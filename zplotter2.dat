@@ -1,0 +1,54 @@
+set title
+standard model fit
+parameters
+1  'M_Z'        91.1867d0   0.001d0
+2  'M_H'         5.7000d0   1.000d0  4.5129d0  6.9078d0
+3  'm_t MS-bar' 164.000d0   5.000d0
+4  'm_c'         1.3100d0   0.110d0
+5  'alpha_s'     0.1200d0   0.003d0
+6  'm_b'         4.2400d0   0.300d0
+11 'S parametr'  0.0000d0   1.000d0  
+12 'T parametr'  0.0000d0   1.000d0
+13 'U parametr'  0.0000d0   1.000d0
+14 'B parametr'  0.0000d0   0.100d0
+15 'Z parametr'  3.0000d0   0.100d0
+18 'lambda_g'    1.0000d0   0.100d0
+
+set printout       -1
+set errordef       4.6052
+fix                  1   6   11   12   13   14   15    18
+minimize
+return
+
+-----------------------------------------------------------------------
+
+16 'M_Z^prime'   0.5000d3   0.250d3  0.0000d0  9.6000d3
+
+set strategy       2
+migrad
+save
+
+1 parameter:
+set err         1.0000    (68.269% range)
+set err         2.7055    (90%     range)
+set err         3.8415    (95%     range)
+set err         6.6349    (99%     range)
+
+2 parameters:
+set err         1.0000    (39.347% region)
+set err         2.2958    (68.269% region)
+set err         4.6052    (90%     region)
+set err         5.9915    (95%     region)
+set err         9.2103    (99%     region)
+
+2  'M_H'       4.5129d0   2.000d0   ! M_H =  M_Z
+2  'M_H'       4.6052d0   2.000d0   ! M_H =  100 GeV
+2  'M_H'       5.0106d0   2.000d0   ! M_H =  150 GeV (upper SUSY limit)
+2  'M_H'       5.2983d0   2.000d0   ! M_H =  200 GeV
+2  'M_H'       5.5215d0   2.000d0   ! M_H =  250 GeV
+2  'M_H'       5.7038d0   2.000d0   ! M_H =  300 GeV
+2  'M_H'       6.3969d0   2.000d0   ! M_H =  600 GeV (Technicolor)
+2  'M_H'       6.9078d0   2.000d0   ! M_H = 1000 GeV
+
+
+

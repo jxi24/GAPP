@@ -1,0 +1,145 @@
+#!/bin/bash
+
+# INPUT PARAMETERS ####################################################
+
+target=$1
+NEWdir=$2
+
+# DIRECTORIES #########################################################
+
+GAPPdir="/home/isaacs21/work/GAPP/"
+SCRPdir=$GAPPdir"scripts"
+MDLSdir=$GAPPdir"mdls"
+PLOTdir=$GAPPdir"221plots"
+
+cd $PLOTdir
+
+# FUNCTIONS ###########################################################
+
+srt() {
+
+mdlsp=(`ls *.out | grep -v _sm.out`)
+mdls=()
+nmdl=0
+
+for mdlp in ${mdlsp[*]}
+do
+
+   mdls[$nmdl]=${mdlp%.out}
+   mdls[$nmdl]=${mdls[$nmdl]#plot_}
+   nmdl=$nmdl+1
+
+done
+
+mkdir $NEWdir
+
+for mdl in ${mdls[*]}
+do
+
+   mkdir $NEWdir"/"$mdl
+   mv `ls | grep "$mdl"` $NEWdir"/"$mdl
+   cp `ls *.C ` $NEWdir"/"$mdl
+
+   cd $NEWdir"/"$mdl
+
+   root -l -b -q 'out2root.C("'$mdl'")'
+   root -l -b -q 'out2root.C("'$mdl'_sm")'
+
+   cd $PLOTdir
+
+done
+
+rm *sm.out *sm.dat
+
+}
+
+cfs() {
+
+cd $NEWdir
+
+dirs=(`ls -d */`)
+mdls=()
+nmdl=0
+
+for dirc in ${dirs[*]}
+do
+
+   mdls[$nmdl]=${dirc%/}
+   nmdl=$nmdl+1
+
+done
+
+cd $PLOTdir
+
+for mdl in ${mdls[*]}
+do
+
+   cp `ls *.C ` $NEWdir"/"$mdl
+
+done
+
+}
+
+plt() {
+
+cd $NEWdir
+
+dirs=(`ls -d */`)
+mdls=()
+nmdl=0
+
+for dirc in ${dirs[*]}
+do
+
+   mdls[$nmdl]=${dirc%/}
+   nmdl=$nmdl+1
+
+done
+
+for mdl in ${mdls[*]}
+do
+
+   cd $mdl
+
+   if [ $mdl = "uu-d" ] || [ $mdl = "nu-d" ]
+   then
+
+      root -l -b -q 'plot3.C("'$mdl'","sin")'
+      root -l -b -q 'plot3.C("'$mdl'","mmp")'
+
+   else
+
+      root -l -b -q 'plot3.C("'$mdl'","cos")'
+#     root -l -b -q 'plot3.C("'$mdl'_sm")'
+      root -l -b -q 'plot3.C("'$mdl'","mmp")'
+#     root -l -b -q 'plot3.C("'$mdl'_sm","mmp")'
+
+   fi
+
+   cd $PLOTdir"/"$NEWdir
+
+ done
+
+}
+
+# TARGETS #############################################################
+
+case "$target" in
+
+   srt) srt
+   ;;
+#  cfs) cfs
+#  ;;
+   plt) plt
+   ;;
+   all) srt
+        plt
+   ;;
+   *)   echo "Options: 'srt', 'plt' and 'all'" 
+   ;;
+
+esac
+
+#######################################################################
+
+exit 0

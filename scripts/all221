@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# INPUT PARAMETERS ####################################################
+
+target=$1
+
+# DIRECTORIES #########################################################
+
+GAPPdir="/home/isaacs21/work/GAPP/"
+SCRPdir=$GAPPdir"scripts"
+MDLSdir=$GAPPdir"mdls"
+
+cd $GAPPdir
+
+# FUNCTIONS ###########################################################
+
+cl() {
+
+   rm -rf  *.o *.fit *.221plot *.out *.pull *.template~
+
+}
+
+#----------------------------------------------------------------------
+
+np() {
+
+   cd $SCRPdir
+
+   ./fit221 mkfit
+
+   ./plot221 prep
+
+   ./plot221 mkplt
+
+   ./plot221 plt
+
+}
+
+#----------------------------------------------------------------------
+
+sm() {
+
+   cd $SCRPdir
+
+   ./plot221 prep "" sm
+
+   ./plot221 mkplt "" sm
+
+   ./plot221 plt "" sm
+
+}
+
+# COMPILE COMMANDS ####################################################
+
+case "$target" in
+
+   cl) cl
+   ;;
+   np) np
+   ;;
+   sm) sm
+   ;;
+   *)  echo "Options: 'np', 'sm' and 'cl'." 
+   ;;
+
+esac
+
+#######################################################################
+
+exit 0

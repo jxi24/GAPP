@@ -1,0 +1,141 @@
+#!/bin/bash
+
+# INPUT PARAMETERS ####################################################
+
+target=$1
+usrmdl=$2
+
+# DIRECTORIES #########################################################
+
+GAPPdir="/scratch/kai/masters/GAPP/"
+SCRPdir=$GAPPdir"scripts"
+MDLSdir=$GAPPdir"mdls"
+MTOPdir=$GAPPdir"221chi2/mt_NP"
+
+# MODEL ARRAY #########################################################
+
+cd $MTOPdir
+
+mdlsd=(*.dat)
+mdls=()
+nmdl=0
+
+for mdld in ${mdlsd[*]}
+do
+    
+   mdls[$nmdl]=${mdld%.dat}
+   mdls[$nmdl]=${mdls[$nmdl]#plot_}    
+   nmdl=$nmdl+1
+
+done
+
+cd $GAPPdir
+
+# FUNCTIONS ###########################################################
+
+clean() {
+
+   rm -rf *.o *.221mt  *.template~
+
+}
+
+#----------------------------------------------------------------------
+
+mkmt() {
+
+   if [ $usrmdl ]
+   then
+
+      sed 's/MODELNAME/'$usrmdl'/' chi2.f.template > chi2.f
+      sed 's/MODELNAME/'$usrmdl'/' 221mt.f.template  > 221mt.f
+      make 221mt
+      mv 221mt $usrmdl.221mt
+      rm chi2.o 221mt.o
+
+   else
+
+      for mdl in ${mdls[*]}
+      do
+    
+         sed 's/MODELNAME/'$mdl'/' chi2.f.template > chi2.f
+         sed 's/MODELNAME/'$mdl'/' 221mt.f.template  > 221mt.f
+         make 221mt
+         mv 221mt $mdl.221mt
+         rm chi2.o 221mt.o
+ 
+      done
+
+   fi
+
+}
+
+#----------------------------------------------------------------------
+
+mt() {
+    
+   if [ $usrmdl ]
+   then
+
+      echo "Generating chi2 distribution for the ["$usrmdl"] model."
+      nice ./$usrmdl.221mt
+
+   else
+
+      for mdl in ${mdls[*]}
+      do
+
+         echo "Generating chi2 distribution for the ["$mdl"] model."
+         nice ./$mdl.221mt
+ 
+      done
+
+   fi
+
+}
+
+cv() {
+
+   cd $MTOPdir
+
+   if [ $usrmdl ]
+   then
+   
+      root -l -b -q 'out4root.C("'$usrmdl'")'
+   
+   else
+
+      for mdl in ${mdls[*]}
+      do
+
+         root -l -b -q 'out4root.C("'$mdl'")'
+         
+      done
+
+   fi
+
+}
+
+# COMPILE COMMANDS ####################################################
+
+case "$target" in
+
+   clean) clean
+   ;;
+   mkmt)  mkmt 
+   ;;
+   mt)    mt 
+   ;;
+   cv)    cv
+   ;;
+   all)   mkmt
+          mt
+          cv
+   ;;
+   *)     echo "Options: 'mkmt', 'mt', 'cv', 'clean' and 'all'." 
+   ;;
+
+esac
+
+#######################################################################
+
+exit 0

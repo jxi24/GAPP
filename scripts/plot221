@@ -1,0 +1,274 @@
+#!/bin/bash
+
+# INPUT PARAMETERS ####################################################
+
+target=$1
+usrmdl=$2
+SMpars=$3
+
+# DIRECTORIES #########################################################
+
+GAPPdir="/home/isaacs21/work/GAPP/"
+SCRPdir=$GAPPdir"scripts"
+MDLSdir=$GAPPdir"mdls"
+PLOTdir=$GAPPdir"221plots"
+
+# MODEL ARRAY #########################################################
+
+cd $MDLSdir
+
+mdlsf=(*.f)
+mdls=()
+nmdl=0
+
+for mdlf in ${mdlsf[*]}
+do
+
+   mdls[$nmdl]=${mdlf%%.f}
+   nmdl=$nmdl+1
+
+done
+
+cd $GAPPdir
+
+# FUNCTIONS ###########################################################
+
+clean() {
+
+   rm -rf *.o *.221plot *.template~
+
+}
+
+#----------------------------------------------------------------------
+
+prep() {
+
+   summary=$GAPPdir/summary.out
+#  if [ -e $summary ]; then rm $summary; fi
+
+   if [ $usrmdl ]
+   then
+
+      cd $GAPPdir
+
+      if [ $SMpars ]
+      then
+
+         sed 's/MODELNAME/'$SMpars'/' smfit.dat.template > smfit.dat
+         echo "Getting best fit values for 'm_t' and 'M_H' in the ["$SMpars"] model."
+         ./$SMpars.fit
+
+         cd $PLOTdir
+
+         SMvl=($(cat bestfit_"$SMpars".tmp |while read val; do echo $val; done))
+
+      fi
+
+      cd $GAPPdir
+
+      sed 's/MODELNAME/'$usrmdl'/' smfit.dat.template > smfit.dat
+      echo "Getting best fit values for the ["$usrmdl"] model."
+      ./$usrmdl.fit
+
+      cd $PLOTdir
+
+      vals=($(cat bestfit_"$usrmdl".tmp |while read val; do echo $val; done))
+
+      if [ $SMpars ]
+      then
+ 
+         sed -e 's/MODELNAME/'$usrmdl'/' -e 's/BESTMT/'${SMvl[0]}'/' -e 's/BESTMH/'${SMvl[1]}'/' -e 's/BESTFITX/'${vals[2]}'/' -e 's/BESTTPH/'${vals[3]}'/' -e 's/BESTS2B/'${vals[4]}'/' plot.dat.template > plot_"$usrmdl"_"$SMpars".dat
+
+      else 
+
+         sed -e 's/MODELNAME/'$usrmdl'/' -e 's/BESTMT/'${vals[0]}'/' -e 's/BESTMH/'${vals[1]}'/' -e 's/BESTFITX/'${vals[2]}'/' -e 's/BESTTPH/'${vals[3]}'/' -e 's/BESTS2B/'${vals[4]}'/' plot.dat.template > plot_"$usrmdl".dat
+
+      fi
+
+      rm bestfit_"$usrmdl".tmp
+   
+   else
+
+      cd $GAPPdir
+
+      if [ $SMpars ]
+      then
+    
+         sed 's/MODELNAME/'$SMpars'/' smfit.dat.template > smfit.dat
+         echo "Getting best fit values for 'm_t' and 'M_H' in the ["$SMpars"] model."
+         ./$SMpars.fit
+
+         cd $PLOTdir
+
+         SMvl=($(cat bestfit_"$SMpars".tmp |while read val; do echo $val; done))
+
+      fi
+  
+      for mdl in ${mdls[*]}
+      do
+
+         cd $GAPPdir
+
+         sed 's/MODELNAME/'$mdl'/' smfit.dat.template > smfit.dat
+         echo "Getting best fit values for the ["$mdl"] model."
+         ./$mdl.fit
+  
+         cd $PLOTdir
+
+         vals=($(cat bestfit_"$mdl".tmp |while read val; do echo $val; done))
+
+         if [ $SMpars ]
+         then
+ 
+            sed -e 's/MODELNAME/'$mdl'/' -e 's/BESTMT/'${SMvl[0]}'/' -e 's/BESTMH/'${SMvl[1]}'/' -e 's/BESTFITX/'${vals[2]}'/' -e 's/BESTTPH/'${vals[3]}'/' -e 's/BESTS2B/'${vals[4]}'/' plot.dat.template > plot_"$mdl"_"$SMpars".dat
+
+         else 
+
+            sed -e 's/MODELNAME/'$mdl'/' -e 's/BESTMT/'${vals[0]}'/' -e 's/BESTMH/'${vals[1]}'/' -e 's/BESTFITX/'${vals[2]}'/' -e 's/BESTTPH/'${vals[3]}'/' -e 's/BESTS2B/'${vals[4]}'/' plot.dat.template > plot_"$mdl".dat
+
+         fi
+
+      done
+
+      rm *.tmp 
+
+   fi
+
+}
+
+#----------------------------------------------------------------------
+
+mkplt() {
+
+   cd $GAPPdir
+
+   if [ $usrmdl ]
+   then
+
+      sed 's/MODELNAME/'$usrmdl'/' chi2.f.template > chi2.f
+     
+      if [ $SMpars ]
+      then
+ 
+         sed -e 's/MODELNAME/'$usrmdl'/' -e 's/XXX/'$SMpars'/' 221plotter.f.template  > 221plotter.f
+         make 221plot
+         mv 221plot $usrmdl.$SMpars.221plot
+
+      else
+
+         sed -e 's/MODELNAME/'$usrmdl'/' -e 's/_XXX/''/' 221plotter.f.template  > 221plotter.f
+         make 221plot
+         mv 221plot $usrmdl.221plot
+
+      fi
+
+      rm chi2.o 221plotter.o
+   
+   else
+  
+      for mdl in ${mdls[*]}
+      do
+    
+         sed 's/MODELNAME/'$mdl'/' chi2.f.template > chi2.f
+
+         if [ $SMpars ]
+         then
+ 
+            sed -e 's/MODELNAME/'$mdl'/' -e 's/XXX/'$SMpars'/' 221plotter.f.template  > 221plotter.f
+            make 221plot
+            mv 221plot $mdl.$SMpars.221plot
+
+         else
+
+            sed -e 's/MODELNAME/'$mdl'/' -e 's/_XXX/''/' 221plotter.f.template  > 221plotter.f
+            make 221plot
+            mv 221plot $mdl.221plot
+
+         fi        
+
+         rm chi2.o 221plotter.o
+
+      done   
+
+   fi
+
+}
+
+#----------------------------------------------------------------------
+
+plt() {
+
+   cd $GAPPdir
+
+   if [ $usrmdl ]
+   then
+
+      sed 's/MODELNAME/'$usrmdl'/' smfit.dat.template > smfit.dat
+      
+      if [ $SMpars ]
+      then
+
+         echo "Plotting the ["$usrmdl"] model with ["$SMpars"] best fit values"
+         ./$usrmdl.$SMpars.221plot
+
+      else
+
+         echo "Plotting the ["$usrmdl"] model"
+         ./$usrmdl.221plot
+
+      fi
+
+      cd $PLOTdir
+      rm bestfit_"$usrmdl".tmp
+   
+   else
+  
+      for mdl in ${mdls[*]}
+      do
+    
+         sed 's/MODELNAME/'$mdl'/' smfit.dat.template > smfit.dat
+
+         if [ $SMpars ]
+         then
+
+            echo "Plotting the ["$mdl"] model with ["$SMpars"] best fit values"
+            ./$mdl.$SMpars.221plot
+
+         else
+
+            echo "Plotting the ["$mdl"] model"
+            ./$mdl.221plot
+
+         fi
+
+      done   
+
+      cd $PLOTdir
+      rm *.tmp 
+
+   fi
+
+}
+
+# COMPILE COMMANDS ####################################################
+
+case "$target" in
+
+   clean) clean
+   ;;
+   prep)  prep
+   ;;
+   mkplt) mkplt
+   ;;
+   plt)   plt
+   ;;
+   all)   clean; prep; mkplt; plt
+   ;;
+   *)     echo "Options: 'mkplt', 'plt', 'clean' and 'all'"
+   ;;
+
+esac
+
+#######################################################################
+
+exit 0

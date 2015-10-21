@@ -1,0 +1,145 @@
+#!/bin/bash
+
+# INPUT PARAMETERS ####################################################
+
+target=$1
+usrmdl=$2
+
+# DIRECTORIES #########################################################
+
+GAPPdir="/scratch/kai/masters/GAPP/"
+SCRPdir=$GAPPdir"scripts"
+MDLSdir=$GAPPdir"mdls"
+MHIGdir=$GAPPdir"221chi2/mh_SM"
+
+# MODEL ARRAY #########################################################
+
+cd $MHIGdir
+
+mdlsd=(*.dat)
+mdls=()
+nmdl=0
+
+for mdld in ${mdlsd[*]}
+do
+    
+   mdls[$nmdl]=${mdld%.dat}
+   mdls[$nmdl]=${mdls[$nmdl]#plot_}    
+   nmdl=$nmdl+1
+
+done
+
+cd $GAPPdir
+
+# FUNCTIONS ###########################################################
+
+clean() {
+
+   rm -rf *.o *.221mh  *.template~
+
+}
+
+#----------------------------------------------------------------------
+
+mkmh() {
+
+   if [ $usrmdl ]
+   then
+
+      sed 's/MODELNAME/'$usrmdl'/' chi2.f.template > chi2.f
+      sed 's/MODELNAME/'$usrmdl'/' 221mh.f.template  > 221mh.f
+      make 221mh
+      mv 221mh $usrmdl.221mh
+      rm chi2.o 221mh.o
+
+   else
+
+      for mdl in ${mdls[*]}
+      do
+    
+         sed 's/MODELNAME/'$mdl'/' chi2.f.template > chi2.f
+         sed 's/MODELNAME/'$mdl'/' 221mh.f.template  > 221mh.f
+         make 221mh
+         mv 221mh $mdl.221mh
+         rm chi2.o 221mh.o
+ 
+      done
+
+   fi
+
+}
+
+#----------------------------------------------------------------------
+
+mh() {
+    
+   if [ $usrmdl ]
+   then
+
+      sed 's/MODELNAME/'$usrmdl'/' smfit.dat.template > smfit.dat
+
+      echo "Generating chi2 distribution for the ["$usrmdl"] model."
+      nice ./$usrmdl.221mh
+
+   else
+
+      for mdl in ${mdls[*]}
+      do
+
+         sed 's/MODELNAME/'$mdl'/' smfit.dat.template > smfit.dat
+
+         echo "Generating chi2 distribution for the ["$mdl"] model."
+         nice ./$mdl.221mh
+ 
+      done
+
+   fi
+
+}
+
+cv() {
+
+   cd $MHIGdir
+
+   if [ $usrmdl ]
+   then
+   
+      root -l -b -q 'out3root.C("'$usrmdl'")'
+   
+   else
+
+      for mdl in ${mdls[*]}
+      do
+
+         root -l -b -q 'out3root.C("'$mdl'")'
+         
+      done
+
+   fi
+
+}
+
+# COMPILE COMMANDS ####################################################
+
+case "$target" in
+
+   clean) clean
+   ;;
+   mkmh)  mkmh 
+   ;;
+   mh)    mh 
+   ;;
+   cv)    cv
+   ;;
+   all)   mkmh
+          mh
+          cv
+   ;;
+   *)     echo "Options: 'mkmh', 'mh', 'cv', 'clean' and 'all'." 
+   ;;
+
+esac
+
+#######################################################################
+
+exit 0

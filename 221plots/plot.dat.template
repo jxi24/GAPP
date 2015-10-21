@@ -1,0 +1,36 @@
+set title
+MODELNAME
+parameters
+1  'M_Z'        91.1876d0   0.006d0
+2  'm_t MS-bar'  BESTMT  4.000d0
+3  'm_b'         4.2006d0   0.100d0
+4  'm_c'         1.2717d0   0.100d0
+5  'alpha_s'     0.1190d0   0.006d0 
+6  'da3cut'     56.910d-4   3.00d-4
+7  'M_H'         BESTMH    1.000d0
+8  'T parametr'  0.0000d0   1.000d0
+9  'S parametr'  0.0000d0   1.000d0
+10 'U parametr'  0.0000d0   1.000d0
+11 'B rho'       0.0000d0   0.100d0
+12 'B kappa'     0.0000d0   0.100d0  
+15 'Z parametr'  3.0000d0   0.100d0
+16 'M_Z^prime'   1.0000d0   0.700d0
+17 'sin(theta)'  0.0000d0   0.001d0
+18 'lambda_g'    1.0000d0   1.000d0
+19 'e_1'         0.0000d0   0.100d0
+20 'e_2'         1.0000d0   0.100d0
+21 'u(d)_1'      0.0000d0   1.000d0
+22 'u_2'         0.0000d0   1.000d0
+23 'd_2'         0.0000d0   1.000d0
+24 'tau_1'       0.0000d0   1.000d0
+25 'tau_2'       0.0000d0   1.000d0
+26 't(b)_1'      0.0000d0   1.000d0
+27 'b_2'         0.0000d0   1.000d0
+28 'ln(x)'       BESTFITX    0.001d0  0.00d0  1.0d1
+29 'tan(phi)^2'  BESTTPH    0.001d0  0.03d0  3.0d1
+30 'sin(2be)^2'  BESTS2B    0.001d0  0.00d0  1.0d0
+
+set printout     1
+set errordef     10.d0
+
+return

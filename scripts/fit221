@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# INPUT PARAMETERS ####################################################
+
+target=$1
+usrmdl=$2
+
+# DIRECTORIES #########################################################
+
+GAPPdir="/home/isaacs21/work/GAPP/"
+SCRPdir=$GAPPdir"scripts"
+MDLSdir=$GAPPdir"mdls"
+
+# MODEL ARRAY #########################################################
+
+cd $MDLSdir
+
+mdlsf=(*.f)
+mdls=()
+nmdl=0
+
+for mdlf in ${mdlsf[*]}
+do
+    
+   mdls[$nmdl]=${mdlf%%.f}         
+   nmdl=$nmdl+1
+
+done
+
+cd $GAPPdir
+
+# FUNCTIONS ###########################################################
+
+clean() {
+
+   rm -rf *.o *.fit *.pull *.template~
+
+}
+
+#----------------------------------------------------------------------
+
+mkfit() {
+
+   if [ $usrmdl ]
+   then
+
+      sed 's/MODELNAME/'$usrmdl'/' chi2.f.template > chi2.f
+      sed 's/MODELNAME/'$usrmdl'/' fit.f.template  > fit.f
+      make fit
+      mv fit $usrmdl.fit
+      rm chi2.o fit.o
+
+   else
+
+      for mdl in ${mdls[*]}
+      do
+    
+        sed 's/MODELNAME/'$mdl'/' chi2.f.template > chi2.f
+        sed 's/MODELNAME/'$mdl'/' fit.f.template  > fit.f
+        make fit
+        mv fit $mdl.fit
+        rm chi2.o fit.o
+ 
+      done
+
+   fi
+
+}
+
+#----------------------------------------------------------------------
+
+fit() {
+
+   summary=$GAPPdir/summary.out
+    
+   if [ -e $summary ]; then rm $summary; fi
+
+   if [ $usrmdl ]
+   then
+
+      sed 's/MODELNAME/'$usrmdl'/' smfit.dat.template > smfit.dat
+      echo "Fitting the ["$usrmdl"] model"
+      nice ./$usrmdl.fit
+
+   else
+
+      for mdl in ${mdls[*]}
+      do
+
+         sed 's/MODELNAME/'$mdl'/' smfit.dat.template > smfit.dat
+         echo "Fitting the ["$mdl"] model"
+         nice ./$mdl.fit
+ 
+      done
+
+   fi
+
+}
+
+# COMPILE COMMANDS ####################################################
+
+case "$target" in
+
+   clean) clean
+   ;;
+   mkfit) mkfit 
+   ;;
+   fit)   fit 
+   ;;
+   all)   clean
+          mkfit
+          fit          
+   ;;
+   *)     echo "Options: 'mkfit', 'fit', 'clean' and 'all'" 
+   ;;
+
+esac
+
+#######################################################################
+
+exit 0
