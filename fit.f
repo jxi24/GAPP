@@ -6,7 +6,7 @@
       external chi2
       include 'common.f'
 
-      call mintio(5,7,9)
+CC--K      call mintio(5,7,9)
 
       open (5,file='smfit.dat',status='old')
       open (6,file='/dev/null',status='unknown')
@@ -55,7 +55,7 @@ C ----------------------------------------
 
       sigma = 5.d0
 
-      call minuit(fcn,chi2)
+CC--K      call minuit(fcn,chi2)
 
       stop
       end

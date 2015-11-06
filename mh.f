@@ -9,7 +9,7 @@
       external chi2
       include 'common.f'
 
-      call mintio(7,8,9)
+CC--K      call mintio(7,8,9)
 
       open (1,file='higgs/mh.out',status='unknown')
       open (2,file='higgs/mh_plot.out',status='unknown')
@@ -46,7 +46,7 @@ C      hsteps = 938
          lnmh(i) = lmhmin + i*lmhinc
          mh = dexp(lnmh(i))
          open (7,file='higgs/mh.dat',status='old')
-         call minuit(fcn,chi2)
+CC--K         call minuit(fcn,chi2)
          close (7)
          probmh(i) = prob
          norm = norm + prob

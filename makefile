@@ -1,11 +1,12 @@
 #FLIBS=   /opt/2002/lib/libpacklib.a \
 #         /opt/2002/lib/libmathlib.a 
 # CJY
-FLIBS = -Lcernlib -L/usr/lib64/cernlib/2006-g77/lib -lpacklib -lnsl -lkernlib
+#FLIBS = -Lcernlib -L/usr/lib64/cernlib/2006-g77/lib -lpacklib -lnsl -lkernlib
 #FLIBS = -Lcernlib -L/scratch/kai/masters/cernlib/cernlib/2006b/i686-slc5-gcc34-opt/lib \
         -lpacklib -lkernlib -lpacklib -lnsl
 #CJY
-COMPILE.f=f77 -w -c -C -g
+FC=gfortran
+COMPILE.f=gfortran -w -c -C -g
 LINK.f=xlf -g
 FFLAGS= -g
 

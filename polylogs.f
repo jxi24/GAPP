@@ -85,7 +85,7 @@ C CALCULATES THE TRILOGARITHM FOR REAL ARGUMENTS X </= 1.
 C***********************************************************************
       END
 C@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-      COMPLEX FUNCTION WGPLG*16(N,P,X)
+      COMPLEX*16 FUNCTION WGPLG(N,P,X)
 
       INTEGER P,P1,NC(10),INDEX(31)
       DOUBLE PRECISION FCT(0:4),SGN(0:4),U(0:4),S1(4,4),C(4,4)

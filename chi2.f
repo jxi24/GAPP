@@ -301,7 +301,7 @@ C ----------------------------------------
 
          if (flprob.eqv..true.) prob = dexp( - fval/2)
          if (fbayes.eqv..true.) then
-            call mnemat(emat,6)
+CC--K            call mnemat(emat,6)
             det = emat(1,1)*(emat(2,2)*emat(3,3) - emat(2,3)*emat(3,2))
      .          - emat(1,2)*(emat(2,1)*emat(3,3) - emat(2,3)*emat(3,1))
      .          + emat(1,3)*(emat(2,1)*emat(3,2) - emat(2,2)*emat(3,1))

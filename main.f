@@ -16,11 +16,11 @@
       complex*16 kappa(0:9),rhobar(0:9)
       include 'common.f'
 
-      call mnemat(emat,12)
+CC--K      call mnemat(emat,12)
 
       do 3 l = 0, 12
-         if (l.gt.0) 
-     .        call mnerrs(l,eplus(l),eminus(l),eparab(l),globcc(l))
+CC--K         if (l.gt.0)
+CC--K    .        call mnerrs(l,eplus(l),eminus(l),eparab(l),globcc(l))
          if (l.eq. 1) mz     = mz     + eparab(1)
          if (l.eq. 2) mt     = mt     + eparab(2)
          if (l.eq. 3) mb     = mb     + eparab(3)
@@ -707,10 +707,10 @@ C     write(7,100) 'epsilon_3:       ', z(0,71), z(13,71)
 C     write(7,100) 'epsilon_1:       ', z(0,72), z(13,72)
 C     write(7,100) 'epsilon_2:       ', z(0,73), z(13,73)
 C     write(7,100) 'M_Z_0:           ', z(0,74), z(13,74)
-      call mnerrs(17,eplus(17),eminus(17),eparab(17),globcc(17))
+CC--K      call mnerrs(17,eplus(17),eminus(17),eparab(17),globcc(17))
 C     write(7,100) 'sin(theta):      ', z(0,75), 
 C    .     z(0,75) + eminus(17), z(0,75) + eplus(17)
-      call mnerrs(16,eplus(16),eminus(16),eparab(16),globcc(16))
+CC--K      call mnerrs(16,eplus(16),eminus(16),eparab(16),globcc(16))
 C     write(7,100) 'g_2/g_1:         ', z(0,76), z(13,76)
 C     write(7,100) 'M_Z` (exact):    ', z(0,77),
 C    .     z(0,77)*dexp(eminus(16)), z(0,77)*dexp(eplus(16))
@@ -722,7 +722,7 @@ C     write(7,100) 'placeholder:     ', z(0,80), z(13,80)
       
 C  for rho_0 parameter:
 
-      call mnerrs(8,eplus(8),eminus(8),eparab(8),globcc(8))
+CC--K      call mnerrs(8,eplus(8),eminus(8),eparab(8),globcc(8))
 C     write(7,*) z(0,70),   eplus(8)/z(0,61), eminus(8)/z(0,61)
 C     write(7,*) z(0,70) + eminus(8)/z(0,61), '< rho_0 <',
 C    .           z(0,70) +  eplus(8)/z(0,61)
