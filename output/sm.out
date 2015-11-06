@@ -1,0 +1,645 @@
+ ***************************************************************************
+  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/ 50  EPSMAC=  0.89E-15
+ ***************************************************************************
+                          MINUIT DATA BLOCK NO.   1
+ ***************************************************************************
+ ENTER MINUIT TITLE, or "SET INPUT n" : 
+ ENTER MINUIT TITLE, or "SET INPUT n" : 
+ sm                                                
+ ******************************************************************************
+ ENTER MINUIT PARAMETER DEFINITION:     
+ ENTER MINUIT PARAMETER DEFINITION:     
+     1 'M_Z       '    91.188      0.60000E-02     no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+     2 'm_t MS-bar'    164.52       4.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+     3 'm_b       '    4.2006      0.10000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+     4 'm_c       '    1.2717      0.10000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+     5 'alpha_s   '   0.11900      0.60000E-02     no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+     6 'da3cut    '   0.56910E-02  0.30000E-03     no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+     7 'M_H       '    4.5000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+     8 'T parametr'    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+     9 'S parametr'    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    10 'U parametr'    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    11 'B rho     '    0.0000      0.10000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    12 'B kappa   '    0.0000      0.10000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    15 'Z parametr'    3.0000      0.10000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    16 'M_Z^prime '    1.0000      0.70000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    17 'sin(theta)'    0.0000      0.10000E-02     no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    18 'lambda_g  '    1.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    19 'e_1       '    0.0000      0.10000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    20 'e_2       '    1.0000      0.10000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    21 'u(d)_1    '    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    22 'u_2       '    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    23 'd_2       '    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    24 'tau_1     '    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    25 'tau_2     '    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    26 't(b)_1    '    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    27 'b_2       '    0.0000       1.0000         no limits
+ ENTER MINUIT PARAMETER DEFINITION:     
+    28 'ln(x)     '    6.0000      0.10000E-02     0.0000       10.000    
+ ENTER MINUIT PARAMETER DEFINITION:     
+    29 'tan(phi)^2'    1.1000      0.10000E-02    0.10000E-01   100.00    
+ ENTER MINUIT PARAMETER DEFINITION:     
+    30 'sin(2be)^2'   0.10000      0.10000E-02     0.0000       1.0000    
+ ENTER MINUIT PARAMETER DEFINITION:     
+
+ MINUIT: FIRST CALL TO USER FUNCTION, WITH IFLAG=1
+
+ FCN=   44.53972     FROM PARAMETR  STATUS=RESET          2 CALLS        2 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+
+  EXT PARAMETER               CURRENT GUESS      PHYSICAL LIMITS       
+  NO.   NAME        VALUE          ERROR       NEGATIVE      POSITIVE  
+   1  M_Z           91.188       0.60000E-02
+   2  m_t MS-bar    164.52        4.0000    
+   3  m_b           4.2006       0.10000    
+   4  m_c           1.2717       0.10000    
+   5  alpha_s      0.11900       0.60000E-02
+   6  da3cut       0.56910E-02   0.30000E-03
+   7  M_H           4.5000        1.0000    
+   8  T parametr    0.0000        1.0000    
+   9  S parametr    0.0000        1.0000    
+  10  U parametr    0.0000        1.0000    
+  11  B rho         0.0000       0.10000    
+  12  B kappa       0.0000       0.10000    
+  15  Z parametr    3.0000       0.10000    
+  16  M_Z^prime     1.0000       0.70000    
+  17  sin(theta)    0.0000       0.10000E-02
+  18  lambda_g      1.0000        1.0000    
+  19  e_1           0.0000       0.10000    
+  20  e_2           1.0000       0.10000    
+  21  u(d)_1        0.0000        1.0000    
+  22  u_2           0.0000        1.0000    
+  23  d_2           0.0000        1.0000    
+  24  tau_1         0.0000        1.0000    
+  25  tau_2         0.0000        1.0000    
+  26  t(b)_1        0.0000        1.0000    
+  27  b_2           0.0000        1.0000    
+  28  ln(x)         6.0000       0.10000E-02    0.0000        10.000    
+  29  tan(phi)^2    1.1000       0.10000E-02   0.10000E-01    100.00    
+  30  sin(2be)^2   0.10000E+00   0.10000E-02    0.0000        1.0000    
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    1 **SET PRINTOUT    1.000    
+ **********
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    2 **SET ERRORDEF    10.00    
+ **********
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    3 **FIX    1.000       3.000       4.000       5.000    
+ **********       6.000       8.000       9.000       10.00    
+ **********       11.00       12.00    
+ **********
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    4 **FIX    15.00       16.00       17.00       18.00    
+ **********       19.00       20.00       21.00       22.00    
+ **********       23.00       24.00       25.00       26.00    
+ **********       27.00    
+ **********
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    5 **MINIMIZE 
+ **********
+ START MIGRAD MINIMIZATION.  STRATEGY 1.  CONVERGENCE WHEN EDM .LT. 0.10E-02
+
+ FCN=   44.53972     FROM MIGRAD    STATUS=INITIATE     209 CALLS      211 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    164.52        4.0000        0.0000        2.7915    
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5000        1.0000        0.0000       -6.8736    
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000       0.10000E-02    0.0000        0.0000    
+  29  tan(phi)^2    1.1000       0.10000E-02    0.0000        0.0000    
+  30  sin(2be)^2   0.10000E+00   0.10000E-02    0.0000        0.0000    
+                               ERR DEF=  10.0    
+
+ MIGRAD MINIMIZATION HAS CONVERGED.
+
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ MINUIT WARNING IN HESSE
+ ============== Second derivative enters zero, param   28
+ MINUIT WARNING IN HESSE
+ ============== Second derivative zero for parameter  28
+  MNHESS FAILS AND WILL RETURN DIAGONAL MATRIX. 
+
+ FCN=   41.94848     FROM MIGRAD    STATUS=CONVERGED    251 CALLS      253 TOTAL
+                     EDM=  0.97E-08  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352       0.40456E-02  -0.10685E-03
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72678       0.80880E-03   0.54702E-03
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000       0.14142E-02    0.0000        0.0000    
+  29  tan(phi)^2    1.1000        85.308        0.0000        0.0000    
+  30  sin(2be)^2   0.10000E+00   0.89328        0.0000        0.0000    
+                               ERR DEF=  10.0    
+
+ EXTERNAL ERROR MATRIX.    NDIM=  50    NPAR=  5    ERR DEF=  10.0    
+  0.132E+02 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+  0.000E+00 0.528E+00 0.000E+00 0.000E+00 0.000E+00
+  0.000E+00 0.000E+00 0.200E-05 0.000E+00 0.000E+00
+  0.000E+00 0.000E+00 0.000E+00 0.216E+04 0.000E+00
+  0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.180E+01
+ ERR MATRIX APPROXIMATE
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     2     7    28    29    30
+        2  0.00000  1.000 0.000 0.000 0.000 0.000
+        7  0.00000  0.000 1.000 0.000 0.000 0.000
+       28  0.00000  0.000 0.000 1.000 0.000 0.000
+       29  0.00000  0.000 0.000 0.000 1.000 0.000
+       30  0.00000  0.000 0.000 0.000 0.000 1.000
+ ERR MATRIX APPROXIMATE
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    6 **MINIMIZE 
+ **********
+ START MIGRAD MINIMIZATION.  STRATEGY 1.  CONVERGENCE WHEN EDM .LT. 0.10E-02
+
+ FCN=   41.94848     FROM MIGRAD    STATUS=INITIATE      10 CALLS      263 TOTAL
+                     EDM=  0.31E-07  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352       0.40456E-02  -0.10685E-03
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72678       0.80880E-03   0.54702E-03
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000       0.14142E-02    0.0000        0.0000    
+  29  tan(phi)^2    1.1000        85.308        0.0000        0.0000    
+  30  sin(2be)^2   0.10000E+00   0.89328        0.0000        0.0000    
+                               ERR DEF=  10.0    
+
+ MIGRAD MINIMIZATION HAS CONVERGED.
+
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ MINUIT WARNING IN HESSE
+ ============== Second derivative enters zero, param   28
+ MINUIT WARNING IN HESSE
+ ============== Second derivative zero for parameter  28
+  MNHESS FAILS AND WILL RETURN DIAGONAL MATRIX. 
+
+ FCN=   41.94848     FROM MIGRAD    STATUS=CONVERGED     29 CALLS      282 TOTAL
+                     EDM=  0.16E-11  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352       0.40456E-02   0.41604E-06
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72679       0.80884E-03   0.51668E-05
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000       0.20000E-02    0.0000        0.0000    
+  29  tan(phi)^2    1.1000        85.308        0.0000        0.0000    
+  30  sin(2be)^2   0.10000E+00   0.89328        0.0000        0.0000    
+                               ERR DEF=  10.0    
+
+ EXTERNAL ERROR MATRIX.    NDIM=  50    NPAR=  5    ERR DEF=  10.0    
+  0.132E+02 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+  0.000E+00 0.528E+00 0.000E+00 0.000E+00 0.000E+00
+  0.000E+00 0.000E+00 0.400E-05 0.000E+00 0.000E+00
+  0.000E+00 0.000E+00 0.000E+00 0.216E+04 0.000E+00
+  0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.180E+01
+ ERR MATRIX APPROXIMATE
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     2     7    28    29    30
+        2  0.00000  1.000 0.000 0.000 0.000 0.000
+        7  0.00000  0.000 1.000 0.000 0.000 0.000
+       28  0.00000  0.000 0.000 1.000 0.000 0.000
+       29  0.00000  0.000 0.000 0.000 1.000 0.000
+       30  0.00000  0.000 0.000 0.000 0.000 1.000
+ ERR MATRIX APPROXIMATE
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    7 **IMPROVE 
+ **********
+ MINUIT WARNING IN HESSE
+ ============== Second derivative zero for parameter  28
+  MNHESS FAILS AND WILL RETURN DIAGONAL MATRIX. 
+
+ START ATTEMPT NO. 1 TO FIND NEW MINIMUM
+
+ COVARIANCE MATRIX WAS NOT POSITIVE-DEFINITE
+ IMPROVE HAS RETURNED TO REGION OF ORIGINAL MINIMUM
+
+ FCN=   41.94848     FROM HESSE     STATUS=RESET         13 CALLS      295 TOTAL
+                     EDM=  0.16E-11  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                APPROXIMATE     INTERNAL      INTERNAL  
+  NO.   NAME        VALUE          ERROR       STEP SIZE       VALUE   
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352       0.36352E-01    162.76    
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72679       0.72679E-02    4.5402    
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000        2.4711       0.24711E-01   0.20136    
+  29  tan(phi)^2    1.1000        85.308       0.85308       -1.3616    
+  30  sin(2be)^2   0.10000E+00   0.89328       0.89328E-02  -0.92730    
+                               ERR DEF=  10.0    
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    8 **IMPROVE 
+ **********
+ MINUIT WARNING IN HESSE
+ ============== Second derivative zero for parameter  28
+  MNHESS FAILS AND WILL RETURN DIAGONAL MATRIX. 
+
+ START ATTEMPT NO. 1 TO FIND NEW MINIMUM
+
+ COVARIANCE MATRIX WAS NOT POSITIVE-DEFINITE
+ IMPROVE HAS RETURNED TO REGION OF ORIGINAL MINIMUM
+
+ FCN=   41.94848     FROM HESSE     STATUS=RESET         13 CALLS      308 TOTAL
+                     EDM=  0.16E-11  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                APPROXIMATE     INTERNAL      INTERNAL  
+  NO.   NAME        VALUE          ERROR       STEP SIZE       VALUE   
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352       0.36352E-01    162.76    
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72679       0.72679E-02    4.5402    
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000        2.4711       0.24711E-01   0.20136    
+  29  tan(phi)^2    1.1000        85.308       0.85308       -1.3616    
+  30  sin(2be)^2   0.10000E+00   0.89328       0.89328E-02  -0.92730    
+                               ERR DEF=  10.0    
+ ENTER MINUIT COMMAND:                  
+ **********
+ **    9 **IMPROVE 
+ **********
+ MINUIT WARNING IN HESSE
+ ============== Second derivative zero for parameter  28
+  MNHESS FAILS AND WILL RETURN DIAGONAL MATRIX. 
+
+ START ATTEMPT NO. 1 TO FIND NEW MINIMUM
+
+ COVARIANCE MATRIX WAS NOT POSITIVE-DEFINITE
+ IMPROVE HAS RETURNED TO REGION OF ORIGINAL MINIMUM
+
+ FCN=   41.94848     FROM HESSE     STATUS=RESET         13 CALLS      321 TOTAL
+                     EDM=  0.16E-11  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                APPROXIMATE     INTERNAL      INTERNAL  
+  NO.   NAME        VALUE          ERROR       STEP SIZE       VALUE   
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352       0.36352E-01    162.76    
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72679       0.72679E-02    4.5402    
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000        2.4711       0.24711E-01   0.20136    
+  29  tan(phi)^2    1.1000        85.308       0.85308       -1.3616    
+  30  sin(2be)^2   0.10000E+00   0.89328       0.89328E-02  -0.92730    
+                               ERR DEF=  10.0    
+ ENTER MINUIT COMMAND:                  
+ **********
+ **   10 **SEEK 
+ **********
+ MNSEEK: MONTE CARLO MINIMIZATION USING METROPOLIS ALGORITHM
+ TO STOP AFTER   200 SUCCESSIVE FAILURES, OR   2000 STEPS
+ MAXIMUM STEP SIZE IS    3.000 ERROR BARS.
+
+ FCN=   41.94848     FROM SEEk      STATUS=UNCHANGED    250 CALLS      571 TOTAL
+                     EDM=  0.16E-11  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                APPROXIMATE     INTERNAL      INTERNAL  
+  NO.   NAME        VALUE          ERROR       STEP SIZE       VALUE   
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352        21.811        162.76    
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72679        4.3607        4.5402    
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000        2.4711        3.0265       0.20136    
+  29  tan(phi)^2    1.1000        85.308        6.2832       -1.3616    
+  30  sin(2be)^2   0.10000E+00   0.89328        6.2832      -0.92730    
+                               ERR DEF=  10.0    
+ ENTER MINUIT COMMAND:                  
+ **********
+ **   11 **MINOS 
+ **********
+ MINUIT WARNING IN HESSE
+ ============== Second derivative zero for parameter  28
+  MNHESS FAILS AND WILL RETURN DIAGONAL MATRIX. 
+     THE POSITIVE MINOS ERROR OF PARAMETER 28, ln(x)     , EXCEEDS ITS LIMIT.
+
+     THE NEGATIVE MINOS ERROR OF PARAMETER 28, ln(x)     , EXCEEDS ITS LIMIT.
+
+ MINUIT WARNING IN MIGRAD  
+ ============== VARIABLE  28 IS AT ITS LOWER ALLOWED LIMIT
+     THE POSITIVE MINOS ERROR OF PARAMETER 29, tan(phi)^2, EXCEEDS ITS LIMIT.
+
+     THE NEGATIVE MINOS ERROR OF PARAMETER 29, tan(phi)^2, EXCEEDS ITS LIMIT.
+
+ MINUIT WARNING IN MIGRAD  
+ ============== VARIABLE  29 IS AT ITS LOWER ALLOWED LIMIT
+     THE POSITIVE MINOS ERROR OF PARAMETER 30, sin(2be)^2, EXCEEDS ITS LIMIT.
+
+     THE NEGATIVE MINOS ERROR OF PARAMETER 30, sin(2be)^2, EXCEEDS ITS LIMIT.
+
+ MINUIT WARNING IN MIGRAD  
+ ============== VARIABLE  30 IS AT ITS LOWER ALLOWED LIMIT
+
+ MINUIT TASK: sm                                                
+
+ FCN=   41.94848     FROM MINOS     STATUS=PROBLEMS     383 CALLS      961 TOTAL
+                     EDM=  0.16E-11  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                  PARABOLIC         MINOS ERRORS        
+  NO.   NAME        VALUE          ERROR      NEGATIVE      POSITIVE   
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352       -3.9663        3.9812    
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72679      -0.86395       0.73633    
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         6.0000        2.4711       at limit      at limit   
+  29  tan(phi)^2    1.1000        85.308       at limit      at limit   
+  30  sin(2be)^2   0.10000E+00   0.89328       at limit      at limit   
+                               ERR DEF=  10.0    
+ ENTER MINUIT COMMAND:                  
+ **********
+ **   12 **HESSE 
+ **********
+ MINUIT WARNING IN HESSE
+ ============== Second derivative enters zero, param   28
+ MINUIT WARNING IN HESSE
+ ============== Second derivative zero for parameter  28
+  MNHESS FAILS AND WILL RETURN DIAGONAL MATRIX. 
+
+ FCN=   41.94848     FROM HESSE     STATUS=FAILED         7 CALLS      968 TOTAL
+                     EDM=  0.16E-11  STRATEGY=1  ERROR MATRIX UNCERTAINTY=100.0%
+
+  EXT PARAMETER                APPROXIMATE     INTERNAL      INTERNAL  
+  NO.   NAME        VALUE          ERROR       STEP SIZE       VALUE   
+   1  M_Z           91.188         fixed    
+   2  m_t MS-bar    162.76        3.6352       0.40456E-02    162.76    
+   3  m_b           4.2006         fixed    
+   4  m_c           1.2717         fixed    
+   5  alpha_s      0.11900         fixed    
+   6  da3cut       0.56910E-02     fixed    
+   7  M_H           4.5402       0.72679       0.80884E-03    4.5402    
+   8  T parametr    0.0000         fixed    
+   9  S parametr    0.0000         fixed    
+  10  U parametr    0.0000         fixed    
+  11  B rho         0.0000         fixed    
+  12  B kappa       0.0000         fixed    
+  15  Z parametr    3.0000         fixed    
+  16  M_Z^prime     1.0000         fixed    
+  17  sin(theta)    0.0000         fixed    
+  18  lambda_g      1.0000         fixed    
+  19  e_1           0.0000         fixed    
+  20  e_2           1.0000         fixed    
+  21  u(d)_1        0.0000         fixed    
+  22  u_2           0.0000         fixed    
+  23  d_2           0.0000         fixed    
+  24  tau_1         0.0000         fixed    
+  25  tau_2         0.0000         fixed    
+  26  t(b)_1        0.0000         fixed    
+  27  b_2           0.0000         fixed    
+  28  ln(x)         3.5289        3.2057        0.0000       0.20136    
+  29  tan(phi)^2    1.1000        85.308        0.0000       -1.3616    
+  30  sin(2be)^2   0.10000E+00   0.89328       0.89328      -0.92730    
+                               ERR DEF=  10.0    
+
+ EXTERNAL ERROR MATRIX.    NDIM=  50    NPAR=  5    ERR DEF=  10.0    
+  0.132E+02 0.000E+00 0.000E+00 0.000E+00 0.000E+00
+  0.000E+00 0.528E+00 0.000E+00 0.000E+00 0.000E+00
+  0.000E+00 0.000E+00 0.122E+02 0.000E+00 0.000E+00
+  0.000E+00 0.000E+00 0.000E+00 0.216E+04 0.000E+00
+  0.000E+00 0.000E+00 0.000E+00 0.000E+00 0.180E+01
+ ERR MATRIX APPROXIMATE
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     2     7    28    29    30
+        2  0.00000  1.000 0.000 0.000 0.000 0.000
+        7  0.00000  0.000 1.000 0.000 0.000 0.000
+       28  0.00000  0.000 0.000 1.000 0.000 0.000
+       29  0.00000  0.000 0.000 0.000 1.000 0.000
+       30  0.00000  0.000 0.000 0.000 0.000 1.000
+ ERR MATRIX APPROXIMATE
+ ENTER MINUIT COMMAND:                  
+ **********
+ **   13 **#MNCONTOURS    28.00       29.00       50.00    
+ **********
+           UNKNOWN COMMAND IGNORED:#MNCONTOURS 
+ ENTER MINUIT COMMAND:                  
+ **********
+ **   14 **RETURN 
+ **********
+
+ CALL TO USER FUNCTION WITH IFLAG = 3
+
+ ..........MINUIT TERMINATED AND RETURNS TO USER PROGRAM.            

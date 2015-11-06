@@ -1,0 +1,36 @@
+set title
+standard model fit
+parameters
+1  'M_Z'        91.1876d0   0.006d0
+2  'm_t MS-bar'  162.84d0   4.000d0
+3  'm_b'         4.2006d0   0.100d0
+4  'm_c'         1.2717d0   0.100d0  1.0000d0  1.5000d0
+5  'alpha_s'     0.1176d0   0.006d0
+6  'da3cut'     56.910d-4   3.00d-4
+7  'M_H'         4.7622d0   1.000d0  4.7397d0  6.9078d0
+8  'T parametr'  0.0000d0   1.000d0
+9  'S parametr'  0.0000d0   1.000d0
+10 'U parametr'  0.0000d0   1.000d0
+11 'B rho'       0.0000d0   0.100d0
+12 'B kappa'     0.0000d0   0.100d0
+15 'Z parametr'  3.0000d0   0.100d0
+16 'M_Z^prime'   0.0010d0   0.003d0
+17 'sin(theta)'  0.0000d0   0.001d0
+18 'lambda_g'    1.0000d0   1.000d0
+19 'e_1'         1.0000d0   0.100d0
+20 'e_2'         1.0000d0   0.100d0
+21 'u(d)_1'      0.0000d0   1.000d0
+22 'u_2'         0.0000d0   1.000d0
+23 'd_2'         0.0000d0   1.000d0
+24 'tau_1'       0.0000d0   1.000d0
+25 'tau_2'       0.0000d0   1.000d0
+26 't(b)_1'      0.0000d0   1.000d0
+27 'b_2'         0.0000d0   1.000d0
+
+set printout    -1
+set errordef      1.d0 
+fix               1                           8   9  10  11  12
+fix              15  16  17  18  19  20  21  22  23  24  25  26  27
+minimize
+improve
+return
