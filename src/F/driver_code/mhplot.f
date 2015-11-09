@@ -5,7 +5,7 @@
       double precision chi2,norm,probmh(0:1255),mhmin,mhinc,avprob
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
       call mintio(7,8,9)
 

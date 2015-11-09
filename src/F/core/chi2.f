@@ -194,11 +194,11 @@ C ----------------------------------------
 C  Input of functions A_n from grid.out for tau lifetime and g-2:
 
          if (f4lqcd.eqv..true.) then
-            open (3,file='grid4loop.dat',status='old')
-            open (4,file='grid4amu.dat' ,status='old')
+            open (3,file='dat/grid4loop.dat',status='old')
+            open (4,file='dat/grid4amu.dat' ,status='old')
          else
-            open (3,file='grid3loop.dat',status='old')
-            open (4,file='grid3amu.dat' ,status='old')
+            open (3,file='dat/grid3loop.dat',status='old')
+            open (4,file='dat/grid3amu.dat' ,status='old')
          endif
 
          do 5 i = 0,2000
@@ -313,6 +313,7 @@ CC--K            call mnemat(emat,6)
 
       return
       end
+************************************************************************
 
       double precision function chi2(xval,npar,smval,pull)
    

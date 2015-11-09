@@ -8,7 +8,7 @@
 
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
 CC--K      call mintio(5,6,7)
 

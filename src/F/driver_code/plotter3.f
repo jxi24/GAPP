@@ -8,7 +8,7 @@
       double precision eplus(30),eminus(30),eparab(30),globcc(30)
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
 C  choose flplot =  1 for M_W vs m_t and       all data
 C  choose flplot =  2 for M_W vs m_t and  indirect data
@@ -46,10 +46,10 @@ C  choose delchi = errordef in smfit.dat
       fzprim = .true.
       fsinth = .true.
 
-      call mintio(5,6,7)
+CC--K      call mintio(5,6,7)
       open (5,file='smfit.dat',status='old')
       open (6,file='/dev/null',status='unknown')
-      call minuit(fcn,chi2)
+CC--K      call minuit(fcn,chi2)
       close(5)
 
       if (flplot.le.7) then
@@ -129,8 +129,8 @@ C  choose delchi = errordef in smfit.dat
             mtinc =  80.0d0/(9*xsteps + 2)
             mhinc =   5.0d0/(2*ysteps - 2)
          else
-            call mnerrs(2,eplus(2),eminus(2),eparab(2),globcc(2))
-            call mnerrs(7,eplus(7),eminus(7),eparab(7),globcc(7))
+CC--K            call mnerrs(2,eplus(2),eminus(2),eparab(2),globcc(2))
+CC--K            call mnerrs(7,eplus(7),eminus(7),eparab(7),globcc(7))
             mtmin = mt + eminus(2)
             mhmin = dlog(mh) + eminus(7)
             mtinc = (eplus(2) - eminus(2))/(9*xsteps + 2)
@@ -148,7 +148,7 @@ C  choose delchi = errordef in smfit.dat
                if (flplot.eq.5) open (5,file='mhmtplot/plot5.dat')
                if (flplot.eq.6) open (5,file='mhmtplot/plot6.dat')
                if (flplot.eq.7) open (5,file='mhmtplot/plot7.dat')
-               call minuit(fcn,chi2)
+CC--K               call minuit(fcn,chi2)
                close(5)
                if ((prob1.ge.chiref).and.(prob.le.chiref)) then
                   if (flplot.le.2) write(1,100) mtp,
@@ -170,8 +170,8 @@ C  choose delchi = errordef in smfit.dat
  30         continue
  40      continue
       else if (flplot.eq.16) then
-         call mnerrs(11,eplus(11),eminus(11),eparab(11),globcc(11))
-         call mnerrs(12,eplus(12),eminus(12),eparab(12),globcc(12))
+CC--K         call mnerrs(11,eplus(11),eminus(11),eparab(11),globcc(11))
+CC--K         call mnerrs(12,eplus(12),eminus(12),eparab(12),globcc(12))
          rhomin = Brho   + eminus(11)
          kapmin = Bkappa + eminus(12)
          rhoinc = (eplus(11) - eminus(11))/(2*ysteps - 2)
@@ -182,7 +182,7 @@ C  choose delchi = errordef in smfit.dat
             do 45 i = 0, ysteps
                Brho = rhomin + (2*i - 1)*rhoinc
                open (5,file='STplot/plot16.dat')
-               call minuit(fcn,chi2)
+CC--K               call minuit(fcn,chi2)
                close(5)
                if ((prob1.ge.chiref).and.(prob.le.chiref)) write(1,100) 
      .              rhomin + 2*rhoinc*(i - 1/2.d0 
@@ -200,8 +200,8 @@ C  choose delchi = errordef in smfit.dat
             Tinc =  3.10d0/(9*xsteps + 2)
             Sinc =  3.20d0/(2*ysteps - 2)
          else
-            call mnerrs(8,eplus(8),eminus(8),eparab(8),globcc(8))
-            call mnerrs(9,eplus(9),eminus(9),eparab(9),globcc(9))
+CC--K            call mnerrs(8,eplus(8),eminus(8),eparab(8),globcc(8))
+CC--K            call mnerrs(9,eplus(9),eminus(9),eparab(9),globcc(9))
             Tmin = Tpar + eminus(8)
             Smin = Spar + eminus(9)
             Tinc = (eplus(8) - eminus(8))/(9*xsteps + 2)
@@ -221,7 +221,7 @@ C            Tpar = 18.d0/452.d0*3.1d0
                if (flplot.eq.13) open (5,file='STplot/plot13.dat')
                if (flplot.eq.14) open (5,file='STplot/plot14.dat')
                if (flplot.eq.15) open (5,file='STplot/plot15.dat')
-               call minuit(fcn,chi2)
+CC--K               call minuit(fcn,chi2)
                close(5)
                if ((prob1.ge.chiref).and.(prob.le.chiref)) write(1,100) 
      .              Smin + 2*Sinc*(i - 1/2.d0 

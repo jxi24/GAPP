@@ -6,7 +6,7 @@
       double precision mtval,mterr,mwval,mwerr,mtmin,mtinc,mw1
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
       open ( 8,file='mwmtplot/mwmt_117.out',   status='unknown')
       open ( 9,file='mwmtplot/mwmt_200.out',   status='unknown')
@@ -15,7 +15,7 @@
       open (12,file='mwmtplot/mwmt_direct.out',status='unknown')
       open (13,file='mhmtplot/mhmt_mt.out',    status='unknown')
 
-      call mintio(5,6,7)
+CC--K      call mintio(5,6,7)
 
       open (6,file='/dev/null',status='unknown')
       
@@ -52,7 +52,7 @@ C  enter central values and errors of direct measurements here:
          do 10 j = 0, tsteps
             mt = mtmin + j*mtinc
             open (5,file='mwmtplot/plot.dat',status='old')
-            call minuit(fcn,chi2)
+CC--K            call minuit(fcn,chi2)
             close(5)
             write(i,100) mtp, mw
  10      continue
@@ -67,7 +67,7 @@ C  enter central values and errors of direct measurements here:
          do 30 j = 0, tsteps
             mt = mtmin + (tsteps - j)*mtinc
             open (5,file='mwmtplot/plot.dat',status='old')
-            call minuit(fcn,chi2)
+CC--K            call minuit(fcn,chi2)
             close(5)
             write(i,100) mtp, mw
  30      continue

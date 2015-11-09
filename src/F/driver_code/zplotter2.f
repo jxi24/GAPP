@@ -13,14 +13,14 @@ C        flagzp = zprime
 C
 
       implicit none
-      double precision chi2,chimin,delchi,chiref,prob,prob1
-      double precision mzpmin,mzpinc,sinmin,sininc,sigma
-      integer i,j,zprime,ssteps,zsteps
+      double precision chi2,chimin,delchi,chiref,prob1!,prob
+      double precision mzpmin,mzpinc,sinmin,sininc!,sigma
+      integer i,j,ssteps,zsteps!,zprime
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
-      call mintio(7,6,9)
+CC--K      call mintio(7,6,9)
       open (6,file='/dev/null',status='unknown')
 
       fwrite = .false.
@@ -41,7 +41,7 @@ C
       do 10 j = 0, zsteps
          mzp = mzpmin + j*mzpinc
          open (7,file='zplotter.dat',status='old')
-         call minuit(fcn,chi2)
+CC--K         call minuit(fcn,chi2)
          close (7)
          write(zprime,100) sinth,mzp
  10   continue  

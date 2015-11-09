@@ -6,7 +6,7 @@
       double precision lnsint(0:1400),probst(0:1400)
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
       call mintio(5,6,9)
 

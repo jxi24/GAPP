@@ -7,7 +7,7 @@
       double precision lnmh(0:1000),probmh(0:1000)
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
 CC--K      call mintio(7,8,9)
 

@@ -8,7 +8,7 @@
       external fcn
       external chi2
       common   /ma/ ima,ssteps
-      include 'common.f'
+      include '../core/common.f'
       
       ssteps = 60
       zsteps = 151
@@ -26,7 +26,7 @@
       fkappa = .true.
       fsinth = .true.
 
-      call mintio(5,6,7)
+CC--K      call mintio(5,6,7)
 
       sinth = 0.d0
 
@@ -42,7 +42,7 @@
          open (5,file='smfit.dat',status='old')
          open (6,file='/dev/null',status='unknown')
          open (7,file='smfit.out',status='unknown')
-         call minuit(fcn,chi2)
+CC--K         call minuit(fcn,chi2)
          close(5)
          
          fzprim = .false.      
@@ -53,7 +53,7 @@
          do 30 i = 0, zsteps
             mzp = dexp(mzpmin + (2*i - 1)*mzpinc)
             open (5,file='zplotter.dat',status='old')
-            call minuit(fcn,chi2)
+CC--K            call minuit(fcn,chi2)
             close (5)
             if (ima.le.ssteps/2) then
                if ((prob1.ge.cref95).and.(prob.le.cref95))

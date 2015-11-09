@@ -4,7 +4,7 @@
       double precision chi2
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
 CC--K      call mintio(5,7,9)
 

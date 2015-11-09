@@ -5,7 +5,7 @@
 #FLIBS = -Lcernlib -L/scratch/kai/masters/cernlib/cernlib/2006b/i686-slc5-gcc34-opt/lib \
         -lpacklib -lkernlib -lpacklib -lnsl
 #CJY
-SOURCE=../src/F/
+SOURCE=../src/F/core/:../src/F/driver_code/
 BUILD=../build/
 
 VPATH=$(SOURCE)
@@ -14,6 +14,7 @@ FC=gfortran
 FCC=gfortran -w -c -C -g
 LINK.f=xlf -g
 FFLAGS= -g
+
 
 commonobj = $(BUILD)alfahat.o $(BUILD)sin2th.o $(BUILD)lowenergy.o $(BUILD)alfas.o $(BUILD)masses.o \
             $(BUILD)kappa.o $(BUILD)rho.o $(BUILD)bvertex.o $(BUILD)lep100.o $(BUILD)pnc.o $(BUILD)dis.o $(BUILD)nue.o $(BUILD)bsgamma.o \
@@ -64,8 +65,9 @@ abobjs  = $(BUILD)ab.o $(BUILD)chi2.o $(commonobj)
 fit:    $(fitobj)
 	$(FC) -o $@ $(FFLAGS) $(fitobj) $(FLIBS)
 
-fit2:   $(fitobj2)
-	$(FC) -o $@ $(FFLAGS) $(fitobj2) $(FLIBS)
+## Could not find file fit_f2.f ==> Check this 
+#fit2:   $(fitobj2)
+#	$(FC) -o $@ $(FFLAGS) $(fitobj2) $(FLIBS)
 
 mh:     $(mhobjs)
 	$(FC) -o $@ $(FFLAGS) $(mhobjs) $(FLIBS)
@@ -94,12 +96,8 @@ plot2:  $(plotob2)
 plot3:  $(plotob3)
 	$(FC) -o $@ $(FFLAGS) $(plotob3) $(FLIBS)
 
-ab:     $(abobjs)
-	$(FC) -o $@ $(FFLAGS) $(abobjs) $(FLIBS)
-
-clean:
-	rm  -f $(BUILD)*.o 
-	rm -f *-d.fit *-t.fit
+#ab:     $(abobjs)
+#	$(FC) -o $@ $(FFLAGS) $(abobjs) $(FLIBS)
 
 # Kai024 ###############################################################
 # Make command for the program ttoplot in 221plotter.f 
@@ -120,5 +118,21 @@ clean:
 
 ########################################################################
 
+########################################################################
+
 $(BUILD)%.o: $(SRC)%.f
 	$(FCC) $< -o $@ $(FFLAGS) $(FLIBS)
+
+LIST= fit mh zplot zplot2 maplot plot plot2 plot3  221plot 221mh 221mt
+
+all: $(LIST)
+
+clean:
+	rm  -f $(BUILD)*.o 
+	rm -f *-d.fit *-t.fit
+cleanall:
+	rm -f $(LIST)
+	rm  -f $(BUILD)*.o 
+	rm -f *-d.fit *-t.fit
+
+

@@ -13,7 +13,7 @@
 
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
 CC--K      call mintio(5,6,7)
 
@@ -162,11 +162,11 @@ C           endif
 
  10      continue
       endif
-11
+
 
 C FIND BOUNDARIES FOR fittph CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
-      if (scntph.eqv..true.) then
+ 11    if (scntph.eqv..true.) then
 
 C        flgfitx = .true.
          fitx = dexp(lnxmax)

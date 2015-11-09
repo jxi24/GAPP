@@ -7,7 +7,7 @@
       integer i,j,ssteps,zsteps
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
       ssteps =  4
       zsteps =  9
@@ -26,10 +26,10 @@
       fsinth = .true.
       fzprim = .true.
 
-      call mintio(5,6,7)
+CC--K      call mintio(5,6,7)
       open (5,file='smfit.dat',status='old')
       open (6,file='/dev/null',status='unknown')
-      call minuit(fcn,chi2)
+CC--K      call minuit(fcn,chi2)
       close(5)
 
       fsinth = .false.
@@ -66,7 +66,7 @@ C  if that fails:
          do 30 i = 0, zsteps
             mzp = dexp(mzpmin + (2*i - 1)*mzpinc)
             open (5,file='zplotter.dat',status='old')
-            call minuit(fcn,chi2)
+CC--K            call minuit(fcn,chi2)
             close (5)
             if ((prob1.ge.cref1s).and.(prob.le.cref1s))
      .           write(1,100) sinth, dexp(mzpmin + 2*mzpinc*

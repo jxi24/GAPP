@@ -28,6 +28,9 @@ http://arxiv.org/pdf/hep-ph/0005084v1.pdf
 10. 221mt.f		:
 11. 221mh.f		:
 12. 221plotter.f	:
+13. plotter2.f		:
+14. plotter3.f		:
+15. plot_ma.f		:
 #####################################################
 ##Remaing code
 13. chi2.f		: contains subroutine 1. fcn which:
