@@ -194,11 +194,11 @@ C ----------------------------------------
 C  Input of functions A_n from grid.out for tau lifetime and g-2:
 
          if (f4lqcd.eqv..true.) then
-            open (3,file='grid4loop.dat',status='old')
-            open (4,file='grid4amu.dat' ,status='old')
+            open (3,file='../src/F/dat/grid4loop.dat',status='old')
+            open (4,file='../src/F/dat/grid4amu.dat' ,status='old')
          else
-            open (3,file='grid3loop.dat',status='old')
-            open (4,file='grid3amu.dat' ,status='old')
+            open (3,file='../src/F/dat/grid3loop.dat',status='old')
+            open (4,file='../src/F/dat/grid3amu.dat' ,status='old')
          endif
 
          do 5 i = 0,2000
@@ -213,17 +213,19 @@ C  Input of functions A_n from grid.out for tau lifetime and g-2:
          
          call ffinit
       endif
-
       fval = chi2(xval,npar,smval,pull)
       prob = fval
 
-      if (iflag.eq.3) then 
 
+      if (iflag.eq.3) then 
+      
 C Kai026 ---------------------------------
 C  Store the best fit values of the NP parameters. 
 C ----------------------------------------
 
-      open (1,file='221plots/bestfit_MODELNAME.tmp',status='unknown')
+       open (1,
+     $ file='../221plots/bestfit_MODELNAME.tmp'
+     $ ,status='unknown')
 
       write(1,'(F10.5)') xval(2)
       write(1,'(F10.5)') xval(7)
@@ -270,7 +272,6 @@ C ----------------------------------------
             if (fsplot.eqv..true.) call s2plot
             call values
          endif
-
 
 C Kai022 ---------------------------------
 C  Initial pulls

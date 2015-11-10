@@ -10,7 +10,7 @@
       external chi2
       include '../core/common.f'
 
-CC--K      call mintio(5,6,7)
+      call mintio(5,6,7)
 
       flgfitx = .true.
       flgtph  = .true.
@@ -47,7 +47,7 @@ CC--K      call mintio(5,6,7)
          mt = mtMin + i*mtDelta
 
          open (5,file='221chi2/mt_NP/plot_nu-d.dat',status='old')
-CC--K         call minuit(fcn,chi2)
+         call minuit(fcn,chi2)
          close (5)
 
          chisqr = prob

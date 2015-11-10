@@ -52,7 +52,7 @@ C  enter central values and errors of direct measurements here:
          do 10 j = 0, tsteps
             mt = mtmin + j*mtinc
             open (5,file='mwmtplot/plot.dat',status='old')
-CC--K            call minuit(fcn,chi2)
+            call minuit(fcn,chi2)
             close(5)
             write(i,100) mtp, mw
  10      continue
@@ -67,7 +67,7 @@ CC--K            call minuit(fcn,chi2)
          do 30 j = 0, tsteps
             mt = mtmin + (tsteps - j)*mtinc
             open (5,file='mwmtplot/plot.dat',status='old')
-CC--K            call minuit(fcn,chi2)
+            call minuit(fcn,chi2)
             close(5)
             write(i,100) mtp, mw
  30      continue

@@ -107,7 +107,9 @@
 	s = 1
 	xalogm = 1
 	do 5 i=1,10000
+C            print*,"s_before= ",s
 	    s = s/2
+C           print*,"s=",s
 	    if ( 2*abs(s) .ne. xalogm ) goto 6
 	    xalogm = abs(s)
     5	continue

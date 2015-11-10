@@ -7,9 +7,17 @@ usrmdl=$2
 
 # DIRECTORIES #########################################################
 
-GAPPdir="/home/isaacs21/work/GAPP/"
+GAPPdir="/home/kirtimaan/git-repos/GAPP/"
 SCRPdir=$GAPPdir"scripts"
-MDLSdir=$GAPPdir"mdls"
+MDLSdir=$GAPPdir"/src/F/core/mdls"
+
+tempdir=$GAPPdir"src/F/template/"
+maindir=$GAPPdir"src/F/driver_code/"
+coredir=$GAPPdir"src/F/core/"
+builddir=$GAPPdir"build/"
+##inputdir=$GAPPdir"bin/"
+inputdir=""
+
 
 # MODEL ARRAY #########################################################
 
@@ -27,12 +35,13 @@ do
 
 done
 
-cd $GAPPdir
+cd ${GAPPdir}bin/
 
 # FUNCTIONS ###########################################################
 
 clean() {
 
+   make clean
    rm -rf *.o *.fit *.pull *.template~
 
 }
@@ -44,22 +53,22 @@ mkfit() {
    if [ $usrmdl ]
    then
 
-      sed 's/MODELNAME/'$usrmdl'/' chi2.f.template > chi2.f
-      sed 's/MODELNAME/'$usrmdl'/' fit.f.template  > fit.f
+      sed 's/MODELNAME/'$usrmdl'/' ${tempdir}chi2.f.template > ${coredir}chi2.f
+      sed 's/MODELNAME/'$usrmdl'/' ${tempdir}fit.f.template  > ${maindir}fit.f
       make fit
       mv fit $usrmdl.fit
-      rm chi2.o fit.o
+      rm ${builddir}chi2.o ${builddir}fit.o
 
    else
 
       for mdl in ${mdls[*]}
       do
     
-        sed 's/MODELNAME/'$mdl'/' chi2.f.template > chi2.f
-        sed 's/MODELNAME/'$mdl'/' fit.f.template  > fit.f
+        sed 's/MODELNAME/'$mdl'/' ${tempdir}chi2.f.template > ${coredir}chi2.f
+        sed 's/MODELNAME/'$mdl'/' ${tempdir}fit.f.template  > ${maindir}fit.f
         make fit
         mv fit $mdl.fit
-        rm chi2.o fit.o
+        rm ${builddir}chi2.o ${builddir}fit.o
  
       done
 
@@ -78,7 +87,7 @@ fit() {
    if [ $usrmdl ]
    then
 
-      sed 's/MODELNAME/'$usrmdl'/' smfit.dat.template > smfit.dat
+      sed 's/MODELNAME/'$usrmdl'/' ${tempdir}smfit.dat.template > ${inputdir}smfit.dat
       echo "Fitting the ["$usrmdl"] model"
       nice ./$usrmdl.fit
 
@@ -87,7 +96,7 @@ fit() {
       for mdl in ${mdls[*]}
       do
 
-         sed 's/MODELNAME/'$mdl'/' smfit.dat.template > smfit.dat
+         sed 's/MODELNAME/'$mdl'/' ${tempdir}smfit.dat.template > ${inputdir}smfit.dat
          echo "Fitting the ["$mdl"] model"
          nice ./$mdl.fit
  

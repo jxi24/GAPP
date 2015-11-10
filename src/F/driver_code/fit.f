@@ -6,12 +6,12 @@
       external chi2
       include '../core/common.f'
 
-CC--K      call mintio(5,7,9)
+      call mintio(5,7,9)
 
       open (5,file='smfit.dat',status='old')
-      open (6,file='/dev/null',status='unknown')
-      open (7,file='uu-d.out',status='unknown')
-      open (50,file='uu-d.pull',status='unknown')
+      !open (6,file='/dev/null',status='unknown')
+      open (7,file='fp-d.out',status='unknown')
+      open (50,file='fp-d.pull',status='unknown')
       open (51,file='summary.out',access = 'append',status='unknown')
 
 C Kai023 ---------------------------------
@@ -55,7 +55,7 @@ C ----------------------------------------
 
       sigma = 5.d0
 
-CC--K      call minuit(fcn,chi2)
+      call minuit(fcn,chi2)
 
       stop
       end

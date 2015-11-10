@@ -4,12 +4,12 @@
       double precision chi2
       external fcn
       external chi2
-      include 'common.f'
+      include '../core/common.f'
 
       call mintio(5,7,9)
 
       open (5,file='smfit.dat',status='old')
-      open (6,file='/dev/null',status='unknown')
+      !open (6,file='/dev/null',status='unknown')
       open (7,file='MODELNAME.out',status='unknown')
       open (50,file='MODELNAME.pull',status='unknown')
       open (51,file='summary.out',access = 'append',status='unknown')

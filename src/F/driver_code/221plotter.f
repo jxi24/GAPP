@@ -15,7 +15,7 @@
       external chi2
       include '../core/common.f'
 
-CC--K      call mintio(5,6,7)
+      call mintio(5,6,7)
 
       flgfitx = .true.
       flgtph  = .true.
@@ -49,7 +49,7 @@ C -------------------------------------------------------------
       open (20,file='221plots/plot_fp-d_sm.out',status='unknown')
 C     open (21,file='221plots/plot_fp-d_2_sm.out', status='unknown')
 
-CC--K      call minuit(fcn,chi2)
+      call minuit(fcn,chi2)
 
       close(5)
 
@@ -137,7 +137,7 @@ C FIND BOUNDARIES FOR fitx CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
             open (5,file='221plots/plot_fp-d_sm.dat')
 
-CC--K            call minuit(fcn,chi2)   
+            call minuit(fcn,chi2)   
             close(5)
 
 C           write(9,'(F10.4,A,F10.4)') fitx, ': ', prob
@@ -178,7 +178,7 @@ C        flgfitx = .true.
          do 15 i = 0, ysteps
 
             open (5,file='221plots/plot_fp-d_sm.dat')
-CC--K            call minuit(fcn,chi2)   
+            call minuit(fcn,chi2)   
             close(5)
 
 C           write(9,'(A,F10.4,A,F10.4)') '\t', fittph, ': ', prob
@@ -214,7 +214,7 @@ C FIND BOUNDARIES FOR fits2b CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
          do 20 i = 0, zsteps
 
             open (5,file='221plots/plot_fp-d_sm.dat')
-CC--K            call minuit(fcn,chi2)   
+            call minuit(fcn,chi2)   
             close(5)
 
 C           write(9,'(A,F10.4,A,F10.4)') '\t\t', fits2b, ': ', prob
@@ -296,7 +296,7 @@ C        fits2b = bests2b --  plot only best fit value for fits2b. 05/30/09
                fitx = dexp(lnx)
 
                open (5,file='221plots/plot_fp-d_sm.dat')
-CC--K               call minuit(fcn,chi2)
+               call minuit(fcn,chi2)
                close(5)
 
                fcalls = fcalls + 1

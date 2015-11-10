@@ -1,19 +1,29 @@
 #FLIBS=   /opt/2002/lib/libpacklib.a \
 #         /opt/2002/lib/libmathlib.a 
 # CJY
-#FLIBS = -Lcernlib -L/usr/lib64/cernlib/2006-g77/lib -lpacklib -lnsl -lkernlib
-#FLIBS = -Lcernlib -L/scratch/kai/masters/cernlib/cernlib/2006b/i686-slc5-gcc34-opt/lib \
-        -lpacklib -lkernlib -lpacklib -lnsl
+FLIBS = -L../lib/ -lminuit
 #CJY
 SOURCE=../src/F/core/:../src/F/driver_code/
 BUILD=../build/
 
 VPATH=$(SOURCE)
 
-FC=gfortran
-FCC=gfortran -w -c -C -g
+FC=gfortran -g -fbacktrace -ffpe-trap=zero,overflow,underflow -O -Wall -fcheck=all
+FCC=gfortran -w -c -C -g -fbacktrace -ffpe-trap=zero,overflow,underflow
 LINK.f=xlf -g
 FFLAGS= -g
+######################################################################
+#### Compilation and creation of minuit fortran library ##############
+######################################################################
+FC = gfortran
+
+MINDIR=../src/F/minuit_src
+
+FMINUIT:
+	$(MAKE) -C $(MINDIR) FC=$(FC)
+	$(MAKE) -C $(MINDIR) install
+
+####################################################################
 
 
 commonobj = $(BUILD)alfahat.o $(BUILD)sin2th.o $(BUILD)lowenergy.o $(BUILD)alfas.o $(BUILD)masses.o \
@@ -134,5 +144,7 @@ cleanall:
 	rm -f $(LIST)
 	rm  -f $(BUILD)*.o 
 	rm -f *-d.fit *-t.fit
+	rm -f $(MINDIR)/*.o
+	rm -f ../lib/libminuit.a
 
 

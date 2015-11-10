@@ -11,7 +11,7 @@
       external chi2
       include '../core/common.f'
 
-CC--K      call mintio(5,6,7)
+      call mintio(5,6,7)
 
       flgfitx = .true.
       flgtph  = .true.
@@ -35,7 +35,7 @@ CC--K      call mintio(5,6,7)
       open (20,file='221chi2/mh_SM/chi2_uu-d.out',status='unknown')
       open (21,file='221chi2/mh_SM/mh_uu-d.out',status='unknown')
 
-CC--K      call minuit(fcn,chi2)
+      call minuit(fcn,chi2)
 
       close(5)
 
@@ -63,7 +63,7 @@ CC--K      call minuit(fcn,chi2)
          mh = dexp(lnmh)
 
          open (5,file='221chi2/mh_SM/plot_uu-d.dat',status='old')
-CC--K         call minuit(fcn,chi2)
+         call minuit(fcn,chi2)
          close (5)
 
          chisqr = prob

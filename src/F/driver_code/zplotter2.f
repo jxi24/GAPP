@@ -20,7 +20,7 @@ C
       external chi2
       include '../core/common.f'
 
-CC--K      call mintio(7,6,9)
+      call mintio(7,6,9)
       open (6,file='/dev/null',status='unknown')
 
       fwrite = .false.
@@ -41,7 +41,7 @@ CC--K      call mintio(7,6,9)
       do 10 j = 0, zsteps
          mzp = mzpmin + j*mzpinc
          open (7,file='zplotter.dat',status='old')
-CC--K         call minuit(fcn,chi2)
+         call minuit(fcn,chi2)
          close (7)
          write(zprime,100) sinth,mzp
  10   continue  

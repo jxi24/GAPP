@@ -194,11 +194,11 @@ C ----------------------------------------
 C  Input of functions A_n from grid.out for tau lifetime and g-2:
 
          if (f4lqcd.eqv..true.) then
-            open (3,file='dat/grid4loop.dat',status='old')
-            open (4,file='dat/grid4amu.dat' ,status='old')
+            open (3,file='../src/F/dat/grid4loop.dat',status='old')
+            open (4,file='../src/F/dat/grid4amu.dat' ,status='old')
          else
-            open (3,file='dat/grid3loop.dat',status='old')
-            open (4,file='dat/grid3amu.dat' ,status='old')
+            open (3,file='../src/F/dat/grid3loop.dat',status='old')
+            open (4,file='../src/F/dat/grid3amu.dat' ,status='old')
          endif
 
          do 5 i = 0,2000
@@ -213,17 +213,19 @@ C  Input of functions A_n from grid.out for tau lifetime and g-2:
          
          call ffinit
       endif
-
       fval = chi2(xval,npar,smval,pull)
       prob = fval
 
-      if (iflag.eq.3) then 
 
+      if (iflag.eq.3) then 
+      
 C Kai026 ---------------------------------
 C  Store the best fit values of the NP parameters. 
 C ----------------------------------------
 
-      open (1,file='221plots/bestfit_fp-d.tmp',status='unknown')
+       open (1,
+     $ file='../221plots/bestfit_fp-d.tmp'
+     $ ,status='unknown')
 
       write(1,'(F10.5)') xval(2)
       write(1,'(F10.5)') xval(7)
@@ -271,7 +273,6 @@ C ----------------------------------------
             call values
          endif
 
-
 C Kai022 ---------------------------------
 C  Initial pulls
 C ----------------------------------------
@@ -301,7 +302,7 @@ C ----------------------------------------
 
          if (flprob.eqv..true.) prob = dexp( - fval/2)
          if (fbayes.eqv..true.) then
-CC--K            call mnemat(emat,6)
+            call mnemat(emat,6)
             det = emat(1,1)*(emat(2,2)*emat(3,3) - emat(2,3)*emat(3,2))
      .          - emat(1,2)*(emat(2,1)*emat(3,3) - emat(2,3)*emat(3,1))
      .          + emat(1,3)*(emat(2,1)*emat(3,2) - emat(2,2)*emat(3,1))
@@ -313,7 +314,6 @@ CC--K            call mnemat(emat,6)
 
       return
       end
-************************************************************************
 
       double precision function chi2(xval,npar,smval,pull)
    
