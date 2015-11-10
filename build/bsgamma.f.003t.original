@@ -1,0 +1,523 @@
+bsgamma (real(kind=8) & restrict sgcenu)
+{
+  static real(kind=8) q[10] [value-expr: coupls.q];
+  static real(kind=8) i3[10] [value-expr: coupls.i3];
+  static real(kind=8) nc[10] [value-expr: coupls.nc];
+  static real(kind=8) v[10] [value-expr: coupls.v];
+  static real(kind=8) a[10] [value-expr: coupls.a];
+  static real(kind=8) alphat [value-expr: coupls.alphat];
+  static real(kind=8) sinhat [value-expr: coupls.sinhat];
+  static real(kind=8) coshat [value-expr: coupls.coshat];
+  static real(kind=8) rhonc [value-expr: coupls.rhonc];
+  static real(kind=8) i3r[10] [value-expr: coupls.i3r];
+  static real(kind=8) u1xr[10] [value-expr: coupls.u1xr];
+  static real(kind=8) u1xl[10] [value-expr: coupls.u1xl];
+  static real(kind=8) fitx [value-expr: fit221.fitx];
+  static real(kind=8) fitsph [value-expr: fit221.fitsph];
+  static real(kind=8) fitcph [value-expr: fit221.fitcph];
+  static real(kind=8) fittph [value-expr: fit221.fittph];
+  static real(kind=8) fits2b [value-expr: fit221.fits2b];
+  static real(kind=8) kkss [value-expr: fit221.kkss];
+  static real(kind=8) kkcc [value-expr: fit221.kkcc];
+  static real(kind=8) kkem [value-expr: fit221.kkem];
+  static real(kind=8) bestlnx [value-expr: fitbst.bestlnx];
+  static real(kind=8) besttph [value-expr: fitbst.besttph];
+  static real(kind=8) bests2b [value-expr: fitbst.bests2b];
+  static logical(kind=4) flgfitx [value-expr: fitflg.flgfitx];
+  static logical(kind=4) flgtph [value-expr: fitflg.flgtph];
+  static logical(kind=4) flgs2b [value-expr: fitflg.flgs2b];
+  static logical(kind=4) flfout [value-expr: fitflg.flfout];
+  static integer(kind=4) modtype [value-expr: fitswtr.modtype];
+  static integer(kind=4) plltr [value-expr: fitswtr.plltr];
+  static integer(kind=4) prtpll[81] [value-expr: fitswtr.prtpll];
+  static logical(kind=4) flagmr [value-expr: flags.flagmr];
+  static integer(kind=4) flgblm [value-expr: flags.flgblm];
+  static logical(kind=4) ffermi [value-expr: flags.ffermi];
+  static logical(kind=4) fa2mt4 [value-expr: flags.fa2mt4];
+  static logical(kind=4) fa2mt2 [value-expr: flags.fa2mt2];
+  static logical(kind=4) fa2mt0 [value-expr: flags.fa2mt0];
+  static logical(kind=4) fla2im [value-expr: flags.fla2im];
+  static logical(kind=4) fasmt2 [value-expr: flags.fasmt2];
+  static logical(kind=4) fasmt0 [value-expr: flags.fasmt0];
+  static logical(kind=4) fas2mt [value-expr: flags.fas2mt];
+  static logical(kind=4) flagmf [value-expr: flags.flagmf];
+  static logical(kind=4) fpolew [value-expr: flags.fpolew];
+  static logical(kind=4) flgech [value-expr: flags.flgech];
+  static logical(kind=4) fobliq [value-expr: flags.fobliq];
+  static logical(kind=4) f4lqcd [value-expr: flags.f4lqcd];
+  static logical(kind=4) falas2 [value-expr: flags.falas2];
+  static logical(kind=4) fbayes [value-expr: flags.fbayes];
+  static integer(kind=4) flagzp [value-expr: flags.flagzp];
+  static logical(kind=4) flagmh [value-expr: flags.flagmh];
+  static logical(kind=4) flagmt [value-expr: flags.flagmt];
+  static logical(kind=4) flagmc [value-expr: flags.flagmc];
+  static logical(kind=4) flgrho [value-expr: flags.flgrho];
+  static logical(kind=4) fkappa [value-expr: flags.fkappa];
+  static logical(kind=4) flags [value-expr: flags.flags];
+  static logical(kind=4) flagt [value-expr: flags.flagt];
+  static logical(kind=4) fzprim [value-expr: flags.fzprim];
+  static logical(kind=4) fsinth [value-expr: flags.fsinth];
+  static logical(kind=4) fwrite [value-expr: flags.fwrite];
+  static logical(kind=4) flprob [value-expr: flags.flprob];
+  static logical(kind=4) fhiggs [value-expr: flags.fhiggs];
+  static logical(kind=4) flagal [value-expr: flags.flagal];
+  static logical(kind=4) fsplot [value-expr: flags.fsplot];
+  static real(kind=8) alpha [value-expr: inputs.alpha];
+  static real(kind=8) gf [value-expr: inputs.gf];
+  static real(kind=8) alfas0 [value-expr: inputs.alfas0];
+  static real(kind=8) asgrid[2001] [value-expr: inputs.asgrid];
+  static real(kind=8) mu0 [value-expr: inputs.mu0];
+  static real(kind=8) dahad3 [value-expr: inputs.dahad3];
+  static real(kind=8) pol4hf [value-expr: inputs.pol4hf];
+  static real(kind=8) an[8004] [value-expr: inputs.an];
+  static real(kind=8) bn[8004] [value-expr: inputs.bn];
+  static real(kind=8) pi1 [value-expr: inputs.pi1];
+  static real(kind=8) pi2 [value-expr: inputs.pi2];
+  static real(kind=8) zeta2 [value-expr: inputs.zeta2];
+  static real(kind=8) zeta3 [value-expr: inputs.zeta3];
+  static real(kind=8) zeta4 [value-expr: inputs.zeta4];
+  static real(kind=8) zeta5 [value-expr: inputs.zeta5];
+  static real(kind=8) zeta6 [value-expr: inputs.zeta6];
+  static real(kind=8) zeta7 [value-expr: inputs.zeta7];
+  static real(kind=8) prob [value-expr: limits.prob];
+  static real(kind=8) mtp [value-expr: limits.mtp];
+  static real(kind=8) sigma [value-expr: limits.sigma];
+  static integer(kind=4) zprime [value-expr: limits.zprime];
+  static real(kind=8) mw2 [value-expr: mass2.mw2];
+  static real(kind=8) mz2 [value-expr: mass2.mz2];
+  static real(kind=8) mt2 [value-expr: mass2.mt2];
+  static real(kind=8) mh2 [value-expr: mass2.mh2];
+  static real(kind=8) mz [value-expr: masses.mz];
+  static real(kind=8) mh [value-expr: masses.mh];
+  static real(kind=8) mt [value-expr: masses.mt];
+  static real(kind=8) mb [value-expr: masses.mb];
+  static real(kind=8) mc [value-expr: masses.mc];
+  static real(kind=8) ms [value-expr: masses.ms];
+  static real(kind=8) md [value-expr: masses.md];
+  static real(kind=8) mu [value-expr: masses.mu];
+  static real(kind=8) mtau [value-expr: masses.mtau];
+  static real(kind=8) mmu [value-expr: masses.mmu];
+  static real(kind=8) me [value-expr: masses.me];
+  static real(kind=8) mw [value-expr: masses.mw];
+  static real(kind=8) swpar [value-expr: obliqe.swpar];
+  static real(kind=8) spar [value-expr: obliqe.spar];
+  static real(kind=8) tpar [value-expr: obliqe.tpar];
+  static real(kind=8) upar [value-expr: obliqe.upar];
+  static real(kind=8) brho [value-expr: obliqe.brho];
+  static real(kind=8) bkappa [value-expr: obliqe.bkappa];
+  static real(kind=8) rpar [value-expr: obliqe.rpar];
+  static real(kind=8) zpar [value-expr: obliqe.zpar];
+  static real(kind=8) delrwh [value-expr: obliqe.delrwh];
+  static real(kind=8) delrzh [value-expr: obliqe.delrzh];
+  static real(kind=8) delr [value-expr: obliqe.delr];
+  static real(kind=8) rhohat [value-expr: obliqe.rhohat];
+  static real(kind=8) rho2 [value-expr: obliqe.rho2];
+  static real(kind=8) ratzw2 [value-expr: ratios.ratzw2];
+  static real(kind=8) rathw2 [value-expr: ratios.rathw2];
+  static real(kind=8) rathz2 [value-expr: ratios.rathz2];
+  static real(kind=8) rattw2 [value-expr: ratios.rattw2];
+  static real(kind=8) rattz2 [value-expr: ratios.rattz2];
+  static real(kind=8) ratth2 [value-expr: ratios.ratth2];
+  static real(kind=8) mzp [value-expr: zprime.mzp];
+  static real(kind=8) mzp2 [value-expr: zprime.mzp2];
+  static real(kind=8) mz02 [value-expr: zprime.mz02];
+  static real(kind=8) sinth [value-expr: zprime.sinth];
+  static real(kind=8) sinth2 [value-expr: zprime.sinth2];
+  static real(kind=8) costh [value-expr: zprime.costh];
+  static real(kind=8) costh2 [value-expr: zprime.costh2];
+  static real(kind=8) ratg21 [value-expr: zprime.ratg21];
+  static real(kind=8) rhoeff [value-expr: zprime.rhoeff];
+  static real(kind=8) rhoezp [value-expr: zprime.rhoezp];
+  static real(kind=8) rhozzp [value-expr: zprime.rhozzp];
+  static real(kind=8) v2[10] [value-expr: zprime.v2];
+  static real(kind=8) a2[10] [value-expr: zprime.a2];
+  static real(kind=8) eps2_l[10] [value-expr: zprime.eps2_l];
+  static real(kind=8) eps2_r[10] [value-expr: zprime.eps2_r];
+  static real(kind=8) ratgrl [value-expr: zprime.ratgrl];
+  real(kind=8) a7[8];
+  real(kind=8) abrems;
+  real(kind=8) alpem;
+  real(kind=8) asb;
+  real(kind=8) c20eff;
+  real(kind=8) c41;
+  real(kind=8) c70;
+  real(kind=8) c70eff;
+  real(kind=8) c71;
+  real(kind=8) c71eff;
+  real(kind=8) c7em;
+  real(kind=8) c80;
+  real(kind=8) c80eff;
+  real(kind=8) c81;
+  real(kind=8) cbue1;
+  real(kind=8) cbue2;
+  real(kind=8) dabs2;
+  real(kind=8) del;
+  real(kind=8) del2;
+  real(kind=8) del3;
+  real(kind=8) delnpc;
+  real(kind=8) delnpg;
+  real(kind=8) dgamma;
+  real(kind=8) dlnpsl;
+  real(kind=8) e7[8];
+  real(kind=8) eta;
+  real(kind=8) eta7[12];
+  real(kind=8) f22;
+  real(kind=8) f221;
+  real(kind=8) f27;
+  real(kind=8) f271;
+  real(kind=8) f28;
+  real(kind=8) f7[8];
+  real(kind=8) f77;
+  real(kind=8) f78;
+  real(kind=8) f88;
+  real(kind=8) fphsp;
+  real(kind=8) ftw;
+  real(kind=8) h7[8];
+  real(kind=8) h8[8];
+  real(kind=8) hphsp;
+  integer(kind=4) i;
+  real(kind=8) kl7[8];
+  real(kind=8) l3p;
+  real(kind=8) lamnp2;
+  real(kind=8) li2;
+  real(kind=8) li2del;
+  real(kind=8) lnx;
+  real(kind=8) logdel;
+  real(kind=8) logdl2;
+  real(kind=8) logz;
+  real(kind=8) logz2;
+  real(kind=8) logz3;
+  complex(kind=8) r2;
+  complex(kind=8) r7;
+  complex(kind=8) r8;
+  real(kind=8) ratckm;
+  real(kind=8) rootz;
+  real(kind=8) rtckm2;
+  real(kind=8) sudfac;
+  real(kind=8) sum70;
+  real(kind=8) sum71;
+  real(kind=8) sum80;
+  complex(kind=8) vrtuel;
+  real(kind=8) x;
+  real(kind=8) x12;
+  real(kind=8) x13;
+  real(kind=8) x14;
+  real(kind=8) x15;
+  real(kind=8) x2;
+  real(kind=8) x3;
+  real(kind=8) x4;
+  real(kind=8) x5;
+  real(kind=8) z;
+  real(kind=8) z2;
+  real(kind=8) z3;
+  real(kind=8) z4;
+  real(kind=8) z5;
+  real(kind=8) z6;
+
+  {
+    real(kind=8) __var_2;
+    real(kind=8) __var_1;
+
+    ratckm = 9.678999999999999825917029738775454461574554443359375e-1;
+    rtckm2 = 7.59999999999999998473443341140409756917506456375122070312e-3;
+    lamnp2 = 1.2800000000000000266453525910037569701671600341796875e-1;
+    del = 9.0000000000000002220446049250313080847263336181640625e-1;
+    cbue1 = 1.08333333333333339254522798000834882259368896484375e+1 - zeta2 * 4.0e+0;
+    cbue2 = ((((3.763495e+6 - zeta2 * 1.8382884493928649462759494781494140625e+6) - zeta3 * 9.38592e+5) + zeta4 * 9.3636e+5)) / 2.3328e+4;
+    alfahat (&mb, &dgamma, &alpem);
+    alpem = alpem / pi1;
+    asb = alphas (&mb) / pi1;
+    a7[0] = 6.0869565217391308209471390000544488430023193359375e-1;
+    a7[1] = 6.95652173913043458952643049997277557849884033203125e-1;
+    a7[2] = 2.60869565217391297107241143748979084193706512451171875e-1;
+    a7[3] = -5.2173913043478259421448228749795816838741302490234375e-1;
+    a7[4] = 4.08600000000000018740564655672642402350902557373046875e-1;
+    a7[5] = -4.22999999999999987121412914348184131085872650146484375e-1;
+    a7[6] = -8.993999999999999772626324556767940521240234375e-1;
+    a7[7] = 1.45600000000000007194245199571014381945133209228515625e-1;
+    h7[0] = 2.29959195965872975619959106552414596080780029296875e+0;
+    h7[1] = -1.087976029383336484812616618000902235507965087890625e+0;
+    h7[2] = -4.28571428571428547638078043746645562350749969482421875e-1;
+    h7[3] = -7.14285714285714246063463406244409270584583282470703125e-2;
+    h7[4] = -6.493999999999999772626324556767940521240234375e-1;
+    h7[5] = -3.7999999999999999056310429068616940639913082122802734375e-2;
+    h7[6] = -1.8599999999999998478994456263535539619624614715576171875e-2;
+    h7[7] = -5.7000000000000002053912595556539599783718585968017578125e-3;
+    h8[0] = 8.6234698487202365857484664957155473530292510986328125e-1;
+    h8[1] = 0.0;
+    h8[2] = 0.0;
+    h8[3] = 0.0;
+    h8[4] = -9.1349999999999997868371792719699442386627197265625e-1;
+    h8[5] = 8.730000000000000259792187762286630459129810333251953125e-2;
+    h8[6] = -5.709999999999999797939409518221509642899036407470703125e-2;
+    h8[7] = 2.08999999999999984401366504016550607047975063323974609375e-2;
+    e7[0] = 5.706436215079985885267888079397380352020263671875e+0;
+    e7[1] = -3.841226883175462347708162269555032253265380859375e+0;
+    e7[2] = 0.0;
+    e7[3] = 0.0;
+    e7[4] = -1.90430000000000010373923942097462713718414306640625e+0;
+    e7[5] = -1.00800000000000000710542735760100185871124267578125e-1;
+    e7[6] = 1.2159999999999999975575093458246556110680103302001953125e-1;
+    e7[7] = 1.83000000000000002942091015256664832122623920440673828125e-2;
+    f7[0] = -1.7302299999999998902922015986405313014984130859375e+1;
+    f7[1] = 8.502700000000000812860889709554612636566162109375e+0;
+    f7[2] = 4.55079999999999973425701682572253048419952392578125e+0;
+    f7[3] = 7.5190000000000001278976924368180334568023681640625e-1;
+    f7[4] = 2.004000000000000003552713678800500929355621337890625e+0;
+    f7[5] = 7.476000000000000422772927777259610593318939208984375e-1;
+    f7[6] = -5.3849999999999997868371792719699442386627197265625e-1;
+    f7[7] = 9.139999999999999513722315214181435294449329376220703125e-2;
+    kl7[0] = 1.86130610000000018544596969150006771087646484375e+1;
+    kl7[1] = -1.33698505000000000819682099972851574420928955078125e+1;
+    kl7[2] = -8.74016499999999751935320091433823108673095703125e-1;
+    kl7[3] = 4.21775000000000066524563635539379902184009552001953125e-1;
+    kl7[4] = -4.20422500000000010089706847793422639369964599609375e+0;
+    kl7[5] = 3.2991449999999999942446038403431884944438934326171875e-1;
+    kl7[6] = 2.41041000000000005254463530945940874516963958740234375e-1;
+    kl7[7] = 3.4710499999999998299582415484110242687165737152099609375e-2;
+    {
+      real(kind=8) D.3767;
+      real(kind=8) D.3766;
+
+      D.3766 = ((mcrun (&mb) / mb));
+      D.3767 = D.3766 * D.3766;
+      z = D.3767;
+    }
+    z2 = z * z;
+    z3 = z * z2;
+    z4 = z * z3;
+    z5 = z * z4;
+    z6 = z * z5;
+    logz = __builtin_log (z);
+    {
+      real(kind=8) D.3769;
+      real(kind=8) D.3768;
+
+      D.3768 = logz;
+      D.3769 = D.3768 * D.3768;
+      logz2 = D.3769;
+    }
+    logz3 = logz * logz2;
+    l3p = pi2 * logz + logz3;
+    rootz = __builtin_sqrt (z);
+    __var_1 = __builtin_log (1.0e+0 - z);
+    {
+      complex(kind=8) D.3776;
+      complex(kind=8) D.3775;
+      complex(kind=8) D.3773;
+      real(kind=8) D.3772;
+
+      D.3772 = rootz;
+      D.3773 = COMPLEX_EXPR <rootz, 0.0> * __complex__ (1.0e+0, 0.0);
+      D.3775 = COMPLEX_EXPR <rootz, 0.0> * __complex__ (-1.0e+0, 0.0);
+      D.3776 = COMPLEX_EXPR <z, 0.0> * __complex__ (1.0e+0, 0.0);
+      hphsp = (((((((z2 - 1.0e+0)) * (((((z2 + 1.0e+0)) * 6.5e+1) * 2.5e-1 - (z * 4.79e+2) / 3.0e+0)) + (z * logz) * ((((z * 1.74e+2 - 4.0e+0) + (z2 * 2.12e+2) / 3.0e+0) - (z3 * 1.9e+1) / 3.0e+0))) + (z2 * logz2) * ((z2 - 3.6e+1))) - ((__builtin_powi (D.3772, 3) * 3.2e+1) * ((z + 1.0e+0))) * (((pi2 - (logz * 2.0e+0) * __builtin_log (((1.0e+0 - rootz)) / ((rootz + 1.0e+0)))) - (REALPART_EXPR <spence (&D.3773)> - REALPART_EXPR <spence (&D.3775)>) * 4.0e+0))) + (((1.0e+0 - z2)) * (((((z2 + 1.0e+0)) * 1.7e+1) / 3.0e+0 - (z * 6.4e+1) / 3.0e+0))) * __var_1) - (((((z2 * 3.0e+1 + 1.0e+0) + z4)) * 4.0e+0) * logz) * __var_1) - (((z2 * 1.6e+1 + 1.0e+0) + z4)) * ((REALPART_EXPR <spence (&D.3776)> * 6.0e+0 - pi2));
+    }
+    L.1:;
+    fphsp = ((((1.0e+0 - z * 8.0e+0) + z3 * 8.0e+0) - z4) - (z2 * 1.2e+1) * logz) - ((asb * 2.0e+0) / 3.0e+0) * hphsp;
+    del2 = del * del;
+    del3 = del * del2;
+    logdel = __builtin_log (del);
+    logdl2 = __builtin_log (1.0e+0 - del);
+    {
+      complex(kind=8) D.3777;
+
+      D.3777 = COMPLEX_EXPR <((1.0e+0 - del)), 0.0> * __complex__ (1.0e+0, 0.0);
+      li2del = REALPART_EXPR <spence (&D.3777)>;
+    }
+    {
+      real(kind=8) D.3779;
+      real(kind=8) D.3778;
+
+      D.3778 = logdel;
+      D.3779 = D.3778 * D.3778;
+      sudfac = __builtin_exp (-((((D.3779 * 2.0e+0 + logdel * 7.0e+0)) * asb) / 3.0e+0));
+    }
+    {
+      real(kind=8) D.3780;
+
+      D.3780 = rootz;
+      r2 = COMPLEX_EXPR <-(((((((8.33e+2 - (pi2 * 1.44e+2) * __builtin_powi (D.3780, 3)) - (((((((4.8e+1 - pi2 * 5.0e+0) - zeta3 * 3.6e+1) + (((4.0e+0 - pi2)) * 9.0e+0) * logz) + logz2 * 3.0e+0) + logz3)) * 3.6e+1) * z) - (((((pi2 * 2.0e+0 + 1.8e+1) + (((2.0e+0 - pi2)) * 6.0e+0) * logz) + logz3)) * 3.6e+1) * z2) + (((((pi2 * 1.4e+1 + 9.0e+0) - logz * 1.82e+2) + logz2 * 1.26e+2)) * 6.0e+0) * z3)) * 2.0e+0) / 2.43e+2), 0.0> + ((COMPLEX_EXPR <((((((2.8e+1 - logz * 1.2e+1)) * z3 + (((logz2 * 3.0e+0 - pi2)) * 3.0e+0) * z2) + ((((1.5e+1 - pi2) + (logz * 3.0e+0) * ((logz + 1.0e+0)))) * 3.0e+0) * z) - 5.0e+0)), 0.0> * __complex__ (0.0, 1.6e+1)) * COMPLEX_EXPR <pi1, 0.0>) / __complex__ (8.1e+1, 0.0);
+    }
+    r7 = COMPLEX_EXPR <((4.2e+1 - pi2 * 8.0e+0)) / 9.0e+0, 0.0>;
+    r8 = -((((COMPLEX_EXPR <pi2 * 2.0e+0 - 3.3e+1, 0.0> - COMPLEX_EXPR <pi1, 0.0> * __complex__ (0.0, 6.0e+0))) * __complex__ (4.0e+0, 0.0)) / __complex__ (2.7e+1, 0.0));
+    f221 = ((((((((2.0e+0 - zeta3 * 1.4e+1) + pi2 * 2.772588722239781144907055931980721652507781982421875e+0) - (zeta4 * 4.5e+1) * 2.5e-1)) * z - ((((((1.0e+0 - zeta2)) * 2.4e+1 - (pi2 * 1.8e+1) * zeta3) + zeta4 * 1.247664925007901501885498873889446258544921875e+2) + zeta5 * 9.3e+1)) * z2) + (((7.46666666666666714036182384006679058074951171875e+1 - pi2 * 1.7e+1) + zeta4 * 9.0e+1)) * z3)) * 8.0e+0) / 2.7e+1;
+    f271 = ((((pi2 - 8.0e+0)) * 8.0e+0) / 9.0e+0) * z2 + ((((1.12e+2 - pi2 * 1.5e+1)) * 4.0e+0) / 2.7e+1) * z3;
+    f22 = ((((((((((((((((pi2 * 3.6e+1 + (pi2 * 9.6e+1) * 6.9314718055994528622676398299518041312694549560546875e-1) + zeta4 * 2.7e+2) + zeta3 * 1.44e+2) + l3p * 2.4e+1) - logz2 * 3.6e+1) - logz3 * 3.2e+1) - logz * 8.4e+1) - 1.38e+2)) * z + 4.0e+0) + (z2 * 8.0e+0) * ((((((((((zeta2 * 9.0e+0) * zeta3 + 6.0e+0) + logz * 6.0e+0) + l3p) + logz2) - pi2 * 2.0e+0)) * 1.2e+1 + (((zeta4 * 2.0e+0) * __builtin_log (z * 4.0e+0) + zeta5)) * 1.35e+2) + (logz3 * 2.0e+0) * (((logz2 * 3.0e+0) / 1.0e+1 + pi2))))) + ((((((((logz * 3.0e+2 - 5.65e+2) - pi2 * 1.8e+1) - zeta4 * 1.08e+3) - logz2 * 1.44e+2) - (logz2 * 6.0e+0) * ((pi2 * 2.0e+0 + logz2))) + l3p * 3.6e+1)) * 4.0e+0) * z3) + (((((pi2 * 5.6e+1 + 4.12888888888888914152630604803562164306640625e+2) - (logz * 1.304e+3) / 3.0e+0) - l3p * 4.8e+1) + logz2 * 1.68e+2)) * z4) + ((((((pi2 * 4.4e+1 + 3.833333333333333570180911920033395290374755859375e+1) - logz * 6.64e+2) - l3p * 2.4e+2) + logz2 * 1.32e+2)) / 9.0e+0) * z5) - (((((((logz2 * 3.0e+0 + pi2)) * 3.3e+2 + 1.300549999999999954525264911353588104248046875e+3) + logz * 3.681e+3) + l3p * 1.4e+3)) / 5.0e+1) * z6)) / 8.1e+1 + f221;
+    f27 = ((((((((((((pi2 * 2.0e+0 - 7.0e+0) - logz * 6.0e+0) - logz2 * 2.0e+0)) * 3.0e+0) * z - 2.0e+0) + (((((8.0e+0 - pi2 * 2.0e+0) + logz * 2.0e+0) + logz2)) * 2.4e+1) * z2) + ((((pi2 * 9.6e+1 - 3.82e+2) + logz * 2.4e+1) - logz2 * 3.6e+1)) * z3) + (((3.0e+0 - logz * 5.0e+0)) * 1.6e+1) * z4) - ((logz * 7.0e+1 + 1.3e+1)) * z5) - ((((logz * 6.3e+1 + 3.2e+1)) * 8.0e+0) / 5.0e+0) * z6)) / 2.7e+1 + f271;
+    f28 = -(f27 / 3.0e+0);
+    f77 = ((((del * 1.0e+1 + del2) - (del3 * 2.0e+0) / 3.0e+0) + (((del - 4.0e+0)) * del) * logdel)) / 3.0e+0;
+    f78 = (((((li2del - zeta2) - del * logdel) + (del * 2.5e-1) * (((9.0e+0 - del) + del2 / 3.0e+0)))) * 8.0e+0) / 9.0e+0;
+    f88 = ((((((((li2del * 4.0e+0 - (pi2 * 2.0e+0) / 3.0e+0) + logdl2 * 8.0e+0) - (((del + 2.0e+0)) * del) * logdel) + del * 7.0e+0) + del2 * 3.0e+0) - (del3 * 2.0e+0) / 3.0e+0) - ((((del * 2.0e+0 + del2) + logdl2 * 4.0e+0)) * 2.0e+0) * __builtin_log (mb / msrun (&mb)))) / 2.7e+1;
+    {
+      real(kind=8) D.3784;
+      real(kind=8) D.3783;
+
+      D.3783 = mtrun (&mw);
+      D.3784 = D.3783 * D.3783;
+      x = D.3784 / mw2;
+    }
+    x2 = x * x;
+    x3 = x * x2;
+    x4 = x * x3;
+    x5 = x * x4;
+    {
+      real(kind=8) D.3786;
+      real(kind=8) D.3785;
+
+      D.3785 = ((x - 1.0e+0));
+      D.3786 = D.3785 * D.3785;
+      x12 = D.3786;
+    }
+    x13 = ((x - 1.0e+0)) * x12;
+    x14 = ((x - 1.0e+0)) * x13;
+    x15 = ((x - 1.0e+0)) * x14;
+    lnx = __builtin_log (x);
+    {
+      complex(kind=8) D.3787;
+
+      D.3787 = COMPLEX_EXPR <((1.0e+0 - 1.0e+0 / x)), 0.0> * __complex__ (1.0e+0, 0.0);
+      li2 = REALPART_EXPR <spence (&D.3787)>;
+    }
+    __var_2 = __builtin_log (x - 1.0e+0);
+    ftw = (((((((((2.0e+0 - x * 3.0e+0)) * pi2) * ((2.0e+0 - x))) * x) / 4.8e+1 - (((((((1.76e+2 - x * 3.73e+2) + x2 * 4.91e+2) - x3 * 4.68e+2) + x4 * 7.2e+1)) * x) / 1.92e+2) / x13) + ((((((x - 2.0e+0)) * x2) * ((((5.0e+0 - x * 1.4e+1) + x2 * 1.1e+1) - x3 * 3.0e+0))) * 1.25e-1) / x13) * li2) - ((((((x + 2.0e+0)) * x) * (((x * 1.6e+1 + 7.0e+0) - x2 * 4.7e+1))) / 9.6e+1) / x12) * __var_2) + (((((((((8.0e+1 - x * 1.15e+2) + x2 * 2.0e+2) - x3 * 4.25e+2) + x4 * 2.2e+2) - x5 * 8.3e+1)) * x) / 9.6e+1) / x14) * lnx) - (((((((4.0e+0 - x * 5.0e+0) - x2 * 3.0e+0)) * x2) * 6.25e-2) / x13) * lnx) * ((((((5.0e+0 - x * 3.0e+0) + x3)) / x12) * lnx - ((x + 2.0e+0)) * __var_2));
+    L.2:;
+    c70 = (((((((x2 * 3.0e+0 - x3 * 8.0e+0) + x * 1.2e+1) - 7.0e+0) + ((x * 6.0e+0) * ((x * 3.0e+0 - 2.0e+0))) * lnx)) * x) / 2.4e+1) / x14;
+    c80 = (((((((x2 * 6.0e+0 - x3) - x * 3.0e+0) - 2.0e+0) - (x * 6.0e+0) * lnx)) * x) * 1.25e-1) / x14;
+    c41 = ((((((x * 1.1e+1 + x2) - 1.8e+1)) * x) / 1.2e+1) / x13 - (((lnx + 1.0e+0)) * 2.0e+0) / 3.0e+0) + ((((((x2 * 4.0e+0 - x * 1.6e+1) + 1.5e+1)) * x2) / 6.0e+0) / x14) * lnx;
+    {
+      real(kind=8) D.3791;
+      real(kind=8) D.3790;
+
+      D.3790 = lnx;
+      D.3791 = D.3790 * D.3790;
+      c71 = (((((((((-(x3 * 1.6e+1) - x2 * 1.22e+2) + x * 8.0e+1) - 8.0e+0)) * x) / 9.0e+0) / x14) * li2 + ((((((x2 * 6.0e+0 + x * 4.6e+1) - 2.8e+1)) * x2) / 3.0e+0) / x15) * D.3791) - ((((((((x5 * 1.02e+2 + x4 * 5.88e+2) + x3 * 2.262e+3) - x2 * 3.244e+3) + x * 1.364e+3) - 2.08e+2)) * lnx) / 8.1e+1) / x15) + ((((((x4 * 1.646e+3 + x3 * 1.2205e+4) - x2 * 1.074e+4) + x * 2.509e+3) - 4.36e+2)) / 4.86e+2) / x14;
+    }
+    {
+      real(kind=8) D.3793;
+      real(kind=8) D.3792;
+
+      D.3792 = lnx;
+      D.3793 = D.3792 * D.3792;
+      c81 = (((((((((x2 * 4.0e+1 - x3 * 4.0e+0) + x * 4.1e+1) + 1.0e+0)) * x) / 6.0e+0) / x14) * li2 - (((((x * 1.7e+1 + 3.1e+1)) * x2) * 5.0e-1) / x15) * D.3793) - ((((((((x5 * 2.1e+2 - x4 * 1.086e+3) - x3 * 4.893e+3) - x2 * 2.857e+3) + x * 1.994e+3) - 2.8e+2)) * lnx) / 2.16e+2) / x15) + ((((((x4 * 7.37e+2 - x3 * 1.4102e+4) - x2 * 2.8209e+4) + x * 6.1e+2) - 5.08e+2)) / 1.296e+3) / x14;
+    }
+    eta = (alphas (&mw) / pi1) / asb;
+    sum70 = 0.0;
+    sum80 = 0.0;
+    sum71 = 0.0;
+    i = 1;
+    if (i <= 8)
+      {
+        while (1)
+          {
+            {
+              logical(kind=4) D.3798;
+
+              {
+                real(kind=8) D.3796;
+
+                D.3796 = eta;
+                eta7[(integer(kind=8)) i + -1] = __builtin_pow (D.3796, a7[(integer(kind=8)) i + -1]);
+              }
+              sum70 = eta7[(integer(kind=8)) i + -1] * h7[(integer(kind=8)) i + -1] + sum70;
+              sum80 = eta7[(integer(kind=8)) i + -1] * h8[(integer(kind=8)) i + -1] + sum80;
+              sum71 = eta7[(integer(kind=8)) i + -1] * ((f7[(integer(kind=8)) i + -1] + ((e7[(integer(kind=8)) i + -1] * c41 + kl7[(integer(kind=8)) i + -1])) * eta)) + sum71;
+              __label_000010:;
+              L.3:;
+              D.3798 = i == 8;
+              i = i + 1;
+              if (D.3798) goto L.4;
+            }
+          }
+      }
+    L.4:;
+    i = 9;
+    if (i <= 12)
+      {
+        while (1)
+          {
+            {
+              logical(kind=4) D.3802;
+
+              eta7[(integer(kind=8)) i + -1] = eta7[(integer(kind=8)) (i + -8) + -1] / eta;
+              __label_000020:;
+              L.5:;
+              D.3802 = i == 12;
+              i = i + 1;
+              if (D.3802) goto L.6;
+            }
+          }
+      }
+    L.6:;
+    c20eff = ((eta7[2] + eta7[3])) * 5.0e-1;
+    c70eff = (eta7[1] * c70 + ((((eta7[0] - eta7[1])) * 8.0e+0) / 3.0e+0) * c80) + sum70;
+    c80eff = eta7[0] * c80 + sum80;
+    c71eff = ((((eta7[1] * c71 + ((((eta7[0] - eta7[1])) * 8.0e+0) / 3.0e+0) * c81)) * eta + ((((((7.4416e+4 - (eta * 1.674721e+6) / 2.5e+1)) * eta7[1] - ((7.164416000000000349245965480804443359375e+4 - eta * 6.4217e+4)) * eta7[0])) * 4.0e+0) * c80) / 1.4283e+4) + (((((eta - 1.0e+0)) * 3.7208e+4) * eta7[1]) * c70) / 4.761e+3) + sum71;
+    c7em = ((((((((((((eta7[8] * 3.2e+1) / 7.5e+1 - (eta7[9] * 4.0e+1) / 6.9e+1) + (eta7[1] * 8.8e+1) / 5.75e+2)) * c70 + (((((eta7[9] * 3.2e+1) / 1.449e+3 - (eta7[8] * 3.2e+1) / 5.75e+2) + (eta7[0] * 6.4e+2) / 1.449e+3) - (eta7[1] * 7.04e+2) / 1.725e+3)) * c80) - (eta7[1] * 7.48e+2) / 8.625e+3) - (eta7[11] * 1.9e+2) / 8.073e+3) - (eta7[10] * 3.59e+2) / 3.105e+3) + (eta7[3] * 4.276e+3) / 1.21095e+5) + (eta7[8] * 3.50531e+5) / 1.009125e+6) + (eta7[9] * 2.0e+0) / 4.347e+3) - (eta7[2] * 5.956e+3) / 1.5525e+4) + (eta7[0] * 3.838e+4) / 1.69533e+5;
+    vrtuel = (COMPLEX_EXPR <c20eff, 0.0> * r2 + COMPLEX_EXPR <c70eff, 0.0> * r7) + COMPLEX_EXPR <c80eff, 0.0> * r8;
+    {
+      real(kind=8) D.3804;
+      real(kind=8) D.3803;
+
+      D.3803 = c70eff;
+      D.3804 = D.3803 * D.3803;
+      abrems = ((((((c80eff * f28 + c70eff * f27) + c20eff * f22)) * c20eff + ((c80eff * f88 + c70eff * f78)) * c80eff) + D.3804 * f77)) * asb;
+    }
+    {
+      real(kind=8) D.3806;
+      real(kind=8) D.3805;
+
+      D.3805 = __builtin_cabs (COMPLEX_EXPR <c70eff, 0.0> + COMPLEX_EXPR <asb * 2.5e-1, 0.0> * ((COMPLEX_EXPR <c71eff, 0.0> + vrtuel)));
+      D.3806 = D.3805 * D.3805;
+      dabs2 = D.3806;
+    }
+    {
+      real(kind=8) D.3808;
+      real(kind=8) D.3807;
+
+      D.3807 = asb;
+      D.3808 = D.3807 * D.3807;
+      fphsp = ((((cbue1 * asb + 1.0e+0) + cbue2 * D.3808) - fphsp)) * rtckm2 + fphsp;
+    }
+    {
+      real(kind=8) D.3810;
+      real(kind=8) D.3809;
+
+      D.3809 = ((c70eff / mb));
+      D.3810 = D.3809 * D.3809;
+      delnpg = -(((lamnp2 * 9.0e+0) * 5.0e-1) * D.3810);
+    }
+    {
+      real(kind=8) D.3812;
+      real(kind=8) D.3811;
+
+      D.3811 = mc;
+      D.3812 = D.3811 * D.3811;
+      delnpc = -((((lamnp2 / 9.0e+0) / D.3812) * c70eff) * c20eff);
+    }
+    {
+      real(kind=8) D.3815;
+      real(kind=8) D.3814;
+      real(kind=8) D.3813;
+
+      D.3813 = ((1.0e+0 - z));
+      D.3814 = mb;
+      D.3815 = D.3814 * D.3814;
+      dlnpsl = (((lamnp2 * 3.0e+0) * ((fphsp - __builtin_powi (D.3813, 4) * 4.0e+0))) * 5.0e-1) / D.3815;
+    }
+    {
+      real(kind=8) D.3818;
+      real(kind=8) D.3817;
+      real(kind=8) D.3816;
+
+      D.3816 = ((1.0e+0 - z));
+      D.3817 = mb;
+      D.3818 = D.3817 * D.3817;
+      dlnpsl = dlnpsl - (((rtckm2 * 6.0e+0) * lamnp2) * ((1.0e+0 - __builtin_powi (D.3816, 4)))) / D.3818;
+    }
+    *sgcenu = ((((((alpha * 6.0e+0) / pi1) * ratckm) * sudfac) * (((((abrems / sudfac + dabs2) + delnpg) + delnpc) - (alpem * c70eff) * (((ftw / sinhat) * eta7[1] + (2.0e+0 / asb) * c7em))))) / ((fphsp + dlnpsl))) / (((((((1.0e+0 / eta - 1.0e+0)) * 6.0e+0) / 2.3e+1) * alpem) / asb + 1.0e+0));
+    return;
+  }
+}
+
+

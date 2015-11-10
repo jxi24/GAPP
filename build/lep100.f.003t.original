@@ -1,0 +1,1032 @@
+z0pole (real(kind=8)[12] * restrict gamma, real(kind=8) & restrict sigmah, real(kind=8)[10] * restrict r, real(kind=8)[10] * restrict sin2te, real(kind=8)[11] * restrict alr, real(kind=8)[11] * restrict afb, integer(kind=4) & restrict fmin, integer(kind=4) & restrict fmax)
+{
+  static real(kind=8) q[10] [value-expr: coupls.q];
+  static real(kind=8) i3[10] [value-expr: coupls.i3];
+  static real(kind=8) nc[10] [value-expr: coupls.nc];
+  static real(kind=8) v[10] [value-expr: coupls.v];
+  static real(kind=8) a[10] [value-expr: coupls.a];
+  static real(kind=8) alphat [value-expr: coupls.alphat];
+  static real(kind=8) sinhat [value-expr: coupls.sinhat];
+  static real(kind=8) coshat [value-expr: coupls.coshat];
+  static real(kind=8) rhonc [value-expr: coupls.rhonc];
+  static real(kind=8) i3r[10] [value-expr: coupls.i3r];
+  static real(kind=8) u1xr[10] [value-expr: coupls.u1xr];
+  static real(kind=8) u1xl[10] [value-expr: coupls.u1xl];
+  static real(kind=8) fitx [value-expr: fit221.fitx];
+  static real(kind=8) fitsph [value-expr: fit221.fitsph];
+  static real(kind=8) fitcph [value-expr: fit221.fitcph];
+  static real(kind=8) fittph [value-expr: fit221.fittph];
+  static real(kind=8) fits2b [value-expr: fit221.fits2b];
+  static real(kind=8) kkss [value-expr: fit221.kkss];
+  static real(kind=8) kkcc [value-expr: fit221.kkcc];
+  static real(kind=8) kkem [value-expr: fit221.kkem];
+  static real(kind=8) bestlnx [value-expr: fitbst.bestlnx];
+  static real(kind=8) besttph [value-expr: fitbst.besttph];
+  static real(kind=8) bests2b [value-expr: fitbst.bests2b];
+  static logical(kind=4) flgfitx [value-expr: fitflg.flgfitx];
+  static logical(kind=4) flgtph [value-expr: fitflg.flgtph];
+  static logical(kind=4) flgs2b [value-expr: fitflg.flgs2b];
+  static logical(kind=4) flfout [value-expr: fitflg.flfout];
+  static integer(kind=4) modtype [value-expr: fitswtr.modtype];
+  static integer(kind=4) plltr [value-expr: fitswtr.plltr];
+  static integer(kind=4) prtpll[81] [value-expr: fitswtr.prtpll];
+  static logical(kind=4) flagmr [value-expr: flags.flagmr];
+  static integer(kind=4) flgblm [value-expr: flags.flgblm];
+  static logical(kind=4) ffermi [value-expr: flags.ffermi];
+  static logical(kind=4) fa2mt4 [value-expr: flags.fa2mt4];
+  static logical(kind=4) fa2mt2 [value-expr: flags.fa2mt2];
+  static logical(kind=4) fa2mt0 [value-expr: flags.fa2mt0];
+  static logical(kind=4) fla2im [value-expr: flags.fla2im];
+  static logical(kind=4) fasmt2 [value-expr: flags.fasmt2];
+  static logical(kind=4) fasmt0 [value-expr: flags.fasmt0];
+  static logical(kind=4) fas2mt [value-expr: flags.fas2mt];
+  static logical(kind=4) flagmf [value-expr: flags.flagmf];
+  static logical(kind=4) fpolew [value-expr: flags.fpolew];
+  static logical(kind=4) flgech [value-expr: flags.flgech];
+  static logical(kind=4) fobliq [value-expr: flags.fobliq];
+  static logical(kind=4) f4lqcd [value-expr: flags.f4lqcd];
+  static logical(kind=4) falas2 [value-expr: flags.falas2];
+  static logical(kind=4) fbayes [value-expr: flags.fbayes];
+  static integer(kind=4) flagzp [value-expr: flags.flagzp];
+  static logical(kind=4) flagmh [value-expr: flags.flagmh];
+  static logical(kind=4) flagmt [value-expr: flags.flagmt];
+  static logical(kind=4) flagmc [value-expr: flags.flagmc];
+  static logical(kind=4) flgrho [value-expr: flags.flgrho];
+  static logical(kind=4) fkappa [value-expr: flags.fkappa];
+  static logical(kind=4) flags [value-expr: flags.flags];
+  static logical(kind=4) flagt [value-expr: flags.flagt];
+  static logical(kind=4) fzprim [value-expr: flags.fzprim];
+  static logical(kind=4) fsinth [value-expr: flags.fsinth];
+  static logical(kind=4) fwrite [value-expr: flags.fwrite];
+  static logical(kind=4) flprob [value-expr: flags.flprob];
+  static logical(kind=4) fhiggs [value-expr: flags.fhiggs];
+  static logical(kind=4) flagal [value-expr: flags.flagal];
+  static logical(kind=4) fsplot [value-expr: flags.fsplot];
+  static real(kind=8) alpha [value-expr: inputs.alpha];
+  static real(kind=8) gf [value-expr: inputs.gf];
+  static real(kind=8) alfas0 [value-expr: inputs.alfas0];
+  static real(kind=8) asgrid[2001] [value-expr: inputs.asgrid];
+  static real(kind=8) mu0 [value-expr: inputs.mu0];
+  static real(kind=8) dahad3 [value-expr: inputs.dahad3];
+  static real(kind=8) pol4hf [value-expr: inputs.pol4hf];
+  static real(kind=8) an[8004] [value-expr: inputs.an];
+  static real(kind=8) bn[8004] [value-expr: inputs.bn];
+  static real(kind=8) pi1 [value-expr: inputs.pi1];
+  static real(kind=8) pi2 [value-expr: inputs.pi2];
+  static real(kind=8) zeta2 [value-expr: inputs.zeta2];
+  static real(kind=8) zeta3 [value-expr: inputs.zeta3];
+  static real(kind=8) zeta4 [value-expr: inputs.zeta4];
+  static real(kind=8) zeta5 [value-expr: inputs.zeta5];
+  static real(kind=8) zeta6 [value-expr: inputs.zeta6];
+  static real(kind=8) zeta7 [value-expr: inputs.zeta7];
+  static real(kind=8) prob [value-expr: limits.prob];
+  static real(kind=8) mtp [value-expr: limits.mtp];
+  static real(kind=8) sigma [value-expr: limits.sigma];
+  static integer(kind=4) zprime [value-expr: limits.zprime];
+  static real(kind=8) mw2 [value-expr: mass2.mw2];
+  static real(kind=8) mz2 [value-expr: mass2.mz2];
+  static real(kind=8) mt2 [value-expr: mass2.mt2];
+  static real(kind=8) mh2 [value-expr: mass2.mh2];
+  static real(kind=8) mz [value-expr: masses.mz];
+  static real(kind=8) mh [value-expr: masses.mh];
+  static real(kind=8) mt [value-expr: masses.mt];
+  static real(kind=8) mb [value-expr: masses.mb];
+  static real(kind=8) mc [value-expr: masses.mc];
+  static real(kind=8) ms [value-expr: masses.ms];
+  static real(kind=8) md [value-expr: masses.md];
+  static real(kind=8) mu [value-expr: masses.mu];
+  static real(kind=8) mtau [value-expr: masses.mtau];
+  static real(kind=8) mmu [value-expr: masses.mmu];
+  static real(kind=8) me [value-expr: masses.me];
+  static real(kind=8) mw [value-expr: masses.mw];
+  static real(kind=8) swpar [value-expr: obliqe.swpar];
+  static real(kind=8) spar [value-expr: obliqe.spar];
+  static real(kind=8) tpar [value-expr: obliqe.tpar];
+  static real(kind=8) upar [value-expr: obliqe.upar];
+  static real(kind=8) brho [value-expr: obliqe.brho];
+  static real(kind=8) bkappa [value-expr: obliqe.bkappa];
+  static real(kind=8) rpar [value-expr: obliqe.rpar];
+  static real(kind=8) zpar [value-expr: obliqe.zpar];
+  static real(kind=8) delrwh [value-expr: obliqe.delrwh];
+  static real(kind=8) delrzh [value-expr: obliqe.delrzh];
+  static real(kind=8) delr [value-expr: obliqe.delr];
+  static real(kind=8) rhohat [value-expr: obliqe.rhohat];
+  static real(kind=8) rho2 [value-expr: obliqe.rho2];
+  static real(kind=8) ratzw2 [value-expr: ratios.ratzw2];
+  static real(kind=8) rathw2 [value-expr: ratios.rathw2];
+  static real(kind=8) rathz2 [value-expr: ratios.rathz2];
+  static real(kind=8) rattw2 [value-expr: ratios.rattw2];
+  static real(kind=8) rattz2 [value-expr: ratios.rattz2];
+  static real(kind=8) ratth2 [value-expr: ratios.ratth2];
+  static real(kind=8) mzp [value-expr: zprime.mzp];
+  static real(kind=8) mzp2 [value-expr: zprime.mzp2];
+  static real(kind=8) mz02 [value-expr: zprime.mz02];
+  static real(kind=8) sinth [value-expr: zprime.sinth];
+  static real(kind=8) sinth2 [value-expr: zprime.sinth2];
+  static real(kind=8) costh [value-expr: zprime.costh];
+  static real(kind=8) costh2 [value-expr: zprime.costh2];
+  static real(kind=8) ratg21 [value-expr: zprime.ratg21];
+  static real(kind=8) rhoeff [value-expr: zprime.rhoeff];
+  static real(kind=8) rhoezp [value-expr: zprime.rhoezp];
+  static real(kind=8) rhozzp [value-expr: zprime.rhozzp];
+  static real(kind=8) v2[10] [value-expr: zprime.v2];
+  static real(kind=8) a2[10] [value-expr: zprime.a2];
+  static real(kind=8) eps2_l[10] [value-expr: zprime.eps2_l];
+  static real(kind=8) eps2_r[10] [value-expr: zprime.eps2_r];
+  static real(kind=8) ratgrl [value-expr: zprime.ratgrl];
+  complex(kind=8) aeff[10];
+  real(kind=8) al;
+  real(kind=8) az;
+  real(kind=8) az2;
+  real(kind=8) az3;
+  real(kind=8) c1;
+  real(kind=8) c2;
+  real(kind=8) c3;
+  real(kind=8) cal2;
+  real(kind=8) cam2a0;
+  real(kind=8) cam2a1;
+  real(kind=8) cam2a2;
+  real(kind=8) cam2a3;
+  real(kind=8) cam4a0;
+  real(kind=8) cpi2;
+  real(kind=8) cpi4;
+  real(kind=8) csaa2;
+  real(kind=8) csaa2t;
+  real(kind=8) csaa3t;
+  real(kind=8) csm2a2;
+  real(kind=8) csva3;
+  real(kind=8) csva3t;
+  real(kind=8) cum0a2;
+  real(kind=8) cum0a3;
+  real(kind=8) cum0a4;
+  real(kind=8) cum0a5;
+  real(kind=8) cum0a6;
+  real(kind=8) cum2a3;
+  real(kind=8) cumta2;
+  real(kind=8) cumta3;
+  real(kind=8) cvm2a1;
+  real(kind=8) cvm2a2;
+  real(kind=8) cvm2a3;
+  real(kind=8) cvm4a0;
+  integer(kind=4) f;
+  real(kind=8) gammaa[10];
+  real(kind=8) gammafirstsecond;
+  real(kind=8) gammathird;
+  real(kind=8) gammav[10];
+  real(kind=8) hbarc2;
+  complex(kind=8) kappa[10];
+  real(kind=8) lntz2;
+  real(kind=8) lntz22;
+  real(kind=8) mbz2;
+  real(kind=8) mbz4;
+  real(kind=8) mcz2;
+  real(kind=8) mtauz2;
+  real(kind=8) qf234;
+  complex(kind=8) rho[10];
+  real(kind=8) rtz2;
+  real(kind=8) rtz4;
+  real(kind=8) rtz6;
+  real(kind=8) sinthe;
+  real(kind=8) sumaef;
+  real(kind=8) sumv;
+  complex(kind=8) veff[10];
+
+  hbarc2 = 3.893796599999999743886291980743408203125e+5;
+  al = alphat / pi1;
+  az = alphas (&mz) / pi1;
+  {
+    real(kind=8) D.3753;
+    real(kind=8) D.3752;
+
+    D.3752 = az;
+    D.3753 = D.3752 * D.3752;
+    az2 = D.3753;
+  }
+  {
+    real(kind=8) D.3754;
+
+    D.3754 = az;
+    az3 = __builtin_powi (D.3754, 3);
+  }
+  {
+    real(kind=8) D.3756;
+    real(kind=8) D.3755;
+
+    D.3755 = ((mtau / mz));
+    D.3756 = D.3755 * D.3755;
+    mtauz2 = D.3756;
+  }
+  {
+    real(kind=8) D.3759;
+    real(kind=8) D.3758;
+
+    D.3758 = ((mcrun (&mz) / mz));
+    D.3759 = D.3758 * D.3758;
+    mcz2 = D.3759;
+  }
+  {
+    real(kind=8) D.3762;
+    real(kind=8) D.3761;
+
+    D.3761 = ((mbrun (&mz) / mz));
+    D.3762 = D.3761 * D.3761;
+    mbz2 = D.3762;
+  }
+  {
+    real(kind=8) D.3764;
+    real(kind=8) D.3763;
+
+    D.3763 = mbz2;
+    D.3764 = D.3763 * D.3763;
+    mbz4 = D.3764;
+  }
+  mcz2 = (((al * 6.6666666666666662965923251249478198587894439697265625e-1) * __builtin_log (mcz2) + 1.0e+0)) * mcz2;
+  mbz2 = (((al * 1.666666666666666574148081281236954964697360992431640625e-1) * __builtin_log (mbz2) + 1.0e+0)) * mbz2;
+  {
+    real(kind=8) D.3767;
+    real(kind=8) D.3766;
+
+    D.3766 = ((mtrun (&mz) / mz));
+    D.3767 = D.3766 * D.3766;
+    rtz2 = D.3767;
+  }
+  {
+    real(kind=8) D.3769;
+    real(kind=8) D.3768;
+
+    D.3768 = rtz2;
+    D.3769 = D.3768 * D.3768;
+    rtz4 = D.3769;
+  }
+  {
+    real(kind=8) D.3770;
+
+    D.3770 = rtz2;
+    rtz6 = __builtin_powi (D.3770, 3);
+  }
+  lntz2 = __builtin_log (rtz2);
+  {
+    real(kind=8) D.3772;
+    real(kind=8) D.3771;
+
+    D.3771 = __builtin_log (rtz2);
+    D.3772 = D.3771 * D.3771;
+    lntz22 = D.3772;
+  }
+  {
+    static integer(kind=4) C.3774 = 9;
+    static integer(kind=4) C.3773 = 0;
+
+    rhof (&rho, &C.3773, &C.3774);
+  }
+  {
+    static integer(kind=4) C.3777 = 9;
+    static integer(kind=4) C.3776 = 0;
+
+    kappaf (&kappa, &C.3776, &C.3777);
+  }
+  f = 0;
+  if (f <= 9)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3784;
+
+            veff[(integer(kind=8)) f] = (__builtin_csqrt ((rho[(integer(kind=8)) f] / COMPLEX_EXPR <sinhat, 0.0>) / COMPLEX_EXPR <coshat, 0.0>) / __complex__ (2.0e+0, 0.0)) * ((COMPLEX_EXPR <i3[(integer(kind=8)) f], 0.0> - ((kappa[(integer(kind=8)) f] * __complex__ (2.0e+0, 0.0)) * COMPLEX_EXPR <q[(integer(kind=8)) f], 0.0>) * COMPLEX_EXPR <sinhat, 0.0>));
+            aeff[(integer(kind=8)) f] = (__builtin_csqrt ((rho[(integer(kind=8)) f] / COMPLEX_EXPR <sinhat, 0.0>) / COMPLEX_EXPR <coshat, 0.0>) / __complex__ (2.0e+0, 0.0)) * COMPLEX_EXPR <i3[(integer(kind=8)) f], 0.0>;
+            if (flagzp != 0)
+              {
+                sinthe = ((ratg21 * sinth) * 5.0e-1) / __builtin_sqrt (sinhat * coshat);
+                veff[(integer(kind=8)) f] = COMPLEX_EXPR <costh, 0.0> * veff[(integer(kind=8)) f] + COMPLEX_EXPR <v2[(integer(kind=8)) f] * sinthe, 0.0>;
+                aeff[(integer(kind=8)) f] = COMPLEX_EXPR <costh, 0.0> * aeff[(integer(kind=8)) f] + COMPLEX_EXPR <a2[(integer(kind=8)) f] * sinthe, 0.0>;
+              }
+            L.3:;
+            if (f != 0)
+              {
+                (*sin2te)[(integer(kind=8)) f] = (((1.0e+0 - REALPART_EXPR <veff[(integer(kind=8)) f] / aeff[(integer(kind=8)) f]>)) / ABS_EXPR <q[(integer(kind=8)) f]>) * 2.5e-1;
+              }
+            L.4:;
+            __label_000010:;
+            L.1:;
+            D.3784 = f == 9;
+            f = f + 1;
+            if (D.3784) goto L.2;
+          }
+        }
+    }
+  L.2:;
+  cal2 = 1.222222222222222143273029359988868236541748046875e+1 - (zeta3 * 8.0e+1) / 9.0e+0;
+  cpi2 = -((zeta2 * 5.29e+2) / 7.2e+1);
+  cpi4 = (zeta4 * 2.79841e+5) / 1.152e+3;
+  cum0a2 = 1.0625e+1 - (zeta3 * 2.3e+1) / 3.0e+0;
+  cum0a3 = (1.4384297839506172067558509297668933868408203125e+2 - (zeta3 * 1.5961e+4) / 1.08e+2) + (zeta5 * 5.75e+2) / 1.8e+1;
+  {
+    real(kind=8) D.3786;
+    real(kind=8) D.3785;
+
+    D.3785 = zeta3;
+    D.3786 = D.3785 * D.3785;
+    cum0a4 = (((((4.19585161e+8 - zeta3 * 4.8565512e+8) + D.3786 * 7.958736e+7) + zeta5 * 6.838236e+7) - zeta7 * 1.982232e+7)) / 1.86624e+5;
+  }
+  cum0a5 = 0.0;
+  cum0a6 = 0.0;
+  if (NON_LVALUE_EXPR <flgech>)
+    {
+      {
+        static integer(kind=4) C.3788 = 5;
+
+        c1 = (fbeta1 (&C.3788) * 1.2e+1) / 2.3e+1;
+      }
+      {
+        static integer(kind=4) C.3790 = 5;
+
+        c2 = (fbeta2 (&C.3790) * 1.2e+1) / 2.3e+1;
+      }
+      {
+        static integer(kind=4) C.3792 = 5;
+
+        c3 = (fbeta3 (&C.3792) * 1.2e+1) / 2.3e+1;
+      }
+      {
+        real(kind=8) D.3795;
+        real(kind=8) D.3794;
+
+        D.3794 = c1;
+        D.3795 = D.3794 * D.3794;
+        cum0a5 = ((((cum0a3 * 6.0e+0 + (c1 * 7.0e+0) * cum0a2) + (D.3795 * 3.0e+0) * 5.0e-1) + c2 * 3.0e+0)) * cpi2 + cpi4;
+      }
+      {
+        real(kind=8) D.3797;
+        real(kind=8) D.3796;
+
+        D.3796 = c1;
+        D.3797 = D.3796 * D.3796;
+        cum0a6 = (((((((c1 * 2.7e+1) * 5.0e-1) * cum0a3 + (D.3797 * 4.0e+0) * cum0a2) + ((c1 * 7.0e+0) * c2) * 5.0e-1) + (c2 * 8.0e+0) * cum0a2) + (c3 * 7.0e+0) * 5.0e-1)) * cpi2 + ((cum0a2 * 5.0e+0 + (c1 * 7.7e+1) / 1.2e+1)) * cpi4;
+      }
+    }
+  L.5:;
+  cum0a3 = cum0a3 + cpi2;
+  cum0a4 = ((cum0a2 * 3.0e+0 + (c1 * 5.0e+0) * 5.0e-1)) * cpi2 + cum0a4;
+  cum2a3 = (zeta3 * 1.4e+2) / 3.0e+0 - 6.222222222222222143273029359988868236541748046875e+1;
+  cumta2 = ((((lntz2 * 2.0e+0) / 1.35e+2 + 6.5185185185185179346234463082510046660900115966796875e-2)) / rtz2 - ((lntz2 / 2.52e+3 + 1.23110355253212388863814918948946797172538936138153076172e-3)) / rtz4) + ((lntz2 / 4.2525e+4 + 6.13271371648796648169341128031817333976505324244499206543e-5)) / rtz6;
+  cumta3 = (-(((((lntz2 * 1.85827e+5) / 8.748e+5 + 1.737430000000000085425000406758044846355915069580078125e-1) + (lntz22 * 1.81e+2) / 4.86e+3)) / rtz2) - (((7.5218100000000003013678195884494925849139690399169921875e-3 - (lntz2 * 1.9223e+4) / 3.26592e+7) - (lntz22 * 1.39e+2) / 3.6288e+5)) / rtz4) + ((((lntz2 * 1.8671173e+7) / 1.5431472e+11 + 5.04106000000000041907921577433171478332951664924621582031e-4) + (lntz22 * 4.81e+2) / 1.5309e+7)) / rtz6;
+  cvm2a1 = 1.2e+1;
+  cvm2a2 = 1.048333333333333285963817615993320941925048828125e+2;
+  cvm2a3 = ((1.6646851851851852188701741397380828857421875e+3 - (zeta2 * 1.645e+3) / 6.0e+0) + (zeta3 * 8.2e+2) / 2.7e+1) - (zeta5 * 3.6575e+4) / 5.4e+1;
+  cvm4a0 = -6.0e+0;
+  cam2a0 = -6.0e+0;
+  cam2a1 = -2.2e+1;
+  cam2a2 = (zeta2 * 4.7e+1 - 2.79625e+2) + zeta3 * 9.7e+1;
+  cam2a3 = ((((zeta2 * 1.5515e+4) / 1.8e+1 - 3.2181667952674897605902515351772308349609375e+3) + (zeta3 * 2.7545e+4) / 1.2e+1) + zeta4 * 2.5e+1) - zeta5 * 9.95e+2;
+  cam4a0 = 6.0e+0;
+  csaa2 = -8.5e+0;
+  csaa2t = (((lntz2 * 3.0e+0 + 7.5e-1) - (7.0e+0 / rtz2) / 2.7e+1) - (7.0e+0 / rtz4) / 4.0e+2) - (1.04e+2 / rtz6) / 5.5125e+4;
+  csaa3t = (((((((zeta2 * 2.3e+1) * 5.0e-1 - 7.8486111111111114269078825600445270538330078125e+1) + zeta3 * 3.0e+0) - (lntz2 * 3.1e+1) / 6.0e+0) + (lntz22 * 2.3e+1) * 2.5e-1) - ((((lntz2 * 6.961e+3) / 8.1e+3 + 3.77554000000000000714095449438900686800479888916015625e-1) + lntz22 / 3.0e+1)) / rtz2) - ((((lntz2 * 1.15421e+5) / 3.1752e+6 + 9.3967200000000007664713308486170717515051364898681640625e-3) + lntz22 / 2.8e+2)) / rtz4) - ((((lntz2 * 1.35059e+5) / 9.5256e+7 + 2.6648100000000000953104262180204386822879314422607421875e-3) + lntz22 / 1.89e+3)) / rtz6;
+  csm2a2 = (lntz2 * 6.0e+0 + 1.8e+1) - (((lntz2 * 5.0e+0) / 2.7e+1 + 9.8765432098765426616182594443671405315399169921875e-1)) / rtz2;
+  csva3 = 7.63888888888888839545643349993042647838592529296875e-1 - (zeta3 * 5.0e+0) / 3.0e+0;
+  csva3t = (-(((6.42361111111111160454356650006957352161407470703125e-1 - (zeta3 * 6.5e+1) / 1.08e+2)) / rtz2) - ((4.7325531550068589137225671947817318141460418701171875e-1 - (zeta3 * 2.9e+1) / 7.2e+1)) / rtz4) - ((3.96454877732986210592258657925412990152835845947265625e-1 - (zeta3 * 5.009e+3) / 1.512e+4)) / rtz6;
+  f = 0;
+  if (f <= 9)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3960;
+
+            if (f == 6)
+              {
+                gammav[6] = 0.0;
+                gammaa[6] = 0.0;
+                (*gamma)[6] = 0.0;
+                (*alr)[6] = 0.0;
+                (*afb)[6] = 0.0;
+              }
+            else
+              {
+                {
+                  real(kind=8) D.3802;
+                  real(kind=8) D.3801;
+
+                  D.3801 = q[(integer(kind=8)) f];
+                  D.3802 = D.3801 * D.3801;
+                  qf234 = (D.3802 * 3.0e+0) * 2.5e-1;
+                }
+                {
+                  complex(kind=8) D.3804;
+                  complex(kind=8) D.3803;
+
+                  D.3803 = veff[(integer(kind=8)) f];
+                  D.3804 = D.3803 * D.3803;
+                  gammav[(integer(kind=8)) f] = (((nc[(integer(kind=8)) f] / 3.0e+0) * alphat) * __builtin_cabs (D.3804)) * mz;
+                }
+                {
+                  complex(kind=8) D.3806;
+                  complex(kind=8) D.3805;
+
+                  D.3805 = aeff[(integer(kind=8)) f];
+                  D.3806 = D.3805 * D.3805;
+                  gammaa[(integer(kind=8)) f] = (((nc[(integer(kind=8)) f] / 3.0e+0) * alphat) * __builtin_cabs (D.3806)) * mz;
+                }
+                (*gamma)[(integer(kind=8)) f] = ((gammav[(integer(kind=8)) f] + gammaa[(integer(kind=8)) f]));
+                if (modtype == 1)
+                  {
+                    {
+                      real(kind=8) D.3821;
+                      real(kind=8) D.3820;
+                      real(kind=8) D.3819;
+                      real(kind=8) D.3818;
+                      real(kind=8) D.3817;
+                      real(kind=8) D.3816;
+                      real(kind=8) D.3815;
+                      real(kind=8) D.3814;
+                      real(kind=8) D.3813;
+                      real(kind=8) D.3812;
+                      real(kind=8) D.3811;
+                      real(kind=8) D.3810;
+                      real(kind=8) D.3809;
+                      real(kind=8) D.3808;
+
+                      D.3808 = i3[(integer(kind=8)) f];
+                      D.3809 = D.3808 * D.3808;
+                      D.3810 = kkss;
+                      D.3811 = D.3810 * D.3810;
+                      D.3812 = kkss;
+                      D.3813 = D.3812 * D.3812;
+                      D.3814 = q[(integer(kind=8)) f];
+                      D.3815 = D.3814 * D.3814;
+                      D.3816 = fitcph;
+                      D.3817 = D.3816 * D.3816;
+                      D.3818 = i3[(integer(kind=8)) f];
+                      D.3819 = D.3818 * D.3818;
+                      D.3820 = q[(integer(kind=8)) f];
+                      D.3821 = D.3820 * D.3820;
+                      (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + ((((alphat * mz) * nc[(integer(kind=8)) f]) * ((((((((kkss - kkcc)) * D.3809 - ((D.3811 * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) + ((D.3813 * 2.0e+0) * ((kkcc + kkss))) * D.3815)) * fits2b + (((((kkss - kkcc)) * D.3819 + ((((((kkcc - 1.0e+0)) * kkss + kkcc)) * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) - ((kkss * 2.0e+0) * ((((kkss - 2.0e+0)) * kkss + ((kkss + 2.0e+0)) * kkcc))) * D.3821)) * D.3817) + ((fitcph * 2.0e+0) * ((kkcc - kkss))) * ((i3[(integer(kind=8)) f] * ((i3[(integer(kind=8)) f] - q[(integer(kind=8)) f])) + (q[(integer(kind=8)) f] * kkss) * (((-i3[(integer(kind=8)) f] - i3r[(integer(kind=8)) f]) + q[(integer(kind=8)) f] * 2.0e+0)))))))) / (((((fitx * 6.0e+0) * kkcc) * ((kkcc - kkss))) * kkss));
+                    }
+                  }
+                L.9:;
+                if (modtype == 2)
+                  {
+                    {
+                      real(kind=8) D.3836;
+                      real(kind=8) D.3835;
+                      real(kind=8) D.3834;
+                      real(kind=8) D.3833;
+                      real(kind=8) D.3832;
+                      real(kind=8) D.3831;
+                      real(kind=8) D.3830;
+                      real(kind=8) D.3829;
+                      real(kind=8) D.3828;
+                      real(kind=8) D.3827;
+                      real(kind=8) D.3826;
+                      real(kind=8) D.3825;
+                      real(kind=8) D.3824;
+                      real(kind=8) D.3823;
+
+                      D.3823 = i3[(integer(kind=8)) f];
+                      D.3824 = D.3823 * D.3823;
+                      D.3825 = kkss;
+                      D.3826 = D.3825 * D.3825;
+                      D.3827 = kkss;
+                      D.3828 = D.3827 * D.3827;
+                      D.3829 = q[(integer(kind=8)) f];
+                      D.3830 = D.3829 * D.3829;
+                      D.3831 = fitcph;
+                      D.3832 = D.3831 * D.3831;
+                      D.3833 = i3[(integer(kind=8)) f];
+                      D.3834 = D.3833 * D.3833;
+                      D.3835 = q[(integer(kind=8)) f];
+                      D.3836 = D.3835 * D.3835;
+                      (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + ((((alphat * mz) * nc[(integer(kind=8)) f]) * ((((fits2b * 2.0e+0) * (((((kkss - kkcc)) * D.3824 - ((D.3826 * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) + ((D.3828 * 2.0e+0) * ((kkcc + kkss))) * D.3830)) + (((((kkss - kkcc)) * D.3834 + ((((((kkcc - 1.0e+0)) * kkss + kkcc)) * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) - ((kkss * 2.0e+0) * ((((kkss - 2.0e+0)) * kkss + ((kkss + 2.0e+0)) * kkcc))) * D.3836)) * D.3832) + ((fitcph * 2.0e+0) * ((kkcc - kkss))) * ((i3[(integer(kind=8)) f] * ((i3[(integer(kind=8)) f] - q[(integer(kind=8)) f])) + (q[(integer(kind=8)) f] * kkss) * (((-i3[(integer(kind=8)) f] - i3r[(integer(kind=8)) f]) + q[(integer(kind=8)) f] * 2.0e+0)))))))) / (((((fitx * 2.4e+1) * kkcc) * ((kkcc - kkss))) * kkss));
+                    }
+                  }
+                L.10:;
+                if (modtype == 3)
+                  {
+                    if (f <= 3)
+                      {
+                        {
+                          real(kind=8) D.3846;
+                          real(kind=8) D.3845;
+                          real(kind=8) D.3844;
+                          real(kind=8) D.3843;
+                          real(kind=8) D.3842;
+                          real(kind=8) D.3841;
+                          real(kind=8) D.3840;
+                          real(kind=8) D.3839;
+
+                          D.3839 = fitsph;
+                          D.3840 = D.3839 * D.3839;
+                          D.3841 = i3[(integer(kind=8)) f];
+                          D.3842 = D.3841 * D.3841;
+                          D.3843 = kkss;
+                          D.3844 = D.3843 * D.3843;
+                          D.3845 = q[(integer(kind=8)) f];
+                          D.3846 = D.3845 * D.3845;
+                          (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + (((((alphat * D.3840) * mz) * nc[(integer(kind=8)) f]) * (((((kkss - kkcc)) * D.3842 + (((kkcc * 2.0e+0) * kkss) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) - ((D.3844 * 2.0e+0) * ((kkcc + kkss))) * D.3846)))) / (((((fitx * 6.0e+0) * kkcc) * ((kkcc - kkss))) * kkss));
+                        }
+                      }
+                    else
+                      {
+                        {
+                          real(kind=8) D.3852;
+                          real(kind=8) D.3851;
+                          real(kind=8) D.3850;
+                          real(kind=8) D.3849;
+                          real(kind=8) D.3848;
+                          real(kind=8) D.3847;
+
+                          D.3847 = i3[(integer(kind=8)) f];
+                          D.3848 = D.3847 * D.3847;
+                          D.3849 = kkss;
+                          D.3850 = D.3849 * D.3849;
+                          D.3851 = q[(integer(kind=8)) f];
+                          D.3852 = D.3851 * D.3851;
+                          (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + (((((alphat * fitsph) * mz) * nc[(integer(kind=8)) f]) * ((((((fitsph - 2.0e+0)) * ((kkss - kkcc))) * D.3848 + (((kkss * 2.0e+0) * ((((fitsph - 1.0e+0)) * kkcc + kkss))) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) - (((fitsph * 2.0e+0) * D.3850) * ((kkcc + kkss))) * D.3852)))) / (((((fitx * 6.0e+0) * kkcc) * ((kkcc - kkss))) * kkss));
+                        }
+                      }
+                    L.12:;
+                    if (modtype == 4)
+                      {
+                        {
+                          real(kind=8) D.3860;
+                          real(kind=8) D.3859;
+                          real(kind=8) D.3858;
+                          real(kind=8) D.3857;
+                          real(kind=8) D.3856;
+                          real(kind=8) D.3855;
+                          real(kind=8) D.3854;
+
+                          D.3854 = mz;
+                          D.3855 = i3[(integer(kind=8)) f];
+                          D.3856 = D.3855 * D.3855;
+                          D.3857 = kkss;
+                          D.3858 = D.3857 * D.3857;
+                          D.3859 = q[(integer(kind=8)) f];
+                          D.3860 = D.3859 * D.3859;
+                          gammafirstsecond = (((alphat * fitsph) * __builtin_pow (D.3854, ((((((fitsph - 2.0e+0)) * ((kkss - kkcc))) * D.3856 + (((kkss * 2.0e+0) * ((((fitsph - 1.0e+0)) * kkcc + kkss))) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) - (((fitsph * 2.0e+0) * D.3858) * ((kkcc + kkss))) * D.3860))))) / (((((fitx * 6.0e+0) * kkcc) * ((kkcc - kkss))) * kkss));
+                        }
+                        {
+                          real(kind=8) D.3868;
+                          real(kind=8) D.3867;
+                          real(kind=8) D.3866;
+                          real(kind=8) D.3865;
+                          real(kind=8) D.3864;
+                          real(kind=8) D.3863;
+                          real(kind=8) D.3862;
+                          real(kind=8) D.3861;
+
+                          D.3861 = fitsph;
+                          D.3862 = D.3861 * D.3861;
+                          D.3863 = i3[(integer(kind=8)) f];
+                          D.3864 = D.3863 * D.3863;
+                          D.3865 = kkss;
+                          D.3866 = D.3865 * D.3865;
+                          D.3867 = q[(integer(kind=8)) f];
+                          D.3868 = D.3867 * D.3867;
+                          gammathird = ((((alphat * D.3862) * mz) * (((((kkss - kkcc)) * D.3864 + (((kkcc * 2.0e+0) * kkss) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) - ((D.3866 * 2.0e+0) * ((kkcc + kkss))) * D.3868)))) / (((((fitx * 6.0e+0) * kkcc) * ((kkcc - kkss))) * kkss));
+                        }
+                        if (f == 0)
+                          {
+                            (*gamma)[(integer(kind=8)) f] = ((*gamma)[(integer(kind=8)) f] + gammafirstsecond * 2.0e+0) + gammathird;
+                          }
+                        else
+                          {
+                            if (f == 3 || f == 9)
+                              {
+                                (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + nc[(integer(kind=8)) f] * gammathird;
+                              }
+                            else
+                              {
+                                (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + nc[(integer(kind=8)) f] * gammafirstsecond;
+                              }
+                            L.15:;
+                          }
+                        L.14:;
+                      }
+                    L.13:;
+                  }
+                L.11:;
+                (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] * ((al * qf234 + 1.0e+0));
+                if (NON_LVALUE_EXPR <fa2mt0>)
+                  {
+                    {
+                      real(kind=8) D.3873;
+                      real(kind=8) D.3872;
+
+                      D.3872 = al;
+                      D.3873 = D.3872 * D.3872;
+                      (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] - ((((gammav[(integer(kind=8)) f] + gammaa[(integer(kind=8)) f])) * D.3873) * qf234) * ((qf234 / 6.0e+0 + cal2));
+                    }
+                  }
+                L.16:;
+                {
+                  real(kind=8) D.3875;
+                  real(kind=8) D.3874;
+
+                  D.3874 = ((q[(integer(kind=8)) f] * (*sin2te)[(integer(kind=8)) f]));
+                  D.3875 = D.3874 * D.3874;
+                  (*alr)[(integer(kind=8)) f] = ((1.0e+0 - ((i3[(integer(kind=8)) f] * 8.0e+0) * q[(integer(kind=8)) f]) * (*sin2te)[(integer(kind=8)) f])) / (((1.0e+0 - ((i3[(integer(kind=8)) f] * 8.0e+0) * q[(integer(kind=8)) f]) * (*sin2te)[(integer(kind=8)) f]) + D.3875 * 8.0e+0));
+                }
+                if (modtype == 1)
+                  {
+                    {
+                      real(kind=8) D.3886;
+                      real(kind=8) D.3885;
+                      real(kind=8) D.3884;
+                      real(kind=8) D.3883;
+                      real(kind=8) D.3882;
+                      real(kind=8) D.3881;
+                      real(kind=8) D.3880;
+                      real(kind=8) D.3879;
+                      real(kind=8) D.3878;
+                      real(kind=8) D.3877;
+
+                      D.3877 = fitcph;
+                      D.3878 = D.3877 * D.3877;
+                      D.3879 = i3[(integer(kind=8)) f];
+                      D.3880 = D.3879 * D.3879;
+                      D.3881 = kkss;
+                      D.3882 = D.3881 * D.3881;
+                      D.3883 = q[(integer(kind=8)) f];
+                      D.3884 = D.3883 * D.3883;
+                      D.3885 = (((D.3880 - ((kkss * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) + (D.3882 * 2.0e+0) * D.3884));
+                      D.3886 = D.3885 * D.3885;
+                      (*alr)[(integer(kind=8)) f] = (*alr)[(integer(kind=8)) f] + (((((kkss * 4.0e+0) * q[(integer(kind=8)) f]) * ((q[(integer(kind=8)) f] * kkss - i3[(integer(kind=8)) f]))) * ((((((kkss - 1.0e+0)) * ((((((kkss - 1.0e+0)) * D.3878 + fitcph) - (fitcph * 2.0e+0) * kkss) + fits2b * kkss))) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f] + ((((kkss * 2.0e+0 - 1.0e+0)) * fitcph) * i3r[(integer(kind=8)) f]) * ((q[(integer(kind=8)) f] * kkss - i3[(integer(kind=8)) f])))))) / (((((kkss * 2.0e+0 - 1.0e+0)) * fitx) * D.3886));
+                    }
+                  }
+                L.17:;
+                if (modtype == 2)
+                  {
+                    {
+                      real(kind=8) D.3897;
+                      real(kind=8) D.3896;
+                      real(kind=8) D.3895;
+                      real(kind=8) D.3894;
+                      real(kind=8) D.3893;
+                      real(kind=8) D.3892;
+                      real(kind=8) D.3891;
+                      real(kind=8) D.3890;
+                      real(kind=8) D.3889;
+                      real(kind=8) D.3888;
+
+                      D.3888 = fitcph;
+                      D.3889 = D.3888 * D.3888;
+                      D.3890 = i3[(integer(kind=8)) f];
+                      D.3891 = D.3890 * D.3890;
+                      D.3892 = kkss;
+                      D.3893 = D.3892 * D.3892;
+                      D.3894 = q[(integer(kind=8)) f];
+                      D.3895 = D.3894 * D.3894;
+                      D.3896 = (((D.3891 - ((kkss * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) + (D.3893 * 2.0e+0) * D.3895));
+                      D.3897 = D.3896 * D.3896;
+                      (*alr)[(integer(kind=8)) f] = (*alr)[(integer(kind=8)) f] + ((((q[(integer(kind=8)) f] * kkss) * ((q[(integer(kind=8)) f] * kkss - i3[(integer(kind=8)) f]))) * ((((((kkss - 1.0e+0)) * ((((((kkss - 1.0e+0)) * D.3889 + fitcph) - (fitcph * 2.0e+0) * kkss) + (fits2b * 2.0e+0) * kkss))) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f] + ((((kkss * 2.0e+0 - 1.0e+0)) * fitcph) * i3r[(integer(kind=8)) f]) * ((q[(integer(kind=8)) f] * kkss - i3[(integer(kind=8)) f])))))) / (((((kkss * 2.0e+0 - 1.0e+0)) * fitx) * D.3897));
+                    }
+                  }
+                L.18:;
+                if (modtype == 3)
+                  {
+                    if (f <= 3)
+                      {
+                        {
+                          real(kind=8) D.3912;
+                          real(kind=8) D.3911;
+                          real(kind=8) D.3910;
+                          real(kind=8) D.3909;
+                          real(kind=8) D.3908;
+                          real(kind=8) D.3907;
+                          real(kind=8) D.3906;
+                          real(kind=8) D.3905;
+                          real(kind=8) D.3904;
+                          real(kind=8) D.3903;
+                          real(kind=8) D.3902;
+                          real(kind=8) D.3901;
+                          real(kind=8) D.3900;
+
+                          D.3900 = fitsph;
+                          D.3901 = D.3900 * D.3900;
+                          D.3902 = kkss;
+                          D.3903 = q[(integer(kind=8)) f];
+                          D.3904 = D.3903 * D.3903;
+                          D.3905 = i3[(integer(kind=8)) f];
+                          D.3906 = D.3905 * D.3905;
+                          D.3907 = kkss;
+                          D.3908 = D.3907 * D.3907;
+                          D.3909 = q[(integer(kind=8)) f];
+                          D.3910 = D.3909 * D.3909;
+                          D.3911 = (((D.3906 - ((kkss * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) + (D.3908 * 2.0e+0) * D.3910));
+                          D.3912 = D.3911 * D.3911;
+                          (*alr)[(integer(kind=8)) f] = (*alr)[(integer(kind=8)) f] + ((((((D.3901 * 4.0e+0) * __builtin_powi (D.3902, 3)) * i3[(integer(kind=8)) f]) * D.3904) * ((i3[(integer(kind=8)) f] - q[(integer(kind=8)) f] * kkss)))) / (((((kkcc - kkss)) * fitx) * D.3912));
+                        }
+                      }
+                    else
+                      {
+                        {
+                          real(kind=8) D.3924;
+                          real(kind=8) D.3923;
+                          real(kind=8) D.3922;
+                          real(kind=8) D.3921;
+                          real(kind=8) D.3920;
+                          real(kind=8) D.3919;
+                          real(kind=8) D.3918;
+                          real(kind=8) D.3917;
+                          real(kind=8) D.3916;
+                          real(kind=8) D.3915;
+                          real(kind=8) D.3914;
+                          real(kind=8) D.3913;
+
+                          D.3913 = kkss;
+                          D.3914 = D.3913 * D.3913;
+                          D.3915 = q[(integer(kind=8)) f];
+                          D.3916 = D.3915 * D.3915;
+                          D.3917 = i3[(integer(kind=8)) f];
+                          D.3918 = D.3917 * D.3917;
+                          D.3919 = kkss;
+                          D.3920 = D.3919 * D.3919;
+                          D.3921 = q[(integer(kind=8)) f];
+                          D.3922 = D.3921 * D.3921;
+                          D.3923 = (((D.3918 - ((kkss * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) + (D.3920 * 2.0e+0) * D.3922));
+                          D.3924 = D.3923 * D.3923;
+                          (*alr)[(integer(kind=8)) f] = (*alr)[(integer(kind=8)) f] + (((((((fitsph * 4.0e+0) * D.3914) * ((((fitsph - 2.0e+0)) * kkss + 1.0e+0))) * i3[(integer(kind=8)) f]) * D.3916) * ((q[(integer(kind=8)) f] * kkss - i3[(integer(kind=8)) f])))) / (((((kkss * 2.0e+0 - 1.0e+0)) * fitx) * D.3924));
+                        }
+                      }
+                    L.20:;
+                    if (modtype == 4)
+                      {
+                        if (f <= 1)
+                          {
+                            if (f == 3 || f == 9)
+                              {
+                                {
+                                  real(kind=8) D.3940;
+                                  real(kind=8) D.3939;
+                                  real(kind=8) D.3938;
+                                  real(kind=8) D.3937;
+                                  real(kind=8) D.3936;
+                                  real(kind=8) D.3935;
+                                  real(kind=8) D.3934;
+                                  real(kind=8) D.3933;
+                                  real(kind=8) D.3932;
+                                  real(kind=8) D.3931;
+                                  real(kind=8) D.3930;
+                                  real(kind=8) D.3929;
+                                  real(kind=8) D.3928;
+
+                                  D.3928 = fitsph;
+                                  D.3929 = D.3928 * D.3928;
+                                  D.3930 = kkss;
+                                  D.3931 = q[(integer(kind=8)) f];
+                                  D.3932 = D.3931 * D.3931;
+                                  D.3933 = i3[(integer(kind=8)) f];
+                                  D.3934 = D.3933 * D.3933;
+                                  D.3935 = kkss;
+                                  D.3936 = D.3935 * D.3935;
+                                  D.3937 = q[(integer(kind=8)) f];
+                                  D.3938 = D.3937 * D.3937;
+                                  D.3939 = (((D.3934 - ((kkss * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) + (D.3936 * 2.0e+0) * D.3938));
+                                  D.3940 = D.3939 * D.3939;
+                                  (*alr)[(integer(kind=8)) f] = (*alr)[(integer(kind=8)) f] + ((((((D.3929 * 4.0e+0) * __builtin_powi (D.3930, 3)) * i3[(integer(kind=8)) f]) * D.3932) * ((i3[(integer(kind=8)) f] - q[(integer(kind=8)) f] * kkss)))) / (((((kkcc - kkss)) * fitx) * D.3940));
+                                }
+                              }
+                            else
+                              {
+                                {
+                                  real(kind=8) D.3952;
+                                  real(kind=8) D.3951;
+                                  real(kind=8) D.3950;
+                                  real(kind=8) D.3949;
+                                  real(kind=8) D.3948;
+                                  real(kind=8) D.3947;
+                                  real(kind=8) D.3946;
+                                  real(kind=8) D.3945;
+                                  real(kind=8) D.3944;
+                                  real(kind=8) D.3943;
+                                  real(kind=8) D.3942;
+                                  real(kind=8) D.3941;
+
+                                  D.3941 = kkss;
+                                  D.3942 = D.3941 * D.3941;
+                                  D.3943 = q[(integer(kind=8)) f];
+                                  D.3944 = D.3943 * D.3943;
+                                  D.3945 = i3[(integer(kind=8)) f];
+                                  D.3946 = D.3945 * D.3945;
+                                  D.3947 = kkss;
+                                  D.3948 = D.3947 * D.3947;
+                                  D.3949 = q[(integer(kind=8)) f];
+                                  D.3950 = D.3949 * D.3949;
+                                  D.3951 = (((D.3946 - ((kkss * 2.0e+0) * i3[(integer(kind=8)) f]) * q[(integer(kind=8)) f]) + (D.3948 * 2.0e+0) * D.3950));
+                                  D.3952 = D.3951 * D.3951;
+                                  (*alr)[(integer(kind=8)) f] = (*alr)[(integer(kind=8)) f] + (((((((fitsph * 4.0e+0) * D.3942) * ((((fitsph - 2.0e+0)) * kkss + 1.0e+0))) * i3[(integer(kind=8)) f]) * D.3944) * ((q[(integer(kind=8)) f] * kkss - i3[(integer(kind=8)) f])))) / (((((kkss * 2.0e+0 - 1.0e+0)) * fitx) * D.3952));
+                                }
+                              }
+                            L.23:;
+                          }
+                        L.22:;
+                      }
+                    L.21:;
+                  }
+                L.19:;
+                if (f == 4)
+                  {
+                    {
+                      real(kind=8) D.3955;
+                      real(kind=8) D.3954;
+
+                      D.3954 = (*sin2te)[4];
+                      D.3955 = D.3954 * D.3954;
+                      (*afb)[4] = (((*alr)[1] * 7.5e-1) * ((5.0e+0 - (*sin2te)[4] * 1.2e+1))) / (((5.0e+0 - (*sin2te)[4] * 1.2e+1) + (D.3955 * 1.36e+2) / 9.0e+0));
+                    }
+                  }
+                else
+                  {
+                    (*afb)[(integer(kind=8)) f] = ((*alr)[1] * 7.5e-1) * (*alr)[(integer(kind=8)) f];
+                  }
+                L.24:;
+                if (f > 3)
+                  {
+                    {
+                      real(kind=8) D.3958;
+                      real(kind=8) D.3957;
+
+                      D.3957 = az2;
+                      D.3958 = D.3957 * D.3957;
+                      (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + ((gammav[(integer(kind=8)) f] + gammaa[(integer(kind=8)) f])) * (((((((((cum0a2 + cumta2)) * az2 + az) - ((al * az) / 3.0e+0) * qf234) + (((((mcz2 + mbz2)) * cum2a3 + cum0a3) + cumta3)) * az3) + cum0a4 * D.3958) + (cum0a5 * az2) * az3) + (cum0a6 * az3) * az3));
+                    }
+                  }
+                L.25:;
+              }
+            L.8:;
+            __label_000020:;
+            L.6:;
+            D.3960 = f == 9;
+            f = f + 1;
+            if (D.3960) goto L.7;
+          }
+        }
+    }
+  L.7:;
+  {
+    real(kind=8) D.3962;
+    real(kind=8) D.3961;
+
+    D.3961 = ((mmu / mz));
+    D.3962 = D.3961 * D.3961;
+    (*gamma)[2] = (*gamma)[2] + (gammaa[2] * cam2a0) * D.3962;
+  }
+  (*gamma)[3] = (*gamma)[3] + ((gammaa[3] * cam2a0) * mtauz2) * ((1.0e+0 - (al * 2.0e+0) * ((1.0e+0 - __builtin_log (mtauz2) * 7.5e-1))));
+  (*gamma)[5] = ((*gamma)[5] + ((gammav[5] * mcz2) * cvm2a1) * az) + (gammaa[5] * mcz2) * ((cam2a1 * az + cam2a0));
+  {
+    real(kind=8) D.3965;
+    real(kind=8) D.3964;
+
+    D.3964 = ((msrun (&mz) / mz));
+    D.3965 = D.3964 * D.3964;
+    (*gamma)[8] = (*gamma)[8] + (gammaa[8] * cam2a0) * D.3965;
+  }
+  (*gamma)[9] = ((*gamma)[9] + gammav[9] * ((mbz4 * cvm4a0 + (((cvm2a1 * az + cvm2a2 * az2) + cvm2a3 * az3)) * mbz2))) + gammaa[9] * ((mbz4 * cam4a0 + ((((cam2a1 * az + cam2a0) + cam2a2 * az2) + cam2a3 * az3)) * mbz2));
+  sumv = -(((((sinhat * 4.0e+0) / 3.0e+0 + 1.0e+0)) * 2.5e-1) / __builtin_sqrt (sinhat * coshat));
+  sumaef = 0.0;
+  f = 4;
+  if (f <= 9)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3970;
+
+            if (f != 6)
+              {
+                sumaef = REALPART_EXPR <aeff[(integer(kind=8)) f]> + sumaef;
+              }
+            L.28:;
+            __label_000030:;
+            L.26:;
+            D.3970 = f == 9;
+            f = f + 1;
+            if (D.3970) goto L.27;
+          }
+        }
+    }
+  L.27:;
+  f = 4;
+  if (f <= 9)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3975;
+
+            if (f != 6)
+              {
+                (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + ((((az3 * alphat) / 3.0e+0) * mz) * v[(integer(kind=8)) f]) * ((sumv * csva3 + v[6] * csva3t));
+                (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] + ((((az2 * alphat) / 3.0e+0) * mz) * REALPART_EXPR <aeff[(integer(kind=8)) f]>) * ((sumaef * csaa2 + REALPART_EXPR <aeff[6]> * csaa2t));
+                (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] - (((((az3 * alphat) / 3.0e+0) * mz) * a[(integer(kind=8)) f]) * a[6]) * csaa3t;
+              }
+            L.31:;
+            __label_000040:;
+            L.29:;
+            D.3975 = f == 9;
+            f = f + 1;
+            if (D.3975) goto L.30;
+          }
+        }
+    }
+  L.30:;
+  (*gamma)[9] = (*gamma)[9] - (((((az2 * alphat) * mz) * mbz2) * a[9]) * a[6]) * csm2a2;
+  if (NON_LVALUE_EXPR <fobliq>)
+    {
+      (*gamma)[0] = ((*gamma)[0] * zpar) / 3.0e+0;
+    }
+  L.32:;
+  (*gamma)[10] = 0.0;
+  (*alr)[10] = 0.0;
+  f = 4;
+  if (f <= 9)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3980;
+
+            (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] * 1.0e+3;
+            (*gamma)[10] = (*gamma)[10] + (*gamma)[(integer(kind=8)) f];
+            (*alr)[10] = (*alr)[10] - ((q[(integer(kind=8)) f] / ABS_EXPR <q[(integer(kind=8)) f]>) * (*gamma)[(integer(kind=8)) f]) * (*alr)[(integer(kind=8)) f];
+            __label_000060:;
+            L.33:;
+            D.3980 = f == 9;
+            f = f + 1;
+            if (D.3980) goto L.34;
+          }
+        }
+    }
+  L.34:;
+  (*gamma)[11] = (*gamma)[10];
+  f = 0;
+  if (f <= 3)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3984;
+
+            (*gamma)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] * 1.0e+3;
+            (*gamma)[11] = (*gamma)[11] + (*gamma)[(integer(kind=8)) f];
+            __label_000070:;
+            L.35:;
+            D.3984 = f == 3;
+            f = f + 1;
+            if (D.3984) goto L.36;
+          }
+        }
+    }
+  L.36:;
+  {
+    real(kind=8) D.3986;
+    real(kind=8) D.3985;
+
+    D.3985 = (((*gamma)[11] * mz));
+    D.3986 = D.3985 * D.3985;
+    *sigmah = ((((pi1 * 1.2e+1) * (*gamma)[1]) * (*gamma)[10]) / D.3986) * hbarc2;
+  }
+  f = 0;
+  if (f <= 3)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3990;
+
+            (*r)[(integer(kind=8)) f] = (*gamma)[10] / (*gamma)[(integer(kind=8)) f];
+            __label_000080:;
+            L.37:;
+            D.3990 = f == 3;
+            f = f + 1;
+            if (D.3990) goto L.38;
+          }
+        }
+    }
+  L.38:;
+  f = 4;
+  if (f <= 9)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3994;
+
+            (*r)[(integer(kind=8)) f] = (*gamma)[(integer(kind=8)) f] / (*gamma)[10];
+            __label_000090:;
+            L.39:;
+            D.3994 = f == 9;
+            f = f + 1;
+            if (D.3994) goto L.40;
+          }
+        }
+    }
+  L.40:;
+  (*alr)[10] = (*alr)[10] / (*gamma)[10];
+  (*afb)[10] = ((*alr)[1] * 7.5e-1) * (*alr)[10];
+  return;
+}
+
+

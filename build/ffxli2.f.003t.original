@@ -1,0 +1,1693 @@
+ffzxdl (complex(kind=8) & restrict zxdilo, integer(kind=4) & restrict ipi12, complex(kind=8) & restrict zlog, real(kind=8) & restrict x, integer(kind=4) & restrict ieps, integer(kind=4) & restrict ier)
+{
+  static real(kind=8) fodel2 [value-expr: ffcdel.fodel2];
+  static real(kind=8) fodel3 [value-expr: ffcdel.fodel3];
+  static complex(kind=8) cfdl4s [value-expr: ffcdel.cfdl4s];
+  static real(kind=8) fodel4 [value-expr: ffcdel.fodel4];
+  static real(kind=8) fodl3i[5] [value-expr: ffcdel.fodl3i];
+  static real(kind=8) fod3ij[36] [value-expr: ffcdel.fod3ij];
+  static real(kind=8) fodl4i[6] [value-expr: ffcdel.fodl4i];
+  static complex(kind=8) cfpij2[9] [value-expr: ffcdot.cfpij2];
+  static complex(kind=8) cfpij3[36] [value-expr: ffcdot.cfpij3];
+  static complex(kind=8) cfpij4[100] [value-expr: ffcdot.cfpij4];
+  static complex(kind=8) cfpij5[225] [value-expr: ffcdot.cfpij5];
+  static complex(kind=8) cfpij6[441] [value-expr: ffcdot.cfpij6];
+  static real(kind=8) bf[20] [value-expr: ffcnst.bf];
+  static real(kind=8) xninv[30] [value-expr: ffcnst.xninv];
+  static real(kind=8) xn2inv[30] [value-expr: ffcnst.xn2inv];
+  static real(kind=8) xinfac[30] [value-expr: ffcnst.xinfac];
+  static integer(kind=4) inx[16] [value-expr: ffcnst.inx];
+  static integer(kind=4) isgn[16] [value-expr: ffcnst.isgn];
+  static integer(kind=4) iold[156] [value-expr: ffcnst.iold];
+  static integer(kind=4) isgrot[120] [value-expr: ffcnst.isgrot];
+  static integer(kind=4) inx5[25] [value-expr: ffcnst.inx5];
+  static integer(kind=4) isgn5[25] [value-expr: ffcnst.isgn5];
+  static real(kind=8) fdel2 [value-expr: ffdel.fdel2];
+  static real(kind=8) fdel3 [value-expr: ffdel.fdel3];
+  static real(kind=8) fdel4s [value-expr: ffdel.fdel4s];
+  static real(kind=8) fdel4 [value-expr: ffdel.fdel4];
+  static real(kind=8) fdl3i[5] [value-expr: ffdel.fdl3i];
+  static real(kind=8) fdl4si[5] [value-expr: ffdel.fdl4si];
+  static real(kind=8) fdl3ij[36] [value-expr: ffdel.fdl3ij];
+  static real(kind=8) fdl4i[6] [value-expr: ffdel.fdl4i];
+  static real(kind=8) fpij2[9] [value-expr: ffdot.fpij2];
+  static real(kind=8) fpij3[36] [value-expr: ffdot.fpij3];
+  static real(kind=8) fpij4[100] [value-expr: ffdot.fpij4];
+  static real(kind=8) fpij5[225] [value-expr: ffdot.fpij5];
+  static real(kind=8) fpij6[441] [value-expr: ffdot.fpij6];
+  static logical(kind=4) lwrite [value-expr: ffflag.lwrite];
+  static logical(kind=4) ltest [value-expr: ffflag.ltest];
+  static logical(kind=4) l4also [value-expr: ffflag.l4also];
+  static logical(kind=4) ldc3c4 [value-expr: ffflag.ldc3c4];
+  static logical(kind=4) lmem [value-expr: ffflag.lmem];
+  static logical(kind=4) lwarn [value-expr: ffflag.lwarn];
+  static logical(kind=4) ldot [value-expr: ffflag.ldot];
+  static integer(kind=4) nevent [value-expr: ffflag.nevent];
+  static integer(kind=4) ner [value-expr: ffflag.ner];
+  static integer(kind=4) id [value-expr: ffflag.id];
+  static integer(kind=4) idsub [value-expr: ffflag.idsub];
+  static integer(kind=4) nwidth [value-expr: ffflag.nwidth];
+  static integer(kind=4) nschem [value-expr: ffflag.nschem];
+  static logical(kind=4) onshel [value-expr: ffflag.onshel];
+  static integer(kind=4) idot [value-expr: ffflag.idot];
+  static integer(kind=4) fidel3 [value-expr: ffidel.fidel3];
+  static integer(kind=4) fidel4 [value-expr: ffidel.fidel4];
+  static integer(kind=4) fidl3i[5] [value-expr: ffidel.fidl3i];
+  static integer(kind=4) fid3ij[36] [value-expr: ffidel.fid3ij];
+  static integer(kind=4) fidl4i[6] [value-expr: ffidel.fidl4i];
+  static real(kind=8) xloss [value-expr: ffprec.xloss];
+  static real(kind=8) precx [value-expr: ffprec.precx];
+  static real(kind=8) precc [value-expr: ffprec.precc];
+  static real(kind=8) xalogm [value-expr: ffprec.xalogm];
+  static real(kind=8) xclogm [value-expr: ffprec.xclogm];
+  static real(kind=8) xalog2 [value-expr: ffprec.xalog2];
+  static real(kind=8) xclog2 [value-expr: ffprec.xclog2];
+  static real(kind=8) reqprc [value-expr: ffprec.reqprc];
+  static integer(kind=4) irota3 [value-expr: ffrota.irota3];
+  static integer(kind=4) irota4 [value-expr: ffrota.irota4];
+  static integer(kind=4) irota5 [value-expr: ffrota.irota5];
+  static integer(kind=4) irota6 [value-expr: ffrota.irota6];
+  static integer(kind=4) isgn34 [value-expr: ffsign.isgn34];
+  static integer(kind=4) isgnal [value-expr: ffsign.isgnal];
+  static logical(kind=4) lsmug [value-expr: ffsmug.lsmug];
+  static logical(kind=4) lnasty [value-expr: ffsmug.lnasty];
+  static integer(kind=4) idum93[2] [value-expr: ffsmug.idum93];
+  static complex(kind=8) cmipj[9] [value-expr: ffsmug.cmipj];
+  static complex(kind=8) c2sisj[16] [value-expr: ffsmug.c2sisj];
+  static complex(kind=8) ca1 [value-expr: ffsmug.ca1];
+  real(kind=8) a;
+  static real(kind=8) bdn02;
+  static real(kind=8) bdn05;
+  static real(kind=8) bdn10;
+  static real(kind=8) bdn15;
+  static real(kind=8) bdn20;
+  complex(kind=8) cfact;
+  complex(kind=8) cy;
+  real(kind=8) fact;
+  integer(kind=4) jsgn;
+  real(kind=8) u;
+  real(kind=8) u2;
+  real(kind=8) xdilo;
+  static real(kind=8) xprec = -1.0e+0;
+
+  if (xprec != precx)
+    {
+      xprec = precx;
+      {
+        static integer(kind=4) C.3595 = 2;
+        static integer(kind=4) C.3594 = 1;
+
+        bdn02 = ffbnd (&C.3594, &C.3595, &bf);
+      }
+      {
+        static integer(kind=4) C.3598 = 5;
+        static integer(kind=4) C.3597 = 1;
+
+        bdn05 = ffbnd (&C.3597, &C.3598, &bf);
+      }
+      {
+        static integer(kind=4) C.3600 = 10;
+        static integer(kind=4) C.3599 = 1;
+
+        bdn10 = ffbnd (&C.3599, &C.3600, &bf);
+      }
+      {
+        static integer(kind=4) C.3602 = 15;
+        static integer(kind=4) C.3601 = 1;
+
+        bdn15 = ffbnd (&C.3601, &C.3602, &bf);
+      }
+      {
+        static integer(kind=4) C.3604 = 19;
+        static integer(kind=4) C.3603 = 1;
+
+        bdn20 = ffbnd (&C.3603, &C.3604, &bf);
+      }
+    }
+  L.1:;
+  if (*x == 1.0e+0)
+    {
+      *zxdilo = __complex__ (0.0, 0.0);
+      *zlog = __complex__ (-9.9999e+4, 0.0);
+      *ipi12 = 2;
+      return;
+    }
+  else
+    {
+      if (*x == -1.0e+0)
+        {
+          *zxdilo = __complex__ (0.0, 0.0);
+          *zlog = __complex__ (6.9314718055994528622676398299518041312694549560546875e-1, 0.0);
+          *ipi12 = -1;
+          return;
+        }
+      else
+        {
+          if (*x == 5.0e-1)
+            {
+              *zxdilo = __complex__ (-2.40226506959100694071906900717294774949550628662109375e-1, 0.0);
+              *zlog = __complex__ (-6.9314718055994528622676398299518041312694549560546875e-1, 0.0);
+              *ipi12 = 1;
+              return;
+            }
+          else
+            {
+              if (ABS_EXPR <*x> < precx)
+                {
+                  *zxdilo = COMPLEX_EXPR <*x, 0.0>;
+                  *zlog = COMPLEX_EXPR <-*x, 0.0>;
+                  *ipi12 = 0;
+                  return;
+                }
+              L.5:;
+            }
+          L.4:;
+        }
+      L.3:;
+    }
+  L.2:;
+  if (*x < -1.0e+0)
+    {
+      fact = __builtin_log (-*x);
+      {
+        real(kind=8) D.3611;
+        real(kind=8) D.3610;
+
+        D.3610 = fact;
+        D.3611 = D.3610 * D.3610;
+        cy = COMPLEX_EXPR <-(D.3611 * 5.0e-1), 0.0>;
+      }
+      *ipi12 = -2;
+      if (*x * xloss < -1.0e+0)
+        {
+          {
+            real(kind=8) D.3613;
+
+            D.3613 = 1.0e+0 / *x;
+            u = -dfflo1 (&D.3613, (integer(kind=4) *) ier);
+          }
+        }
+      else
+        {
+          u = -__builtin_log (1.0e+0 - 1.0e+0 / *x);
+        }
+      L.7:;
+      *zlog = COMPLEX_EXPR <__builtin_log (1.0e+0 - *x), 0.0>;
+      jsgn = -1;
+    }
+  else
+    {
+      if (*x < 5.0e-1)
+        {
+          cy = __complex__ (0.0, 0.0);
+          *ipi12 = 0;
+          if (ABS_EXPR <*x> < xloss)
+            {
+              *zlog = COMPLEX_EXPR <dfflo1 ((real(kind=8) *) x, (integer(kind=4) *) ier), 0.0>;
+            }
+          else
+            {
+              *zlog = COMPLEX_EXPR <__builtin_log (1.0e+0 - *x), 0.0>;
+            }
+          L.9:;
+          u = -REALPART_EXPR <*zlog>;
+          jsgn = 1;
+        }
+      else
+        {
+          if (*x <= 2.0e+0)
+            {
+              u = -__builtin_log (*x);
+              if (ABS_EXPR <1.0e+0 - *x> < xalogm)
+                {
+                  if (lwarn)
+                    {
+                      {
+                        real(kind=8) D.3624;
+                        static integer(kind=4) C.3623 = 64;
+
+                        D.3624 = 1.0e+0 - *x;
+                        ffwarn (&C.3623, (integer(kind=4) *) ier, &D.3624, &xalogm);
+                      }
+                    }
+                  L.12:;
+                  cy = __complex__ (0.0, 0.0);
+                }
+              else
+                {
+                  if (*x < 1.0e+0)
+                    {
+                      *zlog = COMPLEX_EXPR <__builtin_log (1.0e+0 - *x), 0.0>;
+                      cy = COMPLEX_EXPR <u, 0.0> * *zlog;
+                    }
+                  else
+                    {
+                      if (*ieps > 0)
+                        {
+                          *zlog = COMPLEX_EXPR <__builtin_log (*x - 1.0e+0), -3.141592653589793115997963468544185161590576171875e+0>;
+                          cy = COMPLEX_EXPR <u, 0.0> * *zlog;
+                        }
+                      else
+                        {
+                          *zlog = COMPLEX_EXPR <__builtin_log (*x - 1.0e+0), 3.141592653589793115997963468544185161590576171875e+0>;
+                          cy = COMPLEX_EXPR <u, 0.0> * *zlog;
+                        }
+                      L.14:;
+                    }
+                  L.13:;
+                }
+              L.11:;
+              *ipi12 = 2;
+              jsgn = -1;
+            }
+          else
+            {
+              if (*ieps > 0)
+                {
+                  cfact = COMPLEX_EXPR <__builtin_log (*x), -3.141592653589793115997963468544185161590576171875e+0>;
+                  *zlog = COMPLEX_EXPR <__builtin_log (*x - 1.0e+0), -3.141592653589793115997963468544185161590576171875e+0>;
+                }
+              else
+                {
+                  cfact = COMPLEX_EXPR <__builtin_log (*x), 3.141592653589793115997963468544185161590576171875e+0>;
+                  *zlog = COMPLEX_EXPR <__builtin_log (*x - 1.0e+0), 3.141592653589793115997963468544185161590576171875e+0>;
+                }
+              L.15:;
+              {
+                complex(kind=8) D.3630;
+                complex(kind=8) D.3629;
+
+                D.3629 = cfact;
+                D.3630 = D.3629 * D.3629;
+                cy = -(D.3630 / __complex__ (2.0e+0, 0.0));
+              }
+              *ipi12 = -2;
+              if (*x * xloss > 1.0e+0)
+                {
+                  {
+                    real(kind=8) D.3632;
+
+                    D.3632 = 1.0e+0 / *x;
+                    u = -dfflo1 (&D.3632, (integer(kind=4) *) ier);
+                  }
+                }
+              else
+                {
+                  u = -__builtin_log (1.0e+0 - 1.0e+0 / *x);
+                }
+              L.16:;
+              jsgn = -1;
+            }
+          L.10:;
+        }
+      L.8:;
+    }
+  L.6:;
+  if (ABS_EXPR <u> < xalog2)
+    {
+      xdilo = u;
+    }
+  else
+    {
+      {
+        real(kind=8) D.3635;
+        real(kind=8) D.3634;
+
+        D.3634 = u;
+        D.3635 = D.3634 * D.3634;
+        u2 = D.3635;
+      }
+      a = ABS_EXPR <u2>;
+      if (lwarn && a > bdn20)
+        {
+          {
+            real(kind=8) D.3639;
+            real(kind=8) D.3638;
+            static integer(kind=4) C.3637 = 66;
+
+            D.3638 = a;
+            D.3639 = bf[19] * __builtin_powi (D.3638, 20);
+            ffwarn (&C.3637, (integer(kind=4) *) ier, &precx, &D.3639);
+          }
+        }
+      L.18:;
+      if (a > bdn15)
+        {
+          xdilo = ((bf[15] + ((bf[16] + ((bf[17] + ((bf[18] + ((bf[19])) * u2)) * u2)) * u2)) * u2)) * u2;
+        }
+      else
+        {
+          xdilo = 0.0;
+        }
+      L.19:;
+      if (a > bdn10)
+        {
+          xdilo = ((bf[10] + ((bf[11] + ((bf[12] + ((bf[13] + ((bf[14] + xdilo)) * u2)) * u2)) * u2)) * u2)) * u2;
+        }
+      L.20:;
+      if (a > bdn05)
+        {
+          xdilo = ((bf[5] + ((bf[6] + ((bf[7] + ((bf[8] + ((bf[9] + xdilo)) * u2)) * u2)) * u2)) * u2)) * u2;
+        }
+      L.21:;
+      if (a > bdn02)
+        {
+          xdilo = ((bf[2] + ((bf[3] + ((bf[4] + xdilo)) * u2)) * u2)) * u2;
+        }
+      L.22:;
+      xdilo = ((bf[0] + ((bf[1] + xdilo)) * u)) * u2 + u;
+    }
+  L.17:;
+  if (jsgn == 1)
+    {
+      *zxdilo = COMPLEX_EXPR <xdilo, 0.0> + cy;
+    }
+  else
+    {
+      *zxdilo = COMPLEX_EXPR <-xdilo, 0.0> + cy;
+    }
+  L.23:;
+}
+
+
+dfflo2 (real(kind=8) & restrict x, integer(kind=4) & restrict ier)
+{
+  static real(kind=8) fodel2 [value-expr: ffcdel.fodel2];
+  static real(kind=8) fodel3 [value-expr: ffcdel.fodel3];
+  static complex(kind=8) cfdl4s [value-expr: ffcdel.cfdl4s];
+  static real(kind=8) fodel4 [value-expr: ffcdel.fodel4];
+  static real(kind=8) fodl3i[5] [value-expr: ffcdel.fodl3i];
+  static real(kind=8) fod3ij[36] [value-expr: ffcdel.fod3ij];
+  static real(kind=8) fodl4i[6] [value-expr: ffcdel.fodl4i];
+  static complex(kind=8) cfpij2[9] [value-expr: ffcdot.cfpij2];
+  static complex(kind=8) cfpij3[36] [value-expr: ffcdot.cfpij3];
+  static complex(kind=8) cfpij4[100] [value-expr: ffcdot.cfpij4];
+  static complex(kind=8) cfpij5[225] [value-expr: ffcdot.cfpij5];
+  static complex(kind=8) cfpij6[441] [value-expr: ffcdot.cfpij6];
+  static real(kind=8) bf[20] [value-expr: ffcnst.bf];
+  static real(kind=8) xninv[30] [value-expr: ffcnst.xninv];
+  static real(kind=8) xn2inv[30] [value-expr: ffcnst.xn2inv];
+  static real(kind=8) xinfac[30] [value-expr: ffcnst.xinfac];
+  static integer(kind=4) inx[16] [value-expr: ffcnst.inx];
+  static integer(kind=4) isgn[16] [value-expr: ffcnst.isgn];
+  static integer(kind=4) iold[156] [value-expr: ffcnst.iold];
+  static integer(kind=4) isgrot[120] [value-expr: ffcnst.isgrot];
+  static integer(kind=4) inx5[25] [value-expr: ffcnst.inx5];
+  static integer(kind=4) isgn5[25] [value-expr: ffcnst.isgn5];
+  static real(kind=8) fdel2 [value-expr: ffdel.fdel2];
+  static real(kind=8) fdel3 [value-expr: ffdel.fdel3];
+  static real(kind=8) fdel4s [value-expr: ffdel.fdel4s];
+  static real(kind=8) fdel4 [value-expr: ffdel.fdel4];
+  static real(kind=8) fdl3i[5] [value-expr: ffdel.fdl3i];
+  static real(kind=8) fdl4si[5] [value-expr: ffdel.fdl4si];
+  static real(kind=8) fdl3ij[36] [value-expr: ffdel.fdl3ij];
+  static real(kind=8) fdl4i[6] [value-expr: ffdel.fdl4i];
+  static real(kind=8) fpij2[9] [value-expr: ffdot.fpij2];
+  static real(kind=8) fpij3[36] [value-expr: ffdot.fpij3];
+  static real(kind=8) fpij4[100] [value-expr: ffdot.fpij4];
+  static real(kind=8) fpij5[225] [value-expr: ffdot.fpij5];
+  static real(kind=8) fpij6[441] [value-expr: ffdot.fpij6];
+  static logical(kind=4) lwrite [value-expr: ffflag.lwrite];
+  static logical(kind=4) ltest [value-expr: ffflag.ltest];
+  static logical(kind=4) l4also [value-expr: ffflag.l4also];
+  static logical(kind=4) ldc3c4 [value-expr: ffflag.ldc3c4];
+  static logical(kind=4) lmem [value-expr: ffflag.lmem];
+  static logical(kind=4) lwarn [value-expr: ffflag.lwarn];
+  static logical(kind=4) ldot [value-expr: ffflag.ldot];
+  static integer(kind=4) nevent [value-expr: ffflag.nevent];
+  static integer(kind=4) ner [value-expr: ffflag.ner];
+  static integer(kind=4) id [value-expr: ffflag.id];
+  static integer(kind=4) idsub [value-expr: ffflag.idsub];
+  static integer(kind=4) nwidth [value-expr: ffflag.nwidth];
+  static integer(kind=4) nschem [value-expr: ffflag.nschem];
+  static logical(kind=4) onshel [value-expr: ffflag.onshel];
+  static integer(kind=4) idot [value-expr: ffflag.idot];
+  static integer(kind=4) fidel3 [value-expr: ffidel.fidel3];
+  static integer(kind=4) fidel4 [value-expr: ffidel.fidel4];
+  static integer(kind=4) fidl3i[5] [value-expr: ffidel.fidl3i];
+  static integer(kind=4) fid3ij[36] [value-expr: ffidel.fid3ij];
+  static integer(kind=4) fidl4i[6] [value-expr: ffidel.fidl4i];
+  static real(kind=8) xloss [value-expr: ffprec.xloss];
+  static real(kind=8) precx [value-expr: ffprec.precx];
+  static real(kind=8) precc [value-expr: ffprec.precc];
+  static real(kind=8) xalogm [value-expr: ffprec.xalogm];
+  static real(kind=8) xclogm [value-expr: ffprec.xclogm];
+  static real(kind=8) xalog2 [value-expr: ffprec.xalog2];
+  static real(kind=8) xclog2 [value-expr: ffprec.xclog2];
+  static real(kind=8) reqprc [value-expr: ffprec.reqprc];
+  static integer(kind=4) irota3 [value-expr: ffrota.irota3];
+  static integer(kind=4) irota4 [value-expr: ffrota.irota4];
+  static integer(kind=4) irota5 [value-expr: ffrota.irota5];
+  static integer(kind=4) irota6 [value-expr: ffrota.irota6];
+  static integer(kind=4) isgn34 [value-expr: ffsign.isgn34];
+  static integer(kind=4) isgnal [value-expr: ffsign.isgnal];
+  static logical(kind=4) lsmug [value-expr: ffsmug.lsmug];
+  static logical(kind=4) lnasty [value-expr: ffsmug.lnasty];
+  static integer(kind=4) idum93[2] [value-expr: ffsmug.idum93];
+  static complex(kind=8) cmipj[9] [value-expr: ffsmug.cmipj];
+  static complex(kind=8) c2sisj[16] [value-expr: ffsmug.c2sisj];
+  static complex(kind=8) ca1 [value-expr: ffsmug.ca1];
+  static real(kind=8) bdn01;
+  static real(kind=8) bdn05;
+  static real(kind=8) bdn10;
+  static real(kind=8) bdn15;
+  static real(kind=8) bdn18;
+  real(kind=8) d1;
+  integer(kind=4) ier0;
+  real(kind=8) xa;
+  real(kind=8) xheck;
+  static real(kind=8) xprec = -1.0e+0;
+  real(kind=8) __result_dfflo2;
+
+  if (xprec != precx)
+    {
+      xprec = precx;
+      {
+        static integer(kind=4) C.3861 = 1;
+        static integer(kind=4) C.3860 = 1;
+
+        bdn01 = ffbnd (&C.3860, &C.3861, &xninv[1]);
+      }
+      {
+        static integer(kind=4) C.3864 = 5;
+        static integer(kind=4) C.3863 = 1;
+
+        bdn05 = ffbnd (&C.3863, &C.3864, &xninv[1]);
+      }
+      {
+        static integer(kind=4) C.3866 = 10;
+        static integer(kind=4) C.3865 = 1;
+
+        bdn10 = ffbnd (&C.3865, &C.3866, &xninv[1]);
+      }
+      {
+        static integer(kind=4) C.3868 = 15;
+        static integer(kind=4) C.3867 = 1;
+
+        bdn15 = ffbnd (&C.3867, &C.3868, &xninv[1]);
+      }
+      {
+        static integer(kind=4) C.3870 = 18;
+        static integer(kind=4) C.3869 = 1;
+
+        bdn18 = ffbnd (&C.3869, &C.3870, &xninv[1]);
+      }
+    }
+  L.24:;
+  xa = ABS_EXPR <*x>;
+  if (xa > bdn18)
+    {
+      __result_dfflo2 = dfflo1 ((real(kind=8) *) x, (integer(kind=4) *) ier) + *x;
+      if (lwarn && ABS_EXPR <__result_dfflo2> < ABS_EXPR <*x> * xloss)
+        {
+          {
+            static integer(kind=4) C.3874 = 231;
+
+            ffwarn (&C.3874, (integer(kind=4) *) ier, &__result_dfflo2, (real(kind=8) *) x);
+          }
+          if (lwrite)
+            {
+              {
+                struct __st_parameter_dt dt_parm.0;
+
+                dt_parm.0.common.filename = &"../src/F/core/ffxli2.f"[1]{lb: 1 sz: 1};
+                dt_parm.0.common.line = 436;
+                dt_parm.0.common.flags = 128;
+                dt_parm.0.common.unit = 6;
+                _gfortran_st_write (&dt_parm.0);
+                _gfortran_transfer_character_write (&dt_parm.0, &"dfflo2: not enough terms, x = "[1]{lb: 1 sz: 1}, 30);
+                _gfortran_transfer_real_write (&dt_parm.0, (real(kind=8) *) x, 8);
+                _gfortran_st_write_done (&dt_parm.0);
+              }
+            }
+          L.27:;
+        }
+      L.26:;
+      return __result_dfflo2;
+    }
+  L.25:;
+  if (xa > bdn15)
+    {
+      __result_dfflo2 = *x * ((xninv[16] + *x * ((xninv[17] + *x * ((xninv[18] + *x * ((xninv[19]))))))));
+    }
+  else
+    {
+      __result_dfflo2 = 0.0;
+    }
+  L.28:;
+  if (xa > bdn10)
+    {
+      __result_dfflo2 = *x * ((xninv[11] + *x * ((xninv[12] + *x * ((xninv[13] + *x * ((xninv[14] + *x * ((xninv[15] + __result_dfflo2))))))))));
+    }
+  L.29:;
+  if (xa > bdn05)
+    {
+      __result_dfflo2 = *x * ((xninv[6] + *x * ((xninv[7] + *x * ((xninv[8] + *x * ((xninv[9] + *x * ((xninv[10] + __result_dfflo2))))))))));
+    }
+  L.30:;
+  if (xa > bdn01)
+    {
+      __result_dfflo2 = *x * ((xninv[2] + *x * ((xninv[3] + *x * ((xninv[4] + *x * ((xninv[5] + __result_dfflo2))))))));
+    }
+  L.31:;
+  {
+    real(kind=8) D.3883;
+    real(kind=8) D.3882;
+
+    D.3882 = *x;
+    D.3883 = D.3882 * D.3882;
+    __result_dfflo2 = -(((xninv[1] + __result_dfflo2)) * D.3883);
+  }
+  if (ltest)
+    {
+      ier0 = *ier;
+      d1 = dfflo1 ((real(kind=8) *) x, &ier0) + *x;
+      xheck = d1 - __result_dfflo2;
+      if (ABS_EXPR <xheck> * xloss > precx)
+        {
+          {
+            struct __st_parameter_dt dt_parm.1;
+
+            dt_parm.1.common.filename = &"../src/F/core/ffxli2.f"[1]{lb: 1 sz: 1};
+            dt_parm.1.common.line = 466;
+            dt_parm.1.common.flags = 128;
+            dt_parm.1.common.unit = 6;
+            _gfortran_st_write (&dt_parm.1);
+            _gfortran_transfer_character_write (&dt_parm.1, &"dfflo2: error:"[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_character_write (&dt_parm.1, &" answer is not OK"[1]{lb: 1 sz: 1}, 17);
+            _gfortran_transfer_real_write (&dt_parm.1, &d1, 8);
+            _gfortran_transfer_real_write (&dt_parm.1, &__result_dfflo2, 8);
+            _gfortran_transfer_real_write (&dt_parm.1, &xheck, 8);
+            _gfortran_st_write_done (&dt_parm.1);
+          }
+        }
+      L.33:;
+    }
+  L.32:;
+  return __result_dfflo2;
+}
+
+
+dfflo1 (real(kind=8) & restrict x, integer(kind=4) & restrict ier)
+{
+  static real(kind=8) fodel2 [value-expr: ffcdel.fodel2];
+  static real(kind=8) fodel3 [value-expr: ffcdel.fodel3];
+  static complex(kind=8) cfdl4s [value-expr: ffcdel.cfdl4s];
+  static real(kind=8) fodel4 [value-expr: ffcdel.fodel4];
+  static real(kind=8) fodl3i[5] [value-expr: ffcdel.fodl3i];
+  static real(kind=8) fod3ij[36] [value-expr: ffcdel.fod3ij];
+  static real(kind=8) fodl4i[6] [value-expr: ffcdel.fodl4i];
+  static complex(kind=8) cfpij2[9] [value-expr: ffcdot.cfpij2];
+  static complex(kind=8) cfpij3[36] [value-expr: ffcdot.cfpij3];
+  static complex(kind=8) cfpij4[100] [value-expr: ffcdot.cfpij4];
+  static complex(kind=8) cfpij5[225] [value-expr: ffcdot.cfpij5];
+  static complex(kind=8) cfpij6[441] [value-expr: ffcdot.cfpij6];
+  static real(kind=8) bf[20] [value-expr: ffcnst.bf];
+  static real(kind=8) xninv[30] [value-expr: ffcnst.xninv];
+  static real(kind=8) xn2inv[30] [value-expr: ffcnst.xn2inv];
+  static real(kind=8) xinfac[30] [value-expr: ffcnst.xinfac];
+  static integer(kind=4) inx[16] [value-expr: ffcnst.inx];
+  static integer(kind=4) isgn[16] [value-expr: ffcnst.isgn];
+  static integer(kind=4) iold[156] [value-expr: ffcnst.iold];
+  static integer(kind=4) isgrot[120] [value-expr: ffcnst.isgrot];
+  static integer(kind=4) inx5[25] [value-expr: ffcnst.inx5];
+  static integer(kind=4) isgn5[25] [value-expr: ffcnst.isgn5];
+  static real(kind=8) fdel2 [value-expr: ffdel.fdel2];
+  static real(kind=8) fdel3 [value-expr: ffdel.fdel3];
+  static real(kind=8) fdel4s [value-expr: ffdel.fdel4s];
+  static real(kind=8) fdel4 [value-expr: ffdel.fdel4];
+  static real(kind=8) fdl3i[5] [value-expr: ffdel.fdl3i];
+  static real(kind=8) fdl4si[5] [value-expr: ffdel.fdl4si];
+  static real(kind=8) fdl3ij[36] [value-expr: ffdel.fdl3ij];
+  static real(kind=8) fdl4i[6] [value-expr: ffdel.fdl4i];
+  static real(kind=8) fpij2[9] [value-expr: ffdot.fpij2];
+  static real(kind=8) fpij3[36] [value-expr: ffdot.fpij3];
+  static real(kind=8) fpij4[100] [value-expr: ffdot.fpij4];
+  static real(kind=8) fpij5[225] [value-expr: ffdot.fpij5];
+  static real(kind=8) fpij6[441] [value-expr: ffdot.fpij6];
+  static logical(kind=4) lwrite [value-expr: ffflag.lwrite];
+  static logical(kind=4) ltest [value-expr: ffflag.ltest];
+  static logical(kind=4) l4also [value-expr: ffflag.l4also];
+  static logical(kind=4) ldc3c4 [value-expr: ffflag.ldc3c4];
+  static logical(kind=4) lmem [value-expr: ffflag.lmem];
+  static logical(kind=4) lwarn [value-expr: ffflag.lwarn];
+  static logical(kind=4) ldot [value-expr: ffflag.ldot];
+  static integer(kind=4) nevent [value-expr: ffflag.nevent];
+  static integer(kind=4) ner [value-expr: ffflag.ner];
+  static integer(kind=4) id [value-expr: ffflag.id];
+  static integer(kind=4) idsub [value-expr: ffflag.idsub];
+  static integer(kind=4) nwidth [value-expr: ffflag.nwidth];
+  static integer(kind=4) nschem [value-expr: ffflag.nschem];
+  static logical(kind=4) onshel [value-expr: ffflag.onshel];
+  static integer(kind=4) idot [value-expr: ffflag.idot];
+  static integer(kind=4) fidel3 [value-expr: ffidel.fidel3];
+  static integer(kind=4) fidel4 [value-expr: ffidel.fidel4];
+  static integer(kind=4) fidl3i[5] [value-expr: ffidel.fidl3i];
+  static integer(kind=4) fid3ij[36] [value-expr: ffidel.fid3ij];
+  static integer(kind=4) fidl4i[6] [value-expr: ffidel.fidl4i];
+  static real(kind=8) xloss [value-expr: ffprec.xloss];
+  static real(kind=8) precx [value-expr: ffprec.precx];
+  static real(kind=8) precc [value-expr: ffprec.precc];
+  static real(kind=8) xalogm [value-expr: ffprec.xalogm];
+  static real(kind=8) xclogm [value-expr: ffprec.xclogm];
+  static real(kind=8) xalog2 [value-expr: ffprec.xalog2];
+  static real(kind=8) xclog2 [value-expr: ffprec.xclog2];
+  static real(kind=8) reqprc [value-expr: ffprec.reqprc];
+  static integer(kind=4) irota3 [value-expr: ffrota.irota3];
+  static integer(kind=4) irota4 [value-expr: ffrota.irota4];
+  static integer(kind=4) irota5 [value-expr: ffrota.irota5];
+  static integer(kind=4) irota6 [value-expr: ffrota.irota6];
+  static integer(kind=4) isgn34 [value-expr: ffsign.isgn34];
+  static integer(kind=4) isgnal [value-expr: ffsign.isgnal];
+  static logical(kind=4) lsmug [value-expr: ffsmug.lsmug];
+  static logical(kind=4) lnasty [value-expr: ffsmug.lnasty];
+  static integer(kind=4) idum93[2] [value-expr: ffsmug.idum93];
+  static complex(kind=8) cmipj[9] [value-expr: ffsmug.cmipj];
+  static complex(kind=8) c2sisj[16] [value-expr: ffsmug.c2sisj];
+  static complex(kind=8) ca1 [value-expr: ffsmug.ca1];
+  static real(kind=8) bdn01;
+  static real(kind=8) bdn05;
+  static real(kind=8) bdn10;
+  static real(kind=8) bdn15;
+  static real(kind=8) bdn19;
+  real(kind=8) d1;
+  real(kind=8) xa;
+  real(kind=8) xheck;
+  static real(kind=8) xprec = -1.0e+0;
+  real(kind=8) __result_dfflo1;
+
+  if (xprec != precx)
+    {
+      xprec = precx;
+      {
+        static integer(kind=4) C.4098 = 1;
+        static integer(kind=4) C.4097 = 1;
+
+        bdn01 = ffbnd (&C.4097, &C.4098, &xninv);
+      }
+      {
+        static integer(kind=4) C.4101 = 5;
+        static integer(kind=4) C.4100 = 1;
+
+        bdn05 = ffbnd (&C.4100, &C.4101, &xninv);
+      }
+      {
+        static integer(kind=4) C.4103 = 10;
+        static integer(kind=4) C.4102 = 1;
+
+        bdn10 = ffbnd (&C.4102, &C.4103, &xninv);
+      }
+      {
+        static integer(kind=4) C.4105 = 15;
+        static integer(kind=4) C.4104 = 1;
+
+        bdn15 = ffbnd (&C.4104, &C.4105, &xninv);
+      }
+      {
+        static integer(kind=4) C.4107 = 19;
+        static integer(kind=4) C.4106 = 1;
+
+        bdn19 = ffbnd (&C.4106, &C.4107, &xninv);
+      }
+    }
+  L.34:;
+  xa = ABS_EXPR <*x>;
+  if (xa > bdn19)
+    {
+      if (lwarn && xa < xloss)
+        {
+          {
+            static real(kind=8) C.4111 = 1.0e+0;
+            static integer(kind=4) C.4110 = 62;
+
+            ffwarn (&C.4110, (integer(kind=4) *) ier, (real(kind=8) *) x, &C.4111);
+          }
+        }
+      L.36:;
+      if (lwarn && 1.0e+0 - *x < xloss)
+        {
+          {
+            static real(kind=8) C.4116 = 1.0e+0;
+            real(kind=8) D.4115;
+            static integer(kind=4) C.4114 = 132;
+
+            D.4115 = 1.0e+0 - *x;
+            ffwarn (&C.4114, (integer(kind=4) *) ier, &D.4115, &C.4116);
+          }
+        }
+      L.37:;
+      {
+        static real(kind=8) C.4119 = 0.0;
+        static integer(kind=4) C.4118 = 0;
+        real(kind=8) D.4117;
+
+        D.4117 = 1.0e+0 - *x;
+        __result_dfflo1 = REALPART_EXPR <zxfflg (&D.4117, &C.4118, &C.4119, (integer(kind=4) *) ier)>;
+      }
+      return __result_dfflo1;
+    }
+  L.35:;
+  if (xa > bdn15)
+    {
+      __result_dfflo1 = *x * ((xninv[15] + *x * ((xninv[16] + *x * ((xninv[17] + *x * ((xninv[18] + *x * ((xninv[19]))))))))));
+    }
+  else
+    {
+      __result_dfflo1 = 0.0;
+    }
+  L.38:;
+  if (xa > bdn10)
+    {
+      __result_dfflo1 = *x * ((xninv[10] + *x * ((xninv[11] + *x * ((xninv[12] + *x * ((xninv[13] + *x * ((xninv[14] + __result_dfflo1))))))))));
+    }
+  L.39:;
+  if (xa > bdn05)
+    {
+      __result_dfflo1 = *x * ((xninv[5] + *x * ((xninv[6] + *x * ((xninv[7] + *x * ((xninv[8] + *x * ((xninv[9] + __result_dfflo1))))))))));
+    }
+  L.40:;
+  if (xa > bdn01)
+    {
+      __result_dfflo1 = *x * ((xninv[1] + *x * ((xninv[2] + *x * ((xninv[3] + *x * ((xninv[4] + __result_dfflo1))))))));
+    }
+  L.41:;
+  __result_dfflo1 = -(*x * ((xninv[0] + __result_dfflo1)));
+  if (ltest)
+    {
+      d1 = __builtin_log (1.0e+0 - *x);
+      xheck = d1 - __result_dfflo1;
+      if (ABS_EXPR <xheck> * xloss > precx)
+        {
+          {
+            struct __st_parameter_dt dt_parm.2;
+
+            dt_parm.2.common.filename = &"../src/F/core/ffxli2.f"[1]{lb: 1 sz: 1};
+            dt_parm.2.common.line = 399;
+            dt_parm.2.common.flags = 128;
+            dt_parm.2.common.unit = 6;
+            _gfortran_st_write (&dt_parm.2);
+            _gfortran_transfer_character_write (&dt_parm.2, &"dfflo1: error:"[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_character_write (&dt_parm.2, &" answer is not OK"[1]{lb: 1 sz: 1}, 17);
+            _gfortran_transfer_real_write (&dt_parm.2, &d1, 8);
+            _gfortran_transfer_real_write (&dt_parm.2, &__result_dfflo1, 8);
+            _gfortran_transfer_real_write (&dt_parm.2, &xheck, 8);
+            _gfortran_st_write_done (&dt_parm.2);
+          }
+        }
+      L.43:;
+    }
+  L.42:;
+  return __result_dfflo1;
+}
+
+
+zxfflg (real(kind=8) & restrict x, integer(kind=4) & restrict ieps, real(kind=8) & restrict y, integer(kind=4) & restrict ier)
+{
+  static real(kind=8) fodel2 [value-expr: ffcdel.fodel2];
+  static real(kind=8) fodel3 [value-expr: ffcdel.fodel3];
+  static complex(kind=8) cfdl4s [value-expr: ffcdel.cfdl4s];
+  static real(kind=8) fodel4 [value-expr: ffcdel.fodel4];
+  static real(kind=8) fodl3i[5] [value-expr: ffcdel.fodl3i];
+  static real(kind=8) fod3ij[36] [value-expr: ffcdel.fod3ij];
+  static real(kind=8) fodl4i[6] [value-expr: ffcdel.fodl4i];
+  static complex(kind=8) cfpij2[9] [value-expr: ffcdot.cfpij2];
+  static complex(kind=8) cfpij3[36] [value-expr: ffcdot.cfpij3];
+  static complex(kind=8) cfpij4[100] [value-expr: ffcdot.cfpij4];
+  static complex(kind=8) cfpij5[225] [value-expr: ffcdot.cfpij5];
+  static complex(kind=8) cfpij6[441] [value-expr: ffcdot.cfpij6];
+  static real(kind=8) bf[20] [value-expr: ffcnst.bf];
+  static real(kind=8) xninv[30] [value-expr: ffcnst.xninv];
+  static real(kind=8) xn2inv[30] [value-expr: ffcnst.xn2inv];
+  static real(kind=8) xinfac[30] [value-expr: ffcnst.xinfac];
+  static integer(kind=4) inx[16] [value-expr: ffcnst.inx];
+  static integer(kind=4) isgn[16] [value-expr: ffcnst.isgn];
+  static integer(kind=4) iold[156] [value-expr: ffcnst.iold];
+  static integer(kind=4) isgrot[120] [value-expr: ffcnst.isgrot];
+  static integer(kind=4) inx5[25] [value-expr: ffcnst.inx5];
+  static integer(kind=4) isgn5[25] [value-expr: ffcnst.isgn5];
+  static real(kind=8) fdel2 [value-expr: ffdel.fdel2];
+  static real(kind=8) fdel3 [value-expr: ffdel.fdel3];
+  static real(kind=8) fdel4s [value-expr: ffdel.fdel4s];
+  static real(kind=8) fdel4 [value-expr: ffdel.fdel4];
+  static real(kind=8) fdl3i[5] [value-expr: ffdel.fdl3i];
+  static real(kind=8) fdl4si[5] [value-expr: ffdel.fdl4si];
+  static real(kind=8) fdl3ij[36] [value-expr: ffdel.fdl3ij];
+  static real(kind=8) fdl4i[6] [value-expr: ffdel.fdl4i];
+  static real(kind=8) fpij2[9] [value-expr: ffdot.fpij2];
+  static real(kind=8) fpij3[36] [value-expr: ffdot.fpij3];
+  static real(kind=8) fpij4[100] [value-expr: ffdot.fpij4];
+  static real(kind=8) fpij5[225] [value-expr: ffdot.fpij5];
+  static real(kind=8) fpij6[441] [value-expr: ffdot.fpij6];
+  static logical(kind=4) lwrite [value-expr: ffflag.lwrite];
+  static logical(kind=4) ltest [value-expr: ffflag.ltest];
+  static logical(kind=4) l4also [value-expr: ffflag.l4also];
+  static logical(kind=4) ldc3c4 [value-expr: ffflag.ldc3c4];
+  static logical(kind=4) lmem [value-expr: ffflag.lmem];
+  static logical(kind=4) lwarn [value-expr: ffflag.lwarn];
+  static logical(kind=4) ldot [value-expr: ffflag.ldot];
+  static integer(kind=4) nevent [value-expr: ffflag.nevent];
+  static integer(kind=4) ner [value-expr: ffflag.ner];
+  static integer(kind=4) id [value-expr: ffflag.id];
+  static integer(kind=4) idsub [value-expr: ffflag.idsub];
+  static integer(kind=4) nwidth [value-expr: ffflag.nwidth];
+  static integer(kind=4) nschem [value-expr: ffflag.nschem];
+  static logical(kind=4) onshel [value-expr: ffflag.onshel];
+  static integer(kind=4) idot [value-expr: ffflag.idot];
+  static integer(kind=4) fidel3 [value-expr: ffidel.fidel3];
+  static integer(kind=4) fidel4 [value-expr: ffidel.fidel4];
+  static integer(kind=4) fidl3i[5] [value-expr: ffidel.fidl3i];
+  static integer(kind=4) fid3ij[36] [value-expr: ffidel.fid3ij];
+  static integer(kind=4) fidl4i[6] [value-expr: ffidel.fidl4i];
+  static real(kind=8) xloss [value-expr: ffprec.xloss];
+  static real(kind=8) precx [value-expr: ffprec.precx];
+  static real(kind=8) precc [value-expr: ffprec.precc];
+  static real(kind=8) xalogm [value-expr: ffprec.xalogm];
+  static real(kind=8) xclogm [value-expr: ffprec.xclogm];
+  static real(kind=8) xalog2 [value-expr: ffprec.xalog2];
+  static real(kind=8) xclog2 [value-expr: ffprec.xclog2];
+  static real(kind=8) reqprc [value-expr: ffprec.reqprc];
+  static integer(kind=4) irota3 [value-expr: ffrota.irota3];
+  static integer(kind=4) irota4 [value-expr: ffrota.irota4];
+  static integer(kind=4) irota5 [value-expr: ffrota.irota5];
+  static integer(kind=4) irota6 [value-expr: ffrota.irota6];
+  static integer(kind=4) isgn34 [value-expr: ffsign.isgn34];
+  static integer(kind=4) isgnal [value-expr: ffsign.isgnal];
+  static logical(kind=4) lsmug [value-expr: ffsmug.lsmug];
+  static logical(kind=4) lnasty [value-expr: ffsmug.lnasty];
+  static integer(kind=4) idum93[2] [value-expr: ffsmug.idum93];
+  static complex(kind=8) cmipj[9] [value-expr: ffsmug.cmipj];
+  static complex(kind=8) c2sisj[16] [value-expr: ffsmug.c2sisj];
+  static complex(kind=8) ca1 [value-expr: ffsmug.ca1];
+  real(kind=8) xlog;
+  complex(kind=8) __result_zxfflg;
+
+  if (lwarn && ABS_EXPR <*x - 1.0e+0> < xloss)
+    {
+      {
+        static real(kind=8) C.4338 = 1.0e+0;
+        real(kind=8) D.4337;
+        static integer(kind=4) C.4336 = 129;
+
+        D.4337 = ABS_EXPR <*x - 1.0e+0>;
+        ffwarn (&C.4336, (integer(kind=4) *) ier, &D.4337, &C.4338);
+      }
+    }
+  L.44:;
+  if (ABS_EXPR <*x> < xalogm)
+    {
+      if (lwarn && *x != 0.0)
+        {
+          {
+            static integer(kind=4) C.4342 = 53;
+
+            ffwarn (&C.4342, (integer(kind=4) *) ier, (real(kind=8) *) x, &xalogm);
+          }
+        }
+      L.46:;
+      __result_zxfflg = __complex__ (0.0, 0.0);
+    }
+  else
+    {
+      if (*x > 0.0)
+        {
+          __result_zxfflg = COMPLEX_EXPR <__builtin_log (*x), 0.0>;
+        }
+      else
+        {
+          xlog = __builtin_log (-*x);
+          if (ABS_EXPR <*ieps> == 1)
+            {
+              if (*y * (real(kind=8)) *ieps < 0.0)
+                {
+                  __result_zxfflg = COMPLEX_EXPR <xlog, -3.141592653589793115997963468544185161590576171875e+0>;
+                }
+              else
+                {
+                  __result_zxfflg = COMPLEX_EXPR <xlog, 3.141592653589793115997963468544185161590576171875e+0>;
+                }
+              L.49:;
+            }
+          else
+            {
+              if (*ieps == 2)
+                {
+                  __result_zxfflg = COMPLEX_EXPR <xlog, -3.141592653589793115997963468544185161590576171875e+0>;
+                }
+              else
+                {
+                  if (*ieps == -2)
+                    {
+                      __result_zxfflg = COMPLEX_EXPR <xlog, 3.141592653589793115997963468544185161590576171875e+0>;
+                    }
+                  else
+                    {
+                      {
+                        static integer(kind=4) C.4349 = 52;
+
+                        fferr (&C.4349, (integer(kind=4) *) ier);
+                      }
+                      __result_zxfflg = COMPLEX_EXPR <xlog, 3.141592653589793115997963468544185161590576171875e+0>;
+                    }
+                  L.51:;
+                }
+              L.50:;
+            }
+          L.48:;
+        }
+      L.47:;
+    }
+  L.45:;
+  return __result_zxfflg;
+}
+
+
+ffxli2 (real(kind=8) & restrict xdilog, real(kind=8) & restrict xlog, real(kind=8) & restrict x, integer(kind=4) & restrict ier)
+{
+  static real(kind=8) fodel2 [value-expr: ffcdel.fodel2];
+  static real(kind=8) fodel3 [value-expr: ffcdel.fodel3];
+  static complex(kind=8) cfdl4s [value-expr: ffcdel.cfdl4s];
+  static real(kind=8) fodel4 [value-expr: ffcdel.fodel4];
+  static real(kind=8) fodl3i[5] [value-expr: ffcdel.fodl3i];
+  static real(kind=8) fod3ij[36] [value-expr: ffcdel.fod3ij];
+  static real(kind=8) fodl4i[6] [value-expr: ffcdel.fodl4i];
+  static complex(kind=8) cfpij2[9] [value-expr: ffcdot.cfpij2];
+  static complex(kind=8) cfpij3[36] [value-expr: ffcdot.cfpij3];
+  static complex(kind=8) cfpij4[100] [value-expr: ffcdot.cfpij4];
+  static complex(kind=8) cfpij5[225] [value-expr: ffcdot.cfpij5];
+  static complex(kind=8) cfpij6[441] [value-expr: ffcdot.cfpij6];
+  static real(kind=8) bf[20] [value-expr: ffcnst.bf];
+  static real(kind=8) xninv[30] [value-expr: ffcnst.xninv];
+  static real(kind=8) xn2inv[30] [value-expr: ffcnst.xn2inv];
+  static real(kind=8) xinfac[30] [value-expr: ffcnst.xinfac];
+  static integer(kind=4) inx[16] [value-expr: ffcnst.inx];
+  static integer(kind=4) isgn[16] [value-expr: ffcnst.isgn];
+  static integer(kind=4) iold[156] [value-expr: ffcnst.iold];
+  static integer(kind=4) isgrot[120] [value-expr: ffcnst.isgrot];
+  static integer(kind=4) inx5[25] [value-expr: ffcnst.inx5];
+  static integer(kind=4) isgn5[25] [value-expr: ffcnst.isgn5];
+  static real(kind=8) fdel2 [value-expr: ffdel.fdel2];
+  static real(kind=8) fdel3 [value-expr: ffdel.fdel3];
+  static real(kind=8) fdel4s [value-expr: ffdel.fdel4s];
+  static real(kind=8) fdel4 [value-expr: ffdel.fdel4];
+  static real(kind=8) fdl3i[5] [value-expr: ffdel.fdl3i];
+  static real(kind=8) fdl4si[5] [value-expr: ffdel.fdl4si];
+  static real(kind=8) fdl3ij[36] [value-expr: ffdel.fdl3ij];
+  static real(kind=8) fdl4i[6] [value-expr: ffdel.fdl4i];
+  static real(kind=8) fpij2[9] [value-expr: ffdot.fpij2];
+  static real(kind=8) fpij3[36] [value-expr: ffdot.fpij3];
+  static real(kind=8) fpij4[100] [value-expr: ffdot.fpij4];
+  static real(kind=8) fpij5[225] [value-expr: ffdot.fpij5];
+  static real(kind=8) fpij6[441] [value-expr: ffdot.fpij6];
+  static logical(kind=4) lwrite [value-expr: ffflag.lwrite];
+  static logical(kind=4) ltest [value-expr: ffflag.ltest];
+  static logical(kind=4) l4also [value-expr: ffflag.l4also];
+  static logical(kind=4) ldc3c4 [value-expr: ffflag.ldc3c4];
+  static logical(kind=4) lmem [value-expr: ffflag.lmem];
+  static logical(kind=4) lwarn [value-expr: ffflag.lwarn];
+  static logical(kind=4) ldot [value-expr: ffflag.ldot];
+  static integer(kind=4) nevent [value-expr: ffflag.nevent];
+  static integer(kind=4) ner [value-expr: ffflag.ner];
+  static integer(kind=4) id [value-expr: ffflag.id];
+  static integer(kind=4) idsub [value-expr: ffflag.idsub];
+  static integer(kind=4) nwidth [value-expr: ffflag.nwidth];
+  static integer(kind=4) nschem [value-expr: ffflag.nschem];
+  static logical(kind=4) onshel [value-expr: ffflag.onshel];
+  static integer(kind=4) idot [value-expr: ffflag.idot];
+  static integer(kind=4) fidel3 [value-expr: ffidel.fidel3];
+  static integer(kind=4) fidel4 [value-expr: ffidel.fidel4];
+  static integer(kind=4) fidl3i[5] [value-expr: ffidel.fidl3i];
+  static integer(kind=4) fid3ij[36] [value-expr: ffidel.fid3ij];
+  static integer(kind=4) fidl4i[6] [value-expr: ffidel.fidl4i];
+  static real(kind=8) xloss [value-expr: ffprec.xloss];
+  static real(kind=8) precx [value-expr: ffprec.precx];
+  static real(kind=8) precc [value-expr: ffprec.precc];
+  static real(kind=8) xalogm [value-expr: ffprec.xalogm];
+  static real(kind=8) xclogm [value-expr: ffprec.xclogm];
+  static real(kind=8) xalog2 [value-expr: ffprec.xalog2];
+  static real(kind=8) xclog2 [value-expr: ffprec.xclog2];
+  static real(kind=8) reqprc [value-expr: ffprec.reqprc];
+  static integer(kind=4) irota3 [value-expr: ffrota.irota3];
+  static integer(kind=4) irota4 [value-expr: ffrota.irota4];
+  static integer(kind=4) irota5 [value-expr: ffrota.irota5];
+  static integer(kind=4) irota6 [value-expr: ffrota.irota6];
+  static integer(kind=4) isgn34 [value-expr: ffsign.isgn34];
+  static integer(kind=4) isgnal [value-expr: ffsign.isgnal];
+  static logical(kind=4) lsmug [value-expr: ffsmug.lsmug];
+  static logical(kind=4) lnasty [value-expr: ffsmug.lnasty];
+  static integer(kind=4) idum93[2] [value-expr: ffsmug.idum93];
+  static complex(kind=8) cmipj[9] [value-expr: ffsmug.cmipj];
+  static complex(kind=8) c2sisj[16] [value-expr: ffsmug.c2sisj];
+  static complex(kind=8) ca1 [value-expr: ffsmug.ca1];
+  real(kind=8) a;
+  static real(kind=8) bdn02;
+  static real(kind=8) bdn05;
+  static real(kind=8) bdn10;
+  static real(kind=8) bdn15;
+  static real(kind=8) bdn20;
+  integer(kind=4) ipi12;
+  real(kind=8) u;
+  real(kind=8) u2;
+  static real(kind=8) xprec = -1.0e+0;
+  complex(kind=8) zlog;
+  complex(kind=8) zxdilo;
+
+  if (xprec != precx)
+    {
+      xprec = precx;
+      {
+        static integer(kind=4) C.4571 = 2;
+        static integer(kind=4) C.4570 = 1;
+
+        bdn02 = ffbnd (&C.4570, &C.4571, &bf);
+      }
+      {
+        static integer(kind=4) C.4574 = 5;
+        static integer(kind=4) C.4573 = 1;
+
+        bdn05 = ffbnd (&C.4573, &C.4574, &bf);
+      }
+      {
+        static integer(kind=4) C.4576 = 10;
+        static integer(kind=4) C.4575 = 1;
+
+        bdn10 = ffbnd (&C.4575, &C.4576, &bf);
+      }
+      {
+        static integer(kind=4) C.4578 = 15;
+        static integer(kind=4) C.4577 = 1;
+
+        bdn15 = ffbnd (&C.4577, &C.4578, &bf);
+      }
+      {
+        static integer(kind=4) C.4580 = 19;
+        static integer(kind=4) C.4579 = 1;
+
+        bdn20 = ffbnd (&C.4579, &C.4580, &bf);
+      }
+    }
+  L.52:;
+  if (*x < -1.5e+0 || *x > 7.5e-1)
+    {
+      if (ltest)
+        {
+          {
+            static integer(kind=4) C.4583 = 29;
+
+            fferr (&C.4583, (integer(kind=4) *) ier);
+          }
+        }
+      L.54:;
+      {
+        static integer(kind=4) C.4585 = 0;
+
+        ffzxdl (&zxdilo, &ipi12, &zlog, (real(kind=8) *) x, &C.4585, (integer(kind=4) *) ier);
+      }
+      if (IMAGPART_EXPR <zxdilo> != 0.0)
+        {
+          {
+            static integer(kind=4) C.4587 = 52;
+
+            fferr (&C.4587, (integer(kind=4) *) ier);
+          }
+        }
+      L.55:;
+      *xdilog = REALPART_EXPR <zxdilo> + (real(kind=8)) ipi12 * 8.2246703342411320303284583133063279092311859130859375e-1;
+      *xlog = REALPART_EXPR <zlog>;
+      return;
+    }
+  L.53:;
+  if (*x == -1.0e+0)
+    {
+      *xdilog = -8.2246703342411320303284583133063279092311859130859375e-1;
+      *xlog = 6.9314718055994528622676398299518041312694549560546875e-1;
+      return;
+    }
+  else
+    {
+      if (*x == 5.0e-1)
+        {
+          *xdilog = 5.822405264650125644720901618711650371551513671875e-1;
+          *xlog = -6.9314718055994528622676398299518041312694549560546875e-1;
+          return;
+        }
+      else
+        {
+          if (ABS_EXPR <*x> < precx)
+            {
+              *xdilog = *x;
+              *xlog = -*x;
+              return;
+            }
+          L.58:;
+        }
+      L.57:;
+    }
+  L.56:;
+  if (ABS_EXPR <*x> < xloss)
+    {
+      *xlog = dfflo1 ((real(kind=8) *) x, (integer(kind=4) *) ier);
+    }
+  else
+    {
+      *xlog = __builtin_log (1.0e+0 - *x);
+    }
+  L.59:;
+  u = -*xlog;
+  u2 = u * u;
+  a = ABS_EXPR <u2>;
+  if (lwarn && a > bdn20)
+    {
+      {
+        real(kind=8) D.4595;
+        real(kind=8) D.4594;
+        static integer(kind=4) C.4593 = 60;
+
+        D.4594 = a;
+        D.4595 = bf[19] * __builtin_powi (D.4594, 20);
+        ffwarn (&C.4593, (integer(kind=4) *) ier, &precx, &D.4595);
+      }
+    }
+  L.60:;
+  if (a > bdn15)
+    {
+      *xdilog = ((bf[15] + ((bf[16] + ((bf[17] + ((bf[18] + ((bf[19])) * u2)) * u2)) * u2)) * u2)) * u2;
+    }
+  else
+    {
+      *xdilog = 0.0;
+    }
+  L.61:;
+  if (a > bdn10)
+    {
+      *xdilog = ((bf[10] + ((bf[11] + ((bf[12] + ((bf[13] + ((bf[14] + *xdilog)) * u2)) * u2)) * u2)) * u2)) * u2;
+    }
+  L.62:;
+  if (a > bdn05)
+    {
+      *xdilog = ((bf[5] + ((bf[6] + ((bf[7] + ((bf[8] + ((bf[9] + *xdilog)) * u2)) * u2)) * u2)) * u2)) * u2;
+    }
+  L.63:;
+  if (a > bdn02)
+    {
+      *xdilog = ((bf[2] + ((bf[3] + ((bf[4] + *xdilog)) * u2)) * u2)) * u2;
+    }
+  L.64:;
+  *xdilog = ((bf[0] + ((bf[1] + *xdilog)) * u)) * u2 + u;
+}
+
+
+dfflo3 (real(kind=8) & restrict x, integer(kind=4) & restrict ier)
+{
+  static real(kind=8) fodel2 [value-expr: ffcdel.fodel2];
+  static real(kind=8) fodel3 [value-expr: ffcdel.fodel3];
+  static complex(kind=8) cfdl4s [value-expr: ffcdel.cfdl4s];
+  static real(kind=8) fodel4 [value-expr: ffcdel.fodel4];
+  static real(kind=8) fodl3i[5] [value-expr: ffcdel.fodl3i];
+  static real(kind=8) fod3ij[36] [value-expr: ffcdel.fod3ij];
+  static real(kind=8) fodl4i[6] [value-expr: ffcdel.fodl4i];
+  static complex(kind=8) cfpij2[9] [value-expr: ffcdot.cfpij2];
+  static complex(kind=8) cfpij3[36] [value-expr: ffcdot.cfpij3];
+  static complex(kind=8) cfpij4[100] [value-expr: ffcdot.cfpij4];
+  static complex(kind=8) cfpij5[225] [value-expr: ffcdot.cfpij5];
+  static complex(kind=8) cfpij6[441] [value-expr: ffcdot.cfpij6];
+  static real(kind=8) bf[20] [value-expr: ffcnst.bf];
+  static real(kind=8) xninv[30] [value-expr: ffcnst.xninv];
+  static real(kind=8) xn2inv[30] [value-expr: ffcnst.xn2inv];
+  static real(kind=8) xinfac[30] [value-expr: ffcnst.xinfac];
+  static integer(kind=4) inx[16] [value-expr: ffcnst.inx];
+  static integer(kind=4) isgn[16] [value-expr: ffcnst.isgn];
+  static integer(kind=4) iold[156] [value-expr: ffcnst.iold];
+  static integer(kind=4) isgrot[120] [value-expr: ffcnst.isgrot];
+  static integer(kind=4) inx5[25] [value-expr: ffcnst.inx5];
+  static integer(kind=4) isgn5[25] [value-expr: ffcnst.isgn5];
+  static real(kind=8) fdel2 [value-expr: ffdel.fdel2];
+  static real(kind=8) fdel3 [value-expr: ffdel.fdel3];
+  static real(kind=8) fdel4s [value-expr: ffdel.fdel4s];
+  static real(kind=8) fdel4 [value-expr: ffdel.fdel4];
+  static real(kind=8) fdl3i[5] [value-expr: ffdel.fdl3i];
+  static real(kind=8) fdl4si[5] [value-expr: ffdel.fdl4si];
+  static real(kind=8) fdl3ij[36] [value-expr: ffdel.fdl3ij];
+  static real(kind=8) fdl4i[6] [value-expr: ffdel.fdl4i];
+  static real(kind=8) fpij2[9] [value-expr: ffdot.fpij2];
+  static real(kind=8) fpij3[36] [value-expr: ffdot.fpij3];
+  static real(kind=8) fpij4[100] [value-expr: ffdot.fpij4];
+  static real(kind=8) fpij5[225] [value-expr: ffdot.fpij5];
+  static real(kind=8) fpij6[441] [value-expr: ffdot.fpij6];
+  static logical(kind=4) lwrite [value-expr: ffflag.lwrite];
+  static logical(kind=4) ltest [value-expr: ffflag.ltest];
+  static logical(kind=4) l4also [value-expr: ffflag.l4also];
+  static logical(kind=4) ldc3c4 [value-expr: ffflag.ldc3c4];
+  static logical(kind=4) lmem [value-expr: ffflag.lmem];
+  static logical(kind=4) lwarn [value-expr: ffflag.lwarn];
+  static logical(kind=4) ldot [value-expr: ffflag.ldot];
+  static integer(kind=4) nevent [value-expr: ffflag.nevent];
+  static integer(kind=4) ner [value-expr: ffflag.ner];
+  static integer(kind=4) id [value-expr: ffflag.id];
+  static integer(kind=4) idsub [value-expr: ffflag.idsub];
+  static integer(kind=4) nwidth [value-expr: ffflag.nwidth];
+  static integer(kind=4) nschem [value-expr: ffflag.nschem];
+  static logical(kind=4) onshel [value-expr: ffflag.onshel];
+  static integer(kind=4) idot [value-expr: ffflag.idot];
+  static integer(kind=4) fidel3 [value-expr: ffidel.fidel3];
+  static integer(kind=4) fidel4 [value-expr: ffidel.fidel4];
+  static integer(kind=4) fidl3i[5] [value-expr: ffidel.fidl3i];
+  static integer(kind=4) fid3ij[36] [value-expr: ffidel.fid3ij];
+  static integer(kind=4) fidl4i[6] [value-expr: ffidel.fidl4i];
+  static real(kind=8) xloss [value-expr: ffprec.xloss];
+  static real(kind=8) precx [value-expr: ffprec.precx];
+  static real(kind=8) precc [value-expr: ffprec.precc];
+  static real(kind=8) xalogm [value-expr: ffprec.xalogm];
+  static real(kind=8) xclogm [value-expr: ffprec.xclogm];
+  static real(kind=8) xalog2 [value-expr: ffprec.xalog2];
+  static real(kind=8) xclog2 [value-expr: ffprec.xclog2];
+  static real(kind=8) reqprc [value-expr: ffprec.reqprc];
+  static integer(kind=4) irota3 [value-expr: ffrota.irota3];
+  static integer(kind=4) irota4 [value-expr: ffrota.irota4];
+  static integer(kind=4) irota5 [value-expr: ffrota.irota5];
+  static integer(kind=4) irota6 [value-expr: ffrota.irota6];
+  static integer(kind=4) isgn34 [value-expr: ffsign.isgn34];
+  static integer(kind=4) isgnal [value-expr: ffsign.isgnal];
+  static logical(kind=4) lsmug [value-expr: ffsmug.lsmug];
+  static logical(kind=4) lnasty [value-expr: ffsmug.lnasty];
+  static integer(kind=4) idum93[2] [value-expr: ffsmug.idum93];
+  static complex(kind=8) cmipj[9] [value-expr: ffsmug.cmipj];
+  static complex(kind=8) c2sisj[16] [value-expr: ffsmug.c2sisj];
+  static complex(kind=8) ca1 [value-expr: ffsmug.ca1];
+  static real(kind=8) bdn01;
+  static real(kind=8) bdn05;
+  static real(kind=8) bdn10;
+  static real(kind=8) bdn15;
+  real(kind=8) d1;
+  integer(kind=4) ier0;
+  real(kind=8) xa;
+  real(kind=8) xheck;
+  static real(kind=8) xprec = -1.0e+0;
+  real(kind=8) __result_dfflo3;
+
+  if (xprec != precx)
+    {
+      xprec = precx;
+      {
+        static integer(kind=4) C.4816 = 1;
+        static integer(kind=4) C.4815 = 1;
+
+        bdn01 = ffbnd (&C.4815, &C.4816, &xninv[2]);
+      }
+      {
+        static integer(kind=4) C.4819 = 5;
+        static integer(kind=4) C.4818 = 1;
+
+        bdn05 = ffbnd (&C.4818, &C.4819, &xninv[2]);
+      }
+      {
+        static integer(kind=4) C.4821 = 10;
+        static integer(kind=4) C.4820 = 1;
+
+        bdn10 = ffbnd (&C.4820, &C.4821, &xninv[2]);
+      }
+      {
+        static integer(kind=4) C.4823 = 15;
+        static integer(kind=4) C.4822 = 1;
+
+        bdn15 = ffbnd (&C.4822, &C.4823, &xninv[2]);
+      }
+    }
+  L.65:;
+  xa = ABS_EXPR <*x>;
+  if (xa > bdn15)
+    {
+      {
+        real(kind=8) D.4826;
+        real(kind=8) D.4825;
+
+        D.4825 = *x;
+        D.4826 = D.4825 * D.4825;
+        __result_dfflo3 = dfflo2 ((real(kind=8) *) x, (integer(kind=4) *) ier) + D.4826 * 5.0e-1;
+      }
+      {
+        real(kind=8) D.4830;
+        real(kind=8) D.4829;
+
+        D.4829 = *x;
+        D.4830 = D.4829 * D.4829;
+        if (lwarn && ABS_EXPR <__result_dfflo3> < (xloss * D.4830) * 5.0e-1)
+          {
+            {
+              real(kind=8) D.4834;
+              real(kind=8) D.4833;
+              real(kind=8) D.4832;
+              static integer(kind=4) C.4831 = 232;
+
+              D.4832 = *x;
+              D.4833 = D.4832 * D.4832;
+              D.4834 = D.4833 * 5.0e-1;
+              ffwarn (&C.4831, (integer(kind=4) *) ier, &__result_dfflo3, &D.4834);
+            }
+            if (lwrite)
+              {
+                {
+                  struct __st_parameter_dt dt_parm.3;
+
+                  dt_parm.3.common.filename = &"../src/F/core/ffxli2.f"[1]{lb: 1 sz: 1};
+                  dt_parm.3.common.line = 502;
+                  dt_parm.3.common.flags = 128;
+                  dt_parm.3.common.unit = 6;
+                  _gfortran_st_write (&dt_parm.3);
+                  _gfortran_transfer_character_write (&dt_parm.3, &"dfflo3: not enough terms, x = "[1]{lb: 1 sz: 1}, 30);
+                  _gfortran_transfer_real_write (&dt_parm.3, (real(kind=8) *) x, 8);
+                  _gfortran_st_write_done (&dt_parm.3);
+                }
+              }
+            L.68:;
+          }
+      }
+      L.67:;
+      return __result_dfflo3;
+    }
+  L.66:;
+  if (xa > bdn10)
+    {
+      __result_dfflo3 = *x * ((xninv[12] + *x * ((xninv[13] + *x * ((xninv[14] + *x * ((xninv[15] + *x * ((xninv[16]))))))))));
+    }
+  else
+    {
+      __result_dfflo3 = 0.0;
+    }
+  L.69:;
+  if (xa > bdn05)
+    {
+      __result_dfflo3 = *x * ((xninv[7] + *x * ((xninv[8] + *x * ((xninv[9] + *x * ((xninv[10] + *x * ((xninv[11] + __result_dfflo3))))))))));
+    }
+  L.70:;
+  if (xa > bdn01)
+    {
+      __result_dfflo3 = *x * ((xninv[3] + *x * ((xninv[4] + *x * ((xninv[5] + *x * ((xninv[6] + __result_dfflo3))))))));
+    }
+  L.71:;
+  {
+    real(kind=8) D.4841;
+
+    D.4841 = *x;
+    __result_dfflo3 = -(__builtin_powi (D.4841, 3) * ((xninv[2] + __result_dfflo3)));
+  }
+  if (ltest)
+    {
+      ier0 = *ier;
+      {
+        real(kind=8) D.4844;
+        real(kind=8) D.4843;
+
+        D.4843 = *x;
+        D.4844 = D.4843 * D.4843;
+        d1 = dfflo2 ((real(kind=8) *) x, &ier0) + D.4844 * 5.0e-1;
+      }
+      xheck = d1 - __result_dfflo3;
+      if (ABS_EXPR <xheck> * xloss > precx)
+        {
+          {
+            struct __st_parameter_dt dt_parm.4;
+
+            dt_parm.4.common.filename = &"../src/F/core/ffxli2.f"[1]{lb: 1 sz: 1};
+            dt_parm.4.common.line = 528;
+            dt_parm.4.common.flags = 128;
+            dt_parm.4.common.unit = 6;
+            _gfortran_st_write (&dt_parm.4);
+            _gfortran_transfer_character_write (&dt_parm.4, &"dfflo3: error:"[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_character_write (&dt_parm.4, &" answer is not OK"[1]{lb: 1 sz: 1}, 17);
+            _gfortran_transfer_real_write (&dt_parm.4, &d1, 8);
+            _gfortran_transfer_real_write (&dt_parm.4, &__result_dfflo3, 8);
+            _gfortran_transfer_real_write (&dt_parm.4, &xheck, 8);
+            _gfortran_st_write_done (&dt_parm.4);
+          }
+        }
+      L.73:;
+    }
+  L.72:;
+  return __result_dfflo3;
+}
+
+
+ffxl22 (real(kind=8) & restrict xl22, real(kind=8) & restrict x, integer(kind=4) & restrict ier)
+{
+  static real(kind=8) fodel2 [value-expr: ffcdel.fodel2];
+  static real(kind=8) fodel3 [value-expr: ffcdel.fodel3];
+  static complex(kind=8) cfdl4s [value-expr: ffcdel.cfdl4s];
+  static real(kind=8) fodel4 [value-expr: ffcdel.fodel4];
+  static real(kind=8) fodl3i[5] [value-expr: ffcdel.fodl3i];
+  static real(kind=8) fod3ij[36] [value-expr: ffcdel.fod3ij];
+  static real(kind=8) fodl4i[6] [value-expr: ffcdel.fodl4i];
+  static complex(kind=8) cfpij2[9] [value-expr: ffcdot.cfpij2];
+  static complex(kind=8) cfpij3[36] [value-expr: ffcdot.cfpij3];
+  static complex(kind=8) cfpij4[100] [value-expr: ffcdot.cfpij4];
+  static complex(kind=8) cfpij5[225] [value-expr: ffcdot.cfpij5];
+  static complex(kind=8) cfpij6[441] [value-expr: ffcdot.cfpij6];
+  static real(kind=8) bf[20] [value-expr: ffcnst.bf];
+  static real(kind=8) xninv[30] [value-expr: ffcnst.xninv];
+  static real(kind=8) xn2inv[30] [value-expr: ffcnst.xn2inv];
+  static real(kind=8) xinfac[30] [value-expr: ffcnst.xinfac];
+  static integer(kind=4) inx[16] [value-expr: ffcnst.inx];
+  static integer(kind=4) isgn[16] [value-expr: ffcnst.isgn];
+  static integer(kind=4) iold[156] [value-expr: ffcnst.iold];
+  static integer(kind=4) isgrot[120] [value-expr: ffcnst.isgrot];
+  static integer(kind=4) inx5[25] [value-expr: ffcnst.inx5];
+  static integer(kind=4) isgn5[25] [value-expr: ffcnst.isgn5];
+  static real(kind=8) fdel2 [value-expr: ffdel.fdel2];
+  static real(kind=8) fdel3 [value-expr: ffdel.fdel3];
+  static real(kind=8) fdel4s [value-expr: ffdel.fdel4s];
+  static real(kind=8) fdel4 [value-expr: ffdel.fdel4];
+  static real(kind=8) fdl3i[5] [value-expr: ffdel.fdl3i];
+  static real(kind=8) fdl4si[5] [value-expr: ffdel.fdl4si];
+  static real(kind=8) fdl3ij[36] [value-expr: ffdel.fdl3ij];
+  static real(kind=8) fdl4i[6] [value-expr: ffdel.fdl4i];
+  static real(kind=8) fpij2[9] [value-expr: ffdot.fpij2];
+  static real(kind=8) fpij3[36] [value-expr: ffdot.fpij3];
+  static real(kind=8) fpij4[100] [value-expr: ffdot.fpij4];
+  static real(kind=8) fpij5[225] [value-expr: ffdot.fpij5];
+  static real(kind=8) fpij6[441] [value-expr: ffdot.fpij6];
+  static logical(kind=4) lwrite [value-expr: ffflag.lwrite];
+  static logical(kind=4) ltest [value-expr: ffflag.ltest];
+  static logical(kind=4) l4also [value-expr: ffflag.l4also];
+  static logical(kind=4) ldc3c4 [value-expr: ffflag.ldc3c4];
+  static logical(kind=4) lmem [value-expr: ffflag.lmem];
+  static logical(kind=4) lwarn [value-expr: ffflag.lwarn];
+  static logical(kind=4) ldot [value-expr: ffflag.ldot];
+  static integer(kind=4) nevent [value-expr: ffflag.nevent];
+  static integer(kind=4) ner [value-expr: ffflag.ner];
+  static integer(kind=4) id [value-expr: ffflag.id];
+  static integer(kind=4) idsub [value-expr: ffflag.idsub];
+  static integer(kind=4) nwidth [value-expr: ffflag.nwidth];
+  static integer(kind=4) nschem [value-expr: ffflag.nschem];
+  static logical(kind=4) onshel [value-expr: ffflag.onshel];
+  static integer(kind=4) idot [value-expr: ffflag.idot];
+  static integer(kind=4) fidel3 [value-expr: ffidel.fidel3];
+  static integer(kind=4) fidel4 [value-expr: ffidel.fidel4];
+  static integer(kind=4) fidl3i[5] [value-expr: ffidel.fidl3i];
+  static integer(kind=4) fid3ij[36] [value-expr: ffidel.fid3ij];
+  static integer(kind=4) fidl4i[6] [value-expr: ffidel.fidl4i];
+  static real(kind=8) xloss [value-expr: ffprec.xloss];
+  static real(kind=8) precx [value-expr: ffprec.precx];
+  static real(kind=8) precc [value-expr: ffprec.precc];
+  static real(kind=8) xalogm [value-expr: ffprec.xalogm];
+  static real(kind=8) xclogm [value-expr: ffprec.xclogm];
+  static real(kind=8) xalog2 [value-expr: ffprec.xalog2];
+  static real(kind=8) xclog2 [value-expr: ffprec.xclog2];
+  static real(kind=8) reqprc [value-expr: ffprec.reqprc];
+  static integer(kind=4) irota3 [value-expr: ffrota.irota3];
+  static integer(kind=4) irota4 [value-expr: ffrota.irota4];
+  static integer(kind=4) irota5 [value-expr: ffrota.irota5];
+  static integer(kind=4) irota6 [value-expr: ffrota.irota6];
+  static integer(kind=4) isgn34 [value-expr: ffsign.isgn34];
+  static integer(kind=4) isgnal [value-expr: ffsign.isgnal];
+  static logical(kind=4) lsmug [value-expr: ffsmug.lsmug];
+  static logical(kind=4) lnasty [value-expr: ffsmug.lnasty];
+  static integer(kind=4) idum93[2] [value-expr: ffsmug.idum93];
+  static complex(kind=8) cmipj[9] [value-expr: ffsmug.cmipj];
+  static complex(kind=8) c2sisj[16] [value-expr: ffsmug.c2sisj];
+  static complex(kind=8) ca1 [value-expr: ffsmug.ca1];
+  static real(kind=8) bdn01;
+  static real(kind=8) bdn05;
+  static real(kind=8) bdn10;
+  static real(kind=8) bdn15;
+  static real(kind=8) bdn20;
+  static real(kind=8) bdn25;
+  static real(kind=8) dilog2[29];
+  integer(kind=4) ier0;
+  static integer(kind=4) init = 0;
+  integer(kind=4) ipi12p;
+  real(kind=8) xa;
+  real(kind=8) xheck;
+  static real(kind=8) xprec = -1.0e+0;
+  complex(kind=8) zdum;
+  complex(kind=8) zli2;
+
+  if (init == 0)
+    {
+      init = 1;
+      dilog2[0] = 0.0;
+      dilog2[1] = 2.5e-1;
+      dilog2[2] = 1.666666666666666574148081281236954964697360992431640625e-1;
+      dilog2[3] = 1.0416666666666667129259593593815225176513195037841796875e-1;
+      dilog2[4] = 6.666666666666666574148081281236954964697360992431640625e-2;
+      dilog2[5] = 4.4444444444444446140618509843989158980548381805419921875e-2;
+      dilog2[6] = 3.095238095238095343830764250014908611774444580078125e-2;
+      dilog2[7] = 2.24702380952380952050528861718703410588204860687255859375e-2;
+      dilog2[8] = 1.69312169312169323587280445053693256340920925140380859375e-2;
+      dilog2[9] = 1.31746031746031739412261529764691658783704042434692382812e-2;
+      dilog2[10] = 1.05339105339105343350780685796053148806095123291015625e-2;
+      dilog2[11] = 8.6159211159211150643510990221329848282039165496826171875e-3;
+      dilog2[12] = 7.18170718170718213463343815305961470585316419601440429688e-3;
+      dilog2[13] = 6.08161679590251032234693440159389865584671497344970703125e-3;
+      dilog2[14] = 5.21904021904021943323304100204040878452360630035400390625e-3;
+      dilog2[15] = 4.5297584360084360011189374972673249430954456329345703125e-3;
+      dilog2[16] = 3.969886322827499702814435522668645717203617095947265625e-3;
+      dilog2[17] = 3.50865546943978333371827460496206185780465602874755859375e-3;
+      dilog2[18] = 3.12398300014399103730067253081870148889720439910888671875e-3;
+      dilog2[19] = 2.79968139875260606588835976538121030898764729499816894531e-3;
+      dilog2[20] = 2.52365780892981235450367449857367319054901599884033203125e-3;
+      dilog2[21] = 2.28672412742212923311702077455720427678897976875305175781e-3;
+      dilog2[22] = 2.08179296212678910729665382461917033651843667030334472656e-3;
+      dilog2[23] = 1.90332289580169501837236811780940115568228065967559814453e-3;
+      dilog2[24] = 1.74692832331814701732342065554348664591088891029357910156e-3;
+      dilog2[25] = 1.60910015544141692632462703471674103639088571071624755859e-3;
+      dilog2[26] = 1.48700263894472771084021012200082623166963458061218261719e-3;
+      dilog2[27] = 1.3783233622954409181016188767898711375892162322998046875e-3;
+      dilog2[28] = 1.28116103204410441106231299812634460977278649806976318359e-3;
+    }
+  L.74:;
+  if (xprec != precx)
+    {
+      xprec = precx;
+      {
+        static integer(kind=4) C.5071 = 1;
+        static integer(kind=4) C.5070 = 2;
+
+        bdn01 = ffbnd (&C.5070, &C.5071, &dilog2);
+      }
+      {
+        static integer(kind=4) C.5074 = 5;
+        static integer(kind=4) C.5073 = 2;
+
+        bdn05 = ffbnd (&C.5073, &C.5074, &dilog2);
+      }
+      {
+        static integer(kind=4) C.5076 = 10;
+        static integer(kind=4) C.5075 = 2;
+
+        bdn10 = ffbnd (&C.5075, &C.5076, &dilog2);
+      }
+      {
+        static integer(kind=4) C.5078 = 15;
+        static integer(kind=4) C.5077 = 2;
+
+        bdn15 = ffbnd (&C.5077, &C.5078, &dilog2);
+      }
+      {
+        static integer(kind=4) C.5080 = 20;
+        static integer(kind=4) C.5079 = 2;
+
+        bdn20 = ffbnd (&C.5079, &C.5080, &dilog2);
+      }
+      {
+        static integer(kind=4) C.5082 = 25;
+        static integer(kind=4) C.5081 = 2;
+
+        bdn25 = ffbnd (&C.5081, &C.5082, &dilog2);
+      }
+    }
+  L.75:;
+  xa = ABS_EXPR <*x>;
+  if (xa > bdn25)
+    {
+      {
+        real(kind=8) D.5086;
+        real(kind=8) D.5085;
+        static integer(kind=4) C.5084 = 230;
+
+        D.5085 = xa;
+        D.5086 = dilog2[26] * __builtin_powi (D.5085, 25);
+        ffwarn (&C.5084, (integer(kind=4) *) ier, &precx, &D.5086);
+      }
+    }
+  L.76:;
+  if (xa > bdn20)
+    {
+      *xl22 = *x * ((dilog2[21] + *x * ((dilog2[22] + *x * ((dilog2[23] + *x * ((dilog2[24] + *x * ((dilog2[25]))))))))));
+    }
+  else
+    {
+      *xl22 = 0.0;
+    }
+  L.77:;
+  if (xa > bdn15)
+    {
+      *xl22 = *x * ((dilog2[16] + *x * ((dilog2[17] + *x * ((dilog2[18] + *x * ((dilog2[19] + *x * ((dilog2[20]))))))))));
+    }
+  L.78:;
+  if (xa > bdn10)
+    {
+      *xl22 = *x * ((dilog2[11] + *x * ((dilog2[12] + *x * ((dilog2[13] + *x * ((dilog2[14] + *x * ((dilog2[15]))))))))));
+    }
+  L.79:;
+  if (xa > bdn05)
+    {
+      *xl22 = *x * ((dilog2[6] + *x * ((dilog2[7] + *x * ((dilog2[8] + *x * ((dilog2[9] + *x * ((dilog2[10] + *xl22))))))))));
+    }
+  L.80:;
+  if (xa > bdn01)
+    {
+      *xl22 = *x * ((dilog2[2] + *x * ((dilog2[3] + *x * ((dilog2[4] + *x * ((dilog2[5] + *xl22))))))));
+    }
+  L.81:;
+  {
+    real(kind=8) D.5094;
+    real(kind=8) D.5093;
+
+    D.5093 = *x;
+    D.5094 = D.5093 * D.5093;
+    *xl22 = -(((dilog2[1] + *xl22)) * D.5094);
+  }
+  if (ltest)
+    {
+      ier0 = 0;
+      ipi12p = 0;
+      {
+        static integer(kind=4) C.5097 = 1;
+        real(kind=8) D.5096;
+
+        D.5096 = 2.0e+0 - *x;
+        ffzxdl (&zli2, &ipi12p, &zdum, &D.5096, &C.5097, &ier0);
+      }
+      xheck = (REALPART_EXPR <zli2> - *xl22) + (real(kind=8)) (ipi12p + -3) * 8.2246703342411320303284583133063279092311859130859375e-1;
+      if (ABS_EXPR <xheck> * xloss > precc * 2.5e+0)
+        {
+          {
+            struct __st_parameter_dt dt_parm.5;
+
+            dt_parm.5.common.filename = &"../src/F/core/ffxli2.f"[1]{lb: 1 sz: 1};
+            dt_parm.5.common.line = 635;
+            dt_parm.5.common.flags = 128;
+            dt_parm.5.common.unit = 6;
+            _gfortran_st_write (&dt_parm.5);
+            _gfortran_transfer_character_write (&dt_parm.5, &"xl22: error: answer is not OK"[1]{lb: 1 sz: 1}, 29);
+            {
+              real(kind=8) D.5100;
+
+              D.5100 = REALPART_EXPR <zli2> + (real(kind=8)) ipi12p * 8.2246703342411320303284583133063279092311859130859375e-1;
+              _gfortran_transfer_real_write (&dt_parm.5, &D.5100, 8);
+            }
+            {
+              real(kind=8) D.5101;
+
+              D.5101 = *xl22 + 2.46740110027233949807623503147624433040618896484375e+0;
+              _gfortran_transfer_real_write (&dt_parm.5, &D.5101, 8);
+            }
+            _gfortran_transfer_real_write (&dt_parm.5, &xheck, 8);
+            _gfortran_st_write_done (&dt_parm.5);
+          }
+        }
+      L.83:;
+    }
+  L.82:;
+}
+
+

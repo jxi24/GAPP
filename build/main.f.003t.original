@@ -1,0 +1,683 @@
+values ()
+{
+  static real(kind=8) q[10] [value-expr: coupls.q];
+  static real(kind=8) i3[10] [value-expr: coupls.i3];
+  static real(kind=8) nc[10] [value-expr: coupls.nc];
+  static real(kind=8) v[10] [value-expr: coupls.v];
+  static real(kind=8) a[10] [value-expr: coupls.a];
+  static real(kind=8) alphat [value-expr: coupls.alphat];
+  static real(kind=8) sinhat [value-expr: coupls.sinhat];
+  static real(kind=8) coshat [value-expr: coupls.coshat];
+  static real(kind=8) rhonc [value-expr: coupls.rhonc];
+  static real(kind=8) i3r[10] [value-expr: coupls.i3r];
+  static real(kind=8) u1xr[10] [value-expr: coupls.u1xr];
+  static real(kind=8) u1xl[10] [value-expr: coupls.u1xl];
+  static real(kind=8) fitx [value-expr: fit221.fitx];
+  static real(kind=8) fitsph [value-expr: fit221.fitsph];
+  static real(kind=8) fitcph [value-expr: fit221.fitcph];
+  static real(kind=8) fittph [value-expr: fit221.fittph];
+  static real(kind=8) fits2b [value-expr: fit221.fits2b];
+  static real(kind=8) kkss [value-expr: fit221.kkss];
+  static real(kind=8) kkcc [value-expr: fit221.kkcc];
+  static real(kind=8) kkem [value-expr: fit221.kkem];
+  static real(kind=8) bestlnx [value-expr: fitbst.bestlnx];
+  static real(kind=8) besttph [value-expr: fitbst.besttph];
+  static real(kind=8) bests2b [value-expr: fitbst.bests2b];
+  static logical(kind=4) flgfitx [value-expr: fitflg.flgfitx];
+  static logical(kind=4) flgtph [value-expr: fitflg.flgtph];
+  static logical(kind=4) flgs2b [value-expr: fitflg.flgs2b];
+  static logical(kind=4) flfout [value-expr: fitflg.flfout];
+  static integer(kind=4) modtype [value-expr: fitswtr.modtype];
+  static integer(kind=4) plltr [value-expr: fitswtr.plltr];
+  static integer(kind=4) prtpll[81] [value-expr: fitswtr.prtpll];
+  static logical(kind=4) flagmr [value-expr: flags.flagmr];
+  static integer(kind=4) flgblm [value-expr: flags.flgblm];
+  static logical(kind=4) ffermi [value-expr: flags.ffermi];
+  static logical(kind=4) fa2mt4 [value-expr: flags.fa2mt4];
+  static logical(kind=4) fa2mt2 [value-expr: flags.fa2mt2];
+  static logical(kind=4) fa2mt0 [value-expr: flags.fa2mt0];
+  static logical(kind=4) fla2im [value-expr: flags.fla2im];
+  static logical(kind=4) fasmt2 [value-expr: flags.fasmt2];
+  static logical(kind=4) fasmt0 [value-expr: flags.fasmt0];
+  static logical(kind=4) fas2mt [value-expr: flags.fas2mt];
+  static logical(kind=4) flagmf [value-expr: flags.flagmf];
+  static logical(kind=4) fpolew [value-expr: flags.fpolew];
+  static logical(kind=4) flgech [value-expr: flags.flgech];
+  static logical(kind=4) fobliq [value-expr: flags.fobliq];
+  static logical(kind=4) f4lqcd [value-expr: flags.f4lqcd];
+  static logical(kind=4) falas2 [value-expr: flags.falas2];
+  static logical(kind=4) fbayes [value-expr: flags.fbayes];
+  static integer(kind=4) flagzp [value-expr: flags.flagzp];
+  static logical(kind=4) flagmh [value-expr: flags.flagmh];
+  static logical(kind=4) flagmt [value-expr: flags.flagmt];
+  static logical(kind=4) flagmc [value-expr: flags.flagmc];
+  static logical(kind=4) flgrho [value-expr: flags.flgrho];
+  static logical(kind=4) fkappa [value-expr: flags.fkappa];
+  static logical(kind=4) flags [value-expr: flags.flags];
+  static logical(kind=4) flagt [value-expr: flags.flagt];
+  static logical(kind=4) fzprim [value-expr: flags.fzprim];
+  static logical(kind=4) fsinth [value-expr: flags.fsinth];
+  static logical(kind=4) fwrite [value-expr: flags.fwrite];
+  static logical(kind=4) flprob [value-expr: flags.flprob];
+  static logical(kind=4) fhiggs [value-expr: flags.fhiggs];
+  static logical(kind=4) flagal [value-expr: flags.flagal];
+  static logical(kind=4) fsplot [value-expr: flags.fsplot];
+  static real(kind=8) alpha [value-expr: inputs.alpha];
+  static real(kind=8) gf [value-expr: inputs.gf];
+  static real(kind=8) alfas0 [value-expr: inputs.alfas0];
+  static real(kind=8) asgrid[2001] [value-expr: inputs.asgrid];
+  static real(kind=8) mu0 [value-expr: inputs.mu0];
+  static real(kind=8) dahad3 [value-expr: inputs.dahad3];
+  static real(kind=8) pol4hf [value-expr: inputs.pol4hf];
+  static real(kind=8) an[8004] [value-expr: inputs.an];
+  static real(kind=8) bn[8004] [value-expr: inputs.bn];
+  static real(kind=8) pi1 [value-expr: inputs.pi1];
+  static real(kind=8) pi2 [value-expr: inputs.pi2];
+  static real(kind=8) zeta2 [value-expr: inputs.zeta2];
+  static real(kind=8) zeta3 [value-expr: inputs.zeta3];
+  static real(kind=8) zeta4 [value-expr: inputs.zeta4];
+  static real(kind=8) zeta5 [value-expr: inputs.zeta5];
+  static real(kind=8) zeta6 [value-expr: inputs.zeta6];
+  static real(kind=8) zeta7 [value-expr: inputs.zeta7];
+  static real(kind=8) prob [value-expr: limits.prob];
+  static real(kind=8) mtp [value-expr: limits.mtp];
+  static real(kind=8) sigma [value-expr: limits.sigma];
+  static integer(kind=4) zprime [value-expr: limits.zprime];
+  static real(kind=8) mw2 [value-expr: mass2.mw2];
+  static real(kind=8) mz2 [value-expr: mass2.mz2];
+  static real(kind=8) mt2 [value-expr: mass2.mt2];
+  static real(kind=8) mh2 [value-expr: mass2.mh2];
+  static real(kind=8) mz [value-expr: masses.mz];
+  static real(kind=8) mh [value-expr: masses.mh];
+  static real(kind=8) mt [value-expr: masses.mt];
+  static real(kind=8) mb [value-expr: masses.mb];
+  static real(kind=8) mc [value-expr: masses.mc];
+  static real(kind=8) ms [value-expr: masses.ms];
+  static real(kind=8) md [value-expr: masses.md];
+  static real(kind=8) mu [value-expr: masses.mu];
+  static real(kind=8) mtau [value-expr: masses.mtau];
+  static real(kind=8) mmu [value-expr: masses.mmu];
+  static real(kind=8) me [value-expr: masses.me];
+  static real(kind=8) mw [value-expr: masses.mw];
+  static real(kind=8) swpar [value-expr: obliqe.swpar];
+  static real(kind=8) spar [value-expr: obliqe.spar];
+  static real(kind=8) tpar [value-expr: obliqe.tpar];
+  static real(kind=8) upar [value-expr: obliqe.upar];
+  static real(kind=8) brho [value-expr: obliqe.brho];
+  static real(kind=8) bkappa [value-expr: obliqe.bkappa];
+  static real(kind=8) rpar [value-expr: obliqe.rpar];
+  static real(kind=8) zpar [value-expr: obliqe.zpar];
+  static real(kind=8) delrwh [value-expr: obliqe.delrwh];
+  static real(kind=8) delrzh [value-expr: obliqe.delrzh];
+  static real(kind=8) delr [value-expr: obliqe.delr];
+  static real(kind=8) rhohat [value-expr: obliqe.rhohat];
+  static real(kind=8) rho2 [value-expr: obliqe.rho2];
+  static real(kind=8) ratzw2 [value-expr: ratios.ratzw2];
+  static real(kind=8) rathw2 [value-expr: ratios.rathw2];
+  static real(kind=8) rathz2 [value-expr: ratios.rathz2];
+  static real(kind=8) rattw2 [value-expr: ratios.rattw2];
+  static real(kind=8) rattz2 [value-expr: ratios.rattz2];
+  static real(kind=8) ratth2 [value-expr: ratios.ratth2];
+  static real(kind=8) mzp [value-expr: zprime.mzp];
+  static real(kind=8) mzp2 [value-expr: zprime.mzp2];
+  static real(kind=8) mz02 [value-expr: zprime.mz02];
+  static real(kind=8) sinth [value-expr: zprime.sinth];
+  static real(kind=8) sinth2 [value-expr: zprime.sinth2];
+  static real(kind=8) costh [value-expr: zprime.costh];
+  static real(kind=8) costh2 [value-expr: zprime.costh2];
+  static real(kind=8) ratg21 [value-expr: zprime.ratg21];
+  static real(kind=8) rhoeff [value-expr: zprime.rhoeff];
+  static real(kind=8) rhoezp [value-expr: zprime.rhoezp];
+  static real(kind=8) rhozzp [value-expr: zprime.rhozzp];
+  static real(kind=8) v2[10] [value-expr: zprime.v2];
+  static real(kind=8) a2[10] [value-expr: zprime.a2];
+  static real(kind=8) eps2_l[10] [value-expr: zprime.eps2_l];
+  static real(kind=8) eps2_r[10] [value-expr: zprime.eps2_r];
+  static real(kind=8) ratgrl [value-expr: zprime.ratgrl];
+  real(kind=8) afb[11];
+  real(kind=8) alfajpsi;
+  real(kind=8) alfamb;
+  real(kind=8) alfamc;
+  real(kind=8) alfame;
+  real(kind=8) alfams;
+  real(kind=8) alfamt;
+  real(kind=8) alfamw;
+  real(kind=8) alfaud;
+  real(kind=8) alfaups;
+  real(kind=8) alfax;
+  real(kind=8) alfmmu;
+  real(kind=8) almtau;
+  real(kind=8) alr[11];
+  real(kind=8) amcbar;
+  real(kind=8) amu;
+  real(kind=8) c1d;
+  real(kind=8) c1u;
+  real(kind=8) c2d;
+  real(kind=8) c2u;
+  real(kind=8) ccfr;
+  real(kind=8) cdhs1;
+  real(kind=8) cdhs2;
+  real(kind=8) cdhs3;
+  real(kind=8) dgamma;
+  real(kind=8) emat[144];
+  real(kind=8) eparab[20];
+  real(kind=8) epsd_l;
+  real(kind=8) epsd_r;
+  real(kind=8) epsu_l;
+  real(kind=8) epsu_r;
+  real(kind=8) gammaw[7];
+  real(kind=8) gammaz[12];
+  real(kind=8) ganue;
+  real(kind=8) gvnue;
+  integer(kind=4) i;
+  integer(kind=4) j;
+  integer(kind=4) k;
+  complex(kind=8) kappa[10];
+  integer(kind=4) l;
+  real(kind=8) mbpole;
+  real(kind=8) mcpole;
+  real(kind=8) mtpole;
+  real(kind=8) nutev;
+  real(kind=8) pterr2;
+  real(kind=8) qwcs;
+  real(kind=8) qwe158;
+  real(kind=8) qwh;
+  real(kind=8) qwjlab;
+  real(kind=8) qwtl;
+  real(kind=8) r[10];
+  real(kind=8) rho[144];
+  complex(kind=8) rhobar[10];
+  real(kind=8) sgcenu;
+  real(kind=8) sigmah;
+  real(kind=8) sin2te[10];
+  real(kind=8) taulif;
+  real(kind=8) z[1120];
+
+  l = 0;
+  if (l <= 12)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3846;
+
+            if (l == 1)
+              {
+                mz = eparab[0] + mz;
+              }
+            L.3:;
+            if (l == 2)
+              {
+                mt = eparab[1] + mt;
+              }
+            L.4:;
+            if (l == 3)
+              {
+                mb = eparab[2] + mb;
+              }
+            L.5:;
+            if (l == 4)
+              {
+                mc = eparab[3] + mc;
+              }
+            L.6:;
+            if (l == 5)
+              {
+                alfas0 = eparab[4] + alfas0;
+              }
+            L.7:;
+            if (l == 6)
+              {
+                dahad3 = eparab[5] + dahad3;
+              }
+            L.8:;
+            if (l == 7)
+              {
+                mh = __builtin_exp (eparab[6]) * mh;
+              }
+            L.9:;
+            if (l == 8)
+              {
+                tpar = eparab[7] + tpar;
+              }
+            L.10:;
+            if (l == 9)
+              {
+                spar = eparab[8] + spar;
+              }
+            L.11:;
+            if (l == 10)
+              {
+                upar = eparab[9] + upar;
+              }
+            L.12:;
+            if (l == 11)
+              {
+                brho = eparab[10] + brho;
+              }
+            L.13:;
+            if (l == 12)
+              {
+                bkappa = eparab[11] + bkappa;
+                i = 1;
+                if (i <= 12)
+                  {
+                    while (1)
+                      {
+                        {
+                          logical(kind=4) D.3768;
+
+                          j = 1;
+                          if (j <= 12)
+                            {
+                              while (1)
+                                {
+                                  {
+                                    logical(kind=4) D.3766;
+
+                                    rho[((integer(kind=8)) j * 12 + (integer(kind=8)) i) + -13] = 0.0;
+                                    if (eparab[(integer(kind=8)) i + -1] != 0.0 && eparab[(integer(kind=8)) j + -1] != 0.0)
+                                      {
+                                        rho[((integer(kind=8)) j * 12 + (integer(kind=8)) i) + -13] = (emat[((integer(kind=8)) j * 12 + (integer(kind=8)) i) + -13] / eparab[(integer(kind=8)) i + -1]) / eparab[(integer(kind=8)) j + -1];
+                                      }
+                                    L.19:;
+                                    __label_000001:;
+                                    L.17:;
+                                    D.3766 = j == 12;
+                                    j = j + 1;
+                                    if (D.3766) goto L.18;
+                                  }
+                                }
+                            }
+                          L.18:;
+                          __label_000002:;
+                          L.15:;
+                          D.3768 = i == 12;
+                          i = i + 1;
+                          if (D.3768) goto L.16;
+                        }
+                      }
+                  }
+                L.16:;
+              }
+            L.14:;
+            {
+              real(kind=8) D.3770;
+              real(kind=8) D.3769;
+
+              D.3769 = mz;
+              D.3770 = D.3769 * D.3769;
+              mz2 = D.3770;
+            }
+            {
+              real(kind=8) D.3772;
+              real(kind=8) D.3771;
+
+              D.3771 = mt;
+              D.3772 = D.3771 * D.3771;
+              mt2 = D.3772;
+            }
+            {
+              real(kind=8) D.3774;
+              real(kind=8) D.3773;
+
+              D.3773 = mh;
+              D.3774 = D.3773 * D.3773;
+              mh2 = D.3774;
+            }
+            rathz2 = mh2 / mz2;
+            rattz2 = mt2 / mz2;
+            ratth2 = mt2 / mh2;
+            sin2thetaw ();
+            {
+              static integer(kind=4) C.3777 = 9;
+              static integer(kind=4) C.3776 = 0;
+
+              z0pole (&gammaz, &sigmah, &r, &sin2te, &alr, &afb, &C.3776, &C.3777);
+            }
+            wwprod (&gammaw);
+            rho0 ();
+            sin2theta0 ();
+            {
+              static integer(kind=4) C.3783 = 1;
+              static integer(kind=4) C.3782 = 1;
+
+              apv (&qwh, &C.3782, &C.3783, &c1u, &c1d, &c2u, &c2d);
+            }
+            {
+              static integer(kind=4) C.3786 = 133;
+              static integer(kind=4) C.3785 = 55;
+
+              apv (&qwcs, &C.3785, &C.3786, &c1u, &c1d, &c2u, &c2d);
+            }
+            {
+              static integer(kind=4) C.3788 = 205;
+              static integer(kind=4) C.3787 = 81;
+
+              apv (&qwtl, &C.3787, &C.3788, &c1u, &c1d, &c2u, &c2d);
+            }
+            bsgamma (&sgcenu);
+            taulifetime (&taulif, &pterr2);
+            anomagmntmu (&amu);
+            nuhnutev (&nutev, &epsu_l, &epsd_l, &epsu_r, &epsd_r);
+            nuhccfr (&ccfr);
+            nuhcdhs (&cdhs1, &cdhs2, &cdhs3);
+            {
+              static real(kind=8) C.3795 = 0.0;
+
+              nue (&C.3795, &gvnue, &ganue);
+            }
+            {
+              static real(kind=8) C.3798 = 5.989999999999999769073610877967439591884613037109375e-1;
+              static real(kind=8) C.3797 = 2.59999999999999988065102485279567190445959568023681640625e-2;
+
+              moller (&qwe158, &C.3797, &C.3798);
+            }
+            {
+              static real(kind=8) C.3801 = 5.709999999999999520383653361932374536991119384765625e-1;
+              static real(kind=8) C.3800 = 5.59999999999999994310106998796072730328887701034545898438e-3;
+
+              moller (&qwjlab, &C.3800, &C.3801);
+            }
+            {
+              static integer(kind=4) C.3803 = 9;
+              static integer(kind=4) C.3802 = 0;
+
+              rhof (&rhobar, &C.3802, &C.3803);
+            }
+            {
+              static integer(kind=4) C.3806 = 9;
+              static integer(kind=4) C.3805 = 0;
+
+              kappaf (&kappa, &C.3805, &C.3806);
+            }
+            {
+              static integer(kind=4) C.3808 = 6;
+
+              polemasses (&C.3808, &mtpole);
+            }
+            {
+              static integer(kind=4) C.3810 = 5;
+
+              polemasses (&C.3810, &mbpole);
+            }
+            {
+              static integer(kind=4) C.3811 = 4;
+
+              polemasses (&C.3811, &mcpole);
+            }
+            alfahat (&me, &dgamma, &alfame);
+            alfahat (&mmu, &dgamma, &alfmmu);
+            {
+              static real(kind=8) C.3813 = 1.75999999999999989785948173448559828102588653564453125e-1;
+
+              alfahat (&C.3813, &dgamma, &alfaud);
+            }
+            {
+              static real(kind=8) C.3814 = 3.04999999999999993338661852249060757458209991455078125e-1;
+
+              alfahat (&C.3814, &dgamma, &alfams);
+            }
+            {
+              static real(kind=8) C.3815 = 1.1759999999999999342747969421907328069210052490234375e+0;
+
+              alfahat (&C.3815, &dgamma, &amcbar);
+            }
+            alfahat (&mc, &dgamma, &alfamc);
+            {
+              static real(kind=8) C.3816 = 3.09687000000000001165290086646564304828643798828125e+0;
+
+              alfahat (&C.3816, &dgamma, &alfajpsi);
+            }
+            alfahat (&mtau, &dgamma, &almtau);
+            alfahat (&mb, &dgamma, &alfamb);
+            {
+              static real(kind=8) C.3817 = 9.460300000000000153477230924181640148162841796875e+0;
+
+              alfahat (&C.3817, &dgamma, &alfaups);
+            }
+            alfahat (&mw, &dgamma, &alfamw);
+            alfahat (&mt, &dgamma, &alfamt);
+            {
+              static real(kind=8) C.3818 = 1.949359999999999981667997417389415204524993896484375e-1;
+
+              alfahat (&C.3818, &dgamma, &alfax);
+            }
+            L.20:;
+            z[(integer(kind=8)) l] = mtpole;
+            z[(integer(kind=8)) l + 14] = mh;
+            z[(integer(kind=8)) l + 28] = mw;
+            z[(integer(kind=8)) l + 42] = gammaw[6];
+            z[(integer(kind=8)) l + 56] = gammaw[0];
+            z[(integer(kind=8)) l + 70] = gammaw[3];
+            z[(integer(kind=8)) l + 84] = mz;
+            z[(integer(kind=8)) l + 98] = gammaz[11];
+            z[(integer(kind=8)) l + 112] = gammaz[10];
+            z[(integer(kind=8)) l + 126] = gammaz[0];
+            z[(integer(kind=8)) l + 140] = gammaz[1];
+            z[(integer(kind=8)) l + 154] = gammaz[4];
+            z[(integer(kind=8)) l + 168] = gammaz[7];
+            z[(integer(kind=8)) l + 182] = gammaz[9];
+            z[(integer(kind=8)) l + 196] = sigmah;
+            z[(integer(kind=8)) l + 210] = r[1];
+            z[(integer(kind=8)) l + 224] = r[2];
+            z[(integer(kind=8)) l + 238] = r[3];
+            z[(integer(kind=8)) l + 252] = r[9];
+            z[(integer(kind=8)) l + 266] = r[5];
+            z[(integer(kind=8)) l + 280] = r[8] / (((r[4] + r[7]) + r[8]));
+            z[(integer(kind=8)) l + 294] = afb[10];
+            z[(integer(kind=8)) l + 308] = afb[1];
+            z[(integer(kind=8)) l + 322] = afb[9];
+            z[(integer(kind=8)) l + 336] = afb[5];
+            z[(integer(kind=8)) l + 350] = afb[8];
+            z[(integer(kind=8)) l + 364] = alr[1];
+            z[(integer(kind=8)) l + 378] = alr[9];
+            z[(integer(kind=8)) l + 392] = alr[5];
+            z[(integer(kind=8)) l + 406] = alr[8];
+            z[(integer(kind=8)) l + 420] = 1.0e+0 - mw2 / mz2;
+            z[(integer(kind=8)) l + 434] = nutev;
+            z[(integer(kind=8)) l + 448] = ccfr;
+            z[(integer(kind=8)) l + 462] = cdhs1;
+            z[(integer(kind=8)) l + 476] = cdhs2;
+            z[(integer(kind=8)) l + 490] = cdhs3;
+            z[(integer(kind=8)) l + 504] = gvnue;
+            z[(integer(kind=8)) l + 518] = ganue;
+            z[(integer(kind=8)) l + 532] = qwe158;
+            z[(integer(kind=8)) l + 546] = qwh;
+            z[(integer(kind=8)) l + 560] = qwcs;
+            z[(integer(kind=8)) l + 574] = qwtl;
+            z[(integer(kind=8)) l + 588] = __builtin_log (sgcenu);
+            z[(integer(kind=8)) l + 602] = delr;
+            z[(integer(kind=8)) l + 616] = delrwh;
+            z[(integer(kind=8)) l + 630] = epsu_l;
+            z[(integer(kind=8)) l + 644] = epsd_l;
+            z[(integer(kind=8)) l + 658] = epsu_r;
+            z[(integer(kind=8)) l + 672] = epsd_r;
+            {
+              real(kind=8) D.3823;
+              real(kind=8) D.3822;
+              real(kind=8) D.3821;
+              real(kind=8) D.3820;
+
+              D.3820 = epsu_l;
+              D.3821 = D.3820 * D.3820;
+              D.3822 = epsd_l;
+              D.3823 = D.3822 * D.3822;
+              z[(integer(kind=8)) l + 686] = D.3821 + D.3823;
+            }
+            {
+              real(kind=8) D.3827;
+              real(kind=8) D.3826;
+              real(kind=8) D.3825;
+              real(kind=8) D.3824;
+
+              D.3824 = epsu_r;
+              D.3825 = D.3824 * D.3824;
+              D.3826 = epsd_r;
+              D.3827 = D.3826 * D.3826;
+              z[(integer(kind=8)) l + 700] = D.3825 + D.3827;
+            }
+            z[(integer(kind=8)) l + 714] = __builtin_atan (epsu_l / epsd_l) + pi1;
+            z[(integer(kind=8)) l + 728] = __builtin_atan (epsu_r / epsd_r) + pi1 * 2.0e+0;
+            z[(integer(kind=8)) l + 742] = c1u;
+            z[(integer(kind=8)) l + 756] = c1d;
+            z[(integer(kind=8)) l + 770] = c2u - c2d * 5.0e-1;
+            z[(integer(kind=8)) l + 784] = c1u + c1d;
+            z[(integer(kind=8)) l + 798] = c1u - c1d;
+            z[(integer(kind=8)) l + 812] = c2u + c2d;
+            z[(integer(kind=8)) l + 826] = c2u - c2d;
+            z[(integer(kind=8)) l + 840] = 1.0e+0 / alphat;
+            z[(integer(kind=8)) l + 854] = 1.0e+0 / almtau;
+            z[(integer(kind=8)) l + 868] = sinhat;
+            z[(integer(kind=8)) l + 882] = sin2te[1];
+            {
+              static real(kind=8) C.3828 = 0.0;
+
+              z[(integer(kind=8)) l + 896] = shat (&C.3828);
+            }
+            z[(integer(kind=8)) l + 910] = taulif;
+            z[(integer(kind=8)) l + 924] = alphas (&mtau);
+            z[(integer(kind=8)) l + 938] = amu;
+            {
+              static real(kind=8) C.3831 = 1.96e+3;
+
+              z[(integer(kind=8)) l + 952] = shat (&C.3831);
+            }
+            z[(integer(kind=8)) l + 966] = 1.0e+0 / ((1.0e+0 - alphat * tpar));
+            z[(integer(kind=8)) l + 980] = ((alphat * spar) * 2.5e-1) / sinhat;
+            z[(integer(kind=8)) l + 994] = alphat * tpar;
+            z[(integer(kind=8)) l + 1008] = -(((alphat * upar) * 2.5e-1) / sinhat);
+            z[(integer(kind=8)) l + 1022] = __builtin_sqrt (mz02);
+            z[(integer(kind=8)) l + 1036] = sinth;
+            z[(integer(kind=8)) l + 1050] = ratg21;
+            z[(integer(kind=8)) l + 1064] = mzp;
+            z[(integer(kind=8)) l + 1078] = shat (&mw);
+            z[(integer(kind=8)) l + 1092] = mbrun (&mb);
+            z[(integer(kind=8)) l + 1106] = mt;
+            if (l == 1)
+              {
+                mz = mz - eparab[0];
+              }
+            L.21:;
+            if (l == 2)
+              {
+                mt = mt - eparab[1];
+              }
+            L.22:;
+            if (l == 3)
+              {
+                mb = mb - eparab[2];
+              }
+            L.23:;
+            if (l == 4)
+              {
+                mc = mc - eparab[3];
+              }
+            L.24:;
+            if (l == 5)
+              {
+                alfas0 = alfas0 - eparab[4];
+              }
+            L.25:;
+            if (l == 6)
+              {
+                dahad3 = dahad3 - eparab[5];
+              }
+            L.26:;
+            if (l == 7)
+              {
+                mh = mh / __builtin_exp (eparab[6]);
+              }
+            L.27:;
+            if (l == 8)
+              {
+                tpar = tpar - eparab[7];
+              }
+            L.28:;
+            if (l == 9)
+              {
+                spar = spar - eparab[8];
+              }
+            L.29:;
+            if (l == 10)
+              {
+                upar = upar - eparab[9];
+              }
+            L.30:;
+            if (l == 11)
+              {
+                brho = brho - eparab[10];
+              }
+            L.31:;
+            if (l == 12)
+              {
+                bkappa = bkappa - eparab[11];
+              }
+            L.32:;
+            __label_000003:;
+            L.1:;
+            D.3846 = l == 12;
+            l = l + 1;
+            if (D.3846) goto L.2;
+          }
+        }
+    }
+  L.2:;
+  i = 1;
+  if (i <= 80)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.3858;
+
+            z[(integer(kind=8)) i * 14 + -1] = 0.0;
+            j = 1;
+            if (j <= 12)
+              {
+                while (1)
+                  {
+                    {
+                      logical(kind=4) D.3856;
+
+                      k = 1;
+                      if (k <= 12)
+                        {
+                          while (1)
+                            {
+                              {
+                                logical(kind=4) D.3854;
+
+                                z[(integer(kind=8)) i * 14 + -1] = z[(integer(kind=8)) i * 14 + -1] + (((z[((integer(kind=8)) i * 14 + (integer(kind=8)) j) + -14] - z[((integer(kind=8)) i + -1) * 14])) * rho[((integer(kind=8)) k * 12 + (integer(kind=8)) j) + -13]) * ((z[((integer(kind=8)) i * 14 + (integer(kind=8)) k) + -14] - z[((integer(kind=8)) i + -1) * 14]));
+                                __label_000010:;
+                                L.37:;
+                                D.3854 = k == 12;
+                                k = k + 1;
+                                if (D.3854) goto L.38;
+                              }
+                            }
+                        }
+                      L.38:;
+                      __label_000020:;
+                      L.35:;
+                      D.3856 = j == 12;
+                      j = j + 1;
+                      if (D.3856) goto L.36;
+                    }
+                  }
+              }
+            L.36:;
+            z[(integer(kind=8)) i * 14 + -1] = __builtin_sqrt (z[(integer(kind=8)) i * 14 + -1]);
+            __label_000030:;
+            L.33:;
+            D.3858 = i == 80;
+            i = i + 1;
+            if (D.3858) goto L.34;
+          }
+        }
+    }
+  L.34:;
+  _gfortran_stop_string (0B, 0);
+}
+
+

@@ -1,0 +1,806 @@
+coefhq (real(kind=8)[44] * restrict c, real(kind=8)[22] * restrict ag)
+{
+  (*c)[0] = 1.0666666666666666518636930049979127943515777587890625e+0;
+  (*c)[4] = 4.57142857142857128582846826247987337410449981689453125e-1;
+  (*c)[8] = 2.70899470899470917739648712085909210145473480224609375e-1;
+  (*c)[12] = 1.8470418470418470402449884204543195664882659912109375e-1;
+  (*c)[16] = 1.363969363969363968180914525873959064483642578125e-1;
+  (*c)[20] = 1.0608650608650609104000039906168240122497081756591796875e-1;
+  (*c)[24] = 8.558239146474440339762423946012859232723712921142578125e-2;
+  (*c)[28] = 7.09432981878802271236139631582773290574550628662109375e-2;
+  (*c)[32] = 6.0057818571750458402913608324524830095469951629638671875e-2;
+  (*c)[36] = 5.1701948161767784239994938388917944394052028656005859375e-2;
+  (*c)[40] = 4.5121700213906434928645694526494480669498443603515625e-2;
+  (*c)[1] = 2.554732510288066027470676999655552208423614501953125e+0;
+  (*c)[5] = 1.1095590828924162263291464114445261657238006591796875e+0;
+  (*c)[9] = 5.193959855547156667654462580685503780841827392578125e-1;
+  (*c)[13] = 2.031213962078159684931932815743493847548961639404296875e-1;
+  (*c)[17] = 1.06272288425796300470604904830906889401376247406005859375e-2;
+  (*c)[21] = -1.1583993404049890141305212409861269406974315643310546875e-1;
+  (*c)[25] = -2.03296819407743800667276445892639458179473876953125e-1;
+  (*c)[29] = -2.660219415937181697273672398296184837818145751953125e-1;
+  (*c)[33] = -3.12199999999999977529085981586831621825695037841796875e-1;
+  (*c)[37] = -3.46999999999999975131004248396493494510650634765625e-1;
+  (*c)[41] = -3.73499999999999998667732370449812151491641998291015625e-1;
+  (*c)[2] = 5.0988169828764917657082378354971297085285186767578125e-1;
+  (*c)[6] = 1.412271177146594336448970352648757398128509521484375e+0;
+  (*c)[10] = 3.52228136147449077952842344529926776885986328125e-1;
+  (*c)[14] = -4.78937559517469690906210644243401475250720977783203125e-1;
+  (*c)[18] = -9.9430791010125119111506819535861723124980926513671875e-1;
+  (*c)[22] = -1.263128108618300604604200998437590897083282470703125e+0;
+  (*c)[26] = -1.351696647473203061196045382530428469181060791015625e+0;
+  (*c)[30] = -1.30896222005010276490111209568567574024200439453125e+0;
+  (*c)[34] = (*c)[30];
+  (*c)[38] = (*c)[30];
+  (*c)[42] = (*c)[30];
+  (*c)[3] = 6.622770919067215711351082063629291951656341552734375e-1;
+  (*c)[7] = 4.54915147952184961699373388910316862165927886962890625e-1;
+  (*c)[11] = 4.288631945194303352053566413815133273601531982421875e-1;
+  (*c)[15] = 4.2483084131473969335957008297555148601531982421875e-1;
+  (*c)[19] = 4.24150564030705889972949762523057870566844940185546875e-1;
+  (*c)[23] = 4.23378703021512536874837451250641606748104095458984375e-1;
+  (*c)[27] = 4.2191120962401507110683951395913027226924896240234375e-1;
+  (*c)[31] = 4.19771893119382399905958891395130194723606109619140625e-1;
+  (*c)[35] = 4.17999999999999982680520815847557969391345977783203125e-1;
+  (*c)[39] = 4.14999999999999980015985556747182272374629974365234375e-1;
+  (*c)[43] = 4.12999999999999978239628717346931807696819305419921875e-1;
+  (*ag)[0] = -3.047619047619047893959987050038762390613555908203125e-1;
+  (*ag)[2] = -5.079365079365079083117961999960243701934814453125e-1;
+  (*ag)[4] = -7.38816738816738816097995368181727826595306396484375e-1;
+  (*ag)[6] = -9.945609945609945601319168417830951511859893798828125e-1;
+  (*ag)[8] = -1.27303807303807303696885355748236179351806640625e+0;
+  (*ag)[10] = -1.572576443164678483555007915128953754901885986328125e+0;
+  (*ag)[12] = -1.8918212850101394639779073258978314697742462158203125e+0;
+  (*ag)[14] = -2.22964651447623563029765136889182031154632568359375e+0;
+  (*ag)[16] = -2.585097408088389503433290883549489080905914306640625e+0;
+  (*ag)[18] = -2.957351434853117577716830055578611791133880615234375e+0;
+  (*ag)[20] = -3.345690512157062368459037315915338695049285888671875e+0;
+  (*ag)[1] = 2.47677469135802486022157609113492071628570556640625e+0;
+  (*ag)[3] = 1.0535714285714286031492292750044725835323333740234375e+0;
+  (*ag)[5] = -4.83927101704879458754504639728111214935779571533203125e-1;
+  (*ag)[7] = -2.107175757957504114159519303939305245876312255859375e+0;
+  (*ag)[9] = -3.79815497828890702436410720110870897769927978515625e+0;
+  (*ag)[11] = -5.54455480053316396293894285918213427066802978515625e+0;
+  (*ag)[13] = -7.33748821684707142054548967280425131320953369140625e+0;
+  (*ag)[15] = -9.170271798819090491861061309464275836944580078125e+0;
+  (*ag)[17] = -1.1037718485971698356706838239915668964385986328125e+1;
+  (*ag)[19] = -1.2935700445920861767490350757725536823272705078125e+1;
+  (*ag)[21] = -1.4861000000000000653699316899292171001434326171875e+1;
+  return;
+}
+
+
+anomagmntmu (real(kind=8) & restrict amu)
+{
+  static real(kind=8) q[10] [value-expr: coupls.q];
+  static real(kind=8) i3[10] [value-expr: coupls.i3];
+  static real(kind=8) nc[10] [value-expr: coupls.nc];
+  static real(kind=8) v[10] [value-expr: coupls.v];
+  static real(kind=8) a[10] [value-expr: coupls.a];
+  static real(kind=8) alphat [value-expr: coupls.alphat];
+  static real(kind=8) sinhat [value-expr: coupls.sinhat];
+  static real(kind=8) coshat [value-expr: coupls.coshat];
+  static real(kind=8) rhonc [value-expr: coupls.rhonc];
+  static real(kind=8) i3r[10] [value-expr: coupls.i3r];
+  static real(kind=8) u1xr[10] [value-expr: coupls.u1xr];
+  static real(kind=8) u1xl[10] [value-expr: coupls.u1xl];
+  static real(kind=8) fitx [value-expr: fit221.fitx];
+  static real(kind=8) fitsph [value-expr: fit221.fitsph];
+  static real(kind=8) fitcph [value-expr: fit221.fitcph];
+  static real(kind=8) fittph [value-expr: fit221.fittph];
+  static real(kind=8) fits2b [value-expr: fit221.fits2b];
+  static real(kind=8) kkss [value-expr: fit221.kkss];
+  static real(kind=8) kkcc [value-expr: fit221.kkcc];
+  static real(kind=8) kkem [value-expr: fit221.kkem];
+  static real(kind=8) bestlnx [value-expr: fitbst.bestlnx];
+  static real(kind=8) besttph [value-expr: fitbst.besttph];
+  static real(kind=8) bests2b [value-expr: fitbst.bests2b];
+  static logical(kind=4) flgfitx [value-expr: fitflg.flgfitx];
+  static logical(kind=4) flgtph [value-expr: fitflg.flgtph];
+  static logical(kind=4) flgs2b [value-expr: fitflg.flgs2b];
+  static logical(kind=4) flfout [value-expr: fitflg.flfout];
+  static integer(kind=4) modtype [value-expr: fitswtr.modtype];
+  static integer(kind=4) plltr [value-expr: fitswtr.plltr];
+  static integer(kind=4) prtpll[81] [value-expr: fitswtr.prtpll];
+  static logical(kind=4) flagmr [value-expr: flags.flagmr];
+  static integer(kind=4) flgblm [value-expr: flags.flgblm];
+  static logical(kind=4) ffermi [value-expr: flags.ffermi];
+  static logical(kind=4) fa2mt4 [value-expr: flags.fa2mt4];
+  static logical(kind=4) fa2mt2 [value-expr: flags.fa2mt2];
+  static logical(kind=4) fa2mt0 [value-expr: flags.fa2mt0];
+  static logical(kind=4) fla2im [value-expr: flags.fla2im];
+  static logical(kind=4) fasmt2 [value-expr: flags.fasmt2];
+  static logical(kind=4) fasmt0 [value-expr: flags.fasmt0];
+  static logical(kind=4) fas2mt [value-expr: flags.fas2mt];
+  static logical(kind=4) flagmf [value-expr: flags.flagmf];
+  static logical(kind=4) fpolew [value-expr: flags.fpolew];
+  static logical(kind=4) flgech [value-expr: flags.flgech];
+  static logical(kind=4) fobliq [value-expr: flags.fobliq];
+  static logical(kind=4) f4lqcd [value-expr: flags.f4lqcd];
+  static logical(kind=4) falas2 [value-expr: flags.falas2];
+  static logical(kind=4) fbayes [value-expr: flags.fbayes];
+  static integer(kind=4) flagzp [value-expr: flags.flagzp];
+  static logical(kind=4) flagmh [value-expr: flags.flagmh];
+  static logical(kind=4) flagmt [value-expr: flags.flagmt];
+  static logical(kind=4) flagmc [value-expr: flags.flagmc];
+  static logical(kind=4) flgrho [value-expr: flags.flgrho];
+  static logical(kind=4) fkappa [value-expr: flags.fkappa];
+  static logical(kind=4) flags [value-expr: flags.flags];
+  static logical(kind=4) flagt [value-expr: flags.flagt];
+  static logical(kind=4) fzprim [value-expr: flags.fzprim];
+  static logical(kind=4) fsinth [value-expr: flags.fsinth];
+  static logical(kind=4) fwrite [value-expr: flags.fwrite];
+  static logical(kind=4) flprob [value-expr: flags.flprob];
+  static logical(kind=4) fhiggs [value-expr: flags.fhiggs];
+  static logical(kind=4) flagal [value-expr: flags.flagal];
+  static logical(kind=4) fsplot [value-expr: flags.fsplot];
+  static real(kind=8) alpha [value-expr: inputs.alpha];
+  static real(kind=8) gf [value-expr: inputs.gf];
+  static real(kind=8) alfas0 [value-expr: inputs.alfas0];
+  static real(kind=8) asgrid[2001] [value-expr: inputs.asgrid];
+  static real(kind=8) mu0 [value-expr: inputs.mu0];
+  static real(kind=8) dahad3 [value-expr: inputs.dahad3];
+  static real(kind=8) pol4hf [value-expr: inputs.pol4hf];
+  static real(kind=8) an[8004] [value-expr: inputs.an];
+  static real(kind=8) bn[8004] [value-expr: inputs.bn];
+  static real(kind=8) pi1 [value-expr: inputs.pi1];
+  static real(kind=8) pi2 [value-expr: inputs.pi2];
+  static real(kind=8) zeta2 [value-expr: inputs.zeta2];
+  static real(kind=8) zeta3 [value-expr: inputs.zeta3];
+  static real(kind=8) zeta4 [value-expr: inputs.zeta4];
+  static real(kind=8) zeta5 [value-expr: inputs.zeta5];
+  static real(kind=8) zeta6 [value-expr: inputs.zeta6];
+  static real(kind=8) zeta7 [value-expr: inputs.zeta7];
+  static real(kind=8) prob [value-expr: limits.prob];
+  static real(kind=8) mtp [value-expr: limits.mtp];
+  static real(kind=8) sigma [value-expr: limits.sigma];
+  static integer(kind=4) zprime [value-expr: limits.zprime];
+  static real(kind=8) mw2 [value-expr: mass2.mw2];
+  static real(kind=8) mz2 [value-expr: mass2.mz2];
+  static real(kind=8) mt2 [value-expr: mass2.mt2];
+  static real(kind=8) mh2 [value-expr: mass2.mh2];
+  static real(kind=8) mz [value-expr: masses.mz];
+  static real(kind=8) mh [value-expr: masses.mh];
+  static real(kind=8) mt [value-expr: masses.mt];
+  static real(kind=8) mb [value-expr: masses.mb];
+  static real(kind=8) mc [value-expr: masses.mc];
+  static real(kind=8) ms [value-expr: masses.ms];
+  static real(kind=8) md [value-expr: masses.md];
+  static real(kind=8) mu [value-expr: masses.mu];
+  static real(kind=8) mtau [value-expr: masses.mtau];
+  static real(kind=8) mmu [value-expr: masses.mmu];
+  static real(kind=8) me [value-expr: masses.me];
+  static real(kind=8) mw [value-expr: masses.mw];
+  static real(kind=8) swpar [value-expr: obliqe.swpar];
+  static real(kind=8) spar [value-expr: obliqe.spar];
+  static real(kind=8) tpar [value-expr: obliqe.tpar];
+  static real(kind=8) upar [value-expr: obliqe.upar];
+  static real(kind=8) brho [value-expr: obliqe.brho];
+  static real(kind=8) bkappa [value-expr: obliqe.bkappa];
+  static real(kind=8) rpar [value-expr: obliqe.rpar];
+  static real(kind=8) zpar [value-expr: obliqe.zpar];
+  static real(kind=8) delrwh [value-expr: obliqe.delrwh];
+  static real(kind=8) delrzh [value-expr: obliqe.delrzh];
+  static real(kind=8) delr [value-expr: obliqe.delr];
+  static real(kind=8) rhohat [value-expr: obliqe.rhohat];
+  static real(kind=8) rho2 [value-expr: obliqe.rho2];
+  static real(kind=8) ratzw2 [value-expr: ratios.ratzw2];
+  static real(kind=8) rathw2 [value-expr: ratios.rathw2];
+  static real(kind=8) rathz2 [value-expr: ratios.rathz2];
+  static real(kind=8) rattw2 [value-expr: ratios.rattw2];
+  static real(kind=8) rattz2 [value-expr: ratios.rattz2];
+  static real(kind=8) ratth2 [value-expr: ratios.ratth2];
+  static real(kind=8) mzp [value-expr: zprime.mzp];
+  static real(kind=8) mzp2 [value-expr: zprime.mzp2];
+  static real(kind=8) mz02 [value-expr: zprime.mz02];
+  static real(kind=8) sinth [value-expr: zprime.sinth];
+  static real(kind=8) sinth2 [value-expr: zprime.sinth2];
+  static real(kind=8) costh [value-expr: zprime.costh];
+  static real(kind=8) costh2 [value-expr: zprime.costh2];
+  static real(kind=8) ratg21 [value-expr: zprime.ratg21];
+  static real(kind=8) rhoeff [value-expr: zprime.rhoeff];
+  static real(kind=8) rhoezp [value-expr: zprime.rhoezp];
+  static real(kind=8) rhozzp [value-expr: zprime.rhozzp];
+  static real(kind=8) v2[10] [value-expr: zprime.v2];
+  static real(kind=8) a2[10] [value-expr: zprime.a2];
+  static real(kind=8) eps2_l[10] [value-expr: zprime.eps2_l];
+  static real(kind=8) eps2_r[10] [value-expr: zprime.eps2_r];
+  static real(kind=8) ratgrl [value-expr: zprime.ratgrl];
+  real(kind=8) a2b;
+  real(kind=8) a2c;
+  real(kind=8) a2e;
+  real(kind=8) a2had;
+  real(kind=8) a2mu;
+  real(kind=8) a2tau;
+  real(kind=8) a2tot;
+  real(kind=8) a2uds;
+  real(kind=8) a3e;
+  real(kind=8) a3ehad;
+  real(kind=8) a3elbl;
+  real(kind=8) a3etau;
+  real(kind=8) a3haha;
+  real(kind=8) a3hlbl;
+  real(kind=8) a3mlbl;
+  real(kind=8) a3mu;
+  real(kind=8) a3muha;
+  real(kind=8) a3mvac;
+  real(kind=8) a3tau;
+  real(kind=8) a3tlbl;
+  real(kind=8) a3tot;
+  real(kind=8) a4e;
+  real(kind=8) a4etau;
+  real(kind=8) a4mu;
+  real(kind=8) a4tot;
+  real(kind=8) a5estm;
+  real(kind=8) ag[22];
+  real(kind=8) al;
+  real(kind=8) al3;
+  real(kind=8) alfamu;
+  real(kind=8) amuew;
+  real(kind=8) as;
+  real(kind=8) as2;
+  real(kind=8) bbn[4];
+  real(kind=8) c[44];
+  real(kind=8) c1;
+  real(kind=8) c2;
+  real(kind=8) cmatch;
+  real(kind=8) cum0a2;
+  real(kind=8) cum0a3;
+  real(kind=8) cut;
+  real(kind=8) dgamma;
+  integer(kind=4) i;
+  integer(kind=4) j;
+  real(kind=8) k2ab;
+  real(kind=8) k2ac;
+  real(kind=8) k2auds;
+  real(kind=8) k2bb;
+  real(kind=8) k2bc;
+  real(kind=8) k2buds;
+  real(kind=8) kk1;
+  real(kind=8) kk2;
+  real(kind=8) li41o2;
+  real(kind=8) lmzmmu;
+  real(kind=8) lmzmta;
+  real(kind=8) lmzmud;
+  real(kind=8) ln2;
+  real(kind=8) lnmzmb;
+  real(kind=8) lnmzmc;
+  real(kind=8) lrmcct;
+  real(kind=8) lrmemc;
+  real(kind=8) lrmemu;
+  real(kind=8) lrmuct;
+  real(kind=8) lrmumc;
+  real(kind=8) mseff;
+  real(kind=8) mudeff;
+  real(kind=8) omega;
+  real(kind=8) rctmc2;
+  real(kind=8) rmemmu;
+  real(kind=8) rmuct2;
+  real(kind=8) rmuct4;
+  real(kind=8) rmumb2;
+  real(kind=8) rmumc2;
+  real(kind=8) rmuta2;
+  real(kind=8) s2;
+  real(kind=8) sin2tw;
+  real(kind=8) weight;
+  real(kind=8) x;
+
+  {
+    real(kind=8) __var_2;
+    real(kind=8) __var_1;
+
+    li41o2 = 5.174790616738993431766857611364684998989105224609375e-1;
+    {
+      real(kind=8) D.3764;
+
+      D.3764 = pi1 / 3.0e+0;
+      s2 = ((cl2 (&D.3764) * 4.0e+0) / 9.0e+0) / 1.732050807568877193176604123436845839023590087890625e+0;
+    }
+    ln2 = 6.9314718055994528622676398299518041312694549560546875e-1;
+    cut = 1.8000000000000000444089209850062616169452667236328125e+0;
+    cmatch = 1.5277777777777779011358916250173933804035186767578125e-1;
+    coefhq (&c, &ag);
+    mudeff = 1.75999999999999989785948173448559828102588653564453125e-1;
+    mseff = 3.04999999999999993338661852249060757458209991455078125e-1;
+    omega = 3.318490000000000161861635206150822341442108154296875e+0;
+    a2had = 6.38299999999999965080610029276309003165579269989393651485e-8;
+    a3muha = -1.80979400000000004747339330592745612613647665511962259188e-9;
+    a3ehad = 9.74814000000000103966655116028306587994123333373863715678e-10;
+    a3haha = 2.70000000000000004666814446727967258428393382274634859641e-11;
+    a3hlbl = 1.37000000000000002535518588706389686571185393404448404908e-9;
+    a3e = 1.9204551299999998992262817409937269985675811767578125e+0;
+    a3tau = -1.78232999999999993864796543618922441964969038963317871094e-3;
+    a3elbl = 2.0947924889999999464862412423826754093170166015625e+1;
+    a4mu = -1.72599999999999997868371792719699442386627197265625e+0;
+    a4e = 1.3268229999999999790816218592226505279541015625e+2;
+    a4etau = 3.759400000000000241495712316464050672948360443115234375e-2;
+    a5estm = 6.52e+2;
+    al = alpha / pi1;
+    {
+      real(kind=8) D.3766;
+
+      D.3766 = al;
+      al3 = __builtin_powi (D.3766, 3);
+    }
+    as = alphas (&mc) / pi1;
+    if (!f4lqcd)
+      {
+        {
+          real(kind=8) D.3770;
+          real(kind=8) D.3769;
+
+          D.3769 = as;
+          D.3770 = D.3769 * D.3769;
+          as = ((cmatch * D.3770 + 1.0e+0)) * as;
+        }
+      }
+    else
+      {
+        {
+          real(kind=8) D.3775;
+          static integer(kind=4) C.3773 = 3;
+          real(kind=8) D.3772;
+          real(kind=8) D.3771;
+
+          D.3771 = as;
+          D.3772 = D.3771 * D.3771;
+          D.3775 = as;
+          as = (((cmatch * D.3772 + 1.0e+0) + c3m (&C.3773) * __builtin_powi (D.3775, 3))) * as;
+        }
+      }
+    L.1:;
+    {
+      real(kind=8) D.3777;
+      static integer(kind=4) C.3776 = 3;
+
+      D.3777 = as * pi1;
+      as = arun (&C.3776, &mc, &cut, &D.3777) / pi1;
+    }
+    as2 = as * as;
+    rmemmu = me / mmu;
+    {
+      real(kind=8) D.3780;
+      real(kind=8) D.3779;
+
+      D.3779 = ((mmu / mtau));
+      D.3780 = D.3779 * D.3779;
+      rmuta2 = D.3780;
+    }
+    {
+      real(kind=8) D.3782;
+      real(kind=8) D.3781;
+
+      D.3781 = ((mmu / cut));
+      D.3782 = D.3781 * D.3781;
+      rmuct2 = D.3782;
+    }
+    {
+      real(kind=8) D.3784;
+      real(kind=8) D.3783;
+
+      D.3783 = rmuct2;
+      D.3784 = D.3783 * D.3783;
+      rmuct4 = D.3784;
+    }
+    {
+      real(kind=8) D.3786;
+      real(kind=8) D.3785;
+
+      D.3785 = ((mmu / mc));
+      D.3786 = D.3785 * D.3785;
+      rmumc2 = D.3786;
+    }
+    {
+      real(kind=8) D.3788;
+      real(kind=8) D.3787;
+
+      D.3787 = ((mmu / mb));
+      D.3788 = D.3787 * D.3787;
+      rmumb2 = D.3788;
+    }
+    {
+      real(kind=8) D.3791;
+      real(kind=8) D.3790;
+
+      D.3790 = ((cut / mcrun (&cut)));
+      D.3791 = D.3790 * D.3790;
+      rctmc2 = D.3791;
+    }
+    lrmuct = __builtin_log (rmuct2);
+    lrmemu = __builtin_log (rmemmu);
+    lrmcct = __builtin_log (rctmc2);
+    lrmumc = __builtin_log (rmumc2);
+    lrmemc = __builtin_log (me / mc);
+    lmzmmu = __builtin_log (mz / mmu);
+    lmzmta = __builtin_log (mz / mtau);
+    lnmzmb = __builtin_log (mz / mb);
+    lnmzmc = __builtin_log (mz / mc);
+    lmzmud = __builtin_log (mz / mudeff);
+    sin2tw = 1.0e+0 - 1.0e+0 / ratzw2;
+    a2mu = (((zeta3 * 3.0e+0) * 2.5e-1 + 1.3680555555555555802271783250034786760807037353515625e+0) + zeta2 * 5.0e-1) - (zeta2 * 3.0e+0) * ln2;
+    __var_1 = __builtin_log (rmemmu);
+    {
+      real(kind=8) D.3796;
+      real(kind=8) D.3795;
+      real(kind=8) D.3794;
+
+      D.3794 = rmemmu;
+      D.3795 = D.3794 * D.3794;
+      D.3796 = rmemmu;
+      a2e = (((-6.944444444444444197728216749965213239192962646484375e-1 - __var_1 / 3.0e+0) + (pi2 * rmemmu) * 2.5e-1) + ((__var_1 * 4.0e+0 + 3.0e+0)) * D.3795) - ((pi2 * 5.0e+0) * 2.5e-1) * __builtin_powi (D.3796, 3);
+    }
+    L.2:;
+    {
+      real(kind=8) D.3798;
+      real(kind=8) D.3797;
+
+      D.3797 = rmuta2;
+      D.3798 = D.3797 * D.3797;
+      a2tau = rmuta2 / 4.5e+1 + (((__builtin_log (rmuta2) + 6.42857142857142793701541449991054832935333251953125e-2)) * D.3798) / 1.4e+2;
+    }
+    {
+      real(kind=8) x.0;
+
+      x.0 = rmuct2;
+      kk1 = ((__builtin_log (x.0) * 3.0e+0 + 6.25e+0)) * x.0 - (rmuct2 * 3.0e+0) * 5.0e-1;
+    }
+    {
+      real(kind=8) D.3802;
+      real(kind=8) D.3801;
+      real(kind=8) x.1;
+
+      x.1 = rmuct2;
+      D.3801 = x.1;
+      D.3802 = D.3801 * D.3801;
+      kk2 = ((__builtin_log (x.1) * 1.8e+1 + 2.910000000000000142108547152020037174224853515625e+1)) * D.3802 - rmuct4 * 6.0e+0;
+    }
+    a2uds = ((rmuct2 * 2.0e+0) * (((((kk1 * 5.0e-1 + 1.0e+0) + kk2 / 3.0e+0)) * ((as + 1.0e+0)) + ((((((5.66666666666666696272613990004174411296844482421875e+0 - (zeta3 * 9.0e+0) * 5.0e-1)) * kk1 + (rmuct2 * 2.7e+1) * 3.125e-2) + ((3.90277777777777767909128669998608529567718505859375e+0 - zeta3 * 3.0e+0)) * kk2) + (rmuct4 * 3.0e+0) * 5.0e-1)) * as2))) / 9.0e+0;
+    if (NON_LVALUE_EXPR <flgech>)
+      {
+        j = (integer(kind=4)) (as * 1.0e+4);
+        if (j < 0)
+          {
+            i = 1;
+            if (i <= 4)
+              {
+                while (1)
+                  {
+                    {
+                      logical(kind=4) D.3808;
+
+                      bbn[(integer(kind=8)) i + -1] = 0.0;
+                      __label_000020:;
+                      L.5:;
+                      D.3808 = i == 4;
+                      i = i + 1;
+                      if (D.3808) goto L.6;
+                    }
+                  }
+              }
+            L.6:;
+          }
+        else
+          {
+            if (j > 1999)
+              {
+                i = 1;
+                if (i <= 4)
+                  {
+                    while (1)
+                      {
+                        {
+                          logical(kind=4) D.3813;
+
+                          bbn[(integer(kind=8)) i + -1] = bn[(integer(kind=8)) i + 7999];
+                          __label_000030:;
+                          L.8:;
+                          D.3813 = i == 4;
+                          i = i + 1;
+                          if (D.3813) goto L.9;
+                        }
+                      }
+                  }
+                L.9:;
+              }
+            else
+              {
+                i = 1;
+                if (i <= 4)
+                  {
+                    while (1)
+                      {
+                        {
+                          logical(kind=4) D.3817;
+
+                          bbn[(integer(kind=8)) i + -1] = bn[((integer(kind=8)) j * 4 + (integer(kind=8)) i) + -1] + (((as - asgrid[(integer(kind=8)) j])) * ((bn[((integer(kind=8)) (j + 1) * 4 + (integer(kind=8)) i) + -1] - bn[((integer(kind=8)) j * 4 + (integer(kind=8)) i) + -1]))) * 1.0e+4;
+                          __label_000040:;
+                          L.10:;
+                          D.3817 = i == 4;
+                          i = i + 1;
+                          if (D.3817) goto L.11;
+                        }
+                      }
+                  }
+                L.11:;
+              }
+            L.7:;
+          }
+        L.4:;
+        cum0a2 = 1.24583333333333339254522798000834882259368896484375e+1 - zeta3 * 9.0e+0;
+        cum0a3 = (2.015868055555555429236846975982189178466796875e+2 - (zeta3 * 7.79e+2) * 2.5e-1) + (zeta5 * 7.5e+1) * 5.0e-1;
+        a2uds = ((rmuct2 * 2.0e+0) * (((((bbn[0] - as)) + bbn[1] * cum0a2) + bbn[2] * cum0a3))) / 9.0e+0 + a2uds;
+      }
+    else
+      {
+        cum0a2 = 1.02083333333333339254522798000834882259368896484375e+1 - zeta3 * 9.0e+0;
+        cum0a3 = ((1.516493055555555429236846975982189178466796875e+2 - (zeta3 * 6.17e+2) * 2.5e-1) + (zeta5 * 7.5e+1) * 5.0e-1) - (zeta2 * 8.1e+1) * 1.25e-1;
+        a2uds = (((rmuct2 * 2.0e+0) * as2) * ((cum0a3 * as + cum0a2))) / 9.0e+0 + a2uds;
+      }
+    L.3:;
+    {
+      real(kind=8) D.3819;
+      real(kind=8) D.3818;
+
+      D.3818 = lrmuct;
+      D.3819 = D.3818 * D.3818;
+      k2auds = (((al3 / 9.0e+0) * rmuct2) * (((((lrmuct * 2.3e+1) / 3.0e+0 - pi2 * 4.0e+0) + 4.1888888888888885730921174399554729461669921875e+1) + ((((((lrmuct * 6.77e+2) / 3.0e+0 + D.3819 * 1.9e+1) + 9.852916666666666287710540927946567535400390625e+2) - pi2 * 1.11e+2)) * rmuct2) / 2.4e+1))) * ((as + 1.0e+0));
+    }
+    {
+      real(kind=8) D.3821;
+      real(kind=8) D.3820;
+
+      D.3820 = lrmuct;
+      D.3821 = D.3820 * D.3820;
+      k2buds = (((al3 / 9.0e+0) * rmuct2) * (((-((lrmemu * 8.0e+0) / 3.0e+0) - 6.6666666666666662965923251249478198587894439697265625e-1) - (((((((lrmuct * 7.0e+0) / 3.0e+0 + D.3821) + 5.70833333333333303727386009995825588703155517578125e+0) - pi2 / 3.0e+0) + (lrmuct * 4.0e+0) * lrmemu) + (lrmemu * 1.9e+1) / 3.0e+0)) * rmuct2))) * ((as + 1.0e+0));
+    }
+    {
+      real(kind=8) D.3824;
+      real(kind=8) D.3823;
+
+      D.3823 = ((msrun (&cut) / cut));
+      D.3824 = D.3823 * D.3823;
+      a2uds = (((rmuct2 * 2.0e+0) * D.3824) * as) / 9.0e+0 + a2uds;
+    }
+    {
+      real(kind=8) D.3828;
+      real(kind=8) D.3827;
+      real(kind=8) D.3826;
+      real(kind=8) D.3825;
+
+      D.3825 = ((mmu / mcrun (&cut)));
+      D.3826 = D.3825 * D.3825;
+      D.3827 = lrmcct;
+      D.3828 = D.3827 * D.3827;
+      a2uds = ((((((((4.67066666666666634455395978875458240509033203125e+1 - (pi2 * 2.0e+0) / 3.0e+0) - (lrmcct * 8.8e+1) / 5.0e+0) + D.3828 * 2.0e+0)) / 3.0e+0 + (((4.10238095238095201722217097994871437549591064453125e+0 - lrmcct)) * rctmc2) / 2.8e+1)) * D.3826) / 4.05e+2) * as2 + a2uds;
+    }
+    as = alphas (&mc) / pi1;
+    {
+      real(kind=8) D.3830;
+      real(kind=8) D.3829;
+
+      D.3829 = as;
+      D.3830 = D.3829 * D.3829;
+      as2 = D.3830;
+    }
+    c1 = (c[0] + c[1] * as) + ((c[2] + c[3] * 3.0e+0)) * as2;
+    c2 = (8.8163265306122451381298787964624352753162384033203125e-2 - as * 1.943000000000000004884981308350688777863979339599609375e-1) + (__builtin_log (rmumc2) * 3.0e+0) * (((c[4] + c[5] * as) + ((c[6] + c[7] * 3.0e+0)) * as2));
+    a2c = (rmumc2 / 3.6e+1) * (((rmumc2 * 2.5e-1) * c2 + c1));
+    k2ac = ((al3 / 6.0e+0) * (((((4.129629629629629761211617733351886272430419921875e+0 - zeta2 * 2.0e+0) + (lrmumc * 2.3e+1) / 3.6e+1)) * c1 - 1.7491358024691356920499174520955421030521392822265625e+0))) * rmumc2;
+    k2bc = -((((al3 / 1.08e+2) * c1) * ((lrmemu * 4.0e+0 + 1.0e+0))) * rmumc2);
+    as = alphas (&mb) / pi1;
+    {
+      real(kind=8) D.3832;
+      real(kind=8) D.3831;
+
+      D.3831 = as;
+      D.3832 = D.3831 * D.3831;
+      as2 = D.3832;
+    }
+    c1 = (c[0] + c[1] * as) + ((c[2] + c[3] * 4.0e+0)) * as2;
+    c2 = (8.8163265306122451381298787964624352753162384033203125e-2 - as * 1.943000000000000004884981308350688777863979339599609375e-1) + (__builtin_log (rmumb2) * 3.0e+0) * (((c[4] + c[5] * as) + ((c[6] + c[7] * 4.0e+0)) * as2));
+    a2b = (rmumb2 / 1.44e+2) * (((rmumb2 * 2.5e-1) * c2 + c1));
+    k2ab = ((al3 / 2.4e+1) * (((((4.129629629629629761211617733351886272430419921875e+0 - zeta2 * 2.0e+0) + (__builtin_log (rmumb2) * 2.3e+1) / 3.6e+1)) * c1 - 1.7491358024691356920499174520955421030521392822265625e+0))) * rmumb2;
+    k2bb = -((((al3 / 4.32e+2) * c1) * ((lrmemu * 4.0e+0 + 1.0e+0))) * rmumb2);
+    {
+      real(kind=8) D.3834;
+      real(kind=8) D.3833;
+
+      D.3833 = al;
+      D.3834 = D.3833 * D.3833;
+      a2tot = ((((((a2mu + a2e) + a2tau) + a2uds) + a2c) + a2b)) * D.3834 + a2had;
+    }
+    {
+      real(kind=8) D.3835;
+
+      D.3835 = ln2;
+      a3mlbl = ((((((((5.0e+0 - zeta3 * 1.2e+1) + (zeta5 * 1.5e+1) * 5.0e-1) + zeta2 * 9.31e+2) - (zeta4 * 1.23e+2) * 5.0e-1) - (zeta2 * 1.5e+1) * zeta3) - ((pi2 * 6.0e+0) * ln2) * ((ln2 + 3.6e+1))) + __builtin_powi (D.3835, 4) * 6.0e+0)) / 9.0e+0 + li41o2 * 1.6e+1;
+    }
+    {
+      real(kind=8) D.3838;
+      real(kind=8) D.3837;
+      real(kind=8) D.3836;
+
+      D.3836 = ln2;
+      D.3837 = ln2;
+      D.3838 = D.3837 * D.3837;
+      a3mu = ((((((zeta3 * 1.39e+2) / 1.8e+1 + 5.4511959876543212288879658444784581661224365234375e+0) - ((zeta5 * 2.15e+2 + zeta4 * 2.39e+2)) / 2.4e+1) + (zeta2 * 1.7101e+4) / 1.35e+2) + ((zeta2 * 8.3e+1) * zeta3) / 1.2e+1) - ((pi2 * 2.98e+2) / 9.0e+0) * ln2) + ((((li41o2 * 2.4e+1 + __builtin_powi (D.3836, 4)) - pi2 * D.3838)) * 2.5e+1) / 1.8e+1;
+    }
+    a3tlbl = (((zeta3 * 3.0e+0) * 5.0e-1 - 1.1875e+0)) * rmuta2;
+    a3mvac = a3mu - a3mlbl;
+    {
+      real(kind=8) D.3840;
+      real(kind=8) D.3839;
+
+      D.3839 = ((me / mtau));
+      D.3840 = D.3839 * D.3839;
+      a3etau = (D.3840 * 2.0e+0) / 1.5e+1 - (((__builtin_log (rmemmu) * 4.0e+0 + 1.0e+0)) * rmuta2) / 1.35e+2;
+    }
+    a3muha = ((a3muha + k2auds) + k2ac) + k2ab;
+    a3ehad = ((a3ehad + k2buds) + k2bc) + k2bb;
+    {
+      real(kind=8) D.3841;
+
+      D.3841 = al;
+      a3tot = (((__builtin_powi (D.3841, 3) * ((((((a3mu + a3e) + a3tau) + a3elbl) + a3tlbl) + a3etau)) + a3muha) + a3ehad) + a3haha) + a3hlbl;
+    }
+    {
+      real(kind=8) D.3842;
+
+      D.3842 = al;
+      a4tot = __builtin_powi (D.3842, 4) * (((a4mu + a4e) + a4etau));
+    }
+    {
+      real(kind=8) D.3846;
+      real(kind=8) D.3845;
+      real(kind=8) D.3844;
+      real(kind=8) D.3843;
+
+      D.3843 = mmu;
+      D.3844 = D.3843 * D.3843;
+      D.3845 = ((1.0e+0 - sin2tw * 4.0e+0));
+      D.3846 = D.3845 * D.3845;
+      amuew = ((((gf * D.3844) / 2.4e+1) / 1.4142135623730951454746218587388284504413604736328125e+0) / pi2) * ((D.3846 + 5.0e+0));
+    }
+    alfahat (&mmu, &dgamma, &alfamu);
+    weight = __builtin_exp (-(omega * ratth2));
+    __var_2 = __builtin_log (ratth2);
+    {
+      real(kind=8) D.3865;
+      real(kind=8) D.3864;
+      real(kind=8) D.3863;
+      real(kind=8) D.3862;
+      real(kind=8) D.3861;
+      real(kind=8) D.3860;
+      real(kind=8) D.3859;
+      real(kind=8) D.3858;
+      real(kind=8) D.3857;
+      real(kind=8) D.3856;
+      real(kind=8) D.3855;
+      real(kind=8) D.3854;
+      real(kind=8) D.3853;
+      real(kind=8) D.3852;
+      real(kind=8) D.3851;
+      real(kind=8) D.3850;
+
+      D.3850 = mmu;
+      D.3851 = D.3850 * D.3850;
+      D.3852 = ((mudeff / mtau));
+      D.3853 = mc;
+      D.3854 = D.3853 * D.3853;
+      D.3855 = ((D.3854 / mz));
+      D.3856 = D.3855 * D.3855;
+      D.3857 = mudeff;
+      D.3858 = mc;
+      D.3859 = D.3858 * D.3858;
+      D.3860 = ((D.3859 / mz));
+      D.3861 = mtau;
+      D.3862 = ((__var_2 + 1.0e+0));
+      D.3863 = D.3862 * D.3862;
+      D.3864 = sin2tw;
+      D.3865 = D.3864 * D.3864;
+      amuew = amuew - ((((((gf * D.3851) / 3.0e+0) / 1.4142135623730951454746218587388284504413604736328125e+0) / pi2) * alfamu) / pi1) * (((((((((((5.125e+0 - pi2 / 3.0e+0) + (7.0e+0 / sin2tw) * 6.25e-2) + ((rattw2 * 1.5e+1) / sin2tw) * 7.8125e-3) + ((3.0e+0 / sin2tw) * 6.25e-2) * __builtin_log (rattw2)) + __builtin_log (rattz2)) + ((__builtin_log (((__builtin_powi (D.3852, 3) * D.3856) / mseff) / mb) * 3.0e+0) * 2.5e-1) * (((((1.0e+0 - sin2tw * 4.0e+0)) * 2.0e+0) / 2.7e+1 + 1.0e+0))) - ((((1.0e+0 - sin2tw * 4.0e+0)) * 2.0e+0) / 2.7e+1) * __builtin_log ((((__builtin_powi (D.3857, 7) * __builtin_powi (D.3860, 4)) / __builtin_powi (D.3861, 9)) / mseff) / mb)) + (((__var_2 * 6.0e+0 + 1.3e+1)) / 9.0e+0) * ((1.0e+0 - weight))) + ((((pi2 / 3.0e+0 + 3.0e+0) + D.3863)) * ratth2) * weight) + ((((1.23e+2 - sin2tw * 1.24e+2) + D.3865 * 2.48e+2)) * lmzmmu) / 1.2e+1));
+    }
+    L.12:;
+    {
+      real(kind=8) D.3909;
+      real(kind=8) D.3908;
+      real(kind=8) D.3907;
+      real(kind=8) D.3906;
+      real(kind=8) D.3905;
+      real(kind=8) D.3904;
+      real(kind=8) D.3903;
+      real(kind=8) D.3902;
+      real(kind=8) D.3901;
+      real(kind=8) D.3900;
+      real(kind=8) D.3899;
+      real(kind=8) D.3898;
+      real(kind=8) D.3897;
+      real(kind=8) D.3896;
+      real(kind=8) D.3895;
+      real(kind=8) D.3894;
+      real(kind=8) D.3893;
+      real(kind=8) D.3892;
+      real(kind=8) D.3891;
+      real(kind=8) D.3890;
+      real(kind=8) D.3889;
+      real(kind=8) D.3888;
+      real(kind=8) D.3887;
+      real(kind=8) D.3886;
+      real(kind=8) D.3885;
+      real(kind=8) D.3884;
+      real(kind=8) D.3883;
+      real(kind=8) D.3882;
+      real(kind=8) D.3881;
+      real(kind=8) D.3880;
+      real(kind=8) D.3879;
+      real(kind=8) D.3878;
+      real(kind=8) D.3877;
+      real(kind=8) D.3876;
+      real(kind=8) D.3875;
+      real(kind=8) D.3874;
+      real(kind=8) D.3873;
+      real(kind=8) D.3872;
+      real(kind=8) D.3871;
+      real(kind=8) D.3870;
+      real(kind=8) D.3869;
+      real(kind=8) D.3868;
+      real(kind=8) D.3867;
+      real(kind=8) D.3866;
+
+      D.3866 = mmu;
+      D.3867 = D.3866 * D.3866;
+      D.3868 = alfamu;
+      D.3869 = D.3868 * D.3868;
+      D.3870 = lmzmmu;
+      D.3871 = D.3870 * D.3870;
+      D.3872 = lmzmta;
+      D.3873 = D.3872 * D.3872;
+      D.3874 = lnmzmb;
+      D.3875 = D.3874 * D.3874;
+      D.3876 = lnmzmc;
+      D.3877 = D.3876 * D.3876;
+      D.3878 = lmzmud;
+      D.3879 = D.3878 * D.3878;
+      D.3880 = lnmzmb;
+      D.3881 = D.3880 * D.3880;
+      D.3882 = lmzmta;
+      D.3883 = D.3882 * D.3882;
+      D.3884 = lnmzmc;
+      D.3885 = D.3884 * D.3884;
+      D.3886 = lmzmud;
+      D.3887 = D.3886 * D.3886;
+      D.3888 = lmzmmu;
+      D.3889 = D.3888 * D.3888;
+      D.3890 = __builtin_log (mb / mtau);
+      D.3891 = D.3890 * D.3890;
+      D.3892 = __builtin_log (mb / mc);
+      D.3893 = D.3892 * D.3892;
+      D.3894 = __builtin_log (mb / mudeff);
+      D.3895 = D.3894 * D.3894;
+      D.3896 = __builtin_log (mb / mmu);
+      D.3897 = D.3896 * D.3896;
+      D.3898 = __builtin_log (mc / mudeff);
+      D.3899 = D.3898 * D.3898;
+      D.3900 = __builtin_log (mc / mmu);
+      D.3901 = D.3900 * D.3900;
+      D.3902 = __builtin_log (mtau / mudeff);
+      D.3903 = D.3902 * D.3902;
+      D.3904 = __builtin_log (mtau / mmu);
+      D.3905 = D.3904 * D.3904;
+      D.3906 = __builtin_log (mtau / mc);
+      D.3907 = D.3906 * D.3906;
+      D.3908 = __builtin_log (mudeff / mmu);
+      D.3909 = D.3908 * D.3908;
+      amuew = ((((((gf * D.3867) / 2.4e+1) / 1.4142135623730951454746218587388284504413604736328125e+0) / pi2) * D.3869) / pi2) * ((((((((((((((D.3871 * 2.827e+3) * 5.0e-1 - D.3873 * 2.98e+2) - (D.3875 * 7.826e+3) / 8.1e+1)) / 9.0e+0 + (D.3877 * 3.52e+4) / 7.29e+2) + (D.3879 * 2.108e+3) / 8.1e+1) + (((((lmzmta * 3.0e+0 + lnmzmb) - lnmzmc * 4.0e+0) - lmzmud * 2.0e+0)) * 2.4e+1) * lmzmmu) - ((lnmzmb * 1.28e+2) * lnmzmc) / 2.43e+2) - ((((((D.3881 / 3.0e+0 + D.3883) + (D.3885 * 4.0e+0) / 3.0e+0) + D.3887 * 2.0e+0) + D.3889 * 2.0e+0)) * 1.79e+2) / 9.0e+0) + ((((D.3891 * 5.0e-1 + (D.3893 * 2.0e+0) / 3.0e+0) + D.3895) + D.3897)) * 4.0e+0) - ((D.3899 + D.3901)) * 1.6e+1) + ((D.3903 + D.3905)) * 1.2e+1) + ((D.3907 - D.3909)) * 8.0e+0)) + amuew;
+    }
+    {
+      real(kind=8) D.3910;
+
+      D.3910 = al;
+      *amu = (((((a2tot + a3tot) + a4tot) + __builtin_powi (D.3910, 5) * a5estm) + amuew)) * 1.0e+9;
+    }
+    return;
+  }
+}
+
+

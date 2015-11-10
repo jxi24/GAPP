@@ -1,0 +1,97 @@
+spence (complex(kind=8) & restrict z)
+{
+  static real(kind=8) fodel2 [value-expr: ffcdel.fodel2];
+  static real(kind=8) fodel3 [value-expr: ffcdel.fodel3];
+  static complex(kind=8) cfdl4s [value-expr: ffcdel.cfdl4s];
+  static real(kind=8) fodel4 [value-expr: ffcdel.fodel4];
+  static real(kind=8) fodl3i[5] [value-expr: ffcdel.fodl3i];
+  static real(kind=8) fod3ij[36] [value-expr: ffcdel.fod3ij];
+  static real(kind=8) fodl4i[6] [value-expr: ffcdel.fodl4i];
+  static complex(kind=8) cfpij2[9] [value-expr: ffcdot.cfpij2];
+  static complex(kind=8) cfpij3[36] [value-expr: ffcdot.cfpij3];
+  static complex(kind=8) cfpij4[100] [value-expr: ffcdot.cfpij4];
+  static complex(kind=8) cfpij5[225] [value-expr: ffcdot.cfpij5];
+  static complex(kind=8) cfpij6[441] [value-expr: ffcdot.cfpij6];
+  static real(kind=8) bf[20] [value-expr: ffcnst.bf];
+  static real(kind=8) xninv[30] [value-expr: ffcnst.xninv];
+  static real(kind=8) xn2inv[30] [value-expr: ffcnst.xn2inv];
+  static real(kind=8) xinfac[30] [value-expr: ffcnst.xinfac];
+  static integer(kind=4) inx[16] [value-expr: ffcnst.inx];
+  static integer(kind=4) isgn[16] [value-expr: ffcnst.isgn];
+  static integer(kind=4) iold[156] [value-expr: ffcnst.iold];
+  static integer(kind=4) isgrot[120] [value-expr: ffcnst.isgrot];
+  static integer(kind=4) inx5[25] [value-expr: ffcnst.inx5];
+  static integer(kind=4) isgn5[25] [value-expr: ffcnst.isgn5];
+  static real(kind=8) fdel2 [value-expr: ffdel.fdel2];
+  static real(kind=8) fdel3 [value-expr: ffdel.fdel3];
+  static real(kind=8) fdel4s [value-expr: ffdel.fdel4s];
+  static real(kind=8) fdel4 [value-expr: ffdel.fdel4];
+  static real(kind=8) fdl3i[5] [value-expr: ffdel.fdl3i];
+  static real(kind=8) fdl4si[5] [value-expr: ffdel.fdl4si];
+  static real(kind=8) fdl3ij[36] [value-expr: ffdel.fdl3ij];
+  static real(kind=8) fdl4i[6] [value-expr: ffdel.fdl4i];
+  static real(kind=8) fpij2[9] [value-expr: ffdot.fpij2];
+  static real(kind=8) fpij3[36] [value-expr: ffdot.fpij3];
+  static real(kind=8) fpij4[100] [value-expr: ffdot.fpij4];
+  static real(kind=8) fpij5[225] [value-expr: ffdot.fpij5];
+  static real(kind=8) fpij6[441] [value-expr: ffdot.fpij6];
+  static logical(kind=4) lwrite [value-expr: ffflag.lwrite];
+  static logical(kind=4) ltest [value-expr: ffflag.ltest];
+  static logical(kind=4) l4also [value-expr: ffflag.l4also];
+  static logical(kind=4) ldc3c4 [value-expr: ffflag.ldc3c4];
+  static logical(kind=4) lmem [value-expr: ffflag.lmem];
+  static logical(kind=4) lwarn [value-expr: ffflag.lwarn];
+  static logical(kind=4) ldot [value-expr: ffflag.ldot];
+  static integer(kind=4) nevent [value-expr: ffflag.nevent];
+  static integer(kind=4) ner [value-expr: ffflag.ner];
+  static integer(kind=4) id [value-expr: ffflag.id];
+  static integer(kind=4) idsub [value-expr: ffflag.idsub];
+  static integer(kind=4) nwidth [value-expr: ffflag.nwidth];
+  static integer(kind=4) nschem [value-expr: ffflag.nschem];
+  static logical(kind=4) onshel [value-expr: ffflag.onshel];
+  static integer(kind=4) idot [value-expr: ffflag.idot];
+  static integer(kind=4) fidel3 [value-expr: ffidel.fidel3];
+  static integer(kind=4) fidel4 [value-expr: ffidel.fidel4];
+  static integer(kind=4) fidl3i[5] [value-expr: ffidel.fidl3i];
+  static integer(kind=4) fid3ij[36] [value-expr: ffidel.fid3ij];
+  static integer(kind=4) fidl4i[6] [value-expr: ffidel.fidl4i];
+  static real(kind=8) xloss [value-expr: ffprec.xloss];
+  static real(kind=8) precx [value-expr: ffprec.precx];
+  static real(kind=8) precc [value-expr: ffprec.precc];
+  static real(kind=8) xalogm [value-expr: ffprec.xalogm];
+  static real(kind=8) xclogm [value-expr: ffprec.xclogm];
+  static real(kind=8) xalog2 [value-expr: ffprec.xalog2];
+  static real(kind=8) xclog2 [value-expr: ffprec.xclog2];
+  static real(kind=8) reqprc [value-expr: ffprec.reqprc];
+  static integer(kind=4) irota3 [value-expr: ffrota.irota3];
+  static integer(kind=4) irota4 [value-expr: ffrota.irota4];
+  static integer(kind=4) irota5 [value-expr: ffrota.irota5];
+  static integer(kind=4) irota6 [value-expr: ffrota.irota6];
+  static integer(kind=4) isgn34 [value-expr: ffsign.isgn34];
+  static integer(kind=4) isgnal [value-expr: ffsign.isgnal];
+  static logical(kind=4) lsmug [value-expr: ffsmug.lsmug];
+  static logical(kind=4) lnasty [value-expr: ffsmug.lnasty];
+  static integer(kind=4) idum93[2] [value-expr: ffsmug.idum93];
+  static complex(kind=8) cmipj[9] [value-expr: ffsmug.cmipj];
+  static complex(kind=8) c2sisj[16] [value-expr: ffsmug.c2sisj];
+  static complex(kind=8) ca1 [value-expr: ffsmug.ca1];
+  integer(kind=4) ier;
+  static integer(kind=4) init = 0;
+  integer(kind=4) ipi12;
+  complex(kind=8) zdilog;
+  complex(kind=8) zdum;
+  complex(kind=8) __result_spence;
+
+  if (init == 0)
+    {
+      init = 1;
+      ffinit ();
+    }
+  L.1:;
+  ier = 0;
+  ffzzdl (&zdilog, &ipi12, &zdum, (complex(kind=8) *) z, &ier);
+  __result_spence = COMPLEX_EXPR <(real(kind=8)) ipi12 * 8.2246703342411320303284583133063279092311859130859375e-1, 0.0> + zdilog;
+  return __result_spence;
+}
+
+

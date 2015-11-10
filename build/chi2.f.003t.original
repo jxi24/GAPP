@@ -1,0 +1,2392 @@
+fcn (integer(kind=4) & restrict npar, real(kind=8)[0:] * restrict grad, real(kind=8) & restrict fval, real(kind=8)[0:D.3777] * restrict xval, integer(kind=4) & restrict iflag, real(kind=8) (*<T8da>) () chi2)
+{
+  static real(kind=8) q[10] [value-expr: coupls.q];
+  static real(kind=8) i3[10] [value-expr: coupls.i3];
+  static real(kind=8) nc[10] [value-expr: coupls.nc];
+  static real(kind=8) v[10] [value-expr: coupls.v];
+  static real(kind=8) a[10] [value-expr: coupls.a];
+  static real(kind=8) alphat [value-expr: coupls.alphat];
+  static real(kind=8) sinhat [value-expr: coupls.sinhat];
+  static real(kind=8) coshat [value-expr: coupls.coshat];
+  static real(kind=8) rhonc [value-expr: coupls.rhonc];
+  static real(kind=8) i3r[10] [value-expr: coupls.i3r];
+  static real(kind=8) u1xr[10] [value-expr: coupls.u1xr];
+  static real(kind=8) u1xl[10] [value-expr: coupls.u1xl];
+  static real(kind=8) fitx [value-expr: fit221.fitx];
+  static real(kind=8) fitsph [value-expr: fit221.fitsph];
+  static real(kind=8) fitcph [value-expr: fit221.fitcph];
+  static real(kind=8) fittph [value-expr: fit221.fittph];
+  static real(kind=8) fits2b [value-expr: fit221.fits2b];
+  static real(kind=8) kkss [value-expr: fit221.kkss];
+  static real(kind=8) kkcc [value-expr: fit221.kkcc];
+  static real(kind=8) kkem [value-expr: fit221.kkem];
+  static real(kind=8) bestlnx [value-expr: fitbst.bestlnx];
+  static real(kind=8) besttph [value-expr: fitbst.besttph];
+  static real(kind=8) bests2b [value-expr: fitbst.bests2b];
+  static logical(kind=4) flgfitx [value-expr: fitflg.flgfitx];
+  static logical(kind=4) flgtph [value-expr: fitflg.flgtph];
+  static logical(kind=4) flgs2b [value-expr: fitflg.flgs2b];
+  static logical(kind=4) flfout [value-expr: fitflg.flfout];
+  static integer(kind=4) modtype [value-expr: fitswtr.modtype];
+  static integer(kind=4) plltr [value-expr: fitswtr.plltr];
+  static integer(kind=4) prtpll[81] [value-expr: fitswtr.prtpll];
+  static logical(kind=4) flagmr [value-expr: flags.flagmr];
+  static integer(kind=4) flgblm [value-expr: flags.flgblm];
+  static logical(kind=4) ffermi [value-expr: flags.ffermi];
+  static logical(kind=4) fa2mt4 [value-expr: flags.fa2mt4];
+  static logical(kind=4) fa2mt2 [value-expr: flags.fa2mt2];
+  static logical(kind=4) fa2mt0 [value-expr: flags.fa2mt0];
+  static logical(kind=4) fla2im [value-expr: flags.fla2im];
+  static logical(kind=4) fasmt2 [value-expr: flags.fasmt2];
+  static logical(kind=4) fasmt0 [value-expr: flags.fasmt0];
+  static logical(kind=4) fas2mt [value-expr: flags.fas2mt];
+  static logical(kind=4) flagmf [value-expr: flags.flagmf];
+  static logical(kind=4) fpolew [value-expr: flags.fpolew];
+  static logical(kind=4) flgech [value-expr: flags.flgech];
+  static logical(kind=4) fobliq [value-expr: flags.fobliq];
+  static logical(kind=4) f4lqcd [value-expr: flags.f4lqcd];
+  static logical(kind=4) falas2 [value-expr: flags.falas2];
+  static logical(kind=4) fbayes [value-expr: flags.fbayes];
+  static integer(kind=4) flagzp [value-expr: flags.flagzp];
+  static logical(kind=4) flagmh [value-expr: flags.flagmh];
+  static logical(kind=4) flagmt [value-expr: flags.flagmt];
+  static logical(kind=4) flagmc [value-expr: flags.flagmc];
+  static logical(kind=4) flgrho [value-expr: flags.flgrho];
+  static logical(kind=4) fkappa [value-expr: flags.fkappa];
+  static logical(kind=4) flags [value-expr: flags.flags];
+  static logical(kind=4) flagt [value-expr: flags.flagt];
+  static logical(kind=4) fzprim [value-expr: flags.fzprim];
+  static logical(kind=4) fsinth [value-expr: flags.fsinth];
+  static logical(kind=4) fwrite [value-expr: flags.fwrite];
+  static logical(kind=4) flprob [value-expr: flags.flprob];
+  static logical(kind=4) fhiggs [value-expr: flags.fhiggs];
+  static logical(kind=4) flagal [value-expr: flags.flagal];
+  static logical(kind=4) fsplot [value-expr: flags.fsplot];
+  static real(kind=8) alpha [value-expr: inputs.alpha];
+  static real(kind=8) gf [value-expr: inputs.gf];
+  static real(kind=8) alfas0 [value-expr: inputs.alfas0];
+  static real(kind=8) asgrid[2001] [value-expr: inputs.asgrid];
+  static real(kind=8) mu0 [value-expr: inputs.mu0];
+  static real(kind=8) dahad3 [value-expr: inputs.dahad3];
+  static real(kind=8) pol4hf [value-expr: inputs.pol4hf];
+  static real(kind=8) an[8004] [value-expr: inputs.an];
+  static real(kind=8) bn[8004] [value-expr: inputs.bn];
+  static real(kind=8) pi1 [value-expr: inputs.pi1];
+  static real(kind=8) pi2 [value-expr: inputs.pi2];
+  static real(kind=8) zeta2 [value-expr: inputs.zeta2];
+  static real(kind=8) zeta3 [value-expr: inputs.zeta3];
+  static real(kind=8) zeta4 [value-expr: inputs.zeta4];
+  static real(kind=8) zeta5 [value-expr: inputs.zeta5];
+  static real(kind=8) zeta6 [value-expr: inputs.zeta6];
+  static real(kind=8) zeta7 [value-expr: inputs.zeta7];
+  static real(kind=8) prob [value-expr: limits.prob];
+  static real(kind=8) mtp [value-expr: limits.mtp];
+  static real(kind=8) sigma [value-expr: limits.sigma];
+  static integer(kind=4) zprime [value-expr: limits.zprime];
+  static real(kind=8) mw2 [value-expr: mass2.mw2];
+  static real(kind=8) mz2 [value-expr: mass2.mz2];
+  static real(kind=8) mt2 [value-expr: mass2.mt2];
+  static real(kind=8) mh2 [value-expr: mass2.mh2];
+  static real(kind=8) mz [value-expr: masses.mz];
+  static real(kind=8) mh [value-expr: masses.mh];
+  static real(kind=8) mt [value-expr: masses.mt];
+  static real(kind=8) mb [value-expr: masses.mb];
+  static real(kind=8) mc [value-expr: masses.mc];
+  static real(kind=8) ms [value-expr: masses.ms];
+  static real(kind=8) md [value-expr: masses.md];
+  static real(kind=8) mu [value-expr: masses.mu];
+  static real(kind=8) mtau [value-expr: masses.mtau];
+  static real(kind=8) mmu [value-expr: masses.mmu];
+  static real(kind=8) me [value-expr: masses.me];
+  static real(kind=8) mw [value-expr: masses.mw];
+  static real(kind=8) swpar [value-expr: obliqe.swpar];
+  static real(kind=8) spar [value-expr: obliqe.spar];
+  static real(kind=8) tpar [value-expr: obliqe.tpar];
+  static real(kind=8) upar [value-expr: obliqe.upar];
+  static real(kind=8) brho [value-expr: obliqe.brho];
+  static real(kind=8) bkappa [value-expr: obliqe.bkappa];
+  static real(kind=8) rpar [value-expr: obliqe.rpar];
+  static real(kind=8) zpar [value-expr: obliqe.zpar];
+  static real(kind=8) delrwh [value-expr: obliqe.delrwh];
+  static real(kind=8) delrzh [value-expr: obliqe.delrzh];
+  static real(kind=8) delr [value-expr: obliqe.delr];
+  static real(kind=8) rhohat [value-expr: obliqe.rhohat];
+  static real(kind=8) rho2 [value-expr: obliqe.rho2];
+  static real(kind=8) ratzw2 [value-expr: ratios.ratzw2];
+  static real(kind=8) rathw2 [value-expr: ratios.rathw2];
+  static real(kind=8) rathz2 [value-expr: ratios.rathz2];
+  static real(kind=8) rattw2 [value-expr: ratios.rattw2];
+  static real(kind=8) rattz2 [value-expr: ratios.rattz2];
+  static real(kind=8) ratth2 [value-expr: ratios.ratth2];
+  static real(kind=8) mzp [value-expr: zprime.mzp];
+  static real(kind=8) mzp2 [value-expr: zprime.mzp2];
+  static real(kind=8) mz02 [value-expr: zprime.mz02];
+  static real(kind=8) sinth [value-expr: zprime.sinth];
+  static real(kind=8) sinth2 [value-expr: zprime.sinth2];
+  static real(kind=8) costh [value-expr: zprime.costh];
+  static real(kind=8) costh2 [value-expr: zprime.costh2];
+  static real(kind=8) ratg21 [value-expr: zprime.ratg21];
+  static real(kind=8) rhoeff [value-expr: zprime.rhoeff];
+  static real(kind=8) rhoezp [value-expr: zprime.rhoezp];
+  static real(kind=8) rhozzp [value-expr: zprime.rhozzp];
+  static real(kind=8) v2[10] [value-expr: zprime.v2];
+  static real(kind=8) a2[10] [value-expr: zprime.a2];
+  static real(kind=8) eps2_l[10] [value-expr: zprime.eps2_l];
+  static real(kind=8) eps2_r[10] [value-expr: zprime.eps2_r];
+  static real(kind=8) ratgrl [value-expr: zprime.ratgrl];
+  real(kind=8) det;
+  real(kind=8) emat[36];
+  integer(kind=4) i;
+  integer(kind=4) j;
+  real(kind=8) pull[80];
+  real(kind=8) smval[80];
+  integer(kind=8) ubound.0;
+  integer(kind=8) size.1;
+  integer(kind=8) D.3777;
+  bitsizetype D.3778;
+  sizetype D.3779;
+
+  ubound.0 = (integer(kind=8)) *npar;
+  size.1 = NON_LVALUE_EXPR <ubound.0>;
+  size.1 = MAX_EXPR <size.1, 0>;
+  D.3777 = size.1 + -1;
+  D.3778 = (bitsizetype) (sizetype) NON_LVALUE_EXPR <size.1> * 64;
+  D.3779 = (sizetype) NON_LVALUE_EXPR <size.1> * 8;
+  if (*iflag == 1)
+    {
+      alpha = 7.2973525678992658127786086197374970652163028717041015625e-3;
+      gf = 1.16636999999999998138674670022929547030798858031630516052e-5;
+      ms = 1.1999999999999999555910790149937383830547332763671875e-1;
+      md = 5.44000000000000039079850466805510222911834716796875e-3;
+      mu = 2.18000000000000008007483565108941547805443406105041503906e-3;
+      mtau = 1.776990000000000069491079557337798178195953369140625e+0;
+      mmu = 1.0565835699999999441889286799778346903622150421142578125e-1;
+      me = 5.10998902000000003106872092928369966102764010429382324219e-4;
+      q[0] = 0.0;
+      q[1] = -1.0e+0;
+      q[2] = -1.0e+0;
+      q[3] = -1.0e+0;
+      q[4] = 6.6666666666666662965923251249478198587894439697265625e-1;
+      q[5] = 6.6666666666666662965923251249478198587894439697265625e-1;
+      q[6] = 6.6666666666666662965923251249478198587894439697265625e-1;
+      q[7] = -3.33333333333333314829616256247390992939472198486328125e-1;
+      q[8] = -3.33333333333333314829616256247390992939472198486328125e-1;
+      q[9] = -3.33333333333333314829616256247390992939472198486328125e-1;
+      i3[0] = 5.0e-1;
+      i3[1] = -5.0e-1;
+      i3[2] = -5.0e-1;
+      i3[3] = -5.0e-1;
+      i3[4] = 5.0e-1;
+      i3[5] = 5.0e-1;
+      i3[6] = 5.0e-1;
+      i3[7] = -5.0e-1;
+      i3[8] = -5.0e-1;
+      i3[9] = -5.0e-1;
+      nc[0] = 3.0e+0;
+      nc[1] = 1.0e+0;
+      nc[2] = 1.0e+0;
+      nc[3] = 1.0e+0;
+      nc[4] = 3.0e+0;
+      nc[5] = 3.0e+0;
+      nc[6] = 3.0e+0;
+      nc[7] = 3.0e+0;
+      nc[8] = 3.0e+0;
+      nc[9] = 3.0e+0;
+      modtype = 0;
+      modtype = 1;
+      i3r[0] = 0.0;
+      i3r[1] = 0.0;
+      i3r[2] = 0.0;
+      i3r[3] = 0.0;
+      i3r[4] = 0.0;
+      i3r[5] = 0.0;
+      i3r[6] = 0.0;
+      i3r[7] = 0.0;
+      i3r[8] = 0.0;
+      i3r[9] = 0.0;
+      u1xl[0] = -5.0e-1;
+      u1xl[1] = -5.0e-1;
+      u1xl[2] = -5.0e-1;
+      u1xl[3] = -5.0e-1;
+      u1xl[4] = 1.666666666666666574148081281236954964697360992431640625e-1;
+      u1xl[5] = 1.666666666666666574148081281236954964697360992431640625e-1;
+      u1xl[6] = 1.666666666666666574148081281236954964697360992431640625e-1;
+      u1xl[7] = 1.666666666666666574148081281236954964697360992431640625e-1;
+      u1xl[8] = 1.666666666666666574148081281236954964697360992431640625e-1;
+      u1xl[9] = 1.666666666666666574148081281236954964697360992431640625e-1;
+      u1xr[0] = 0.0;
+      u1xr[1] = -1.0e+0;
+      u1xr[2] = -1.0e+0;
+      u1xr[3] = -1.0e+0;
+      u1xr[4] = 6.6666666666666662965923251249478198587894439697265625e-1;
+      u1xr[5] = 6.6666666666666662965923251249478198587894439697265625e-1;
+      u1xr[6] = 6.6666666666666662965923251249478198587894439697265625e-1;
+      u1xr[7] = -3.33333333333333314829616256247390992939472198486328125e-1;
+      u1xr[8] = -3.33333333333333314829616256247390992939472198486328125e-1;
+      u1xr[9] = -3.33333333333333314829616256247390992939472198486328125e-1;
+      plltr = 1;
+      pi1 = 3.141592653589793115997963468544185161590576171875e+0;
+      {
+        real(kind=8) D.3700;
+        real(kind=8) D.3699;
+
+        D.3699 = pi1;
+        D.3700 = D.3699 * D.3699;
+        pi2 = D.3700;
+      }
+      zeta2 = pi2 / 6.0e+0;
+      zeta3 = 1.2020569031595942366408280577161349356174468994140625e+0;
+      {
+        real(kind=8) D.3702;
+        real(kind=8) D.3701;
+
+        D.3701 = pi2;
+        D.3702 = D.3701 * D.3701;
+        zeta4 = D.3702 / 9.0e+1;
+      }
+      zeta5 = 1.036927755143369989099255690234713256359100341796875e+0;
+      {
+        real(kind=8) D.3703;
+
+        D.3703 = pi2;
+        zeta6 = __builtin_powi (D.3703, 3) / 9.45e+2;
+      }
+      zeta7 = 1.0083492773819229260112706469953991472721099853515625e+0;
+      pol4hf = 5.174790616738993431766857611364684998989105224609375e-1;
+      flagmr = 1;
+      flgblm = 0;
+      flgech = 1;
+      f4lqcd = 1;
+      ffermi = 1;
+      fa2mt4 = 1;
+      fa2mt2 = 1;
+      fa2mt0 = 1;
+      fla2im = 1;
+      fasmt2 = 1;
+      fasmt0 = 1;
+      fas2mt = 1;
+      falas2 = 1;
+      flagmf = 1;
+      fhiggs = 0;
+      fbayes = 0;
+      fobliq = 1;
+      flagzp = 0;
+      if (NON_LVALUE_EXPR <f4lqcd>)
+        {
+          {
+            struct __st_parameter_open open_parm.2;
+
+            open_parm.2.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            open_parm.2.common.line = 197;
+            open_parm.2.file = &"../src/F/dat/grid4loop.dat"[1]{lb: 1 sz: 1};
+            open_parm.2.file_len = 26;
+            open_parm.2.status = &"old"[1]{lb: 1 sz: 1};
+            open_parm.2.status_len = 3;
+            open_parm.2.common.flags = 768;
+            open_parm.2.common.unit = 3;
+            _gfortran_st_open (&open_parm.2);
+          }
+          {
+            struct __st_parameter_open open_parm.3;
+
+            open_parm.3.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            open_parm.3.common.line = 198;
+            open_parm.3.file = &"../src/F/dat/grid4amu.dat"[1]{lb: 1 sz: 1};
+            open_parm.3.file_len = 25;
+            open_parm.3.status = &"old"[1]{lb: 1 sz: 1};
+            open_parm.3.status_len = 3;
+            open_parm.3.common.flags = 768;
+            open_parm.3.common.unit = 4;
+            _gfortran_st_open (&open_parm.3);
+          }
+        }
+      else
+        {
+          {
+            struct __st_parameter_open open_parm.4;
+
+            open_parm.4.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            open_parm.4.common.line = 200;
+            open_parm.4.file = &"../src/F/dat/grid3loop.dat"[1]{lb: 1 sz: 1};
+            open_parm.4.file_len = 26;
+            open_parm.4.status = &"old"[1]{lb: 1 sz: 1};
+            open_parm.4.status_len = 3;
+            open_parm.4.common.flags = 768;
+            open_parm.4.common.unit = 3;
+            _gfortran_st_open (&open_parm.4);
+          }
+          {
+            struct __st_parameter_open open_parm.5;
+
+            open_parm.5.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            open_parm.5.common.line = 201;
+            open_parm.5.file = &"../src/F/dat/grid3amu.dat"[1]{lb: 1 sz: 1};
+            open_parm.5.file_len = 25;
+            open_parm.5.status = &"old"[1]{lb: 1 sz: 1};
+            open_parm.5.status_len = 3;
+            open_parm.5.common.flags = 768;
+            open_parm.5.common.unit = 4;
+            _gfortran_st_open (&open_parm.5);
+          }
+        }
+      L.2:;
+      i = 0;
+      if (i <= 2000)
+        {
+          while (1)
+            {
+              {
+                logical(kind=4) D.3720;
+
+                {
+                  struct __st_parameter_dt dt_parm.6;
+
+                  dt_parm.6.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+                  dt_parm.6.common.line = 205;
+                  dt_parm.6.format = &"(f6.4,4(1x,f17.14))"[1]{lb: 1 sz: 1};
+                  dt_parm.6.format_len = 19;
+                  dt_parm.6.common.flags = 4096;
+                  dt_parm.6.common.unit = 3;
+                  _gfortran_st_read (&dt_parm.6);
+                  _gfortran_transfer_real (&dt_parm.6, &asgrid[(integer(kind=8)) i], 8);
+                  j = 1;
+                  if (j <= 4)
+                    {
+                      while (1)
+                        {
+                          {
+                            logical(kind=4) D.3714;
+
+                            _gfortran_transfer_real (&dt_parm.6, &an[((integer(kind=8)) i * 4 + (integer(kind=8)) j) + -1], 8);
+                            L.5:;
+                            if (dt_parm.6.common.flags & 3) goto L.6;
+                            D.3714 = j == 4;
+                            j = j + 1;
+                            if (D.3714) goto L.6;
+                          }
+                        }
+                    }
+                  L.6:;
+                  _gfortran_st_read_done (&dt_parm.6);
+                }
+                {
+                  struct __st_parameter_dt dt_parm.7;
+
+                  dt_parm.7.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+                  dt_parm.7.common.line = 206;
+                  dt_parm.7.format = &"(f6.4,4(1x,f17.14))"[1]{lb: 1 sz: 1};
+                  dt_parm.7.format_len = 19;
+                  dt_parm.7.common.flags = 4096;
+                  dt_parm.7.common.unit = 4;
+                  _gfortran_st_read (&dt_parm.7);
+                  _gfortran_transfer_real (&dt_parm.7, &asgrid[(integer(kind=8)) i], 8);
+                  j = 1;
+                  if (j <= 4)
+                    {
+                      while (1)
+                        {
+                          {
+                            logical(kind=4) D.3718;
+
+                            _gfortran_transfer_real (&dt_parm.7, &bn[((integer(kind=8)) i * 4 + (integer(kind=8)) j) + -1], 8);
+                            L.7:;
+                            if (dt_parm.7.common.flags & 3) goto L.8;
+                            D.3718 = j == 4;
+                            j = j + 1;
+                            if (D.3718) goto L.8;
+                          }
+                        }
+                    }
+                  L.8:;
+                  _gfortran_st_read_done (&dt_parm.7);
+                }
+                __label_000005:;
+                L.3:;
+                D.3720 = i == 2000;
+                i = i + 1;
+                if (D.3720) goto L.4;
+              }
+            }
+        }
+      L.4:;
+      {
+        struct __st_parameter_close close_parm.8;
+
+        close_parm.8.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        close_parm.8.common.line = 209;
+        close_parm.8.common.flags = 0;
+        close_parm.8.common.unit = 3;
+        _gfortran_st_close (&close_parm.8);
+      }
+      {
+        struct __st_parameter_close close_parm.9;
+
+        close_parm.9.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        close_parm.9.common.line = 210;
+        close_parm.9.common.flags = 0;
+        close_parm.9.common.unit = 4;
+        _gfortran_st_close (&close_parm.9);
+      }
+      ffinit ();
+    }
+  L.1:;
+  *fval = chi2 (xval, (integer(kind=4) *) npar, &smval, &pull);
+  prob = *fval;
+  if (*iflag == 3)
+    {
+      {
+        struct __st_parameter_open open_parm.10;
+
+        open_parm.10.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        open_parm.10.common.line = 228;
+        open_parm.10.file = &"../221plots/bestfit_fp-d.tmp"[1]{lb: 1 sz: 1};
+        open_parm.10.file_len = 28;
+        open_parm.10.status = &"unknown"[1]{lb: 1 sz: 1};
+        open_parm.10.status_len = 7;
+        open_parm.10.common.flags = 768;
+        open_parm.10.common.unit = 1;
+        _gfortran_st_open (&open_parm.10);
+      }
+      {
+        struct __st_parameter_dt dt_parm.11;
+
+        dt_parm.11.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        dt_parm.11.common.line = 230;
+        dt_parm.11.format = &"(F10.5)"[1]{lb: 1 sz: 1};
+        dt_parm.11.format_len = 7;
+        dt_parm.11.common.flags = 4096;
+        dt_parm.11.common.unit = 1;
+        _gfortran_st_write (&dt_parm.11);
+        _gfortran_transfer_real_write (&dt_parm.11, &(*xval)[1], 8);
+        _gfortran_st_write_done (&dt_parm.11);
+      }
+      {
+        struct __st_parameter_dt dt_parm.12;
+
+        dt_parm.12.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        dt_parm.12.common.line = 231;
+        dt_parm.12.format = &"(F10.5)"[1]{lb: 1 sz: 1};
+        dt_parm.12.format_len = 7;
+        dt_parm.12.common.flags = 4096;
+        dt_parm.12.common.unit = 1;
+        _gfortran_st_write (&dt_parm.12);
+        _gfortran_transfer_real_write (&dt_parm.12, &(*xval)[6], 8);
+        _gfortran_st_write_done (&dt_parm.12);
+      }
+      {
+        struct __st_parameter_dt dt_parm.13;
+
+        dt_parm.13.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        dt_parm.13.common.line = 232;
+        dt_parm.13.format = &"(F10.5)"[1]{lb: 1 sz: 1};
+        dt_parm.13.format_len = 7;
+        dt_parm.13.common.flags = 4096;
+        dt_parm.13.common.unit = 1;
+        _gfortran_st_write (&dt_parm.13);
+        _gfortran_transfer_real_write (&dt_parm.13, &(*xval)[27], 8);
+        _gfortran_st_write_done (&dt_parm.13);
+      }
+      {
+        struct __st_parameter_dt dt_parm.14;
+
+        dt_parm.14.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        dt_parm.14.common.line = 233;
+        dt_parm.14.format = &"(F10.5)"[1]{lb: 1 sz: 1};
+        dt_parm.14.format_len = 7;
+        dt_parm.14.common.flags = 4096;
+        dt_parm.14.common.unit = 1;
+        _gfortran_st_write (&dt_parm.14);
+        _gfortran_transfer_real_write (&dt_parm.14, &(*xval)[28], 8);
+        _gfortran_st_write_done (&dt_parm.14);
+      }
+      {
+        struct __st_parameter_dt dt_parm.15;
+
+        dt_parm.15.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        dt_parm.15.common.line = 234;
+        dt_parm.15.format = &"(F10.5)"[1]{lb: 1 sz: 1};
+        dt_parm.15.format_len = 7;
+        dt_parm.15.common.flags = 4096;
+        dt_parm.15.common.unit = 1;
+        _gfortran_st_write (&dt_parm.15);
+        _gfortran_transfer_real_write (&dt_parm.15, &(*xval)[29], 8);
+        _gfortran_st_write_done (&dt_parm.15);
+      }
+      {
+        struct __st_parameter_close close_parm.16;
+
+        close_parm.16.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+        close_parm.16.common.line = 236;
+        close_parm.16.common.flags = 0;
+        close_parm.16.common.unit = 1;
+        _gfortran_st_close (&close_parm.16);
+      }
+      bestlnx = (*xval)[27];
+      besttph = (*xval)[28];
+      bests2b = (*xval)[29];
+      mtp = smval[30];
+      if (NON_LVALUE_EXPR <fwrite>)
+        {
+          {
+            struct __st_parameter_dt dt_parm.17;
+
+            dt_parm.17.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.17.common.line = 246;
+            dt_parm.17.common.flags = 128;
+            dt_parm.17.common.unit = 7;
+            _gfortran_st_write (&dt_parm.17);
+            _gfortran_transfer_character_write (&dt_parm.17, &"eps2_L(e)   = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.17, &eps2_l[1], 8);
+            _gfortran_st_write_done (&dt_parm.17);
+          }
+          {
+            struct __st_parameter_dt dt_parm.18;
+
+            dt_parm.18.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.18.common.line = 247;
+            dt_parm.18.common.flags = 128;
+            dt_parm.18.common.unit = 7;
+            _gfortran_st_write (&dt_parm.18);
+            _gfortran_transfer_character_write (&dt_parm.18, &"eps2_R(e)   = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.18, &eps2_r[1], 8);
+            _gfortran_st_write_done (&dt_parm.18);
+          }
+          {
+            struct __st_parameter_dt dt_parm.19;
+
+            dt_parm.19.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.19.common.line = 248;
+            dt_parm.19.common.flags = 128;
+            dt_parm.19.common.unit = 7;
+            _gfortran_st_write (&dt_parm.19);
+            _gfortran_transfer_character_write (&dt_parm.19, &"eps2_L(u,d) = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.19, &eps2_l[4], 8);
+            _gfortran_st_write_done (&dt_parm.19);
+          }
+          {
+            struct __st_parameter_dt dt_parm.20;
+
+            dt_parm.20.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.20.common.line = 249;
+            dt_parm.20.common.flags = 128;
+            dt_parm.20.common.unit = 7;
+            _gfortran_st_write (&dt_parm.20);
+            _gfortran_transfer_character_write (&dt_parm.20, &"eps2_R(u)   = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.20, &eps2_r[4], 8);
+            _gfortran_st_write_done (&dt_parm.20);
+          }
+          {
+            struct __st_parameter_dt dt_parm.21;
+
+            dt_parm.21.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.21.common.line = 250;
+            dt_parm.21.common.flags = 128;
+            dt_parm.21.common.unit = 7;
+            _gfortran_st_write (&dt_parm.21);
+            _gfortran_transfer_character_write (&dt_parm.21, &"eps2_R(d)   = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.21, &eps2_r[7], 8);
+            _gfortran_st_write_done (&dt_parm.21);
+          }
+          {
+            struct __st_parameter_dt dt_parm.22;
+
+            dt_parm.22.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.22.common.line = 251;
+            dt_parm.22.common.flags = 128;
+            dt_parm.22.common.unit = 7;
+            _gfortran_st_write (&dt_parm.22);
+            _gfortran_transfer_character_write (&dt_parm.22, &"eps2_L(tau) = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.22, &eps2_l[3], 8);
+            _gfortran_st_write_done (&dt_parm.22);
+          }
+          {
+            struct __st_parameter_dt dt_parm.23;
+
+            dt_parm.23.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.23.common.line = 252;
+            dt_parm.23.common.flags = 128;
+            dt_parm.23.common.unit = 7;
+            _gfortran_st_write (&dt_parm.23);
+            _gfortran_transfer_character_write (&dt_parm.23, &"eps2_R(tau) = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.23, &eps2_r[3], 8);
+            _gfortran_st_write_done (&dt_parm.23);
+          }
+          {
+            struct __st_parameter_dt dt_parm.24;
+
+            dt_parm.24.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.24.common.line = 253;
+            dt_parm.24.common.flags = 128;
+            dt_parm.24.common.unit = 7;
+            _gfortran_st_write (&dt_parm.24);
+            _gfortran_transfer_character_write (&dt_parm.24, &"eps2_L(t,b) = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.24, &eps2_l[9], 8);
+            _gfortran_st_write_done (&dt_parm.24);
+          }
+          {
+            struct __st_parameter_dt dt_parm.25;
+
+            dt_parm.25.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.25.common.line = 254;
+            dt_parm.25.common.flags = 128;
+            dt_parm.25.common.unit = 7;
+            _gfortran_st_write (&dt_parm.25);
+            _gfortran_transfer_character_write (&dt_parm.25, &"eps2_R(b)   = "[1]{lb: 1 sz: 1}, 14);
+            _gfortran_transfer_real_write (&dt_parm.25, &eps2_r[9], 8);
+            _gfortran_st_write_done (&dt_parm.25);
+          }
+          {
+            struct __st_parameter_dt dt_parm.26;
+
+            dt_parm.26.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.26.common.line = 255;
+            dt_parm.26.common.flags = 128;
+            dt_parm.26.common.unit = 7;
+            _gfortran_st_write (&dt_parm.26);
+            _gfortran_st_write_done (&dt_parm.26);
+          }
+          {
+            struct __st_parameter_dt dt_parm.27;
+
+            dt_parm.27.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.27.common.line = 257;
+            dt_parm.27.common.flags = 128;
+            dt_parm.27.common.unit = 7;
+            _gfortran_st_write (&dt_parm.27);
+            _gfortran_transfer_character_write (&dt_parm.27, &"v2(nu)  = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.27, &v2[0], 8);
+            _gfortran_st_write_done (&dt_parm.27);
+          }
+          {
+            struct __st_parameter_dt dt_parm.28;
+
+            dt_parm.28.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.28.common.line = 258;
+            dt_parm.28.common.flags = 128;
+            dt_parm.28.common.unit = 7;
+            _gfortran_st_write (&dt_parm.28);
+            _gfortran_transfer_character_write (&dt_parm.28, &"a2(nu)  = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.28, &a2[0], 8);
+            _gfortran_st_write_done (&dt_parm.28);
+          }
+          {
+            struct __st_parameter_dt dt_parm.29;
+
+            dt_parm.29.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.29.common.line = 259;
+            dt_parm.29.common.flags = 128;
+            dt_parm.29.common.unit = 7;
+            _gfortran_st_write (&dt_parm.29);
+            _gfortran_transfer_character_write (&dt_parm.29, &"v2(e)   = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.29, &v2[1], 8);
+            _gfortran_st_write_done (&dt_parm.29);
+          }
+          {
+            struct __st_parameter_dt dt_parm.30;
+
+            dt_parm.30.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.30.common.line = 260;
+            dt_parm.30.common.flags = 128;
+            dt_parm.30.common.unit = 7;
+            _gfortran_st_write (&dt_parm.30);
+            _gfortran_transfer_character_write (&dt_parm.30, &"a2(e)   = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.30, &a2[1], 8);
+            _gfortran_st_write_done (&dt_parm.30);
+          }
+          {
+            struct __st_parameter_dt dt_parm.31;
+
+            dt_parm.31.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.31.common.line = 261;
+            dt_parm.31.common.flags = 128;
+            dt_parm.31.common.unit = 7;
+            _gfortran_st_write (&dt_parm.31);
+            _gfortran_transfer_character_write (&dt_parm.31, &"v2(u)   = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.31, &v2[4], 8);
+            _gfortran_st_write_done (&dt_parm.31);
+          }
+          {
+            struct __st_parameter_dt dt_parm.32;
+
+            dt_parm.32.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.32.common.line = 262;
+            dt_parm.32.common.flags = 128;
+            dt_parm.32.common.unit = 7;
+            _gfortran_st_write (&dt_parm.32);
+            _gfortran_transfer_character_write (&dt_parm.32, &"a2(u)   = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.32, &a2[4], 8);
+            _gfortran_st_write_done (&dt_parm.32);
+          }
+          {
+            struct __st_parameter_dt dt_parm.33;
+
+            dt_parm.33.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.33.common.line = 263;
+            dt_parm.33.common.flags = 128;
+            dt_parm.33.common.unit = 7;
+            _gfortran_st_write (&dt_parm.33);
+            _gfortran_transfer_character_write (&dt_parm.33, &"v2(d)   = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.33, &v2[7], 8);
+            _gfortran_st_write_done (&dt_parm.33);
+          }
+          {
+            struct __st_parameter_dt dt_parm.34;
+
+            dt_parm.34.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.34.common.line = 264;
+            dt_parm.34.common.flags = 128;
+            dt_parm.34.common.unit = 7;
+            _gfortran_st_write (&dt_parm.34);
+            _gfortran_transfer_character_write (&dt_parm.34, &"a2(d)   = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.34, &a2[7], 8);
+            _gfortran_st_write_done (&dt_parm.34);
+          }
+          {
+            struct __st_parameter_dt dt_parm.35;
+
+            dt_parm.35.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.35.common.line = 265;
+            dt_parm.35.common.flags = 128;
+            dt_parm.35.common.unit = 7;
+            _gfortran_st_write (&dt_parm.35);
+            _gfortran_transfer_character_write (&dt_parm.35, &"v2(tau) = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.35, &v2[3], 8);
+            _gfortran_st_write_done (&dt_parm.35);
+          }
+          {
+            struct __st_parameter_dt dt_parm.36;
+
+            dt_parm.36.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.36.common.line = 266;
+            dt_parm.36.common.flags = 128;
+            dt_parm.36.common.unit = 7;
+            _gfortran_st_write (&dt_parm.36);
+            _gfortran_transfer_character_write (&dt_parm.36, &"a2(tau) = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.36, &a2[3], 8);
+            _gfortran_st_write_done (&dt_parm.36);
+          }
+          {
+            struct __st_parameter_dt dt_parm.37;
+
+            dt_parm.37.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.37.common.line = 267;
+            dt_parm.37.common.flags = 128;
+            dt_parm.37.common.unit = 7;
+            _gfortran_st_write (&dt_parm.37);
+            _gfortran_transfer_character_write (&dt_parm.37, &"v2(b)   = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.37, &v2[9], 8);
+            _gfortran_st_write_done (&dt_parm.37);
+          }
+          {
+            struct __st_parameter_dt dt_parm.38;
+
+            dt_parm.38.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.38.common.line = 268;
+            dt_parm.38.common.flags = 128;
+            dt_parm.38.common.unit = 7;
+            _gfortran_st_write (&dt_parm.38);
+            _gfortran_transfer_character_write (&dt_parm.38, &"a2(b)   = "[1]{lb: 1 sz: 1}, 10);
+            _gfortran_transfer_real_write (&dt_parm.38, &a2[9], 8);
+            _gfortran_st_write_done (&dt_parm.38);
+          }
+          {
+            struct __st_parameter_dt dt_parm.39;
+
+            dt_parm.39.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.39.common.line = 269;
+            dt_parm.39.common.flags = 128;
+            dt_parm.39.common.unit = 7;
+            _gfortran_st_write (&dt_parm.39);
+            _gfortran_st_write_done (&dt_parm.39);
+          }
+          {
+            struct __st_parameter_dt dt_parm.40;
+
+            dt_parm.40.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.40.common.line = 271;
+            dt_parm.40.format = &"(\' observable \',i2,\'): \',f12.7,f10.3)"[1]{lb: 1 sz: 1};
+            dt_parm.40.format_len = 37;
+            dt_parm.40.common.flags = 4096;
+            dt_parm.40.common.unit = 7;
+            _gfortran_st_write (&dt_parm.40);
+            i = 1;
+            if (i <= 80)
+              {
+                while (1)
+                  {
+                    {
+                      logical(kind=4) D.3759;
+
+                      _gfortran_transfer_integer_write (&dt_parm.40, &i, 4);
+                      _gfortran_transfer_real_write (&dt_parm.40, &smval[(integer(kind=8)) i + -1], 8);
+                      _gfortran_transfer_real_write (&dt_parm.40, &pull[(integer(kind=8)) i + -1], 8);
+                      L.11:;
+                      if (dt_parm.40.common.flags & 3) goto L.12;
+                      D.3759 = i == 80;
+                      i = i + 1;
+                      if (D.3759) goto L.12;
+                    }
+                  }
+              }
+            L.12:;
+            _gfortran_st_write_done (&dt_parm.40);
+          }
+          if (NON_LVALUE_EXPR <fsplot>)
+            {
+              s2plot ();
+            }
+          L.13:;
+          values ();
+        }
+      L.10:;
+      if (NON_LVALUE_EXPR <flfout>)
+        {
+          i = 1;
+          if (i <= 80)
+            {
+              while (1)
+                {
+                  {
+                    logical(kind=4) D.3770;
+
+                    if (prtpll[(integer(kind=8)) i] == 1)
+                      {
+                        {
+                          struct __st_parameter_dt dt_parm.41;
+
+                          dt_parm.41.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+                          dt_parm.41.common.line = 283;
+                          dt_parm.41.format = &"(I3,A,F8.4)"[1]{lb: 1 sz: 1};
+                          dt_parm.41.format_len = 11;
+                          dt_parm.41.common.flags = 4096;
+                          dt_parm.41.common.unit = 50;
+                          _gfortran_st_write (&dt_parm.41);
+                          {
+                            integer(kind=4) D.3768;
+
+                            D.3768 = i + 100;
+                            _gfortran_transfer_integer_write (&dt_parm.41, &D.3768, 4);
+                          }
+                          _gfortran_transfer_character_write (&dt_parm.41, &"\\t"[1]{lb: 1 sz: 1}, 2);
+                          _gfortran_transfer_real_write (&dt_parm.41, &pull[(integer(kind=8)) i + -1], 8);
+                          _gfortran_st_write_done (&dt_parm.41);
+                        }
+                      }
+                    L.17:;
+                    __label_000900:;
+                    L.15:;
+                    D.3770 = i == 80;
+                    i = i + 1;
+                    if (D.3770) goto L.16;
+                  }
+                }
+            }
+          L.16:;
+          {
+            struct __st_parameter_close close_parm.42;
+
+            close_parm.42.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            close_parm.42.common.line = 286;
+            close_parm.42.common.flags = 0;
+            close_parm.42.common.unit = 50;
+            _gfortran_st_close (&close_parm.42);
+          }
+          {
+            struct __st_parameter_dt dt_parm.43;
+
+            dt_parm.43.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+            dt_parm.43.common.line = 293;
+            dt_parm.43.format = &"(A)"[1]{lb: 1 sz: 1};
+            dt_parm.43.format_len = 3;
+            dt_parm.43.common.flags = 4096;
+            dt_parm.43.common.unit = 51;
+            _gfortran_st_write (&dt_parm.43);
+            _gfortran_transfer_character_write (&dt_parm.43, &"// fp-d ////////////////////////"[1]{lb: 1 sz: 1}, 32);
+            _gfortran_st_write_done (&dt_parm.43);
+          }
+        }
+      L.14:;
+      if (NON_LVALUE_EXPR <flprob>)
+        {
+          prob = __builtin_exp (-(*fval * 5.0e-1));
+        }
+      L.18:;
+      if (NON_LVALUE_EXPR <fbayes>)
+        {
+          {
+            static integer(kind=4) C.3775 = 6;
+
+            mnemat (&emat, &C.3775);
+          }
+          det = (emat[0] * ((emat[7] * emat[14] - emat[13] * emat[8])) - emat[6] * ((emat[1] * emat[14] - emat[13] * emat[2]))) + emat[12] * ((emat[1] * emat[8] - emat[7] * emat[2]));
+          prob = __builtin_sqrt (det) * prob;
+        }
+      L.19:;
+    }
+  L.9:;
+  return;
+}
+
+
+chi2 (real(kind=8)[0:D.4455] * restrict xval, integer(kind=4) & restrict npar, real(kind=8)[80] * restrict smval, real(kind=8)[80] * restrict pull)
+{
+  static real(kind=8) q[10] [value-expr: coupls.q];
+  static real(kind=8) i3[10] [value-expr: coupls.i3];
+  static real(kind=8) nc[10] [value-expr: coupls.nc];
+  static real(kind=8) v[10] [value-expr: coupls.v];
+  static real(kind=8) a[10] [value-expr: coupls.a];
+  static real(kind=8) alphat [value-expr: coupls.alphat];
+  static real(kind=8) sinhat [value-expr: coupls.sinhat];
+  static real(kind=8) coshat [value-expr: coupls.coshat];
+  static real(kind=8) rhonc [value-expr: coupls.rhonc];
+  static real(kind=8) i3r[10] [value-expr: coupls.i3r];
+  static real(kind=8) u1xr[10] [value-expr: coupls.u1xr];
+  static real(kind=8) u1xl[10] [value-expr: coupls.u1xl];
+  static real(kind=8) fitx [value-expr: fit221.fitx];
+  static real(kind=8) fitsph [value-expr: fit221.fitsph];
+  static real(kind=8) fitcph [value-expr: fit221.fitcph];
+  static real(kind=8) fittph [value-expr: fit221.fittph];
+  static real(kind=8) fits2b [value-expr: fit221.fits2b];
+  static real(kind=8) kkss [value-expr: fit221.kkss];
+  static real(kind=8) kkcc [value-expr: fit221.kkcc];
+  static real(kind=8) kkem [value-expr: fit221.kkem];
+  static real(kind=8) bestlnx [value-expr: fitbst.bestlnx];
+  static real(kind=8) besttph [value-expr: fitbst.besttph];
+  static real(kind=8) bests2b [value-expr: fitbst.bests2b];
+  static logical(kind=4) flgfitx [value-expr: fitflg.flgfitx];
+  static logical(kind=4) flgtph [value-expr: fitflg.flgtph];
+  static logical(kind=4) flgs2b [value-expr: fitflg.flgs2b];
+  static logical(kind=4) flfout [value-expr: fitflg.flfout];
+  static integer(kind=4) modtype [value-expr: fitswtr.modtype];
+  static integer(kind=4) plltr [value-expr: fitswtr.plltr];
+  static integer(kind=4) prtpll[81] [value-expr: fitswtr.prtpll];
+  static logical(kind=4) flagmr [value-expr: flags.flagmr];
+  static integer(kind=4) flgblm [value-expr: flags.flgblm];
+  static logical(kind=4) ffermi [value-expr: flags.ffermi];
+  static logical(kind=4) fa2mt4 [value-expr: flags.fa2mt4];
+  static logical(kind=4) fa2mt2 [value-expr: flags.fa2mt2];
+  static logical(kind=4) fa2mt0 [value-expr: flags.fa2mt0];
+  static logical(kind=4) fla2im [value-expr: flags.fla2im];
+  static logical(kind=4) fasmt2 [value-expr: flags.fasmt2];
+  static logical(kind=4) fasmt0 [value-expr: flags.fasmt0];
+  static logical(kind=4) fas2mt [value-expr: flags.fas2mt];
+  static logical(kind=4) flagmf [value-expr: flags.flagmf];
+  static logical(kind=4) fpolew [value-expr: flags.fpolew];
+  static logical(kind=4) flgech [value-expr: flags.flgech];
+  static logical(kind=4) fobliq [value-expr: flags.fobliq];
+  static logical(kind=4) f4lqcd [value-expr: flags.f4lqcd];
+  static logical(kind=4) falas2 [value-expr: flags.falas2];
+  static logical(kind=4) fbayes [value-expr: flags.fbayes];
+  static integer(kind=4) flagzp [value-expr: flags.flagzp];
+  static logical(kind=4) flagmh [value-expr: flags.flagmh];
+  static logical(kind=4) flagmt [value-expr: flags.flagmt];
+  static logical(kind=4) flagmc [value-expr: flags.flagmc];
+  static logical(kind=4) flgrho [value-expr: flags.flgrho];
+  static logical(kind=4) fkappa [value-expr: flags.fkappa];
+  static logical(kind=4) flags [value-expr: flags.flags];
+  static logical(kind=4) flagt [value-expr: flags.flagt];
+  static logical(kind=4) fzprim [value-expr: flags.fzprim];
+  static logical(kind=4) fsinth [value-expr: flags.fsinth];
+  static logical(kind=4) fwrite [value-expr: flags.fwrite];
+  static logical(kind=4) flprob [value-expr: flags.flprob];
+  static logical(kind=4) fhiggs [value-expr: flags.fhiggs];
+  static logical(kind=4) flagal [value-expr: flags.flagal];
+  static logical(kind=4) fsplot [value-expr: flags.fsplot];
+  static real(kind=8) alpha [value-expr: inputs.alpha];
+  static real(kind=8) gf [value-expr: inputs.gf];
+  static real(kind=8) alfas0 [value-expr: inputs.alfas0];
+  static real(kind=8) asgrid[2001] [value-expr: inputs.asgrid];
+  static real(kind=8) mu0 [value-expr: inputs.mu0];
+  static real(kind=8) dahad3 [value-expr: inputs.dahad3];
+  static real(kind=8) pol4hf [value-expr: inputs.pol4hf];
+  static real(kind=8) an[8004] [value-expr: inputs.an];
+  static real(kind=8) bn[8004] [value-expr: inputs.bn];
+  static real(kind=8) pi1 [value-expr: inputs.pi1];
+  static real(kind=8) pi2 [value-expr: inputs.pi2];
+  static real(kind=8) zeta2 [value-expr: inputs.zeta2];
+  static real(kind=8) zeta3 [value-expr: inputs.zeta3];
+  static real(kind=8) zeta4 [value-expr: inputs.zeta4];
+  static real(kind=8) zeta5 [value-expr: inputs.zeta5];
+  static real(kind=8) zeta6 [value-expr: inputs.zeta6];
+  static real(kind=8) zeta7 [value-expr: inputs.zeta7];
+  static real(kind=8) prob [value-expr: limits.prob];
+  static real(kind=8) mtp [value-expr: limits.mtp];
+  static real(kind=8) sigma [value-expr: limits.sigma];
+  static integer(kind=4) zprime [value-expr: limits.zprime];
+  static integer(kind=4) ima [value-expr: ma.ima];
+  static integer(kind=4) ssteps [value-expr: ma.ssteps];
+  static real(kind=8) mw2 [value-expr: mass2.mw2];
+  static real(kind=8) mz2 [value-expr: mass2.mz2];
+  static real(kind=8) mt2 [value-expr: mass2.mt2];
+  static real(kind=8) mh2 [value-expr: mass2.mh2];
+  static real(kind=8) mz [value-expr: masses.mz];
+  static real(kind=8) mh [value-expr: masses.mh];
+  static real(kind=8) mt [value-expr: masses.mt];
+  static real(kind=8) mb [value-expr: masses.mb];
+  static real(kind=8) mc [value-expr: masses.mc];
+  static real(kind=8) ms [value-expr: masses.ms];
+  static real(kind=8) md [value-expr: masses.md];
+  static real(kind=8) mu [value-expr: masses.mu];
+  static real(kind=8) mtau [value-expr: masses.mtau];
+  static real(kind=8) mmu [value-expr: masses.mmu];
+  static real(kind=8) me [value-expr: masses.me];
+  static real(kind=8) mw [value-expr: masses.mw];
+  static real(kind=8) swpar [value-expr: obliqe.swpar];
+  static real(kind=8) spar [value-expr: obliqe.spar];
+  static real(kind=8) tpar [value-expr: obliqe.tpar];
+  static real(kind=8) upar [value-expr: obliqe.upar];
+  static real(kind=8) brho [value-expr: obliqe.brho];
+  static real(kind=8) bkappa [value-expr: obliqe.bkappa];
+  static real(kind=8) rpar [value-expr: obliqe.rpar];
+  static real(kind=8) zpar [value-expr: obliqe.zpar];
+  static real(kind=8) delrwh [value-expr: obliqe.delrwh];
+  static real(kind=8) delrzh [value-expr: obliqe.delrzh];
+  static real(kind=8) delr [value-expr: obliqe.delr];
+  static real(kind=8) rhohat [value-expr: obliqe.rhohat];
+  static real(kind=8) rho2 [value-expr: obliqe.rho2];
+  static real(kind=8) ratzw2 [value-expr: ratios.ratzw2];
+  static real(kind=8) rathw2 [value-expr: ratios.rathw2];
+  static real(kind=8) rathz2 [value-expr: ratios.rathz2];
+  static real(kind=8) rattw2 [value-expr: ratios.rattw2];
+  static real(kind=8) rattz2 [value-expr: ratios.rattz2];
+  static real(kind=8) ratth2 [value-expr: ratios.ratth2];
+  static real(kind=8) mzp [value-expr: zprime.mzp];
+  static real(kind=8) mzp2 [value-expr: zprime.mzp2];
+  static real(kind=8) mz02 [value-expr: zprime.mz02];
+  static real(kind=8) sinth [value-expr: zprime.sinth];
+  static real(kind=8) sinth2 [value-expr: zprime.sinth2];
+  static real(kind=8) costh [value-expr: zprime.costh];
+  static real(kind=8) costh2 [value-expr: zprime.costh2];
+  static real(kind=8) ratg21 [value-expr: zprime.ratg21];
+  static real(kind=8) rhoeff [value-expr: zprime.rhoeff];
+  static real(kind=8) rhoezp [value-expr: zprime.rhoezp];
+  static real(kind=8) rhozzp [value-expr: zprime.rhozzp];
+  static real(kind=8) v2[10] [value-expr: zprime.v2];
+  static real(kind=8) a2[10] [value-expr: zprime.a2];
+  static real(kind=8) eps2_l[10] [value-expr: zprime.eps2_l];
+  static real(kind=8) eps2_r[10] [value-expr: zprime.eps2_r];
+  static real(kind=8) ratgrl [value-expr: zprime.ratgrl];
+  real(kind=8) afb[11];
+  real(kind=8) afb200[22];
+  real(kind=8) alr[11];
+  real(kind=8) c1d;
+  real(kind=8) c1u;
+  real(kind=8) c2d;
+  real(kind=8) c2u;
+  static real(kind=8) ccdis[49] = {1.79999999999999986399767948341832379810512065887451171875e-2, -5.8999999999999996891375531049561686813831329345703125e-2, -5.8999999999999996891375531049561686813831329345703125e-2, -5.8999999999999996891375531049561686813831329345703125e-2, 1.40000000000000002914335439641035918612033128738403320312e-2, 1.40000000000000002914335439641035918612033128738403320312e-2, 1.40000000000000002914335439641035918612033128738403320312e-2, -5.8999999999999996891375531049561686813831329345703125e-2, 3.06999999999999995115018691649311222136020660400390625e-1, -3.5999999999999998667732370449812151491641998291015625e-1, -3.5999999999999998667732370449812151491641998291015625e-1, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -5.8999999999999996891375531049561686813831329345703125e-2, -3.5999999999999998667732370449812151491641998291015625e-1, 3.06999999999999995115018691649311222136020660400390625e-1, -3.5999999999999998667732370449812151491641998291015625e-1, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -5.8999999999999996891375531049561686813831329345703125e-2, -3.5999999999999998667732370449812151491641998291015625e-1, -3.5999999999999998667732370449812151491641998291015625e-1, 3.06999999999999995115018691649311222136020660400390625e-1, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, 1.40000000000000002914335439641035918612033128738403320312e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, 5.0999999999999996724842077355788205750286579132080078125e-2, -1.25e-1, -1.25e-1, 1.40000000000000002914335439641035918612033128738403320312e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -1.25e-1, 5.0999999999999996724842077355788205750286579132080078125e-2, -1.25e-1, 1.40000000000000002914335439641035918612033128738403320312e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -4.499999999999999833466546306226518936455249786376953125e-2, -1.25e-1, -1.25e-1, 5.0999999999999996724842077355788205750286579132080078125e-2};
+  real(kind=8) cchad;
+  static real(kind=8) cchf[36] = {5.49800000000000010924594562311540357768535614013671875e-2, 1.758800000000000085531581817122059874236583709716796875e-1, 1.058499999999999996447286321199499070644378662109375e-1, -7.618999999999999384048265937963151372969150543212890625e-2, 7.363999999999999712674281227009487338364124298095703125e-2, -3.776000000000000189626092605976737104356288909912109375e-2, 1.758800000000000085531581817122059874236583709716796875e-1, 4.0649999999999998634425679711057455278933048248291015625e-2, -3.0519999999999998518962485150041175074875354766845703125e-2, 5.179999999999999882316359389733406715095043182373046875e-2, -3.096000000000000140776279522469849325716495513916015625e-2, 5.7040000000000000424105195406809798441827297210693359375e-2, 1.058499999999999996447286321199499070644378662109375e-1, -3.0519999999999998518962485150041175074875354766845703125e-2, 4.0109999999999999820143870010724640451371669769287109375e-2, -1.662200000000000066346927951599354855716228485107421875e-1, -5.5640000000000001956212969389525824226438999176025390625e-2, -3.70000000000000016375789613221058971248567104339599609375e-3, -7.618999999999999384048265937963151372969150543212890625e-2, 5.179999999999999882316359389733406715095043182373046875e-2, -1.662200000000000066346927951599354855716228485107421875e-1, 3.536999999999999866329147835131152532994747161865234375e-2, 2.65300000000000014976908602193361730314791202545166015625e-2, -3.651000000000000078603790143461083061993122100830078125e-2, 7.363999999999999712674281227009487338364124298095703125e-2, -3.096000000000000140776279522469849325716495513916015625e-2, -5.5640000000000001956212969389525824226438999176025390625e-2, 2.65300000000000014976908602193361730314791202545166015625e-2, 2.39700000000000017219559111936177941970527172088623046875e-2, -1.17949999999999999289457264239899814128875732421875e-1, -3.776000000000000189626092605976737104356288909912109375e-2, 5.7040000000000000424105195406809798441827297210693359375e-2, -3.70000000000000016375789613221058971248567104339599609375e-3, -3.651000000000000078603790143461083061993122100830078125e-2, -1.17949999999999999289457264239899814128875732421875e-1, 1.94000000000000005773159728050814010202884674072265625e-2};
+  static real(kind=8) ccls[81] = {1.41300000000000001987299214079030207358300685882568359375e-2, 4.3900000000000001521005543736464460380375385284423828125e-2, 6.821000000000000673683331342544988729059696197509765625e-2, -9.23599999999999976552089719916693866252899169921875e-2, -2.20000000000000013253287356462806201307103037834167480469e-3, -3.75999999999999988745114087862475571455433964729309082031e-3, -2.21499999999999995503596750268116011284291744232177734375e-2, -4.4089999999999997248867344978862092830240726470947265625e-2, -3.286000000000000031974423109204508364200592041015625e-2, 4.3900000000000001521005543736464460380375385284423828125e-2, 1.0309000000000000107913677993565215729176998138427734375e-1, 3.42150000000000009681144774731365032494068145751953125e-1, -2.88999999999999986066701040954285417683422565460205078125e-2, -4.9290000000000000479616346638067625463008880615234375e-2, -3.336999999999999688693463895106106065213680267333984375e-2, -1.81900000000000013067324999838092480786144733428955078125e-2, -4.349999999999999700239783351207734085619449615478515625e-3, -2.95999999999999995753396930808776232879608869552612304688e-3, 6.821000000000000673683331342544988729059696197509765625e-2, 3.42150000000000009681144774731365032494068145751953125e-1, 1.444100000000000105782049786284915171563625335693359375e-1, -1.260900000000000076294526252240757457911968231201171875e-1, -1.375200000000000033484326422694721259176731109619140625e-1, -9.19999999999999984456877655247808434069156646728515625e-2, -4.9119999999999996997956941413576714694499969482421875e-2, -4.0000000000000000832667268468867405317723751068115234375e-3, -3.75999999999999988745114087862475571455433964729309082031e-3, -9.23599999999999976552089719916693866252899169921875e-2, -2.88999999999999986066701040954285417683422565460205078125e-2, -1.260900000000000076294526252240757457911968231201171875e-1, 1.89879999999999993232080441885045729577541351318359375e-1, -6.29699999999999981969978080087457783520221710205078125e-2, -3.9719999999999998363531261702519259415566921234130859375e-2, 4.4042999999999998816946344959433190524578094482421875e-1, -7.62999999999999962974062128751029376871883869171142578125e-3, -2.62999999999999995933808172310364170698449015617370605469e-3, -2.20000000000000013253287356462806201307103037834167480469e-3, -4.9290000000000000479616346638067625463008880615234375e-2, -1.375200000000000033484326422694721259176731109619140625e-1, -6.29699999999999981969978080087457783520221710205078125e-2, 2.6720000000000000694999613415347994305193424224853515625e-2, -5.4960000000000001907363156306018936447799205780029296875e-2, -2.39399999999999994748645093523009563796222209930419921875e-2, -1.11900000000000002936539900133539049420505762100219726562e-2, 4.83000000000000009187095528773170372005552053451538085938e-3, -3.75999999999999988745114087862475571455433964729309082031e-3, -3.336999999999999688693463895106106065213680267333984375e-2, -9.19999999999999984456877655247808434069156646728515625e-2, -3.9719999999999998363531261702519259415566921234130859375e-2, -5.4960000000000001907363156306018936447799205780029296875e-2, 1.44200000000000005256906021600116218905895948410034179688e-2, -1.761000000000000065281113847959204576909542083740234375e-2, 9.39999999999999971862785219656188928638584911823272705078e-4, -8.81999999999999971522779418364734738133847713470458984375e-3, -2.21499999999999995503596750268116011284291744232177734375e-2, -1.81900000000000013067324999838092480786144733428955078125e-2, -4.9119999999999996997956941413576714694499969482421875e-2, 4.4042999999999998816946344959433190524578094482421875e-1, -2.39399999999999994748645093523009563796222209930419921875e-2, -1.761000000000000065281113847959204576909542083740234375e-2, 1.641700000000000103650421579004614613950252532958984375e-1, 1.983000000000000040412118096355698071420192718505859375e-2, 1.76200000000000002453592884421595954336225986480712890625e-2, -4.4089999999999997248867344978862092830240726470947265625e-2, -4.349999999999999700239783351207734085619449615478515625e-3, -4.0000000000000000832667268468867405317723751068115234375e-3, -7.62999999999999962974062128751029376871883869171142578125e-3, -1.11900000000000002936539900133539049420505762100219726562e-2, 9.39999999999999971862785219656188928638584911823272705078e-4, 1.983000000000000040412118096355698071420192718505859375e-2, 4.83999999999999968441910525029925338458269834518432617188e-3, -4.42099999999999992983390484369010664522647857666015625e-2, -3.286000000000000031974423109204508364200592041015625e-2, -2.95999999999999995753396930808776232879608869552612304688e-3, -3.75999999999999988745114087862475571455433964729309082031e-3, -2.62999999999999995933808172310364170698449015617370605469e-3, 4.83000000000000009187095528773170372005552053451538085938e-3, -8.21999999999999987621013275429504574276506900787353515625e-3, 1.76200000000000002453592884421595954336225986480712890625e-2, -4.42099999999999992983390484369010664522647857666015625e-2, 3.68000000000000011129985821867194317746907472610473632812e-3};
+  real(kind=8) ccmbc;
+  real(kind=8) ccmgw;
+  static real(kind=8) ccmt[121] = {3.5099999999999997868371792719699442386627197265625e-1, -2.119999999999999940047956670241546817123889923095703125e-1, -2.62000000000000010658141036401502788066864013671875e-1, -1.590000000000000024424906541753443889319896697998046875e-1, -3.09999999999999997779553950749686919152736663818359375e-2, -1.2199999999999999733546474089962430298328399658203125e-1, -2.70000000000000017763568394002504646778106689453125e-1, -4.1000000000000001720845688168992637656629085540771484375e-2, -5.6000000000000001165734175856414367444813251495361328125e-2, -4.900000000000000188737914186276611872017383575439453125e-2, -1.0399999999999999522604099411182687617838382720947265625e-1, -2.119999999999999940047956670241546817123889923095703125e-1, 1.3600000000000000976996261670137755572795867919921875e-1, -8.99999999999999966693309261245303787291049957275390625e-2, -4.299999999999999655830862366201472468674182891845703125e-2, -2.69999999999999996946886682280819513835012912750244140625e-2, -6.1999999999999999555910790149937383830547332763671875e-2, -1.1799999999999999378275106209912337362766265869140625e-1, -4.800000000000000099920072216264088638126850128173828125e-2, -6.00000000000000012490009027033011079765856266021728515625e-3, -8.99999999999999931998839741709161899052560329437255859375e-3, -5.0999999999999996724842077355788205750286579132080078125e-2, -2.62000000000000010658141036401502788066864013671875e-1, -8.99999999999999966693309261245303787291049957275390625e-2, 1.610000000000000042188474935755948536098003387451171875e-1, -2.4000000000000000499600361081320443190634250640869140625e-2, -1.40000000000000002914335439641035918612033128738403320312e-2, 6.00000000000000012490009027033011079765856266021728515625e-3, -1.559999999999999997779553950749686919152736663818359375e-1, -5.7000000000000002053912595556539599783718585968017578125e-2, 6.00000000000000012490009027033011079765856266021728515625e-3, 1.20000000000000002498001805406602215953171253204345703125e-2, -6.0999999999999998667732370449812151491641998291015625e-2, -1.590000000000000024424906541753443889319896697998046875e-1, -4.299999999999999655830862366201472468674182891845703125e-2, -2.4000000000000000499600361081320443190634250640869140625e-2, 1.590000000000000024424906541753443889319896697998046875e-1, -1.2199999999999999733546474089962430298328399658203125e-1, -7.599999999999999811262085813723388127982616424560546875e-2, -1.1999999999999999555910790149937383830547332763671875e-1, -2.4000000000000000499600361081320443190634250640869140625e-2, -3.30000000000000015543122344752191565930843353271484375e-2, -2.00000000000000004163336342344337026588618755340576171875e-2, -1.73999999999999988009591334048309363424777984619140625e-1, -3.09999999999999997779553950749686919152736663818359375e-2, -2.69999999999999996946886682280819513835012912750244140625e-2, -1.40000000000000002914335439641035918612033128738403320312e-2, -1.2199999999999999733546474089962430298328399658203125e-1, 4.1000000000000001720845688168992637656629085540771484375e-2, -2.99999999999999988897769753748434595763683319091796875e-2, -5.2999999999999998501198916756038670428097248077392578125e-2, -2.1999999999999998723243521681069978512823581695556640625e-2, 3.00000000000000006245004513516505539882928133010864257812e-3, -1.00000000000000002081668171172168513294309377670288085938e-3, -4.900000000000000188737914186276611872017383575439453125e-2, -1.2199999999999999733546474089962430298328399658203125e-1, -6.1999999999999999555910790149937383830547332763671875e-2, 6.00000000000000012490009027033011079765856266021728515625e-3, -7.599999999999999811262085813723388127982616424560546875e-2, -2.99999999999999988897769753748434595763683319091796875e-2, 9.50000000000000011102230246251565404236316680908203125e-2, -4.800000000000000099920072216264088638126850128173828125e-2, -1.409999999999999864552790995730902068316936492919921875e-1, -2.80000000000000005828670879282071837224066257476806640625e-2, -1.37000000000000010658141036401502788066864013671875e-1, 2.10000000000000013045120539345589349977672100067138671875e-2, -2.70000000000000017763568394002504646778106689453125e-1, -1.1799999999999999378275106209912337362766265869140625e-1, -1.559999999999999997779553950749686919152736663818359375e-1, -1.1999999999999999555910790149937383830547332763671875e-1, -5.2999999999999998501198916756038670428097248077392578125e-2, -4.800000000000000099920072216264088638126850128173828125e-2, 2.94999999999999984456877655247808434069156646728515625e-1, -4.2000000000000002609024107869117869995534420013427734375e-2, -3.00000000000000006245004513516505539882928133010864257812e-3, 6.8000000000000004884981308350688777863979339599609375e-2, -2.7700000000000002398081733190338127315044403076171875e-1, -4.1000000000000001720845688168992637656629085540771484375e-2, -4.800000000000000099920072216264088638126850128173828125e-2, -5.7000000000000002053912595556539599783718585968017578125e-2, -2.4000000000000000499600361081320443190634250640869140625e-2, -2.1999999999999998723243521681069978512823581695556640625e-2, -1.409999999999999864552790995730902068316936492919921875e-1, -4.2000000000000002609024107869117869995534420013427734375e-2, 5.1999999999999997613020497055913438089191913604736328125e-2, -2.5000000000000001387778780781445675529539585113525390625e-2, -6.0999999999999998667732370449812151491641998291015625e-2, 2.59999999999999988065102485279567190445959568023681640625e-2, -5.6000000000000001165734175856414367444813251495361328125e-2, -6.00000000000000012490009027033011079765856266021728515625e-3, 6.00000000000000012490009027033011079765856266021728515625e-3, -3.30000000000000015543122344752191565930843353271484375e-2, 3.00000000000000006245004513516505539882928133010864257812e-3, -2.80000000000000005828670879282071837224066257476806640625e-2, -3.00000000000000006245004513516505539882928133010864257812e-3, -2.5000000000000001387778780781445675529539585113525390625e-2, 8.99999999999999931998839741709161899052560329437255859375e-3, -2.99999999999999988897769753748434595763683319091796875e-2, 2.4000000000000000499600361081320443190634250640869140625e-2, -4.900000000000000188737914186276611872017383575439453125e-2, -8.99999999999999931998839741709161899052560329437255859375e-3, 1.20000000000000002498001805406602215953171253204345703125e-2, -2.00000000000000004163336342344337026588618755340576171875e-2, -1.00000000000000002081668171172168513294309377670288085938e-3, -1.37000000000000010658141036401502788066864013671875e-1, 6.8000000000000004884981308350688777863979339599609375e-2, -6.0999999999999998667732370449812151491641998291015625e-2, -2.99999999999999988897769753748434595763683319091796875e-2, 1.0399999999999999522604099411182687617838382720947265625e-1, -2.7700000000000002398081733190338127315044403076171875e-1, -1.0399999999999999522604099411182687617838382720947265625e-1, -5.0999999999999996724842077355788205750286579132080078125e-2, -6.0999999999999998667732370449812151491641998291015625e-2, -1.73999999999999988009591334048309363424777984619140625e-1, -4.900000000000000188737914186276611872017383575439453125e-2, 2.10000000000000013045120539345589349977672100067138671875e-2, -2.7700000000000002398081733190338127315044403076171875e-1, 2.59999999999999988065102485279567190445959568023681640625e-2, 2.4000000000000000499600361081320443190634250640869140625e-2, -2.7700000000000002398081733190338127315044403076171875e-1, 2.5e-1};
+  real(kind=8) ccntv;
+  real(kind=8) ccnue;
+  static real(kind=8) ccslc[16] = {7.21000000000000026284530108000581094529479742050170898438e-3, -7.381000000000000060840221749458578415215015411376953125e-2, -2.8979999999999998816502255749583127908408641815185546875e-2, -2.92000000000000002609024107869117869995534420013427734375e-2, -7.381000000000000060840221749458578415215015411376953125e-2, 5.72000000000000025784929746919260651338845491409301757812e-3, -1.17999999999999997252198014052737562451511621475219726562e-2, -8.770000000000000017763568394002504646778106689453125e-3, -2.8979999999999998816502255749583127908408641815185546875e-2, -1.17999999999999997252198014052737562451511621475219726562e-2, 1.08000000000000001380839886877538447151891887187957763672e-3, -6.00999999999999971744824023289766046218574047088623046875e-3, -2.92000000000000002609024107869117869995534420013427734375e-2, -8.770000000000000017763568394002504646778106689453125e-3, -6.00999999999999971744824023289766046218574047088623046875e-3, 1.01000000000000004704570066849100840045139193534851074219e-3};
+  real(kind=8) cctau;
+  real(kind=8) chiggs;
+  real(kind=8) dummy;
+  real(kind=8) epsd_l;
+  real(kind=8) epsd_r;
+  real(kind=8) epsu_l;
+  real(kind=8) epsu_r;
+  static real(kind=8) error[80] = {2.09999999999999987024268399693482933798804879188537597656e-3, 2.29999999999999982236431605997495353221893310546875e+0, 3.6999999999999998168132009368491708301007747650146484375e-2, 5.000000000000000277555756156289135105907917022705078125e-2, 3.30000000000000015543122344752191565930843353271484375e-2, 4.499999999999999833466546306226518936455249786376953125e-2, 2.50000000000000005204170427930421283235773444175720214844e-3, 1.29999999999999994032551242639783595222979784011840820312e-3, 1.69999999999999990528409821166633264510892331600189208984e-3, 4.30000000000000000277555756156289135105907917022705078125e-3, 4.89999999999999984179321899091519298963248729705810546875e-3, 2.59999999999999988065102485279567190445959568023681640625e-3, 1.09999999999999993616217608405349892564117908477783203125e-2, 2.1999999999999998723243521681069978512823581695556640625e-2, 6.59999999999999996391775169968241243623197078704833984375e-4, 3.00000000000000006245004513516505539882928133010864257812e-3, 1.60000000000000007667477763817487357300706207752227783203e-3, 3.50000000000000007285838599102589796530082821846008300781e-3, 2.00000000000000004163336342344337026588618755340576171875e-2, 2.69999999999999996946886682280819513835012912750244140625e-2, 2.16000000000000002761679773755076894303783774375915527344e-3, 6.00000000000000012490009027033011079765856266021728515625e-3, 1.499999999999999944488848768742172978818416595458984375e-2, 1.499999999999999944488848768742172978818416595458984375e-2, 4.299999999999999655830862366201472468674182891845703125e-2, 9.09999999999999975575093458246556110680103302001953125e-2, 3.30000000000000015543122344752191565930843353271484375e-2, 8.300000000000000432986979603811050765216350555419921875e-2, 3.8999999999999999944488848768742172978818416595458984375e-2, 6.1999999999999999555910790149937383830547332763671875e-2, 7.29999999999999982236431605997495353221893310546875e+0, 1.14000000000000003552713678800500929355621337890625e+1, 1.15e+1, 5.29999999999999982236431605997495353221893310546875e+0, 1.2800000000000000710542735760100185871124267578125e+1, 2.5e+0, 5.5999999999999996447286321199499070644378662109375e+0, 4.29999999999999982236431605997495353221893310546875e+0, 1.5800000000000000710542735760100185871124267578125e+1, 2.70000000000000017763568394002504646778106689453125e+0, 9.99999999999999954748111825886258685613938723690807819366e-7, 1.3400000000000000799360577730112709105014801025390625e+0, 0.0, 0.0, 9.60000000000000024320823133194835463655181229114532470703e-5, 7.399999999999999911182158029987476766109466552734375e-1, 4.79999999999999982236431605997495353221893310546875e-1, 1.50000000000000003122502256758252769941464066505432128906e-3, 1.10000000000000006626643678231403100653551518917083740234e-3, 4.10000000000000034555691641457997320685535669326782226562e-3, 4.10000000000000034555691641457997320685535669326782226562e-3, 4.30000000000000000277555756156289135105907917022705078125e-3, 1.600000000000000033306690738754696212708950042724609375e-2, 1.79999999999999986399767948341832379810512065887451171875e-2, 1.600000000000000033306690738754696212708950042724609375e-2, 1.499999999999999944488848768742172978818416595458984375e-2, 1.40000000000000002914335439641035918612033128738403320312e-2, 5.30000000000000002359223927328457648400217294692993164062e-3, 1.0790000000000000979216707719388068653643131256103515625e-3, 2.89999999999999980015985556747182272374629974365234375e-3, 3.4999999999999997779553950749686919152736663818359375e-1, 3.640000000000000124344978758017532527446746826171875e+0, 4.30000000000000000277555756156289135105907917022705078125e-3, 6.3000000000000000444089209850062616169452667236328125e-2, 5.99999999999999947437878677902745039318688213825225830078e-4, 1.4000000000000001332267629550187848508358001708984375e-1, 1.77000000000000008888723090905159551766701042652130126953e-3, 4.79999999999999957950302942322196031454950571060180664062e-3, 4.29999999999999993338661852249060757458209991455078125e-1, 1.4000000000000001332267629550187848508358001708984375e-1, 1.79999999999999993338661852249060757458209991455078125e-1, 3.40000000000000024424906541753443889319896697998046875e-2, 4.399999999999999744648704336213995702564716339111328125e-2, 2.5e-1, 8.300000000000000432986979603811050765216350555419921875e-2, 1.0199999999999999344968415471157641150057315826416015625e-1, 2.1999999999999998723243521681069978512823581695556640625e-2, 2.69999999999999996946886682280819513835012912750244140625e-2, 1.00000000000000004792173602385929598312941379845142364502e-4, 1.00000000000000002081668171172168513294309377670288085938e-2};
+  real(kind=8) errorb[9];
+  real(kind=8) errorc[9];
+  logical(kind=4) flcorr;
+  logical(kind=4) flgzph;
+  real(kind=8) gamma[12];
+  real(kind=8) gammaw[7];
+  integer(kind=4) i;
+  integer(kind=4) j;
+  complex(kind=8) kappa[10];
+  real(kind=8) lambdg;
+  real(kind=8) momntb[8];
+  real(kind=8) momntc[8];
+  real(kind=8) r[10];
+  complex(kind=8) rho[10];
+  real(kind=8) sgcenu;
+  real(kind=8) sigmah;
+  real(kind=8) sin2te[10];
+  real(kind=8) sumrlb[9];
+  real(kind=8) sumrlc[9];
+  real(kind=8) therr2;
+  static real(kind=8) value[80] = {9.1187600000000003319655661471188068389892578125e+1, 2.4951999999999998181010596454143524169921875e+3, 4.154099999999999681676854379475116729736328125e+1, 2.0803999999999998493649400188587605953216552734375e+1, 2.0785000000000000142108547152020037174224853515625e+1, 2.0763999999999999346300683100707828998565673828125e+1, 1.45000000000000007355227538141662080306559801101684570312e-2, 1.68999999999999983568699235547683201730251312255859375e-2, 1.88000000000000007382983113757290993817150592803955078125e-2, 1.439000000000000001332267629550187848508358001708984375e-1, 1.49799999999999988720134069808409549295902252197265625e-1, 4.03000000000000024868995751603506505489349365234375e-2, 9.80000000000000037747582837255322374403476715087890625e-2, 3.70999999999999996447286321199499070644378662109375e-1, 2.162900000000000100275343584144138731062412261962890625e-1, 1.721000000000000029753977059954195283353328704833984375e-1, 9.919999999999999651389970267700846306979656219482421875e-2, 7.069999999999999895639035685235285200178623199462890625e-2, 9.230000000000000426325641456060111522674560546875e-1, 6.7000000000000003996802888650563545525074005126953125e-1, 1.513799999999999867927868990591377951204776763916015625e-1, 1.544000000000000094591001698063337244093418121337890625e-1, 1.419999999999999873434575192732154391705989837646484375e-1, 1.3600000000000000976996261670137755572795867919921875e-1, 1.620000000000000051070259132757200859487056732177734375e-1, 8.95000000000000017763568394002504646778106689453125e-1, 8.0376000000000004774847184307873249053955078125e+1, 2.196000000000000174082970261224545538425445556640625e+0, 8.04320000000000021600499167107045650482177734375e+1, 2.056999999999999939603867460391484200954437255859375e+0, 1.76099999999999994315658113919198513031005859375e+2, 1.67400000000000005684341886080801486968994140625e+2, 1.86e+2, 1.80099999999999994315658113919198513031005859375e+2, 1.68400000000000005684341886080801486968994140625e+2, 1.70900000000000005684341886080801486968994140625e+2, 1.645e+2, 1.71099999999999994315658113919198513031005859375e+2, 1.83900000000000005684341886080801486968994140625e+2, 1.705e+2, 1.217000000000000026201263381153694353997707366943359375e-1, 1.72400000000000005684341886080801486968994140625e+2, 0.0, 0.0, 5.69099999999999987820853419862032751552760601043701171875e-3, 4.5110699999999997089616954326629638671875e+3, 2.9093000000000000682121026329696178436279296875e+2, 3.00999999999999989785948173448559828102588653564453125e-1, 3.0800000000000000988098491916389320977032184600830078125e-2, 5.8199999999999996180832795289461500942707061767578125e-1, 3.02099999999999979660714188867132179439067840576171875e-1, 3.0959999999999998632205233661807142198085784912109375e-1, 4.03000000000000024868995751603506505489349365234375e-1, 3.8400000000000000799360577730112709105014801025390625e-1, 3.649999999999999911182158029987476766109466552734375e-1, -4.0000000000000000832667268468867405317723751068115234375e-2, -5.0700000000000000621724893790087662637233734130859375e-1, -4.03000000000000024868995751603506505489349365234375e-2, -4.6899999999999997246646898929611779749393463134765625e-2, 7.149999999999999411581796948667033575475215911865234375e-2, -7.3159999999999996589394868351519107818603515625e+1, -1.16400000000000005684341886080801486968994140625e+2, -2.85000000000000010269562977782697998918592929840087890625e-2, 3.42000000000000026201263381153694353997707366943359375e-1, 1.0e+0, -5.63999999999999968025576890795491635799407958984375e+0, 2.3158000000000000806466005087713710963726043701171875e-1, -8.0110000000000003428368700042483396828174591064453125e-1, 2.453999999999999914734871708787977695465087890625e+1, 3.439999999999999946709294817992486059665679931640625e+0, 3.430000000000000159872115546022541821002960205078125e+0, 5.4700000000000004174438572590588591992855072021484375e-1, 6.149999999999999911182158029987476766109466552734375e-1, 2.2379999999999999005240169935859739780426025390625e+1, 3.193000000000000060396132539608515799045562744140625e+0, 3.1349999999999997868371792719699442386627197265625e+0, 5.620000000000000550670620214077644050121307373046875e-1, 5.96999999999999975131004248396493494510650634765625e-1, 0.0, 0.0};
+  real(kind=8) xs200[22];
+  integer(kind=8) ubound.44;
+  integer(kind=8) size.45;
+  real(kind=8) __result_chi2;
+  integer(kind=8) D.4455;
+  bitsizetype D.4456;
+  sizetype D.4457;
+
+  ubound.44 = (integer(kind=8)) *npar;
+  size.45 = NON_LVALUE_EXPR <ubound.44>;
+  size.45 = MAX_EXPR <size.45, 0>;
+  D.4455 = size.45 + -1;
+  D.4456 = (bitsizetype) (sizetype) NON_LVALUE_EXPR <size.45> * 64;
+  D.4457 = (sizetype) NON_LVALUE_EXPR <size.45> * 8;
+  cctau = 1.20000000000000002498001805406602215953171253204345703125e-2;
+  ccmgw = -1.76999999999999990674126593148685060441493988037109375e-1;
+  cchad = -1.700000000000000122124532708767219446599483489990234375e-1;
+  ccntv = -1.700000000000000122124532708767219446599483489990234375e-2;
+  ccnue = -5.000000000000000277555756156289135105907917022705078125e-2;
+  mz = (*xval)[0];
+  if (NON_LVALUE_EXPR <flagmt>)
+    {
+      mt = (*xval)[1];
+    }
+  L.20:;
+  mb = (*xval)[2];
+  if (NON_LVALUE_EXPR <flagmc>)
+    {
+      mc = (*xval)[3];
+    }
+  L.21:;
+  alfas0 = (*xval)[4];
+  if (NON_LVALUE_EXPR <flagal>)
+    {
+      dahad3 = (*xval)[5];
+    }
+  L.22:;
+  if (NON_LVALUE_EXPR <flagmh>)
+    {
+      mh = __builtin_exp ((*xval)[6]);
+    }
+  L.23:;
+  if (NON_LVALUE_EXPR <flagt>)
+    {
+      tpar = (*xval)[7];
+    }
+  L.24:;
+  if (NON_LVALUE_EXPR <flags>)
+    {
+      spar = (*xval)[8];
+    }
+  L.25:;
+  upar = (*xval)[9];
+  if (NON_LVALUE_EXPR <flgrho>)
+    {
+      brho = (*xval)[10];
+    }
+  L.26:;
+  if (NON_LVALUE_EXPR <fkappa>)
+    {
+      bkappa = (*xval)[11];
+    }
+  L.27:;
+  zpar = (*xval)[14];
+  if (NON_LVALUE_EXPR <fzprim>)
+    {
+      mzp = 1.0e+3 / (*xval)[15];
+    }
+  L.28:;
+  if (NON_LVALUE_EXPR <fsinth>)
+    {
+      sinth = (*xval)[16];
+    }
+  L.29:;
+  lambdg = (*xval)[17];
+  if (NON_LVALUE_EXPR <flgfitx>)
+    {
+      fitx = __builtin_exp ((*xval)[27]);
+    }
+  L.30:;
+  if (NON_LVALUE_EXPR <flgtph>)
+    {
+      fittph = (*xval)[28];
+    }
+  L.31:;
+  if (NON_LVALUE_EXPR <flgs2b>)
+    {
+      fits2b = (*xval)[29];
+    }
+  L.32:;
+  fitsph = fittph / ((fittph + 1.0e+0));
+  fitcph = 1.0e+0 - fitsph;
+  kkem = 7.81750813588169037038344555412550107575953006744384765625e-3;
+  {
+    real(kind=8) D.4166;
+    real(kind=8) D.4165;
+
+    D.4165 = mz;
+    D.4166 = D.4165 * D.4165;
+    kkcc = ((__builtin_sqrt (1.0e+0 - ((((pi1 * 4.0e+0) * kkem) / 1.4142135623730951454746218587388284504413604736328125e+0) / D.4166) / gf) + 1.0e+0)) * 5.0e-1;
+  }
+  kkss = 1.0e+0 - kkcc;
+  swpar = spar + upar;
+  {
+    real(kind=8) D.4168;
+    real(kind=8) D.4167;
+
+    D.4167 = mz;
+    D.4168 = D.4167 * D.4167;
+    mz2 = D.4168;
+  }
+  {
+    real(kind=8) D.4170;
+    real(kind=8) D.4169;
+
+    D.4169 = mzp;
+    D.4170 = D.4169 * D.4169;
+    mzp2 = D.4170;
+  }
+  {
+    real(kind=8) D.4172;
+    real(kind=8) D.4171;
+
+    D.4171 = mt;
+    D.4172 = D.4171 * D.4171;
+    mt2 = D.4172;
+  }
+  {
+    real(kind=8) D.4174;
+    real(kind=8) D.4173;
+
+    D.4173 = mh;
+    D.4174 = D.4173 * D.4173;
+    mh2 = D.4174;
+  }
+  mu0 = mz;
+  rathz2 = mh2 / mz2;
+  rattz2 = mt2 / mz2;
+  ratth2 = mt2 / mh2;
+  flgzph = 0;
+  ratgrl = lambdg;
+  sigma = 1.0e+0;
+  if (flagzp != 0)
+    {
+      if (NON_LVALUE_EXPR <flgzph>)
+        {
+          if (flagzp == 1)
+            {
+              sinth = (((((1.0e+0 - (sigma * 3.0e+0) * 5.0e-1)) / ((sigma + 1.0e+0))) * __builtin_sqrt ((lambdg * 4.6260000000000001119104808822157792747020721435546875e-1) / 3.0e+0)) * mz2) / mzp2;
+            }
+          L.35:;
+          if (flagzp == 2)
+            {
+              sinth = (((((1.0e+0 - sigma)) / ((sigma + 1.0e+0))) * __builtin_sqrt (lambdg * 2.5700000000000000621724893790087662637233734130859375e-1)) * mz2) / mzp2;
+            }
+          L.36:;
+          if (flagzp == 3)
+            {
+              sinth = (((((sigma * 4.0e+0 - 1.0e+0)) / ((sigma + 1.0e+0))) * __builtin_sqrt (lambdg * 2.5700000000000000621724893790087662637233734130859375e-2)) * mz2) / mzp2;
+            }
+          L.37:;
+          if (flagzp == 4)
+            {
+              {
+                real(kind=8) D.4184;
+                real(kind=8) D.4183;
+                real(kind=8) D.4182;
+                real(kind=8) D.4181;
+
+                D.4181 = ratgrl;
+                D.4182 = D.4181 * D.4181;
+                D.4183 = ratgrl;
+                D.4184 = D.4183 * D.4183;
+                sinth = (((((1.0e+0 - sigma / ((D.4182 * 3.323399999999999909761072558467276394367218017578125e+0 - 1.0e+0)))) / ((sigma + 1.0e+0))) * __builtin_sqrt (D.4184 * 7.6870000000000004991562718714703805744647979736328125e-1 - 2.31300000000000005595524044110788963735103607177734375e-1)) * mz2) / mzp2;
+              }
+            }
+          L.38:;
+          if (flagzp == 13)
+            {
+              sinth = 0.0;
+            }
+          L.39:;
+        }
+      L.34:;
+      {
+        real(kind=8) D.4187;
+        real(kind=8) D.4186;
+
+        D.4186 = sinth;
+        D.4187 = D.4186 * D.4186;
+        sinth2 = D.4187;
+      }
+      costh2 = 1.0e+0 - sinth2;
+      costh = __builtin_sqrt (costh2);
+      mz02 = costh2 * mz2 + sinth2 * mzp2;
+    }
+  L.33:;
+  sin2thetaw ();
+  if (flagzp != 0)
+    {
+      if (flagzp == 4)
+        {
+          ratg21 = __builtin_sqrt ((sinhat * 5.0e+0) / 3.0e+0);
+        }
+      else
+        {
+          if (flagzp == 6)
+            {
+              ratg21 = 2.00000000000000011102230246251565404236316680908203125e-1;
+            }
+          else
+            {
+              if (flagzp == 13)
+                {
+                  ratg21 = __builtin_sqrt ((4.4425886399999996168030946819271775893867015838623046875e-2 / pi1) * 1.279200000000000017053025658242404460906982421875e+2);
+                }
+              else
+                {
+                  ratg21 = __builtin_sqrt (((sinhat * 5.0e+0) * lambdg) / 3.0e+0);
+                }
+              L.43:;
+            }
+          L.42:;
+        }
+      L.41:;
+      if (NON_LVALUE_EXPR <flgzph>)
+        {
+          if (flagzp == 1)
+            {
+              chiggs = ((((1.0e+0 - (sigma * 3.0e+0) * 5.0e-1)) / ((sigma + 1.0e+0))) * 2.0e+0) / 3.162277660168379522787063251598738133907318115234375e+0;
+            }
+          L.45:;
+          if (flagzp == 2)
+            {
+              chiggs = (((1.0e+0 - sigma)) / ((sigma + 1.0e+0))) * 8.164965809277260344600790631375275552272796630859375e-1;
+            }
+          L.46:;
+          if (flagzp == 3)
+            {
+              chiggs = (((sigma * 4.0e+0 - 1.0e+0)) / ((sigma + 1.0e+0))) / 3.87298334620741702138957407441921532154083251953125e+0;
+            }
+          L.47:;
+          i = 1;
+          if (i <= 2)
+            {
+              while (1)
+                {
+                  {
+                    logical(kind=4) D.4210;
+
+                    if (flagzp == 4)
+                      {
+                        {
+                          real(kind=8) D.4203;
+                          real(kind=8) D.4202;
+                          real(kind=8) D.4201;
+                          real(kind=8) D.4200;
+
+                          D.4200 = ratgrl;
+                          D.4201 = D.4200 * D.4200;
+                          D.4202 = ratgrl;
+                          D.4203 = D.4202 * D.4202;
+                          chiggs = ((1.0e+0 / ((sigma + 1.0e+0))) * ((1.0e+0 - sigma / (((D.4201 * coshat) / sinhat - 1.0e+0))))) * __builtin_sqrt (((((D.4203 * coshat) / sinhat - 1.0e+0)) * 3.0e+0) / 5.0e+0);
+                        }
+                      }
+                    L.50:;
+                    sinth = ((chiggs * ratg21) * mz2) / mzp2;
+                    {
+                      real(kind=8) D.4205;
+                      real(kind=8) D.4204;
+
+                      D.4204 = sinth;
+                      D.4205 = D.4204 * D.4204;
+                      sinth2 = D.4205;
+                    }
+                    costh2 = 1.0e+0 - sinth2;
+                    costh = __builtin_sqrt (costh2);
+                    mz02 = costh2 * mz2 + sinth2 * mzp2;
+                    sin2thetaw ();
+                    if (flagzp == 4)
+                      {
+                        ratg21 = __builtin_sqrt ((sinhat * 5.0e+0) / 3.0e+0);
+                      }
+                    else
+                      {
+                        if (flagzp == 6)
+                          {
+                            ratg21 = 2.00000000000000011102230246251565404236316680908203125e-1;
+                          }
+                        else
+                          {
+                            if (flagzp == 13)
+                              {
+                                ratg21 = __builtin_sqrt ((((sinhat * coshat) * 2.5e-1) / pi1) / alpha);
+                              }
+                            else
+                              {
+                                ratg21 = __builtin_sqrt (((sinhat * 5.0e+0) * lambdg) / 3.0e+0);
+                              }
+                            L.53:;
+                          }
+                        L.52:;
+                      }
+                    L.51:;
+                    __label_000150:;
+                    L.48:;
+                    D.4210 = i == 2;
+                    i = i + 1;
+                    if (D.4210) goto L.49;
+                  }
+                }
+            }
+          L.49:;
+        }
+      L.44:;
+      rhoeff = ((costh2 / mz2 + sinth2 / mzp2)) * mz02;
+      {
+        real(kind=8) D.4212;
+        real(kind=8) D.4211;
+
+        D.4211 = ratg21;
+        D.4212 = D.4211 * D.4211;
+        rhoezp = (mz02 * D.4212) * ((sinth2 / mz2 + costh2 / mzp2));
+      }
+      rhozzp = (((mz02 * ratg21) * sinth) * costh) * ((1.0e+0 / mz2 - 1.0e+0 / mzp2));
+      if (NON_LVALUE_EXPR <fobliq>)
+        {
+          rhoeff = rhoeff / ((1.0e+0 - alphat * tpar));
+          rhoezp = rhoezp / ((1.0e+0 - alphat * tpar));
+          rhozzp = rhozzp / ((1.0e+0 - alphat * tpar));
+        }
+      L.54:;
+      zprimecoup (xval, (integer(kind=4) *) npar);
+    }
+  L.40:;
+  {
+    static integer(kind=4) C.4216 = 9;
+    static integer(kind=4) C.4215 = 0;
+
+    z0pole (&gamma, &sigmah, &r, &sin2te, &alr, &afb, &C.4215, &C.4216);
+  }
+  rho0 ();
+  sin2theta0 ();
+  {
+    static integer(kind=4) C.4221 = 9;
+    static integer(kind=4) C.4220 = 0;
+
+    rhof (&rho, &C.4220, &C.4221);
+  }
+  {
+    static integer(kind=4) C.4224 = 9;
+    static integer(kind=4) C.4223 = 0;
+
+    kappaf (&kappa, &C.4223, &C.4224);
+  }
+  wwprod (&gammaw);
+  lep200 (&xs200, &afb200);
+  smrule (&sumrlc, &momntc, &errorc, &sumrlb, &momntb, &errorb, &ccmbc);
+  value[42] = sumrlc[2];
+  value[43] = sumrlb[6];
+  error[42] = errorc[2];
+  error[43] = errorb[6];
+  i = 1;
+  if (i <= 80)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4232;
+
+            (*smval)[(integer(kind=8)) i + -1] = 0.0;
+            (*pull)[(integer(kind=8)) i + -1] = 0.0;
+            __label_000200:;
+            L.55:;
+            D.4232 = i == 80;
+            i = i + 1;
+            if (D.4232) goto L.56;
+          }
+        }
+    }
+  L.56:;
+  (*smval)[0] = mz;
+  (*smval)[1] = gamma[11];
+  (*smval)[2] = sigmah;
+  (*smval)[3] = r[1];
+  (*smval)[4] = r[2];
+  (*smval)[5] = r[3];
+  (*smval)[6] = afb[1];
+  (*smval)[7] = afb[2];
+  (*smval)[8] = afb[3];
+  (*smval)[9] = alr[3];
+  (*smval)[10] = alr[1];
+  (*smval)[11] = afb[10];
+  (*smval)[12] = afb[8];
+  (*smval)[13] = r[8] / (((r[4] + r[7]) + r[8]));
+  (*smval)[14] = r[9];
+  (*smval)[15] = r[5];
+  (*smval)[16] = afb[9];
+  (*smval)[17] = afb[5];
+  (*smval)[18] = alr[9];
+  (*smval)[19] = alr[5];
+  (*smval)[20] = alr[1];
+  (*smval)[21] = alr[1];
+  (*smval)[22] = alr[2];
+  (*smval)[23] = alr[3];
+  (*smval)[24] = alr[1];
+  (*smval)[25] = alr[8];
+  (*smval)[26] = mw;
+  (*smval)[27] = gammaw[6];
+  (*smval)[28] = mw;
+  (*smval)[29] = gammaw[6];
+  {
+    static integer(kind=4) C.4233 = 6;
+
+    polemasses (&C.4233, &(*smval)[30]);
+  }
+  {
+    static integer(kind=4) C.4235 = 6;
+
+    polemasses (&C.4235, &(*smval)[31]);
+  }
+  {
+    static integer(kind=4) C.4236 = 6;
+
+    polemasses (&C.4236, &(*smval)[32]);
+  }
+  {
+    static integer(kind=4) C.4237 = 6;
+
+    polemasses (&C.4237, &(*smval)[33]);
+  }
+  {
+    static integer(kind=4) C.4238 = 6;
+
+    polemasses (&C.4238, &(*smval)[34]);
+  }
+  {
+    static integer(kind=4) C.4239 = 6;
+
+    polemasses (&C.4239, &(*smval)[35]);
+  }
+  {
+    static integer(kind=4) C.4240 = 6;
+
+    polemasses (&C.4240, &(*smval)[36]);
+  }
+  {
+    static integer(kind=4) C.4241 = 6;
+
+    polemasses (&C.4241, &(*smval)[37]);
+  }
+  {
+    static integer(kind=4) C.4242 = 6;
+
+    polemasses (&C.4242, &(*smval)[38]);
+  }
+  {
+    static integer(kind=4) C.4243 = 6;
+
+    polemasses (&C.4243, &(*smval)[39]);
+  }
+  (*smval)[40] = alfas0;
+  {
+    static integer(kind=4) C.4244 = 6;
+
+    polemasses (&C.4244, &(*smval)[41]);
+  }
+  (*smval)[42] = momntc[1];
+  (*smval)[43] = momntb[5];
+  (*smval)[44] = dahad3;
+  anomagmntmu (&(*smval)[45]);
+  taulifetime (&(*smval)[46], &therr2);
+  nuhnutev (&dummy, &epsu_l, &epsd_l, &epsu_r, &epsd_r);
+  {
+    real(kind=8) D.4251;
+    real(kind=8) D.4250;
+    real(kind=8) D.4249;
+    real(kind=8) D.4248;
+
+    D.4248 = epsu_l;
+    D.4249 = D.4248 * D.4248;
+    D.4250 = epsd_l;
+    D.4251 = D.4250 * D.4250;
+    (*smval)[47] = D.4249 + D.4251;
+  }
+  {
+    real(kind=8) D.4255;
+    real(kind=8) D.4254;
+    real(kind=8) D.4253;
+    real(kind=8) D.4252;
+
+    D.4252 = epsu_r;
+    D.4253 = D.4252 * D.4252;
+    D.4254 = epsd_r;
+    D.4255 = D.4254 * D.4254;
+    (*smval)[48] = D.4253 + D.4255;
+  }
+  nuhccfr (&(*smval)[49]);
+  nuhcdhs (&(*smval)[50], &(*smval)[52], &dummy);
+  nuhcdhs (&(*smval)[51], &(*smval)[53], &(*smval)[54]);
+  {
+    static real(kind=8) C.4258 = 0.0;
+
+    nue (&C.4258, &(*smval)[55], &(*smval)[56]);
+  }
+  {
+    static real(kind=8) C.4261 = 5.989999999999999769073610877967439591884613037109375e-1;
+    static real(kind=8) C.4260 = 2.59999999999999988065102485279567190445959568023681640625e-2;
+
+    moller (&(*smval)[57], &C.4260, &C.4261);
+  }
+  {
+    static real(kind=8) C.4264 = 5.709999999999999520383653361932374536991119384765625e-1;
+    static real(kind=8) C.4263 = 5.59999999999999994310106998796072730328887701034545898438e-3;
+
+    moller (&(*smval)[58], &C.4263, &C.4264);
+  }
+  {
+    static integer(kind=4) C.4266 = 1;
+    static integer(kind=4) C.4265 = 1;
+
+    apv (&(*smval)[59], &C.4265, &C.4266, &c1u, &c1d, &c2u, &c2d);
+  }
+  {
+    static integer(kind=4) C.4269 = 133;
+    static integer(kind=4) C.4268 = 55;
+
+    apv (&(*smval)[60], &C.4268, &C.4269, &c1u, &c1d, &c2u, &c2d);
+  }
+  {
+    static integer(kind=4) C.4271 = 205;
+    static integer(kind=4) C.4270 = 81;
+
+    apv (&(*smval)[61], &C.4270, &C.4271, &c1u, &c1d, &c2u, &c2d);
+  }
+  (*smval)[62] = c1u * 9.1369998455047607421875e-1 + c1d * 4.065000116825103759765625e-1;
+  (*smval)[63] = c1d * 9.1369998455047607421875e-1 - c1u * 4.065000116825103759765625e-1;
+  (*smval)[64] = 1.0e+0;
+  if (flagzp != 0)
+    {
+      {
+        real(kind=8) D.4274;
+        real(kind=8) D.4273;
+
+        D.4273 = ratg21;
+        D.4274 = D.4273 * D.4273;
+        (*smval)[64] = ((((((((D.4274 * 3.0e+0) * alphat) / pi1) / sinhat) / coshat) * eps2_l[1]) * ((eps2_l[1] - eps2_l[4]))) * __builtin_log (mzp2 / mw2)) / ((mzp2 / mw2 - 1.0e+0)) + 1.0e+0;
+      }
+    }
+  L.57:;
+  bsgamma (&sgcenu);
+  (*smval)[65] = __builtin_log (sgcenu);
+  (*smval)[66] = sin2te[1];
+  (*smval)[67] = ((c1u * 2.0e+0 - c1d)) + ((c2u * 2.0e+0 - c2d)) * 8.3999999999999996891375531049561686813831329345703125e-1;
+  (*smval)[67] = ((c1u * 2.0e+0 - c1d)) + ((c2u * 2.0e+0 - c2d)) * 8.3999999999999996891375531049561686813831329345703125e-1;
+  (*smval)[78] = spar;
+  (*smval)[79] = tpar;
+  __result_chi2 = 0.0;
+  i = 2;
+  if (i <= 26)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4282;
+
+            prtpll[(integer(kind=8)) i] = 1;
+            (*pull)[(integer(kind=8)) i + -1] = ((value[(integer(kind=8)) i + -1] - (*smval)[(integer(kind=8)) i + -1])) / error[(integer(kind=8)) i + -1];
+            {
+              real(kind=8) D.4280;
+              real(kind=8) D.4279;
+
+              D.4279 = (*pull)[(integer(kind=8)) i + -1];
+              D.4280 = D.4279 * D.4279;
+              __result_chi2 = __result_chi2 + D.4280;
+            }
+            __label_000300:;
+            L.58:;
+            D.4282 = i == 26;
+            i = i + 1;
+            if (D.4282) goto L.59;
+          }
+        }
+    }
+  L.59:;
+  i = 27;
+  if (i <= 30)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4288;
+
+            prtpll[(integer(kind=8)) i] = 1;
+            (*pull)[(integer(kind=8)) i + -1] = ((value[(integer(kind=8)) i + -1] - (*smval)[(integer(kind=8)) i + -1])) / error[(integer(kind=8)) i + -1];
+            {
+              real(kind=8) D.4286;
+              real(kind=8) D.4285;
+
+              D.4285 = (*pull)[(integer(kind=8)) i + -1];
+              D.4286 = D.4285 * D.4285;
+              __result_chi2 = __result_chi2 + D.4286;
+            }
+            __label_000302:;
+            L.60:;
+            D.4288 = i == 30;
+            i = i + 1;
+            if (D.4288) goto L.61;
+          }
+        }
+    }
+  L.61:;
+  i = 42;
+  if (i <= 42)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4294;
+
+            prtpll[(integer(kind=8)) i] = 1;
+            (*pull)[(integer(kind=8)) i + -1] = ((value[(integer(kind=8)) i + -1] - (*smval)[(integer(kind=8)) i + -1])) / error[(integer(kind=8)) i + -1];
+            {
+              real(kind=8) D.4292;
+              real(kind=8) D.4291;
+
+              D.4291 = (*pull)[(integer(kind=8)) i + -1];
+              D.4292 = D.4291 * D.4291;
+              __result_chi2 = __result_chi2 + D.4292;
+            }
+            __label_000303:;
+            L.62:;
+            D.4294 = i == 42;
+            i = i + 1;
+            if (D.4294) goto L.63;
+          }
+        }
+    }
+  L.63:;
+  prtpll[47] = 1;
+  {
+    real(kind=8) D.4296;
+    real(kind=8) D.4295;
+
+    D.4295 = error[46];
+    D.4296 = D.4295 * D.4295;
+    (*pull)[46] = ((value[46] - (*smval)[46])) / __builtin_sqrt (((D.4296 + therr2)));
+  }
+  {
+    real(kind=8) D.4298;
+    real(kind=8) D.4297;
+
+    D.4297 = (*pull)[46];
+    D.4298 = D.4297 * D.4297;
+    __result_chi2 = __result_chi2 + D.4298;
+  }
+  i = 48;
+  if (i <= 58)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4304;
+
+            prtpll[(integer(kind=8)) i] = 1;
+            (*pull)[(integer(kind=8)) i + -1] = ((value[(integer(kind=8)) i + -1] - (*smval)[(integer(kind=8)) i + -1])) / error[(integer(kind=8)) i + -1];
+            {
+              real(kind=8) D.4302;
+              real(kind=8) D.4301;
+
+              D.4301 = (*pull)[(integer(kind=8)) i + -1];
+              D.4302 = D.4301 * D.4301;
+              __result_chi2 = __result_chi2 + D.4302;
+            }
+            __label_000304:;
+            L.64:;
+            D.4304 = i == 58;
+            i = i + 1;
+            if (D.4304) goto L.65;
+          }
+        }
+    }
+  L.65:;
+  i = 59;
+  if (i <= 60)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4310;
+
+            prtpll[(integer(kind=8)) i] = 1;
+            (*pull)[(integer(kind=8)) i + -1] = ((value[(integer(kind=8)) i + -1] - (*smval)[(integer(kind=8)) i + -1])) / error[(integer(kind=8)) i + -1];
+            {
+              real(kind=8) D.4308;
+              real(kind=8) D.4307;
+
+              D.4307 = (*pull)[(integer(kind=8)) i + -1];
+              D.4308 = D.4307 * D.4307;
+              __result_chi2 = __result_chi2 + D.4308;
+            }
+            __label_000305:;
+            L.66:;
+            D.4310 = i == 60;
+            i = i + 1;
+            if (D.4310) goto L.67;
+          }
+        }
+    }
+  L.67:;
+  i = 61;
+  if (i <= 64)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4316;
+
+            prtpll[(integer(kind=8)) i] = 1;
+            (*pull)[(integer(kind=8)) i + -1] = ((value[(integer(kind=8)) i + -1] - (*smval)[(integer(kind=8)) i + -1])) / error[(integer(kind=8)) i + -1];
+            {
+              real(kind=8) D.4314;
+              real(kind=8) D.4313;
+
+              D.4313 = (*pull)[(integer(kind=8)) i + -1];
+              D.4314 = D.4313 * D.4313;
+              __result_chi2 = __result_chi2 + D.4314;
+            }
+            __label_000306:;
+            L.68:;
+            D.4316 = i == 64;
+            i = i + 1;
+            if (D.4316) goto L.69;
+          }
+        }
+    }
+  L.69:;
+  if (NON_LVALUE_EXPR <flfout>)
+    {
+      if (plltr == 1)
+        {
+          i = 1;
+          if (i <= 80)
+            {
+              while (1)
+                {
+                  {
+                    logical(kind=4) D.4324;
+
+                    if (prtpll[(integer(kind=8)) i] == 1)
+                      {
+                        {
+                          struct __st_parameter_dt dt_parm.46;
+
+                          dt_parm.46.common.filename = &"../src/F/core/chi2.f"[1]{lb: 1 sz: 1};
+                          dt_parm.46.common.line = 912;
+                          dt_parm.46.format = &"(I3,A,F8.4)"[1]{lb: 1 sz: 1};
+                          dt_parm.46.format_len = 11;
+                          dt_parm.46.common.flags = 4096;
+                          dt_parm.46.common.unit = 50;
+                          _gfortran_st_write (&dt_parm.46);
+                          _gfortran_transfer_integer_write (&dt_parm.46, &i, 4);
+                          _gfortran_transfer_character_write (&dt_parm.46, &"\\t"[1]{lb: 1 sz: 1}, 2);
+                          _gfortran_transfer_real_write (&dt_parm.46, &(*pull)[(integer(kind=8)) i + -1], 8);
+                          _gfortran_st_write_done (&dt_parm.46);
+                        }
+                      }
+                    L.74:;
+                    __label_000800:;
+                    L.72:;
+                    D.4324 = i == 80;
+                    i = i + 1;
+                    if (D.4324) goto L.73;
+                  }
+                }
+            }
+          L.73:;
+          plltr = 0;
+        }
+      L.71:;
+    }
+  L.70:;
+  flcorr = 1;
+  if (NON_LVALUE_EXPR <flcorr>)
+    {
+      i = 1;
+      if (i <= 9)
+        {
+          while (1)
+            {
+              {
+                logical(kind=4) D.4336;
+
+                {
+                  real(kind=8) D.4329;
+                  real(kind=8) D.4328;
+
+                  D.4328 = (*pull)[(integer(kind=8)) i + -1];
+                  D.4329 = D.4328 * D.4328;
+                  __result_chi2 = ccls[((integer(kind=8)) i + -1) * 10] * D.4329 + __result_chi2;
+                }
+                {
+                  integer(kind=4) D.4330;
+
+                  D.4330 = i + 1;
+                  j = D.4330;
+                  if (j <= 9)
+                    {
+                      while (1)
+                        {
+                          {
+                            logical(kind=4) D.4334;
+
+                            __result_chi2 = ((ccls[((integer(kind=8)) i * 9 + (integer(kind=8)) j) + -10] * 2.0e+0) * (*pull)[(integer(kind=8)) i + -1]) * (*pull)[(integer(kind=8)) j + -1] + __result_chi2;
+                            __label_000400:;
+                            L.78:;
+                            D.4334 = j == 9;
+                            j = j + 1;
+                            if (D.4334) goto L.79;
+                          }
+                        }
+                    }
+                  L.79:;
+                }
+                __label_000410:;
+                L.76:;
+                D.4336 = i == 9;
+                i = i + 1;
+                if (D.4336) goto L.77;
+              }
+            }
+        }
+      L.77:;
+      {
+        real(kind=8) D.4346;
+        real(kind=8) D.4345;
+        real(kind=8) D.4344;
+        real(kind=8) D.4343;
+        real(kind=8) D.4342;
+        real(kind=8) D.4341;
+        real(kind=8) D.4340;
+        real(kind=8) D.4339;
+        real(kind=8) D.4338;
+        real(kind=8) D.4337;
+
+        D.4337 = (*pull)[9];
+        D.4338 = D.4337 * D.4337;
+        D.4339 = (*pull)[10];
+        D.4340 = D.4339 * D.4339;
+        D.4341 = cctau;
+        D.4342 = D.4341 * D.4341;
+        D.4343 = (*pull)[9];
+        D.4344 = D.4343 * D.4343;
+        D.4345 = (*pull)[10];
+        D.4346 = D.4345 * D.4345;
+        __result_chi2 = ((__result_chi2 - D.4338) - D.4340) + (1.0e+0 / __builtin_sqrt (1.0e+0 - D.4342)) * (((D.4344 + D.4346) - ((cctau * 2.0e+0) * (*pull)[9]) * (*pull)[10]));
+      }
+      i = 15;
+      if (i <= 20)
+        {
+          while (1)
+            {
+              {
+                logical(kind=4) D.4357;
+
+                {
+                  real(kind=8) D.4350;
+                  real(kind=8) D.4349;
+
+                  D.4349 = (*pull)[(integer(kind=8)) i + -1];
+                  D.4350 = D.4349 * D.4349;
+                  __result_chi2 = cchf[(integer(kind=8)) i * 7 + -105] * D.4350 + __result_chi2;
+                }
+                {
+                  integer(kind=4) D.4351;
+
+                  D.4351 = i + 1;
+                  j = D.4351;
+                  if (j <= 20)
+                    {
+                      while (1)
+                        {
+                          {
+                            logical(kind=4) D.4355;
+
+                            __result_chi2 = ((cchf[((integer(kind=8)) j * 6 + (integer(kind=8)) i) + -105] * 2.0e+0) * (*pull)[(integer(kind=8)) i + -1]) * (*pull)[(integer(kind=8)) j + -1] + __result_chi2;
+                            __label_000420:;
+                            L.82:;
+                            D.4355 = j == 20;
+                            j = j + 1;
+                            if (D.4355) goto L.83;
+                          }
+                        }
+                    }
+                  L.83:;
+                }
+                __label_000430:;
+                L.80:;
+                D.4357 = i == 20;
+                i = i + 1;
+                if (D.4357) goto L.81;
+              }
+            }
+        }
+      L.81:;
+      i = 21;
+      if (i <= 24)
+        {
+          while (1)
+            {
+              {
+                logical(kind=4) D.4368;
+
+                {
+                  real(kind=8) D.4361;
+                  real(kind=8) D.4360;
+
+                  D.4360 = (*pull)[(integer(kind=8)) i + -1];
+                  D.4361 = D.4360 * D.4360;
+                  __result_chi2 = ccslc[(integer(kind=8)) i * 5 + -105] * D.4361 + __result_chi2;
+                }
+                {
+                  integer(kind=4) D.4362;
+
+                  D.4362 = i + 1;
+                  j = D.4362;
+                  if (j <= 24)
+                    {
+                      while (1)
+                        {
+                          {
+                            logical(kind=4) D.4366;
+
+                            __result_chi2 = ((ccslc[((integer(kind=8)) j * 4 + (integer(kind=8)) i) + -105] * 2.0e+0) * (*pull)[(integer(kind=8)) i + -1]) * (*pull)[(integer(kind=8)) j + -1] + __result_chi2;
+                            __label_000440:;
+                            L.86:;
+                            D.4366 = j == 24;
+                            j = j + 1;
+                            if (D.4366) goto L.87;
+                          }
+                        }
+                    }
+                  L.87:;
+                }
+                __label_000450:;
+                L.84:;
+                D.4368 = i == 24;
+                i = i + 1;
+                if (D.4368) goto L.85;
+              }
+            }
+        }
+      L.85:;
+      {
+        real(kind=8) D.4378;
+        real(kind=8) D.4377;
+        real(kind=8) D.4376;
+        real(kind=8) D.4375;
+        real(kind=8) D.4374;
+        real(kind=8) D.4373;
+        real(kind=8) D.4372;
+        real(kind=8) D.4371;
+        real(kind=8) D.4370;
+        real(kind=8) D.4369;
+
+        D.4369 = (*pull)[42];
+        D.4370 = D.4369 * D.4369;
+        D.4371 = (*pull)[43];
+        D.4372 = D.4371 * D.4371;
+        D.4373 = ccmbc;
+        D.4374 = D.4373 * D.4373;
+        D.4375 = (*pull)[42];
+        D.4376 = D.4375 * D.4375;
+        D.4377 = (*pull)[43];
+        D.4378 = D.4377 * D.4377;
+        __result_chi2 = ((__result_chi2 - D.4370) - D.4372) + (1.0e+0 / __builtin_sqrt (1.0e+0 - D.4374)) * (((D.4376 + D.4378) - ((ccmbc * 2.0e+0) * (*pull)[42]) * (*pull)[43]));
+      }
+      {
+        real(kind=8) D.4388;
+        real(kind=8) D.4387;
+        real(kind=8) D.4386;
+        real(kind=8) D.4385;
+        real(kind=8) D.4384;
+        real(kind=8) D.4383;
+        real(kind=8) D.4382;
+        real(kind=8) D.4381;
+        real(kind=8) D.4380;
+        real(kind=8) D.4379;
+
+        D.4379 = (*pull)[44];
+        D.4380 = D.4379 * D.4379;
+        D.4381 = (*pull)[45];
+        D.4382 = D.4381 * D.4381;
+        D.4383 = cchad;
+        D.4384 = D.4383 * D.4383;
+        D.4385 = (*pull)[44];
+        D.4386 = D.4385 * D.4385;
+        D.4387 = (*pull)[45];
+        D.4388 = D.4387 * D.4387;
+        __result_chi2 = ((__result_chi2 - D.4380) - D.4382) + (1.0e+0 / __builtin_sqrt (1.0e+0 - D.4384)) * (((D.4386 + D.4388) - ((cchad * 2.0e+0) * (*pull)[44]) * (*pull)[45]));
+      }
+      {
+        real(kind=8) D.4398;
+        real(kind=8) D.4397;
+        real(kind=8) D.4396;
+        real(kind=8) D.4395;
+        real(kind=8) D.4394;
+        real(kind=8) D.4393;
+        real(kind=8) D.4392;
+        real(kind=8) D.4391;
+        real(kind=8) D.4390;
+        real(kind=8) D.4389;
+
+        D.4389 = (*pull)[47];
+        D.4390 = D.4389 * D.4389;
+        D.4391 = (*pull)[48];
+        D.4392 = D.4391 * D.4391;
+        D.4393 = ccntv;
+        D.4394 = D.4393 * D.4393;
+        D.4395 = (*pull)[47];
+        D.4396 = D.4395 * D.4395;
+        D.4397 = (*pull)[48];
+        D.4398 = D.4397 * D.4397;
+        __result_chi2 = ((__result_chi2 - D.4390) - D.4392) + (1.0e+0 / __builtin_sqrt (1.0e+0 - D.4394)) * (((D.4396 + D.4398) - ((ccntv * 2.0e+0) * (*pull)[47]) * (*pull)[48]));
+      }
+      i = 50;
+      if (i <= 55)
+        {
+          while (1)
+            {
+              {
+                logical(kind=4) D.4409;
+
+                {
+                  real(kind=8) D.4402;
+                  real(kind=8) D.4401;
+
+                  D.4401 = (*pull)[(integer(kind=8)) i + -1];
+                  D.4402 = D.4401 * D.4401;
+                  __result_chi2 = ccdis[((integer(kind=8)) i + -49) * 8] * D.4402 + __result_chi2;
+                }
+                {
+                  integer(kind=4) D.4403;
+
+                  D.4403 = i + 1;
+                  j = D.4403;
+                  if (j <= 55)
+                    {
+                      while (1)
+                        {
+                          {
+                            logical(kind=4) D.4407;
+
+                            __result_chi2 = ((ccdis[((integer(kind=8)) j * 7 + (integer(kind=8)) i) + -392] * 2.0e+0) * (*pull)[(integer(kind=8)) i + -1]) * (*pull)[(integer(kind=8)) j + -1] + __result_chi2;
+                            __label_000480:;
+                            L.90:;
+                            D.4407 = j == 55;
+                            j = j + 1;
+                            if (D.4407) goto L.91;
+                          }
+                        }
+                    }
+                  L.91:;
+                }
+                __label_000490:;
+                L.88:;
+                D.4409 = i == 55;
+                i = i + 1;
+                if (D.4409) goto L.89;
+              }
+            }
+        }
+      L.89:;
+      {
+        real(kind=8) D.4419;
+        real(kind=8) D.4418;
+        real(kind=8) D.4417;
+        real(kind=8) D.4416;
+        real(kind=8) D.4415;
+        real(kind=8) D.4414;
+        real(kind=8) D.4413;
+        real(kind=8) D.4412;
+        real(kind=8) D.4411;
+        real(kind=8) D.4410;
+
+        D.4410 = (*pull)[55];
+        D.4411 = D.4410 * D.4410;
+        D.4412 = (*pull)[56];
+        D.4413 = D.4412 * D.4412;
+        D.4414 = ccnue;
+        D.4415 = D.4414 * D.4414;
+        D.4416 = (*pull)[55];
+        D.4417 = D.4416 * D.4416;
+        D.4418 = (*pull)[56];
+        D.4419 = D.4418 * D.4418;
+        __result_chi2 = ((__result_chi2 - D.4411) - D.4413) + (1.0e+0 / __builtin_sqrt (1.0e+0 - D.4415)) * (((D.4417 + D.4419) - ((ccnue * 2.0e+0) * (*pull)[55]) * (*pull)[56]));
+      }
+    }
+  L.75:;
+  if (NON_LVALUE_EXPR <fhiggs>)
+    {
+      if (mh < 2.05e+2 && mh >= 2.0e+2)
+        {
+          __result_chi2 = ((2.05e+2 - mh)) * 2.00000000000000004163336342344337026588618755340576171875e-2 + __result_chi2;
+        }
+      L.93:;
+      if (mh < 2.0e+2 && mh >= 1.95e+2)
+        {
+          __result_chi2 = __result_chi2 + 1.000000000000000055511151231257827021181583404541015625e-1;
+        }
+      L.94:;
+      if (mh < 1.95e+2 && mh >= 1.9e+2)
+        {
+          __result_chi2 = (((1.95e+2 - mh)) * 1.4000000000000001332267629550187848508358001708984375e-1 + __result_chi2) + 1.000000000000000055511151231257827021181583404541015625e-1;
+        }
+      L.95:;
+      if (mh < 1.9e+2 && mh >= 1.85e+2)
+        {
+          __result_chi2 = (((1.9e+2 - mh)) * 1.600000000000000033306690738754696212708950042724609375e-1 + __result_chi2) + 8.000000000000000444089209850062616169452667236328125e-1;
+        }
+      L.96:;
+      if (mh < 1.85e+2 && mh >= 1.8e+2)
+        {
+          __result_chi2 = (((1.85e+2 - mh)) * 3.8000000000000000444089209850062616169452667236328125e-1 + __result_chi2) + 1.600000000000000088817841970012523233890533447265625e+0;
+        }
+      L.97:;
+      if (mh < 1.8e+2 && mh >= 1.75e+2)
+        {
+          __result_chi2 = (((1.8e+2 - mh)) * 1.79999999999999993338661852249060757458209991455078125e-1 + __result_chi2) + 3.5e+0;
+        }
+      L.98:;
+      if (mh < 1.75e+2 && mh >= 1.7e+2)
+        {
+          __result_chi2 = (((1.75e+2 - mh)) * 2.800000000000000266453525910037569701671600341796875e-1 + __result_chi2) + 4.4000000000000003552713678800500929355621337890625e+0;
+        }
+      L.99:;
+      if (mh < 1.7e+2 && mh >= 1.65e+2)
+        {
+          __result_chi2 = (__result_chi2 - ((1.7e+2 - mh)) * 3.8000000000000000444089209850062616169452667236328125e-1) + 5.79999999999999982236431605997495353221893310546875e+0;
+        }
+      L.100:;
+      if (mh < 1.65e+2 && mh >= 1.6e+2)
+        {
+          __result_chi2 = (__result_chi2 - ((1.65e+2 - mh)) * 2.800000000000000266453525910037569701671600341796875e-1) + 3.899999999999999911182158029987476766109466552734375e+0;
+        }
+      L.101:;
+      if (mh < 1.6e+2 && mh >= 1.55e+2)
+        {
+          __result_chi2 = (__result_chi2 - ((1.6e+2 - mh)) * 8.000000000000000166533453693773481063544750213623046875e-2) + 2.5e+0;
+        }
+      L.102:;
+      if (mh < 1.55e+2 && mh >= 1.5e+2)
+        {
+          __result_chi2 = ((((1.55e+2 - mh)) * 7.399999999999999911182158029987476766109466552734375e-1) / 3.0e+0 + __result_chi2) + 2.100000000000000088817841970012523233890533447265625e+0;
+        }
+      L.103:;
+      if (mh < 1.5e+2 && mh >= 1.4e+2)
+        {
+          __result_chi2 = (__result_chi2 - (((1.5e+2 - mh)) * 7.0e+1) / 2.4e+2) + 3.333333333333333481363069950020872056484222412109375e+0;
+        }
+      L.104:;
+      if (mh < 1.4e+2 && mh >= 1.3e+2)
+        {
+          __result_chi2 = (__result_chi2 - (((1.4e+2 - mh)) * 2.0e+1) / 2.4e+2) + 4.16666666666666685170383743752609007060527801513671875e-1;
+        }
+      L.105:;
+      if (mh < 1.3e+2 && mh >= 1.2e+2)
+        {
+          __result_chi2 = (__result_chi2 - (((1.3e+2 - mh)) * 8.0e+0) / 2.4e+2) - 4.16666666666666685170383743752609007060527801513671875e-1;
+        }
+      L.106:;
+      if (mh < 1.2e+2 && mh >= 1.15e+2)
+        {
+          __result_chi2 = ((((1.2e+2 - mh)) * 5.2e+1) / 2.4e+2 + __result_chi2) - 7.5e-1;
+        }
+      L.107:;
+      if (mh < 1.15e+2)
+        {
+          __result_chi2 = ((((1.15e+2 - mh)) * 2.2e+1) / 2.4e+2 + __result_chi2) + 3.33333333333333314829616256247390992939472198486328125e-1;
+        }
+      L.108:;
+      if (mh < 1.2e+2 && mh >= 1.19599999999999994315658113919198513031005859375e+2)
+        {
+          __result_chi2 = ((1.2e+2 - mh)) * 5.0e-1 + __result_chi2;
+        }
+      L.109:;
+      if (mh < 1.19599999999999994315658113919198513031005859375e+2 && mh >= 1.187999999999999971578290569595992565155029296875e+2)
+        {
+          __result_chi2 = (__result_chi2 - ((1.19599999999999994315658113919198513031005859375e+2 - mh))) + 2.00000000000000011102230246251565404236316680908203125e-1;
+        }
+      L.110:;
+      if (mh < 1.187999999999999971578290569595992565155029296875e+2 && mh >= 1.182000000000000028421709430404007434844970703125e+2)
+        {
+          __result_chi2 = (__result_chi2 - ((1.187999999999999971578290569595992565155029296875e+2 - mh)) / 3.0e+0) - 5.9999999999999997779553950749686919152736663818359375e-1;
+        }
+      L.111:;
+      if (mh < 1.182000000000000028421709430404007434844970703125e+2 && mh >= 1.17e+2)
+        {
+          __result_chi2 = (__result_chi2 - ((1.182000000000000028421709430404007434844970703125e+2 - mh)) * 7.5e-1) - 8.000000000000000444089209850062616169452667236328125e-1;
+        }
+      L.112:;
+      if (mh < 1.17e+2 && mh >= 1.16400000000000005684341886080801486968994140625e+2)
+        {
+          __result_chi2 = ((((1.17e+2 - mh)) * 2.0e+0) / 3.0e+0 + __result_chi2) - 1.6999999999999999555910790149937383830547332763671875e+0;
+        }
+      L.113:;
+      if (mh < 1.16400000000000005684341886080801486968994140625e+2 && mh >= 1.157999999999999971578290569595992565155029296875e+2)
+        {
+          __result_chi2 = (__result_chi2 - ((1.16400000000000005684341886080801486968994140625e+2 - mh)) / 3.0e+0) - 1.3000000000000000444089209850062616169452667236328125e+0;
+        }
+      L.114:;
+      if (mh < 1.157999999999999971578290569595992565155029296875e+2 && mh >= 1.152000000000000028421709430404007434844970703125e+2)
+        {
+          __result_chi2 = ((((1.157999999999999971578290569595992565155029296875e+2 - mh)) * 2.0e+0) / 3.0e+0 + __result_chi2) - 1.5e+0;
+        }
+      L.115:;
+      if (mh < 1.152000000000000028421709430404007434844970703125e+2 && mh >= 1.14599999999999994315658113919198513031005859375e+2)
+        {
+          __result_chi2 = ((((1.152000000000000028421709430404007434844970703125e+2 - mh)) * 1.0e+1) / 3.0e+0 + __result_chi2) - 1.100000000000000088817841970012523233890533447265625e+0;
+        }
+      L.116:;
+      if (mh < 1.14599999999999994315658113919198513031005859375e+2 && mh >= 1.13400000000000005684341886080801486968994140625e+2)
+        {
+          __result_chi2 = (((1.14599999999999994315658113919198513031005859375e+2 - mh)) * 6.0e+0 + __result_chi2) + 9.0000000000000002220446049250313080847263336181640625e-1;
+        }
+      L.117:;
+      if (mh < 1.13400000000000005684341886080801486968994140625e+2 && mh >= 1.122000000000000028421709430404007434844970703125e+2)
+        {
+          __result_chi2 = ((((1.13400000000000005684341886080801486968994140625e+2 - mh)) * 2.3e+1) / 3.0e+0 + __result_chi2) + 8.0999999999999996447286321199499070644378662109375e+0;
+        }
+      L.118:;
+      if (mh < 1.122000000000000028421709430404007434844970703125e+2 && mh >= 1.11599999999999994315658113919198513031005859375e+2)
+        {
+          __result_chi2 = ((((1.122000000000000028421709430404007434844970703125e+2 - mh)) * 1.6e+1) / 3.0e+0 + __result_chi2) + 1.7300000000000000710542735760100185871124267578125e+1;
+        }
+      L.119:;
+      if (mh < 1.11599999999999994315658113919198513031005859375e+2 && mh >= 1.11e+2)
+        {
+          __result_chi2 = ((((1.11599999999999994315658113919198513031005859375e+2 - mh)) * 4.1e+1) / 6.0e+0 + __result_chi2) + 2.05e+1;
+        }
+      L.120:;
+      if (mh < 1.11e+2 && mh >= 1.10400000000000005684341886080801486968994140625e+2)
+        {
+          __result_chi2 = (((1.11e+2 - mh)) * 9.5e+0 + __result_chi2) + 2.460000000000000142108547152020037174224853515625e+1;
+        }
+      L.121:;
+      if (mh < 1.10400000000000005684341886080801486968994140625e+2 && mh >= 1.097999999999999971578290569595992565155029296875e+2)
+        {
+          __result_chi2 = ((((1.10400000000000005684341886080801486968994140625e+2 - mh)) * 3.1e+1) / 3.0e+0 + __result_chi2) + 3.0300000000000000710542735760100185871124267578125e+1;
+        }
+      L.122:;
+      if (mh < 1.097999999999999971578290569595992565155029296875e+2 && mh >= 1.092000000000000028421709430404007434844970703125e+2)
+        {
+          __result_chi2 = (((1.097999999999999971578290569595992565155029296875e+2 - mh)) * 6.5e+0 + __result_chi2) + 3.65e+1;
+        }
+      L.123:;
+      if (mh < 1.092000000000000028421709430404007434844970703125e+2 && mh >= 1.08599999999999994315658113919198513031005859375e+2)
+        {
+          __result_chi2 = (((1.092000000000000028421709430404007434844970703125e+2 - mh)) * 6.0e+0 + __result_chi2) + 4.039999999999999857891452847979962825775146484375e+1;
+        }
+      L.124:;
+      if (mh < 1.08599999999999994315658113919198513031005859375e+2 && mh >= 1.08e+2)
+        {
+          __result_chi2 = ((((1.08599999999999994315658113919198513031005859375e+2 - mh)) * 4.3e+1) / 6.0e+0 + __result_chi2) + 4.4e+1;
+        }
+      L.125:;
+      if (mh < 1.08e+2)
+        {
+          __result_chi2 = (((1.08e+2 - mh)) * 8.5e+0 + __result_chi2) + 4.82999999999999971578290569595992565155029296875e+1;
+        }
+      L.126:;
+    }
+  L.92:;
+  return __result_chi2;
+  return __result_chi2;
+}
+
+

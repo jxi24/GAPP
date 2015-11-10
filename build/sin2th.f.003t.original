@@ -1,0 +1,1248 @@
+b0 (real(kind=8) & restrict mu, real(kind=8) & restrict x, real(kind=8) & restrict y, real(kind=8) & restrict z)
+{
+  real(kind=8) cds;
+  real(kind=8) delta;
+  real(kind=8) m2;
+  real(kind=8) __result_b0;
+
+  {
+    real(kind=8) D.3387;
+    real(kind=8) D.3386;
+
+    D.3386 = *mu;
+    D.3387 = D.3386 * D.3386;
+    m2 = D.3387;
+  }
+  delta = ((*y - *z)) / *x;
+  {
+    real(kind=8) D.3389;
+    real(kind=8) D.3388;
+
+    D.3388 = delta;
+    D.3389 = D.3388 * D.3388;
+    cds = ((((*y + *z)) / *x) * 5.0e-1 - D.3389 * 2.5e-1) - 2.5e-1;
+  }
+  if (*y == *z)
+    {
+      {
+        real(kind=8) D.3391;
+
+        D.3391 = *x / *y;
+        __result_b0 = (((1.0e+0 - lambda (&D.3391))) * 2.0e+0 - __builtin_log (ABS_EXPR <*x / m2>)) - __builtin_log (ABS_EXPR <*y / *x>);
+      }
+    }
+  else
+    {
+      if (*y == 0.0)
+        {
+          __result_b0 = (((*z / *x - 1.0e+0)) * __builtin_log (ABS_EXPR <1.0e+0 - *x / *z>) + 2.0e+0) - __builtin_log (*z / m2);
+        }
+      else
+        {
+          if (*z == 0.0)
+            {
+              __result_b0 = (((*y / *x - 1.0e+0)) * __builtin_log (ABS_EXPR <1.0e+0 - *x / *y>) + 2.0e+0) - __builtin_log (*y / m2);
+            }
+          else
+            {
+              __result_b0 = ((((1.0e+0 - omega (&cds, &delta))) * 2.0e+0 - (__builtin_log (ABS_EXPR <*y / *x>) * ((delta + 1.0e+0))) * 5.0e-1) - __builtin_log (ABS_EXPR <*x / m2>)) - (__builtin_log (ABS_EXPR <*z / *x>) * ((1.0e+0 - delta))) * 5.0e-1;
+            }
+          L.3:;
+        }
+      L.2:;
+    }
+  L.1:;
+  return __result_b0;
+  return __result_b0;
+}
+
+
+omega (real(kind=8) & restrict x, real(kind=8) & restrict y)
+{
+  real(kind=8) rx;
+  real(kind=8) z;
+  real(kind=8) __result_omega;
+
+  if (*x > 0.0)
+    {
+      rx = __builtin_sqrt (*x);
+      __result_omega = ((__builtin_atan ((((*y + 1.0e+0)) * 5.0e-1) / rx) + __builtin_atan ((((1.0e+0 - *y)) * 5.0e-1) / rx))) * rx;
+    }
+  else
+    {
+      rx = ABS_EXPR <__builtin_sqrt (*x)>;
+      {
+        real(kind=8) D.3407;
+        real(kind=8) D.3406;
+
+        D.3406 = *y;
+        D.3407 = D.3406 * D.3406;
+        z = (*x + D.3407 * 2.5e-1) - 2.5e-1;
+      }
+      __result_omega = (rx * 5.0e-1) * __builtin_log (ABS_EXPR <((z - rx)) / ((z + rx))>);
+    }
+  L.4:;
+  return __result_omega;
+  return __result_omega;
+}
+
+
+lambda (real(kind=8) & restrict x)
+{
+  real(kind=8) root;
+  real(kind=8) __result_lambda;
+
+  if (*x < 4.0e+0 && *x > 0.0)
+    {
+      root = __builtin_sqrt (4.0e+0 / *x - 1.0e+0);
+      __result_lambda = __builtin_atan (1.0e+0 / root) * root;
+    }
+  else
+    {
+      root = __builtin_sqrt (ABS_EXPR <4.0e+0 / *x - 1.0e+0>);
+      __result_lambda = (root * 5.0e-1) * __builtin_log (ABS_EXPR <((root + 1.0e+0)) / ((1.0e+0 - root))>);
+    }
+  L.5:;
+  return __result_lambda;
+  return __result_lambda;
+}
+
+
+hms (real(kind=8) & restrict x)
+{
+  real(kind=8) a1;
+  real(kind=8) a2;
+  real(kind=8) xx;
+  real(kind=8) __result_hms;
+
+  {
+    real(kind=8) D.3418;
+    real(kind=8) D.3417;
+
+    D.3417 = *x;
+    D.3418 = D.3417 * D.3417;
+    xx = D.3418;
+  }
+  if (*x >= 4.0e+0)
+    {
+      a2 = xx * 2.5e-1 - *x;
+      a1 = __builtin_sqrt (a2);
+      {
+        real(kind=8) D.3421;
+        real(kind=8) D.3420;
+
+        D.3420 = a1;
+        D.3421 = *x;
+        __result_hms = (((((((a2 * 5.0e-1 + 1.0e+0)) * ((*x * 5.0e-1 - a1)) + (((__builtin_powi (D.3420, 3) - __builtin_powi (D.3421, 3) * 1.25e-1) + (*x * 3.0e+0) * 5.0e-1)) / 6.0e+0)) * __builtin_log (*x) + (*x * 3.0e+0) * 1.25e-1) - xx / 1.2e+1) - 1.888888888888888839545643349993042647838592529296875e+0) + ((a1 * 2.0e+0) * ((a2 / 3.0e+0 + 1.0e+0))) * __builtin_log (((*x * 5.0e-1 + a1)) / (((a1 - 1.0e+0) + *x * 5.0e-1)));
+      }
+    }
+  else
+    {
+      __result_hms = (((((*x * __builtin_log (*x)) * 2.5e-1) * (((3.0e+0 - *x) + xx / 6.0e+0)) + (*x * 3.0e+0) * 1.25e-1) - xx / 1.2e+1) - 1.888888888888888839545643349993042647838592529296875e+0) + (__builtin_sqrt (*x * ((1.0e+0 - *x * 2.5e-1))) * (((2.0e+0 - (*x * 2.0e+0) / 3.0e+0) + xx / 6.0e+0))) * __builtin_atan (__builtin_sqrt (4.0e+0 / *x - 1.0e+0));
+    }
+  L.6:;
+  return __result_hms;
+  return __result_hms;
+}
+
+
+f1bk (real(kind=8) & restrict x)
+{
+  static real(kind=8) q[10] [value-expr: coupls.q];
+  static real(kind=8) i3[10] [value-expr: coupls.i3];
+  static real(kind=8) nc[10] [value-expr: coupls.nc];
+  static real(kind=8) v[10] [value-expr: coupls.v];
+  static real(kind=8) a[10] [value-expr: coupls.a];
+  static real(kind=8) alphat [value-expr: coupls.alphat];
+  static real(kind=8) sinhat [value-expr: coupls.sinhat];
+  static real(kind=8) coshat [value-expr: coupls.coshat];
+  static real(kind=8) rhonc [value-expr: coupls.rhonc];
+  static real(kind=8) i3r[10] [value-expr: coupls.i3r];
+  static real(kind=8) u1xr[10] [value-expr: coupls.u1xr];
+  static real(kind=8) u1xl[10] [value-expr: coupls.u1xl];
+  static real(kind=8) fitx [value-expr: fit221.fitx];
+  static real(kind=8) fitsph [value-expr: fit221.fitsph];
+  static real(kind=8) fitcph [value-expr: fit221.fitcph];
+  static real(kind=8) fittph [value-expr: fit221.fittph];
+  static real(kind=8) fits2b [value-expr: fit221.fits2b];
+  static real(kind=8) kkss [value-expr: fit221.kkss];
+  static real(kind=8) kkcc [value-expr: fit221.kkcc];
+  static real(kind=8) kkem [value-expr: fit221.kkem];
+  static real(kind=8) bestlnx [value-expr: fitbst.bestlnx];
+  static real(kind=8) besttph [value-expr: fitbst.besttph];
+  static real(kind=8) bests2b [value-expr: fitbst.bests2b];
+  static logical(kind=4) flgfitx [value-expr: fitflg.flgfitx];
+  static logical(kind=4) flgtph [value-expr: fitflg.flgtph];
+  static logical(kind=4) flgs2b [value-expr: fitflg.flgs2b];
+  static logical(kind=4) flfout [value-expr: fitflg.flfout];
+  static integer(kind=4) modtype [value-expr: fitswtr.modtype];
+  static integer(kind=4) plltr [value-expr: fitswtr.plltr];
+  static integer(kind=4) prtpll[81] [value-expr: fitswtr.prtpll];
+  static logical(kind=4) flagmr [value-expr: flags.flagmr];
+  static integer(kind=4) flgblm [value-expr: flags.flgblm];
+  static logical(kind=4) ffermi [value-expr: flags.ffermi];
+  static logical(kind=4) fa2mt4 [value-expr: flags.fa2mt4];
+  static logical(kind=4) fa2mt2 [value-expr: flags.fa2mt2];
+  static logical(kind=4) fa2mt0 [value-expr: flags.fa2mt0];
+  static logical(kind=4) fla2im [value-expr: flags.fla2im];
+  static logical(kind=4) fasmt2 [value-expr: flags.fasmt2];
+  static logical(kind=4) fasmt0 [value-expr: flags.fasmt0];
+  static logical(kind=4) fas2mt [value-expr: flags.fas2mt];
+  static logical(kind=4) flagmf [value-expr: flags.flagmf];
+  static logical(kind=4) fpolew [value-expr: flags.fpolew];
+  static logical(kind=4) flgech [value-expr: flags.flgech];
+  static logical(kind=4) fobliq [value-expr: flags.fobliq];
+  static logical(kind=4) f4lqcd [value-expr: flags.f4lqcd];
+  static logical(kind=4) falas2 [value-expr: flags.falas2];
+  static logical(kind=4) fbayes [value-expr: flags.fbayes];
+  static integer(kind=4) flagzp [value-expr: flags.flagzp];
+  static logical(kind=4) flagmh [value-expr: flags.flagmh];
+  static logical(kind=4) flagmt [value-expr: flags.flagmt];
+  static logical(kind=4) flagmc [value-expr: flags.flagmc];
+  static logical(kind=4) flgrho [value-expr: flags.flgrho];
+  static logical(kind=4) fkappa [value-expr: flags.fkappa];
+  static logical(kind=4) flags [value-expr: flags.flags];
+  static logical(kind=4) flagt [value-expr: flags.flagt];
+  static logical(kind=4) fzprim [value-expr: flags.fzprim];
+  static logical(kind=4) fsinth [value-expr: flags.fsinth];
+  static logical(kind=4) fwrite [value-expr: flags.fwrite];
+  static logical(kind=4) flprob [value-expr: flags.flprob];
+  static logical(kind=4) fhiggs [value-expr: flags.fhiggs];
+  static logical(kind=4) flagal [value-expr: flags.flagal];
+  static logical(kind=4) fsplot [value-expr: flags.fsplot];
+  static real(kind=8) alpha [value-expr: inputs.alpha];
+  static real(kind=8) gf [value-expr: inputs.gf];
+  static real(kind=8) alfas0 [value-expr: inputs.alfas0];
+  static real(kind=8) asgrid[2001] [value-expr: inputs.asgrid];
+  static real(kind=8) mu0 [value-expr: inputs.mu0];
+  static real(kind=8) dahad3 [value-expr: inputs.dahad3];
+  static real(kind=8) pol4hf [value-expr: inputs.pol4hf];
+  static real(kind=8) an[8004] [value-expr: inputs.an];
+  static real(kind=8) bn[8004] [value-expr: inputs.bn];
+  static real(kind=8) pi1 [value-expr: inputs.pi1];
+  static real(kind=8) pi2 [value-expr: inputs.pi2];
+  static real(kind=8) zeta2 [value-expr: inputs.zeta2];
+  static real(kind=8) zeta3 [value-expr: inputs.zeta3];
+  static real(kind=8) zeta4 [value-expr: inputs.zeta4];
+  static real(kind=8) zeta5 [value-expr: inputs.zeta5];
+  static real(kind=8) zeta6 [value-expr: inputs.zeta6];
+  static real(kind=8) zeta7 [value-expr: inputs.zeta7];
+  static real(kind=8) prob [value-expr: limits.prob];
+  static real(kind=8) mtp [value-expr: limits.mtp];
+  static real(kind=8) sigma [value-expr: limits.sigma];
+  static integer(kind=4) zprime [value-expr: limits.zprime];
+  static real(kind=8) mw2 [value-expr: mass2.mw2];
+  static real(kind=8) mz2 [value-expr: mass2.mz2];
+  static real(kind=8) mt2 [value-expr: mass2.mt2];
+  static real(kind=8) mh2 [value-expr: mass2.mh2];
+  static real(kind=8) mz [value-expr: masses.mz];
+  static real(kind=8) mh [value-expr: masses.mh];
+  static real(kind=8) mt [value-expr: masses.mt];
+  static real(kind=8) mb [value-expr: masses.mb];
+  static real(kind=8) mc [value-expr: masses.mc];
+  static real(kind=8) ms [value-expr: masses.ms];
+  static real(kind=8) md [value-expr: masses.md];
+  static real(kind=8) mu [value-expr: masses.mu];
+  static real(kind=8) mtau [value-expr: masses.mtau];
+  static real(kind=8) mmu [value-expr: masses.mmu];
+  static real(kind=8) me [value-expr: masses.me];
+  static real(kind=8) mw [value-expr: masses.mw];
+  static real(kind=8) swpar [value-expr: obliqe.swpar];
+  static real(kind=8) spar [value-expr: obliqe.spar];
+  static real(kind=8) tpar [value-expr: obliqe.tpar];
+  static real(kind=8) upar [value-expr: obliqe.upar];
+  static real(kind=8) brho [value-expr: obliqe.brho];
+  static real(kind=8) bkappa [value-expr: obliqe.bkappa];
+  static real(kind=8) rpar [value-expr: obliqe.rpar];
+  static real(kind=8) zpar [value-expr: obliqe.zpar];
+  static real(kind=8) delrwh [value-expr: obliqe.delrwh];
+  static real(kind=8) delrzh [value-expr: obliqe.delrzh];
+  static real(kind=8) delr [value-expr: obliqe.delr];
+  static real(kind=8) rhohat [value-expr: obliqe.rhohat];
+  static real(kind=8) rho2 [value-expr: obliqe.rho2];
+  static real(kind=8) ratzw2 [value-expr: ratios.ratzw2];
+  static real(kind=8) rathw2 [value-expr: ratios.rathw2];
+  static real(kind=8) rathz2 [value-expr: ratios.rathz2];
+  static real(kind=8) rattw2 [value-expr: ratios.rattw2];
+  static real(kind=8) rattz2 [value-expr: ratios.rattz2];
+  static real(kind=8) ratth2 [value-expr: ratios.ratth2];
+  static real(kind=8) mzp [value-expr: zprime.mzp];
+  static real(kind=8) mzp2 [value-expr: zprime.mzp2];
+  static real(kind=8) mz02 [value-expr: zprime.mz02];
+  static real(kind=8) sinth [value-expr: zprime.sinth];
+  static real(kind=8) sinth2 [value-expr: zprime.sinth2];
+  static real(kind=8) costh [value-expr: zprime.costh];
+  static real(kind=8) costh2 [value-expr: zprime.costh2];
+  static real(kind=8) ratg21 [value-expr: zprime.ratg21];
+  static real(kind=8) rhoeff [value-expr: zprime.rhoeff];
+  static real(kind=8) rhoezp [value-expr: zprime.rhoezp];
+  static real(kind=8) rhozzp [value-expr: zprime.rhozzp];
+  static real(kind=8) v2[10] [value-expr: zprime.v2];
+  static real(kind=8) a2[10] [value-expr: zprime.a2];
+  static real(kind=8) eps2_l[10] [value-expr: zprime.eps2_l];
+  static real(kind=8) eps2_r[10] [value-expr: zprime.eps2_r];
+  static real(kind=8) ratgrl [value-expr: zprime.ratgrl];
+  real(kind=8) a0;
+  real(kind=8) b;
+  real(kind=8) xx;
+  real(kind=8) __result_f1bk;
+
+  {
+    real(kind=8) D.3727;
+    real(kind=8) D.3726;
+
+    D.3726 = *x;
+    D.3727 = D.3726 * D.3726;
+    xx = D.3727;
+  }
+  if (*x <= 1.0e+0)
+    {
+      b = __builtin_log (1.0e+0 - *x);
+      {
+        real(kind=8) D.3734;
+        real(kind=8) D.3733;
+        real(kind=8) D.3732;
+        real(kind=8) D.3730;
+
+        D.3730 = b;
+        D.3732 = -(*x / ((1.0e+0 - *x)));
+        D.3733 = b;
+        D.3734 = D.3733 * D.3733;
+        __result_f1bk = (((((((((*x - 1.5e+0) + (1.0e+0 / xx) * 5.0e-1)) * (((((b / 3.0e+0) * ((ddilog ((real(kind=8) *) x) * 2.0e+0 - zeta2)) + __builtin_powi (D.3730, 3) / 6.0e+0) - dtrilog ((real(kind=8) *) x)) - dtrilog (&D.3732))) + ((((*x + 5.0e-1) - (1.0e+0 / *x) * 5.0e-1)) / 3.0e+0) * ddilog ((real(kind=8) *) x)) + (((((*x - 7.5e-1) - (3.0e+0 / *x) * 5.0e-1) + (5.0e+0 / xx) * 2.5e-1)) / 6.0e+0) * D.3734) - (((((*x - 2.5e+0) + (2.0e+0 / *x) / 3.0e+0) + (5.0e+0 / xx) / 6.0e+0)) * 2.5e-1) * b) + ((*x - 1.5e+0)) * zeta3) + (zeta2 / 3.0e+0) * (((*x - 1.75e+0) - (1.0e+0 / *x) * 5.0e-1))) + 1.0833333333333332593184650249895639717578887939453125e+0) - (5.0e+0 / *x) / 2.4e+1;
+      }
+    }
+  else
+    {
+      a0 = __builtin_log (*x);
+      b = __builtin_log (*x - 1.0e+0);
+      {
+        real(kind=8) D.3742;
+        real(kind=8) D.3741;
+        real(kind=8) D.3740;
+        real(kind=8) D.3739;
+        real(kind=8) D.3738;
+        real(kind=8) D.3737;
+        real(kind=8) D.3736;
+
+        D.3736 = 1.0e+0 / ((1.0e+0 - *x));
+        D.3737 = 1.0e+0 / ((1.0e+0 - *x));
+        D.3738 = b;
+        D.3739 = D.3738 * D.3738;
+        D.3740 = 1.0e+0 / ((1.0e+0 - *x));
+        D.3741 = b;
+        D.3742 = D.3741 * D.3741;
+        __result_f1bk = (((((((((*x - 1.5e+0) + (1.0e+0 / xx) * 5.0e-1)) * (((dtrilog (&D.3736) + ((b * 2.0e+0) / 3.0e+0) * ddilog (&D.3737)) + ((zeta2 - D.3739 / 6.0e+0)) * ((a0 - b)))) + ((((*x + 5.0e-1) - (1.0e+0 / *x) * 5.0e-1)) / 3.0e+0) * ((ddilog (&D.3740) - a0 * b))) + (((((*x - 1.25e-1) - 1.0e+0 / *x) + (5.0e+0 / xx) * 1.25e-1)) / 3.0e+0) * D.3742) - (((((*x - 2.5e+0) + (2.0e+0 / *x) / 3.0e+0) + (5.0e+0 / xx) / 6.0e+0)) * 2.5e-1) * b) - (zeta3 * 5.0e-1) / xx) + (((1.0e+0 / *x + 5.0e-1) - (5.0e+0 / xx) * 2.5e-1)) * zeta2) + 1.0833333333333332593184650249895639717578887939453125e+0) - (5.0e+0 / *x) / 2.4e+1;
+      }
+    }
+  L.7:;
+  return __result_f1bk;
+  return __result_f1bk;
+}
+
+
+sin2thetaw ()
+{
+  static real(kind=8) q[10] [value-expr: coupls.q];
+  static real(kind=8) i3[10] [value-expr: coupls.i3];
+  static real(kind=8) nc[10] [value-expr: coupls.nc];
+  static real(kind=8) v[10] [value-expr: coupls.v];
+  static real(kind=8) a[10] [value-expr: coupls.a];
+  static real(kind=8) alphat [value-expr: coupls.alphat];
+  static real(kind=8) sinhat [value-expr: coupls.sinhat];
+  static real(kind=8) coshat [value-expr: coupls.coshat];
+  static real(kind=8) rhonc [value-expr: coupls.rhonc];
+  static real(kind=8) i3r[10] [value-expr: coupls.i3r];
+  static real(kind=8) u1xr[10] [value-expr: coupls.u1xr];
+  static real(kind=8) u1xl[10] [value-expr: coupls.u1xl];
+  static real(kind=8) fitx [value-expr: fit221.fitx];
+  static real(kind=8) fitsph [value-expr: fit221.fitsph];
+  static real(kind=8) fitcph [value-expr: fit221.fitcph];
+  static real(kind=8) fittph [value-expr: fit221.fittph];
+  static real(kind=8) fits2b [value-expr: fit221.fits2b];
+  static real(kind=8) kkss [value-expr: fit221.kkss];
+  static real(kind=8) kkcc [value-expr: fit221.kkcc];
+  static real(kind=8) kkem [value-expr: fit221.kkem];
+  static real(kind=8) bestlnx [value-expr: fitbst.bestlnx];
+  static real(kind=8) besttph [value-expr: fitbst.besttph];
+  static real(kind=8) bests2b [value-expr: fitbst.bests2b];
+  static logical(kind=4) flgfitx [value-expr: fitflg.flgfitx];
+  static logical(kind=4) flgtph [value-expr: fitflg.flgtph];
+  static logical(kind=4) flgs2b [value-expr: fitflg.flgs2b];
+  static logical(kind=4) flfout [value-expr: fitflg.flfout];
+  static integer(kind=4) modtype [value-expr: fitswtr.modtype];
+  static integer(kind=4) plltr [value-expr: fitswtr.plltr];
+  static integer(kind=4) prtpll[81] [value-expr: fitswtr.prtpll];
+  static logical(kind=4) flagmr [value-expr: flags.flagmr];
+  static integer(kind=4) flgblm [value-expr: flags.flgblm];
+  static logical(kind=4) ffermi [value-expr: flags.ffermi];
+  static logical(kind=4) fa2mt4 [value-expr: flags.fa2mt4];
+  static logical(kind=4) fa2mt2 [value-expr: flags.fa2mt2];
+  static logical(kind=4) fa2mt0 [value-expr: flags.fa2mt0];
+  static logical(kind=4) fla2im [value-expr: flags.fla2im];
+  static logical(kind=4) fasmt2 [value-expr: flags.fasmt2];
+  static logical(kind=4) fasmt0 [value-expr: flags.fasmt0];
+  static logical(kind=4) fas2mt [value-expr: flags.fas2mt];
+  static logical(kind=4) flagmf [value-expr: flags.flagmf];
+  static logical(kind=4) fpolew [value-expr: flags.fpolew];
+  static logical(kind=4) flgech [value-expr: flags.flgech];
+  static logical(kind=4) fobliq [value-expr: flags.fobliq];
+  static logical(kind=4) f4lqcd [value-expr: flags.f4lqcd];
+  static logical(kind=4) falas2 [value-expr: flags.falas2];
+  static logical(kind=4) fbayes [value-expr: flags.fbayes];
+  static integer(kind=4) flagzp [value-expr: flags.flagzp];
+  static logical(kind=4) flagmh [value-expr: flags.flagmh];
+  static logical(kind=4) flagmt [value-expr: flags.flagmt];
+  static logical(kind=4) flagmc [value-expr: flags.flagmc];
+  static logical(kind=4) flgrho [value-expr: flags.flgrho];
+  static logical(kind=4) fkappa [value-expr: flags.fkappa];
+  static logical(kind=4) flags [value-expr: flags.flags];
+  static logical(kind=4) flagt [value-expr: flags.flagt];
+  static logical(kind=4) fzprim [value-expr: flags.fzprim];
+  static logical(kind=4) fsinth [value-expr: flags.fsinth];
+  static logical(kind=4) fwrite [value-expr: flags.fwrite];
+  static logical(kind=4) flprob [value-expr: flags.flprob];
+  static logical(kind=4) fhiggs [value-expr: flags.fhiggs];
+  static logical(kind=4) flagal [value-expr: flags.flagal];
+  static logical(kind=4) fsplot [value-expr: flags.fsplot];
+  static real(kind=8) alpha [value-expr: inputs.alpha];
+  static real(kind=8) gf [value-expr: inputs.gf];
+  static real(kind=8) alfas0 [value-expr: inputs.alfas0];
+  static real(kind=8) asgrid[2001] [value-expr: inputs.asgrid];
+  static real(kind=8) mu0 [value-expr: inputs.mu0];
+  static real(kind=8) dahad3 [value-expr: inputs.dahad3];
+  static real(kind=8) pol4hf [value-expr: inputs.pol4hf];
+  static real(kind=8) an[8004] [value-expr: inputs.an];
+  static real(kind=8) bn[8004] [value-expr: inputs.bn];
+  static real(kind=8) pi1 [value-expr: inputs.pi1];
+  static real(kind=8) pi2 [value-expr: inputs.pi2];
+  static real(kind=8) zeta2 [value-expr: inputs.zeta2];
+  static real(kind=8) zeta3 [value-expr: inputs.zeta3];
+  static real(kind=8) zeta4 [value-expr: inputs.zeta4];
+  static real(kind=8) zeta5 [value-expr: inputs.zeta5];
+  static real(kind=8) zeta6 [value-expr: inputs.zeta6];
+  static real(kind=8) zeta7 [value-expr: inputs.zeta7];
+  static real(kind=8) prob [value-expr: limits.prob];
+  static real(kind=8) mtp [value-expr: limits.mtp];
+  static real(kind=8) sigma [value-expr: limits.sigma];
+  static integer(kind=4) zprime [value-expr: limits.zprime];
+  static real(kind=8) mw2 [value-expr: mass2.mw2];
+  static real(kind=8) mz2 [value-expr: mass2.mz2];
+  static real(kind=8) mt2 [value-expr: mass2.mt2];
+  static real(kind=8) mh2 [value-expr: mass2.mh2];
+  static real(kind=8) mz [value-expr: masses.mz];
+  static real(kind=8) mh [value-expr: masses.mh];
+  static real(kind=8) mt [value-expr: masses.mt];
+  static real(kind=8) mb [value-expr: masses.mb];
+  static real(kind=8) mc [value-expr: masses.mc];
+  static real(kind=8) ms [value-expr: masses.ms];
+  static real(kind=8) md [value-expr: masses.md];
+  static real(kind=8) mu [value-expr: masses.mu];
+  static real(kind=8) mtau [value-expr: masses.mtau];
+  static real(kind=8) mmu [value-expr: masses.mmu];
+  static real(kind=8) me [value-expr: masses.me];
+  static real(kind=8) mw [value-expr: masses.mw];
+  static real(kind=8) swpar [value-expr: obliqe.swpar];
+  static real(kind=8) spar [value-expr: obliqe.spar];
+  static real(kind=8) tpar [value-expr: obliqe.tpar];
+  static real(kind=8) upar [value-expr: obliqe.upar];
+  static real(kind=8) brho [value-expr: obliqe.brho];
+  static real(kind=8) bkappa [value-expr: obliqe.bkappa];
+  static real(kind=8) rpar [value-expr: obliqe.rpar];
+  static real(kind=8) zpar [value-expr: obliqe.zpar];
+  static real(kind=8) delrwh [value-expr: obliqe.delrwh];
+  static real(kind=8) delrzh [value-expr: obliqe.delrzh];
+  static real(kind=8) delr [value-expr: obliqe.delr];
+  static real(kind=8) rhohat [value-expr: obliqe.rhohat];
+  static real(kind=8) rho2 [value-expr: obliqe.rho2];
+  static real(kind=8) ratzw2 [value-expr: ratios.ratzw2];
+  static real(kind=8) rathw2 [value-expr: ratios.rathw2];
+  static real(kind=8) rathz2 [value-expr: ratios.rathz2];
+  static real(kind=8) rattw2 [value-expr: ratios.rattw2];
+  static real(kind=8) rattz2 [value-expr: ratios.rattz2];
+  static real(kind=8) ratth2 [value-expr: ratios.ratth2];
+  static real(kind=8) mzp [value-expr: zprime.mzp];
+  static real(kind=8) mzp2 [value-expr: zprime.mzp2];
+  static real(kind=8) mz02 [value-expr: zprime.mz02];
+  static real(kind=8) sinth [value-expr: zprime.sinth];
+  static real(kind=8) sinth2 [value-expr: zprime.sinth2];
+  static real(kind=8) costh [value-expr: zprime.costh];
+  static real(kind=8) costh2 [value-expr: zprime.costh2];
+  static real(kind=8) ratg21 [value-expr: zprime.ratg21];
+  static real(kind=8) rhoeff [value-expr: zprime.rhoeff];
+  static real(kind=8) rhoezp [value-expr: zprime.rhoezp];
+  static real(kind=8) rhozzp [value-expr: zprime.rhozzp];
+  static real(kind=8) v2[10] [value-expr: zprime.v2];
+  static real(kind=8) a2[10] [value-expr: zprime.a2];
+  static real(kind=8) eps2_l[10] [value-expr: zprime.eps2_l];
+  static real(kind=8) eps2_r[10] [value-expr: zprime.eps2_r];
+  static real(kind=8) ratgrl [value-expr: zprime.ratgrl];
+  real(kind=8) a0;
+  real(kind=8) al;
+  real(kind=8) alh;
+  real(kind=8) at;
+  real(kind=8) aw;
+  real(kind=8) az;
+  real(kind=8) b0whw;
+  real(kind=8) b0wwz;
+  real(kind=8) b0zhz;
+  real(kind=8) b0zww;
+  real(kind=8) b1;
+  real(kind=8) b2;
+  real(kind=8) b3;
+  real(kind=8) b4;
+  real(kind=8) b5;
+  real(kind=8) b6;
+  real(kind=8) c[6];
+  real(kind=8) c6;
+  real(kind=8) cfunc;
+  real(kind=8) conqcd;
+  real(kind=8) const;
+  real(kind=8) contmb;
+  real(kind=8) contrf;
+  real(kind=8) cos2tw;
+  real(kind=8) cos4th;
+  real(kind=8) cos4tw;
+  real(kind=8) cqcd1;
+  real(kind=8) cqcd2;
+  real(kind=8) delrho;
+  real(kind=8) dfks;
+  real(kind=8) dfksh;
+  real(kind=8) dgamma;
+  complex(kind=8) dkapse;
+  integer(kind=4) f;
+  real(kind=8) fftj00;
+  real(kind=8) fftj10;
+  real(kind=8) gftj0;
+  real(kind=8) hmsw;
+  integer(kind=4) i;
+  real(kind=8) i1dfs;
+  real(kind=8) i2dfs;
+  real(kind=8) lambd1;
+  real(kind=8) ratbw2;
+  real(kind=8) ratbz2;
+  real(kind=8) ratcw2;
+  real(kind=8) ratcz2;
+  real(kind=8) rootc;
+  real(kind=8) rtauw2;
+  real(kind=8) rtauz2;
+  real(kind=8) s4c2;
+  real(kind=8) sin2tw;
+  real(kind=8) sin4th;
+  real(kind=8) t1;
+  real(kind=8) t2;
+  real(kind=8) t3;
+  real(kind=8) weight;
+  real(kind=8) xa2mt0;
+  real(kind=8) xasmt0;
+  real(kind=8) xt;
+  real(kind=8) zt;
+
+  c[0] = 4.79012345679012352395176321806502528488636016845703125e-1;
+  c[2] = 5.2010582010582007139731786082847975194454193115234375e-2;
+  c[4] = 6.086671705719325087269311325144371949136257171630859375e-3;
+  c[1] = 1.586419753086419637266857307622558437287807464599609375e-1;
+  c[3] = 6.64021164021163980833994955332855170127004384994506835938e-3;
+  c[5] = -1.49533887629125724922501960989507097110617905855178833008e-4;
+  al = alpha / pi1;
+  az = alphas (&mz) / pi1;
+  at = alphas (&mt) / pi1;
+  xt = (((gf * mt2) * 5.0e-1) / pi2) / 1.4142135623730951454746218587388284504413604736328125e+0;
+  const = ((4.58333333333333303727386009995825588703155517578125e+0 - zeta3 * 4.0e+0)) / 3.0e+0;
+  cqcd1 = zeta2 - 1.5e+0;
+  cqcd2 = 2.977199999999999846522769075818359851837158203125e+0;
+  {
+    real(kind=8) D.4092;
+    real(kind=8) D.4091;
+
+    D.4091 = ((mtau / mz));
+    D.4092 = D.4091 * D.4091;
+    rtauz2 = D.4092;
+  }
+  {
+    real(kind=8) D.4095;
+    real(kind=8) D.4094;
+
+    D.4094 = ((mcrun (&mz) / mz));
+    D.4095 = D.4094 * D.4094;
+    ratcz2 = D.4095;
+  }
+  {
+    real(kind=8) D.4098;
+    real(kind=8) D.4097;
+
+    D.4097 = ((mbrun (&mz) / mz));
+    D.4098 = D.4097 * D.4097;
+    ratbz2 = D.4098;
+  }
+  xa2mt0 = 1.0e+0;
+  xasmt0 = 1.0e+0;
+  if (!fa2mt0)
+    {
+      xa2mt0 = 0.0;
+    }
+  L.8:;
+  if (!fasmt0)
+    {
+      xasmt0 = 0.0;
+    }
+  L.9:;
+  a0 = __builtin_sqrt (((pi1 * alpha) / 1.4142135623730951454746218587388284504413604736328125e+0) / gf);
+  {
+    real(kind=8) D.4102;
+    real(kind=8) D.4101;
+
+    D.4101 = a0;
+    D.4102 = D.4101 * D.4101;
+    mw2 = (mz2 * 5.0e-1) * ((__builtin_sqrt (1.0e+0 - (D.4102 * 4.0e+0) / mz2) + 1.0e+0));
+  }
+  if (flagzp != 0)
+    {
+      {
+        real(kind=8) D.4105;
+        real(kind=8) D.4104;
+
+        D.4104 = a0;
+        D.4105 = D.4104 * D.4104;
+        mw2 = (mz02 * 5.0e-1) * ((__builtin_sqrt (1.0e+0 - (D.4105 * 4.0e+0) / mz02) + 1.0e+0));
+      }
+    }
+  L.10:;
+  mw = __builtin_sqrt (mw2);
+  alphat = alpha;
+  alfahat (&mz, &dgamma, &alphat);
+  delrwh = al * dgamma;
+  rhohat = (xt * 3.0e+0) * 2.5e-1 + 1.0e+0;
+  {
+    real(kind=8) D.4108;
+    real(kind=8) D.4107;
+
+    D.4107 = a0;
+    D.4108 = D.4107 * D.4107;
+    mw2 = ((mz2 * rhohat) * 5.0e-1) * ((__builtin_sqrt (1.0e+0 - (((D.4108 * 4.0e+0) / mz2) / rhohat) / ((1.0e+0 - delrwh))) + 1.0e+0));
+  }
+  if (flagzp != 0)
+    {
+      {
+        real(kind=8) D.4111;
+        real(kind=8) D.4110;
+
+        D.4110 = a0;
+        D.4111 = D.4110 * D.4110;
+        mw2 = ((mz02 * rhohat) * 5.0e-1) * ((__builtin_sqrt (1.0e+0 - (((D.4111 * 4.0e+0) / mz02) / rhohat) / ((1.0e+0 - delrwh))) + 1.0e+0));
+      }
+    }
+  L.11:;
+  mw = __builtin_sqrt (mw2);
+  cos2tw = mw2 / mz2;
+  sin2tw = 1.0e+0 - cos2tw;
+  coshat = cos2tw / rhohat;
+  sinhat = 1.0e+0 - coshat;
+  f = 0;
+  if (f <= 9)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4115;
+
+            v[(integer(kind=8)) f] = (((i3[(integer(kind=8)) f] - (q[(integer(kind=8)) f] * 2.0e+0) * sinhat)) * 5.0e-1) / __builtin_sqrt (sinhat * coshat);
+            a[(integer(kind=8)) f] = (i3[(integer(kind=8)) f] * 5.0e-1) / __builtin_sqrt (sinhat * coshat);
+            __label_000010:;
+            L.12:;
+            D.4115 = f == 9;
+            f = f + 1;
+            if (D.4115) goto L.13;
+          }
+        }
+    }
+  L.13:;
+  i = 1;
+  if (i <= 3)
+    {
+      while (1)
+        {
+          {
+            logical(kind=4) D.4234;
+
+            {
+              real(kind=8) __var_1;
+
+              alfahat (&mz, &dgamma, &alphat);
+              alh = alphat / pi1;
+              aw = alphas (&mw) / pi1;
+              {
+                real(kind=8) D.4119;
+                real(kind=8) D.4118;
+
+                D.4118 = ((mtau / mw));
+                D.4119 = D.4118 * D.4118;
+                rtauw2 = D.4119;
+              }
+              {
+                real(kind=8) D.4121;
+                real(kind=8) D.4120;
+
+                D.4120 = ((mcrun (&mw) / mw));
+                D.4121 = D.4120 * D.4120;
+                ratcw2 = D.4121;
+              }
+              {
+                real(kind=8) D.4123;
+                real(kind=8) D.4122;
+
+                D.4122 = ((mbrun (&mt) / mw));
+                D.4123 = D.4122 * D.4122;
+                ratbw2 = D.4123;
+              }
+              {
+                real(kind=8) D.4125;
+                real(kind=8) D.4124;
+
+                D.4124 = sinhat;
+                D.4125 = D.4124 * D.4124;
+                sin4th = D.4125;
+              }
+              {
+                real(kind=8) D.4127;
+                real(kind=8) D.4126;
+
+                D.4126 = cos2tw;
+                D.4127 = D.4126 * D.4126;
+                cos4tw = 1.0e+0 / D.4127;
+              }
+              s4c2 = sin4th / coshat;
+              cfunc = ((1.0e+0 / cos2tw - cos4tw / 6.0e+0)) * 2.5e-1;
+              rootc = __builtin_sqrt (cos2tw * 4.0e+0 - 1.0e+0);
+              {
+                real(kind=8) D.4128;
+
+                D.4128 = mh2 / mw2;
+                hmsw = hms (&D.4128);
+              }
+              delrwh = al * dgamma + ((al * 2.5e-1) / sinhat) * (((__builtin_log (cos2tw) / sin2tw) * (((3.5e+0 - (sin2tw * 5.0e+0) * 5.0e-1) - ((5.0e+0 - (rhohat * 3.0e+0) * 5.0e-1)) * sinhat)) + 6.0e+0));
+              {
+                real(kind=8) D.4129;
+
+                D.4129 = 1.0e+0 / cos2tw;
+                i1dfs = ((((coshat * 2.1e+1) * 5.0e-1 + s4c2 * 5.0e-1) - sinhat)) / 1.8e+1 - ((lambda (&D.4129) - 1.0e+0)) * (((((((coshat * 1.0e+1 - (s4c2 * 1.0e+1) / 3.0e+0) - (sinhat * 4.0e+0) / 3.0e+0)) * cos2tw + (coshat * 1.3e+1) * 5.0e-1) + sinhat / 3.0e+0) - s4c2 / 6.0e+0));
+              }
+              i2dfs = (((((rootc / cos2tw) * __builtin_atan (rootc)) * ((((s4c2 - (1.0e+0 / cos2tw) / 3.0e+0) + cos4tw / 1.2e+1) - ((((1.1e+1 / cos2tw) / 3.0e+0 + 5.0e+0) - (cos4tw * 2.0e+0) / 3.0e+0)) * coshat)) + (__builtin_log (cos2tw) / cos2tw) * (((((((5.0e+0 / cos2tw) * 5.0e-1 - cos4tw / 3.0e+0) + 3.5e+0)) * coshat + cfunc) - s4c2 * 5.0e-1))) + (((6.0e+0 / cos2tw + 1.122222222222222143273029359988868236541748046875e+1) - (cos4tw * 2.0e+0) / 3.0e+0)) * coshat) + 1.11111111111111104943205418749130330979824066162109375e-1) + ((cfunc - s4c2)) * 2.0e+0;
+              __var_1 = __builtin_log (cos2tw);
+              delrwh = ((al * 2.5e-1) / sinhat) * ((((((((hmsw + i2dfs) - (((__builtin_log (rathz2) * rathz2 - cos2tw * __var_1)) * 7.5e-1) / ((rathz2 - cos2tw))) + (((((-(((coshat * 4.0e+0 + 2.5e-1)) / cos2tw) - 6.66666666666666696272613990004174411296844482421875e+0) + sinhat * 4.0e+0) + s4c2) - (cos2tw / sin2tw) * (((coshat * 4.0e+0 + 2.5e-1) - s4c2)))) * __var_1) - 1.75e+0) + (sinhat * 9.2e+1) / 9.0e+0) - ((coshat * 2.0e+0 + 1.25e-1)) / cos2tw) + s4c2)) + delrwh;
+              L.16:;
+              rattw2 = mt2 / mw2;
+              {
+                real(kind=8) D.4133;
+                real(kind=8) D.4132;
+
+                D.4132 = ((rattw2 - 1.0e+0));
+                D.4133 = D.4132 * D.4132;
+                contrf = (2.5e-1 / sinhat) * (((((__builtin_log (cos2tw) * 4.0e+0 - 6.66666666666666696272613990004174411296844482421875e+0) + __builtin_log (rattw2)) + (rattw2 * 2.5e-1) * ((rattw2 * 2.0e+0 + 1.0e+0))) + (((rattw2 * 5.0e-1 + 1.0e+0)) * D.4133) * __builtin_log (ABS_EXPR <1.0e+0 - 1.0e+0 / rattw2>)));
+              }
+              delrwh = al * contrf + delrwh;
+              if (NON_LVALUE_EXPR <fasmt0>)
+                {
+                  {
+                    real(kind=8) D.4135;
+
+                    D.4135 = mw2 / mt2;
+                    conqcd = ((aw * 5.0e-1) / sinhat) * ((__builtin_log (cos2tw) - const * 3.0e+0)) + ((at * 2.5e-1) / sinhat) * (((__builtin_log (rattz2) - const * 3.0e+0) - (rattw2 * 4.0e+0) * ((((f1bk (&D.4135) - 1.4375e+0) + zeta2 * 5.0e-1) + (zeta3 * 3.0e+0) * 5.0e-1))));
+                  }
+                  {
+                    real(kind=8) D.4137;
+                    real(kind=8) D.4136;
+
+                    D.4136 = rattw2;
+                    D.4137 = D.4136 * D.4136;
+                    conqcd = (((at * 5.0e-1) / sinhat) * rattw2) * (((rattw2 * 2.0e+0 + 1.0e+0) - (((1.0e+0 - D.4137)) * 2.0e+0) * __builtin_log (ABS_EXPR <1.0e+0 - mw2 / mt2>))) + conqcd;
+                  }
+                  delrwh = al * conqcd + delrwh;
+                }
+              L.17:;
+              {
+                real(kind=8) D.4139;
+                real(kind=8) D.4138;
+
+                D.4138 = coshat;
+                D.4139 = D.4138 * D.4138;
+                delrho = (((alh * 2.5e-1) / sinhat) / coshat) * ((((((((cos2tw * hmsw - hms (&rathz2)) + cos2tw * i2dfs) - coshat * i1dfs) + D.4139 * 5.0e-1) + sin4th / 6.0e+0) - ((5.0e-1 - sinhat * 9.22222222222222143273029359988868236541748046875e+0)) * cos2tw) - __builtin_log (cos2tw) * (((((((sinhat * 3.0e+0 + 1.1666666666666667406815349750104360282421112060546875e+0) - s4c2)) * cos2tw + 1.0e+0) - sin4th * 3.0e+0) + (sinhat * 7.0e+0) / 3.0e+0))));
+              }
+              {
+                real(kind=8) D.4140;
+
+                D.4140 = 1.0e+0 / rattz2;
+                lambd1 = lambda (&D.4140) - 1.0e+0;
+              }
+              {
+                real(kind=8) D.4142;
+                real(kind=8) D.4141;
+
+                D.4141 = ((1.0e+0 - (sinhat * 8.0e+0) / 3.0e+0));
+                D.4142 = D.4141 * D.4141;
+                delrho = (((alh * rhohat) * contrf + delrho) + (((((alh * 3.0e+0) * 2.5e-1) / sinhat) / coshat) * rattz2) * ((lambd1 + 2.5e-1))) + (((alh * 5.0e-1) / sinhat) / coshat) * ((((((1.75e+0 - (sinhat * 1.0e+1) / 3.0e+0) + (sin4th * 4.0e+1) / 9.0e+0)) * 5.0e+0) / 3.0e+0 - (((D.4142 + 1.0e+0)) * 1.25e-1) * (((__builtin_log (rattz2) + 3.33333333333333314829616256247390992939472198486328125e-1) + (((rattz2 * 2.0e+0 + 1.0e+0)) * 2.0e+0) * lambd1))));
+              }
+              if (NON_LVALUE_EXPR <fasmt2> && !ffermi)
+                {
+                  delrho = delrho - (((((alh * at) * 2.5e-1) / sinhat) / coshat) * cqcd1) * rattz2;
+                }
+              L.18:;
+              if (NON_LVALUE_EXPR <fasmt0>)
+                {
+                  t1 = 1.0e+0 / rattz2;
+                  {
+                    real(kind=8) D.4146;
+                    real(kind=8) D.4145;
+
+                    D.4145 = rattz2;
+                    D.4146 = D.4145 * D.4145;
+                    t2 = 1.0e+0 / D.4146;
+                  }
+                  {
+                    real(kind=8) D.4147;
+
+                    D.4147 = rattz2;
+                    t3 = 1.0e+0 / __builtin_powi (D.4147, 3);
+                  }
+                  delrho = (((alh * rhohat) * conqcd + delrho) + ((((((alh * az) * 2.5e-1) / sinhat) / coshat) * 3.0e+0) * const) * (((2.5e+0 - (sinhat * 1.4e+1) / 3.0e+0) + (sin4th * 4.4e+1) / 9.0e+0))) + ((((alh * at) * 2.5e-1) / sinhat) / coshat) * ((((((2.5e-1 - (sinhat * 4.0e+0) / 3.0e+0) + (sin4th * 1.6e+1) / 9.0e+0)) * ((((c[0] * t1 + 1.0833333333333332593184650249895639717578887939453125e+0) + c[2] * t2) + c[4] * t3)) - __builtin_log (rattz2) * (((5.0e-1 - (sinhat * 4.0e+0) / 3.0e+0) + (sin4th * 1.6e+1) / 9.0e+0))) + ((((c[1] * t1 - 8.055555555555555802271783250034786760807037353515625e-1) + c[3] * t2) + c[5] * t3)) * 2.5e-1));
+                }
+              L.19:;
+              if (NON_LVALUE_EXPR <fas2mt> && !ffermi)
+                {
+                  {
+                    real(kind=8) D.4150;
+                    real(kind=8) D.4149;
+
+                    D.4149 = at;
+                    D.4150 = D.4149 * D.4149;
+                    delrho = delrho - (((((alh * D.4150) * 2.5e-1) / sinhat) / coshat) * rattz2) * cqcd2;
+                  }
+                }
+              L.20:;
+              rho2 = 0.0;
+              if (NON_LVALUE_EXPR <fa2mt4> && !fa2mt2)
+                {
+                  b1 = 1.0e+0 / ratth2;
+                  {
+                    real(kind=8) D.4153;
+                    real(kind=8) D.4152;
+
+                    D.4152 = b1;
+                    D.4153 = D.4152 * D.4152;
+                    b2 = D.4153;
+                  }
+                  rho2 = (((((2.5e+1 - b1 * 4.0e+0) + ((((b2 - b1 * 1.2e+1) - 1.2e+1)) * 5.0e-1) * __builtin_log (b1)) + ((((b1 - 2.0e+0)) * 5.0e-1) / b1) * pi2) + ((((b1 - 4.0e+0)) * 5.0e-1) * __builtin_sqrt (b1)) * gftj (&b1)) - ((((b2 * 3.0e+0 - b1 * 1.2e+1) + 1.5e+1) - 6.0e+0 / b1)) * fftj0 (&b1)) + ((((b2 - b1 * 6.0e+0) + 1.0e+1)) * 3.0e+0) * fftj1 (&b1);
+                }
+              L.21:;
+              if (NON_LVALUE_EXPR <fa2mt2>)
+                {
+                  if (mt * 5.9999999999999997779553950749686919152736663818359375e-1 >= mh)
+                    {
+                      {
+                        real(kind=8) __var_2;
+
+                        zt = 1.0e+0 / rattz2;
+                        b1 = 1.0e+0 / ratth2;
+                        b2 = b1 * b1;
+                        {
+                          real(kind=8) D.4160;
+                          real(kind=8) D.4159;
+
+                          D.4159 = coshat;
+                          D.4160 = D.4159 * D.4159;
+                          cos4th = D.4160;
+                        }
+                        b0zww = b0 (&mz, &mz2, &mw2, &mw2);
+                        b0wwz = b0 (&mz, &mw2, &mw2, &mz2);
+                        b0zhz = b0 (&mz, &mz2, &mh2, &mz2);
+                        b0whw = b0 (&mz, &mw2, &mh2, &mw2);
+                        __var_2 = __builtin_sqrt (b1);
+                        {
+                          real(kind=8) D.4163;
+
+                          D.4163 = __var_2;
+                          rho2 = ((((((((((((((1.9e+1 - (b1 * 5.3e+1) / 3.0e+0) + ((pi1 * 3.0e+0) * 5.0e-1) * __builtin_powi (D.4163, 3)) + ((b2 * 8.0e+0) / 9.0e+0) / zt) - (((b2 * 5.0e+0) / 9.0e+0) / coshat) / zt) - (__var_2 * 4.0e+0) * pi1) + (((((8.45e+2 - 9.0e+0 / coshat) + coshat * 4.27e+2) - cos4th * 3.66e+2)) / 2.7e+1) * zt) + (((((b1 * 5.4e+1 - 5.4e+1) - zt * 1.19e+2) + (coshat * 4.4e+1) * zt)) / 2.7e+1) * pi2) + (((((((3.4e+1 - coshat * 1.16e+2) + cos4th * 6.4e+1)) * zt) * 4.0e+0) * pi1) / 2.7e+1) * __builtin_sqrt (b1)) + ((((b1 * 3.2e+1 - (b2 * 8.0e+0) / zt) - zt * 9.6e+1)) / 9.0e+0) * b0zhz) + (((zt / coshat) * (((coshat * 2.0e+1 + 1.0e+0) - cos4th * 2.4e+1))) / 3.0e+0) * b0wwz) - (((zt * 2.0e+0) * (((coshat * 1.8e+1 + 1.0e+0) - cos4th * 1.6e+1))) / 3.0e+0) * b0zww) - (((((b1 * 4.0e+0 - (b2 / coshat) / zt) - (coshat * 1.2e+1) * zt)) * 5.0e+0) / 9.0e+0) * b0whw) - ((__builtin_log (coshat) * (((((b1 * 5.0e+0) / zt + 3.0e+0) + coshat * 3.2e+1) + cos4th * 4.8e+1))) / 9.0e+0) * zt) + ((((((b2 * 5.0e+0) / coshat - b2 * 8.0e+0) - (b1 * 1.8e+1) * zt)) / 9.0e+0) / zt) * __builtin_log (b1)) + ((((((((b2 * 8.0e+0) / 9.0e+0) / zt - b1) - (((b2 * 5.0e+0) / 9.0e+0) / coshat) / zt) - zt / 9.0e+0) + ((coshat * 1.04e+2) * zt) / 3.0e+0) - ((cos4th * 1.04e+2) * zt) / 9.0e+0)) * __builtin_log (zt);
+                        }
+                        L.24:;
+                      }
+                    }
+                  else
+                    {
+                      if (mh >= mt)
+                        {
+                          {
+                            real(kind=8) __var_3;
+
+                            zt = 1.0e+0 / rattz2;
+                            b1 = 1.0e+0 / ratth2;
+                            b2 = b1 * b1;
+                            b3 = b1 * b2;
+                            b4 = b1 * b3;
+                            b5 = b1 * b4;
+                            b6 = b1 * b5;
+                            {
+                              real(kind=8) D.4166;
+                              real(kind=8) D.4165;
+
+                              D.4165 = coshat;
+                              D.4166 = D.4165 * D.4165;
+                              cos4th = D.4166;
+                            }
+                            {
+                              real(kind=8) D.4167;
+
+                              D.4167 = coshat;
+                              c6 = __builtin_powi (D.4167, 3);
+                            }
+                            fftj00 = fftj0 (&b1);
+                            fftj10 = fftj1 (&b1);
+                            gftj0 = gftj (&b1);
+                            b0zww = b0 (&mz, &mz2, &mw2, &mw2);
+                            b0wwz = b0 (&mz, &mw2, &mw2, &mz2);
+                            __var_3 = __builtin_sqrt (b1);
+                            {
+                              real(kind=8) D.4170;
+
+                              D.4170 = 1.0e+0 - b1;
+                              rho2 = ((((((2.5e+1 - b1 * 4.0e+0) + ((((b2 - b1 * 1.2e+1) - 1.2e+1)) * 5.0e-1) * __builtin_log (b1)) + (((1.0e+0 - 2.0e+0 / b1)) * 5.0e-1) * pi2) + ((((b1 - 4.0e+0)) * 5.0e-1) * __var_3) * gftj0) - ((((b2 * 3.0e+0 - b1 * 1.2e+1) + 1.5e+1) - 6.0e+0 / b1)) * fftj00) + ((((b2 - b1 * 6.0e+0) + 1.0e+1)) * 3.0e+0) * fftj10) + (((((((((((((((((((7.2e+1 - coshat * 6.25e+3) - cos4th * 3.056e+3) + c6 * 3.696e+3)) * b1 - cos4th * 1.776e+3) + ((((coshat * 1.283e+3 - 1.8e+1) + cos4th * 1.371e+3) - c6 * 1.436e+3)) * b2) + (((coshat * 6.8e+1 - cos4th * 1.24e+2) + c6 * 1.28e+2)) * b3)) / 5.4e+1) / coshat) / ((b1 - 4.0e+0))) / b1 + ((pi2 / 2.7e+1) / b2) * (((((coshat * 6.0e+0) * b1 - coshat * 3.7e+1) - b2 * 1.19e+2) + (coshat * 5.6e+1) * b2))) + (((-6.6666666666666662965923251249478198587894439697265625e-1 - coshat * 1.2e+1) + (cos4th * 3.2e+1) / 3.0e+0)) * b0zww) + ((((1.0e+0 / coshat) / 3.0e+0 + 6.66666666666666696272613990004174411296844482421875e+0) - coshat * 8.0e+0)) * b0wwz) + ((((((1.7e+1 - coshat * 5.8e+1) + cos4th * 3.2e+1)) * ((4.0e+0 - b1))) * __var_3) * gftj0) / 2.7e+1) + (((((sinhat * 2.0e+1) * ((4.0e+0 - b1))) * gftj0) / 3.0e+0) / __builtin_sqrt (b1)) / b1) + ((((ddilog (&D.4170) * (((((3.7e+1 - b1 * 6.0e+0) - b2 * 1.2e+1) - b3 * 2.2e+1) + b4 * 9.0e+0))) * 2.0e+0) * coshat) / 9.0e+0) / b2) - ((((coshat * 1.4e+1 + 1.0e+0) + cos4th * 1.6e+1)) * __builtin_log (coshat)) / 3.0e+0)) * zt;
+                            }
+                            L.26:;
+                            {
+                              real(kind=8) D.4175;
+                              real(kind=8) D.4174;
+                              real(kind=8) D.4173;
+                              real(kind=8) D.4172;
+
+                              D.4172 = ((b1 - 4.0e+0));
+                              D.4173 = D.4172 * D.4172;
+                              D.4174 = ((b1 - 4.0e+0));
+                              D.4175 = D.4174 * D.4174;
+                              rho2 = (((((((((((((1.152e+4 - coshat * 1.5072e+4) - (((7.17e+3 - coshat * 8.928e+3) - cos4th * 7.68e+2)) * b1) + (((3.411e+3 - coshat * 7.062e+3) + cos4th * 3.264e+3)) * b2) - (((1.259e+3 - coshat * 3.547e+3) + cos4th * 2.144e+3)) * b3) + (((2.38e+2 - coshat * 7.58e+2) + cos4th * 4.48e+2)) * b4) - (((1.7e+1 - coshat * 5.8e+1) + cos4th * 3.2e+1)) * b5)) * __builtin_log (b1)) / 2.7e+1) / D.4173) / b1 - ((((8.1e+1 - coshat * 3.62e+2) + cos4th * 1.04e+2)) / 9.0e+0) * __builtin_log (zt)) - ((((fftj10 * 2.0e+0) / 9.0e+0) / D.4175) / b2) * (((((((sinhat * 3.84e+3 - (((4.31e+3 - coshat * 4.224e+3) - cos4th * 2.56e+2)) * b1) + (((1.706e+3 - coshat * 1.312e+3) - cos4th * 3.2e+2)) * b2) - (((coshat * 4.76e+2 + 3.15e+2) - cos4th * 6.4e+1)) * b3) + ((coshat * 4.54e+2 + 2.4e+1)) * b4) - (coshat * 1.12e+2) * b5) + (coshat * 9.0e+0) * b6)))) * zt + rho2;
+                            }
+                            if (b1 <= 4.0e+0)
+                              {
+                                {
+                                  real(kind=8) D.4177;
+
+                                  D.4177 = __builtin_sqrt (4.0e+0 / b1 - 1.0e+0);
+                                  rho2 = rho2 - ((((zt * 2.0e+1) * pi1) / 3.0e+0) * sinhat) * __builtin_powi (D.4177, 3);
+                                }
+                              }
+                            L.27:;
+                          }
+                        }
+                      else
+                        {
+                          {
+                            real(kind=8) __var_4;
+
+                            zt = 1.0e+0 / rattz2;
+                            b1 = 3.5999999999999998667732370449812151491641998291015625e-1;
+                            b2 = 1.29599999999999992983390484369010664522647857666015625e-1;
+                            {
+                              real(kind=8) D.4179;
+                              real(kind=8) D.4178;
+
+                              D.4178 = coshat;
+                              D.4179 = D.4178 * D.4178;
+                              cos4th = D.4179;
+                            }
+                            weight = ((mh / mt - 5.9999999999999997779553950749686919152736663818359375e-1)) / 4.0000000000000002220446049250313080847263336181640625e-1;
+                            {
+                              static real(kind=8) C.4180 = 1.0e+0;
+
+                              fftj10 = fftj1 (&C.4180);
+                            }
+                            {
+                              static real(kind=8) C.4181 = 1.0e+0;
+
+                              gftj0 = gftj (&C.4181);
+                            }
+                            b0zww = b0 (&mz, &mz2, &mw2, &mw2);
+                            b0wwz = b0 (&mz, &mw2, &mw2, &mz2);
+                            {
+                              real(kind=8) D.4182;
+
+                              D.4182 = b1 * mt2;
+                              b0zhz = b0 (&mz, &mz2, &D.4182, &mz2);
+                            }
+                            {
+                              real(kind=8) D.4183;
+
+                              D.4183 = b1 * mt2;
+                              b0whw = b0 (&mz, &mw2, &D.4183, &mw2);
+                            }
+                            rho2 = (((((2.1e+1 - pi2 * 5.0e-1) - gftj0 * 1.5e+0) + fftj10 * 1.5e+1) + (((((((((((((1.633e+3 - 1.8e+1 / coshat) + coshat * 1.195e+3) - cos4th * 7.96e+2)) / 5.4e+1 + (pi2 / 2.7e+1) * ((coshat * 2.5e+1 - 1.19e+2))) - ((pi1 * 2.0e+1) * sinhat) * 1.732050807568877193176604123436845839023590087890625e+0) + (((-6.6666666666666662965923251249478198587894439697265625e-1 - coshat * 1.2e+1) + (cos4th * 3.2e+1) / 3.0e+0)) * b0zww) + ((((1.0e+0 / coshat) / 3.0e+0 + 6.66666666666666696272613990004174411296844482421875e+0) - coshat * 8.0e+0)) * b0wwz) - ((((coshat * 1.4e+1 + 1.0e+0) + cos4th * 1.6e+1)) * __builtin_log (coshat)) / 3.0e+0) - ((((8.1e+1 - coshat * 3.62e+2) + cos4th * 1.04e+2)) / 9.0e+0) * __builtin_log (zt)) + ((((1.97e+2 - coshat * 2.38e+2) + cos4th * 3.2e+1)) * gftj0) / 9.0e+0) - ((sinhat * 2.6e+1 - 2.666666666666666518636930049979127943515777587890625e+0)) * fftj10)) * zt)) * weight;
+                            __var_4 = __builtin_sqrt (b1);
+                            {
+                              real(kind=8) D.4186;
+
+                              D.4186 = __var_4;
+                              rho2 = ((1.0e+0 - weight)) * ((((((((((((((((1.9e+1 - (b1 * 5.3e+1) / 3.0e+0) + ((pi1 * 3.0e+0) * 5.0e-1) * __builtin_powi (D.4186, 3)) + ((b2 * 8.0e+0) / 9.0e+0) / zt) - (((b2 * 5.0e+0) / 9.0e+0) / coshat) / zt) - (__var_4 * 4.0e+0) * pi1) + (((((8.45e+2 - 9.0e+0 / coshat) + coshat * 4.27e+2) - cos4th * 3.66e+2)) / 2.7e+1) * zt) + (((((b1 * 5.4e+1 - 5.4e+1) - zt * 1.19e+2) + (coshat * 4.4e+1) * zt)) / 2.7e+1) * pi2) + (((((((3.4e+1 - coshat * 1.16e+2) + cos4th * 6.4e+1)) * zt) * 4.0e+0) * pi1) / 2.7e+1) * __builtin_sqrt (b1)) + ((((b1 * 3.2e+1 - (b2 * 8.0e+0) / zt) - zt * 9.6e+1)) / 9.0e+0) * b0zhz) + (((zt / coshat) * (((coshat * 2.0e+1 + 1.0e+0) - cos4th * 2.4e+1))) / 3.0e+0) * b0wwz) - (((zt * 2.0e+0) * (((coshat * 1.8e+1 + 1.0e+0) - cos4th * 1.6e+1))) / 3.0e+0) * b0zww) - (((((b1 * 4.0e+0 - (b2 / coshat) / zt) - (coshat * 1.2e+1) * zt)) * 5.0e+0) / 9.0e+0) * b0whw) - ((__builtin_log (coshat) * (((((b1 * 5.0e+0) / zt + 3.0e+0) + coshat * 3.2e+1) + cos4th * 4.8e+1))) / 9.0e+0) * zt) + ((((((b2 * 5.0e+0) / coshat - b2 * 8.0e+0) - (b1 * 1.8e+1) * zt)) / 9.0e+0) / zt) * __builtin_log (b1)) + ((((((((b2 * 8.0e+0) / 9.0e+0) / zt - b1) - (((b2 * 5.0e+0) / 9.0e+0) / coshat) / zt) - zt / 9.0e+0) + ((coshat * 1.04e+2) * zt) / 3.0e+0) - ((cos4th * 1.04e+2) * zt) / 9.0e+0)) * __builtin_log (zt))) + rho2;
+                            }
+                            L.28:;
+                          }
+                        }
+                      L.25:;
+                    }
+                  L.23:;
+                }
+              L.22:;
+              if (!ffermi)
+                {
+                  {
+                    real(kind=8) D.4189;
+                    real(kind=8) D.4188;
+
+                    D.4188 = (((((alh * 6.25e-2) / sinhat) / coshat) * rattz2));
+                    D.4189 = D.4188 * D.4188;
+                    delrho = (D.4189 * 3.0e+0) * rho2 + delrho;
+                  }
+                }
+              L.29:;
+              if (NON_LVALUE_EXPR <ffermi>)
+                {
+                  if (!fa2mt2)
+                    {
+                      delrho = (delrho - ((((alh * 3.0e+0) * 6.25e-2) / sinhat) / coshat) * rattz2) + (((xt * 3.0e+0) * 2.5e-1) * rhohat) * ((((xt * rhohat) * 2.5e-1) * rho2 + 1.0e+0));
+                    }
+                  else
+                    {
+                      {
+                        real(kind=8) D.4193;
+                        real(kind=8) D.4192;
+
+                        D.4192 = ((xt * rhohat));
+                        D.4193 = D.4192 * D.4192;
+                        delrho = ((D.4193 * 3.0e+0) * 6.25e-2) * rho2 + delrho;
+                      }
+                    }
+                  L.31:;
+                  if (NON_LVALUE_EXPR <fasmt2>)
+                    {
+                      delrho = delrho - ((at * xt) * rhohat) * cqcd1;
+                    }
+                  L.32:;
+                  if (NON_LVALUE_EXPR <fas2mt>)
+                    {
+                      {
+                        real(kind=8) D.4197;
+                        real(kind=8) D.4196;
+
+                        D.4196 = at;
+                        D.4197 = D.4196 * D.4196;
+                        delrho = delrho - ((D.4197 * xt) * rhohat) * cqcd2;
+                      }
+                    }
+                  L.33:;
+                }
+              L.30:;
+              if (NON_LVALUE_EXPR <fla2im>)
+                {
+                  {
+                    static logical(kind=4) C.4199 = 1;
+
+                    deltakappase (&dkapse, &C.4199);
+                  }
+                  {
+                    real(kind=8) D.4202;
+                    real(kind=8) D.4201;
+
+                    D.4201 = IMAGPART_EXPR <dkapse>;
+                    D.4202 = D.4201 * D.4201;
+                    delrho = (sinhat / coshat) * D.4202 + delrho;
+                  }
+                }
+              L.34:;
+              if (NON_LVALUE_EXPR <flagmr> && mt > mz)
+                {
+                  dfks = (((1.0e+0 / sinhat) / 6.0e+0 - 4.444444444444444197728216749965213239192962646484375e-1)) * (((__builtin_log (rattz2) * (((xasmt0 * at + 1.0e+0) + (xa2mt0 * alh) / 3.0e+0)) - ((xasmt0 * 1.3e+1) / 1.2e+1) * at) - ((xa2mt0 * 5.0e+0) * 2.5e-1) * alh));
+                  dfksh = dfks / ((1.0e+0 - (sinhat * 8.0e+0) / 3.0e+0));
+                  delrwh = delrwh - al * dfksh;
+                  delrho = ((1.0e+0 - alh * dfksh)) * delrho - ((alh * sinhat) / coshat) * dfks;
+                }
+              L.35:;
+              if (NON_LVALUE_EXPR <fobliq>)
+                {
+                  delrwh = ((alpha * 2.5e-1) / sinhat) * swpar + delrwh;
+                  delrho = ((((((cos2tw * swpar - spar)) * 2.5e-1) / sinhat) / coshat + tpar)) * alphat + delrho;
+                }
+              L.36:;
+              delrzh = delrwh - ((1.0e+0 - delrwh)) * delrho;
+              if (NON_LVALUE_EXPR <fa2mt0>)
+                {
+                  delrzh = ((((al * alh) * 2.5e-1) / sinhat) / coshat) * ((((((2.5e+0 - (sinhat * 2.3e+1) / 3.0e+0) + (sin4th * 1.16e+2) / 9.0e+0)) * const - 6.2962962962962965018931527083623223006725311279296875e-1) - (((5.0e-1 - (sinhat * 4.0e+0) / 3.0e+0) + (sin4th * 1.6e+1) / 9.0e+0)) * ((__builtin_log (rattz2) / 3.0e+0 - 1.25e+0)))) + delrzh;
+                }
+              L.37:;
+              if (NON_LVALUE_EXPR <flagmf>)
+                {
+                  {
+                    real(kind=8) D.4208;
+                    real(kind=8) D.4207;
+
+                    D.4207 = rattw2;
+                    D.4208 = D.4207 * D.4207;
+                    contmb = -((((D.4208 + 1.0e+0)) * __builtin_log (ABS_EXPR <1.0e+0 - mw2 / mt2>) + rattw2));
+                  }
+                  delrwh = ((al * 1.25e-1) / sinhat) * ((((ratbw2 * 3.0e+0) * ((contmb - 5.0e-1)) + (ratcw2 * 3.0e+0) * ((__builtin_log (ratcw2) - 5.0e-1))) + ((__builtin_log (rtauw2) - 5.0e-1)) * rtauw2)) + delrwh;
+                  delrzh = (((al * 1.25e-1) / sinhat) / coshat) * ((((ratbz2 * 3.0e+0) * ((((__builtin_log (rattz2) - (sin4th * 1.6e+1) / 9.0e+0) + (sinhat * 8.0e+0) / 3.0e+0) - 5.0e-1)) + (ratcz2 * 3.0e+0) * ((((__builtin_log (ratcz2) - (sin4th * 6.4e+1) / 9.0e+0) + (sinhat * 1.6e+1) / 3.0e+0) - 5.0e-1))) + ((((__builtin_log (rtauz2) - sin4th * 1.6e+1) + sinhat * 8.0e+0) - 5.0e-1)) * rtauz2)) + delrzh;
+                  if (NON_LVALUE_EXPR <fasmt0>)
+                    {
+                      {
+                        real(kind=8) __var_6;
+                        real(kind=8) __var_7;
+                        real(kind=8) __var_5;
+
+                        __var_5 = __builtin_log (ratcw2);
+                        {
+                          real(kind=8) D.4213;
+                          real(kind=8) D.4212;
+
+                          D.4212 = __var_5;
+                          D.4213 = D.4212 * D.4212;
+                          delrwh = ((((al * aw) * 2.5e-1) / sinhat) * ratcw2) * (((((7.75e+0 - zeta2 * 8.0e+0) - zeta3 * 6.0e+0) + __var_5) - (D.4213 * 3.0e+0) * 5.0e-1)) + delrwh;
+                        }
+                        L.40:;
+                        __var_7 = __builtin_log (rattz2);
+                        __var_6 = __builtin_log (ratcz2);
+                        {
+                          real(kind=8) D.4220;
+                          real(kind=8) D.4219;
+                          real(kind=8) D.4218;
+                          real(kind=8) D.4217;
+
+                          D.4217 = __var_6;
+                          D.4218 = D.4217 * D.4217;
+                          D.4219 = __var_7;
+                          D.4220 = D.4219 * D.4219;
+                          delrzh = ((((al * az) * 2.5e-1) / sinhat) / coshat) * ((((((((7.75e+0 - zeta2 * 8.0e+0) - zeta3 * 6.0e+0) + __var_6) - (D.4218 * 3.0e+0) * 5.0e-1) - ((sinhat * 6.4e+1) / 9.0e+0) * ((sinhat * 4.0e+0 - 3.0e+0)))) * ratcz2 + ((((((1.075e+1 - zeta2 * 1.0e+1) - zeta3 * 6.0e+0) + __var_7 * 4.0e+0) - (D.4220 * 3.0e+0) * 5.0e-1) - ((sinhat * 3.2e+1) / 9.0e+0) * ((sinhat * 2.0e+0 - 3.0e+0)))) * ratbz2)) + delrzh;
+                        }
+                        L.41:;
+                      }
+                    }
+                  L.39:;
+                }
+              L.38:;
+              {
+                real(kind=8) D.4222;
+                real(kind=8) D.4221;
+
+                D.4221 = a0;
+                D.4222 = D.4221 * D.4221;
+                sinhat = ((1.0e+0 - __builtin_sqrt (1.0e+0 - ((D.4222 * 4.0e+0) / mz2) / ((1.0e+0 - delrzh))))) * 5.0e-1;
+              }
+              if (flagzp != 0)
+                {
+                  {
+                    real(kind=8) D.4225;
+                    real(kind=8) D.4224;
+
+                    D.4224 = a0;
+                    D.4225 = D.4224 * D.4224;
+                    sinhat = ((1.0e+0 - __builtin_sqrt (1.0e+0 - ((D.4225 * 4.0e+0) / mz02) / ((1.0e+0 - delrzh))))) * 5.0e-1;
+                  }
+                }
+              L.42:;
+              if (sinhat == 0.0)
+                {
+                  sinhat = 1.00000000000000007770539987666107923830718560119501514549e-15;
+                }
+              L.43:;
+              coshat = 1.0e+0 - sinhat;
+              {
+                real(kind=8) D.4228;
+                real(kind=8) D.4227;
+
+                D.4227 = a0;
+                D.4228 = D.4227 * D.4227;
+                mw2 = (D.4228 / sinhat) / ((1.0e+0 - delrwh));
+              }
+              mw = __builtin_sqrt (mw2);
+              cos2tw = mw2 / mz2;
+              sin2tw = 1.0e+0 - cos2tw;
+              rhohat = cos2tw / coshat;
+              f = 0;
+              if (f <= 9)
+                {
+                  while (1)
+                    {
+                      {
+                        logical(kind=4) D.4232;
+
+                        v[(integer(kind=8)) f] = (((i3[(integer(kind=8)) f] - (q[(integer(kind=8)) f] * 2.0e+0) * sinhat)) * 5.0e-1) / __builtin_sqrt (sinhat * coshat);
+                        a[(integer(kind=8)) f] = (i3[(integer(kind=8)) f] * 5.0e-1) / __builtin_sqrt (sinhat * coshat);
+                        __label_000020:;
+                        L.44:;
+                        D.4232 = f == 9;
+                        f = f + 1;
+                        if (D.4232) goto L.45;
+                      }
+                    }
+                }
+              L.45:;
+              __label_000100:;
+            }
+            L.14:;
+            D.4234 = i == 3;
+            i = i + 1;
+            if (D.4234) goto L.15;
+          }
+        }
+    }
+  L.15:;
+  if (modtype == 1)
+    {
+      {
+        real(kind=8) D.4237;
+        real(kind=8) D.4236;
+
+        D.4236 = fitcph;
+        D.4237 = D.4236 * D.4236;
+        mw2 = ((((((D.4237 - fits2b)) * alpha) * kkcc) * pi1)) / (((((fitx * 1.4142135623730951454746218587388284504413604736328125e+0) * gf) * ((kkcc - kkss))) * kkss)) + mw2;
+      }
+    }
+  L.46:;
+  if (modtype == 2)
+    {
+      {
+        real(kind=8) D.4240;
+        real(kind=8) D.4239;
+
+        D.4239 = fitcph;
+        D.4240 = D.4239 * D.4239;
+        mw2 = ((((((D.4240 - fits2b * 2.0e+0)) * alpha) * kkcc) * pi1)) / (((((fitx * 5.65685424949238058189848743495531380176544189453125e+0) * gf) * ((kkcc - kkss))) * kkss)) + mw2;
+      }
+    }
+  L.47:;
+  if (modtype == 3)
+    {
+      {
+        real(kind=8) D.4243;
+        real(kind=8) D.4242;
+
+        D.4242 = ((fitcph - 1.0e+0));
+        D.4243 = D.4242 * D.4242;
+        mw2 = (((alpha * D.4243) * pi1)) / ((((fitx * 1.4142135623730951454746218587388284504413604736328125e+0) * gf) * ((kkcc - kkss)))) + mw2;
+      }
+    }
+  L.48:;
+  if (modtype == 4)
+    {
+      {
+        real(kind=8) D.4246;
+        real(kind=8) D.4245;
+
+        D.4245 = ((fitcph - 1.0e+0));
+        D.4246 = D.4245 * D.4245;
+        mw2 = (((alpha * D.4246) * pi1)) / ((((fitx * 1.4142135623730951454746218587388284504413604736328125e+0) * gf) * ((kkcc - kkss)))) + mw2;
+      }
+    }
+  L.49:;
+  mw = __builtin_sqrt (mw2);
+  delr = delrwh - ((coshat / sinhat) * ((delrwh - delrzh))) / ((1.0e+0 - ((coshat / sinhat) * ((delrwh - delrzh))) / ((1.0e+0 - delrwh))));
+  ratzw2 = mz2 / mw2;
+  rathw2 = mh2 / mw2;
+  rattw2 = mt2 / mw2;
+  return;
+}
+
+
