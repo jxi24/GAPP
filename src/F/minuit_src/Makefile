@@ -1,6 +1,7 @@
 
 FC=gfortran
-FCOPT= -fbacktrace
+#FCOPT= -fbacktrace
+FCOPT= -g -w  -C  -O
 PATHLIB=../../../lib/
 
 all: lib

@@ -56,6 +56,6 @@ C ----------------------------------------
       sigma = 5.d0
 
       call minuit(fcn,chi2)
-
+      print*,"Call to minuit complete !!!"
       stop
       end

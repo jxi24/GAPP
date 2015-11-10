@@ -8,10 +8,11 @@ BUILD=../build/
 
 VPATH=$(SOURCE)
 
-FC=gfortran -g -fbacktrace -ffpe-trap=zero,overflow,underflow -O -Wall -fcheck=all
-FCC=gfortran -w -c -C -g -fbacktrace -ffpe-trap=zero,overflow,underflow
-LINK.f=xlf -g
-FFLAGS= -g
+FC=gfortran 
+FCC=gfortran -c  
+#LINK.f=xlf -g
+#FFLAGS=  -fbacktrace -ffpe-trap=zero,overflow,underflow -O -Wall -fcheck=all
+FFLAGS= -w -C -g 
 ######################################################################
 #### Compilation and creation of minuit fortran library ##############
 ######################################################################
@@ -20,8 +21,7 @@ FC = gfortran
 MINDIR=../src/F/minuit_src
 
 FMINUIT:
-	$(MAKE) -C $(MINDIR) FC=$(FC)
-	$(MAKE) -C $(MINDIR) install
+	$(MAKE) -C $(MINDIR) install FC=$(FC)
 
 ####################################################################
 
