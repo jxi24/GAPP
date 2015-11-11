@@ -213,12 +213,17 @@ C  Input of functions A_n from grid.out for tau lifetime and g-2:
          
          call ffinit
       endif
+      print*,xval
+      print*,"------------" 
+      print*,npar
       fval = chi2(xval,npar,smval,pull)
       prob = fval
 
-
+***********IF Minuit finishes minimizing then do the followin **********
       if (iflag.eq.3) then 
-      
+      print*,xval
+      print*,"------------" 
+      print*,npar
 C Kai026 ---------------------------------
 C  Store the best fit values of the NP parameters. 
 C ----------------------------------------
@@ -302,7 +307,7 @@ C ----------------------------------------
 
          if (flprob.eqv..true.) prob = dexp( - fval/2)
          if (fbayes.eqv..true.) then
-            call mnemat(emat,6)
+c            call mnemat(emat,6)
             det = emat(1,1)*(emat(2,2)*emat(3,3) - emat(2,3)*emat(3,2))
      .          - emat(1,2)*(emat(2,1)*emat(3,3) - emat(2,3)*emat(3,1))
      .          + emat(1,3)*(emat(2,1)*emat(3,2) - emat(2,2)*emat(3,1))
@@ -314,6 +319,8 @@ C ----------------------------------------
 
       return
       end
+      
+************************************************************************
 
       double precision function chi2(xval,npar,smval,pull)
    
@@ -460,6 +467,7 @@ C ----------------------------------------
 *   80) T parameter                                                   *
 *                                                                     *
 ***********************************************************************
+      print*,"Hello"
 
       data value/  91.1876d0,   2.4952d3,  41.5410d0,  20.8040d0,
      .             20.7850d0,  20.7640d0,   0.0145d0,   0.0169d0,
@@ -573,7 +581,7 @@ C Kai010            0.4300d0,   0.1400d0,   0.1800d0,   0.0000d0,
      .-0.061d0,-0.030d0, 0.104d0,-0.277d0,
      .-0.104d0,-0.051d0,-0.061d0,-0.174d0,-0.049d0, 0.021d0,-0.277d0,
      . 0.026d0, 0.024d0,-0.277d0, 0.250d0/
-
+     
        cctau =   0.012d0
        ccmgw = - 0.177d0
        cchad = - 0.170d0 ! - sign: prediction error is added to exp. error
@@ -581,8 +589,6 @@ C Kai010            0.4300d0,   0.1400d0,   0.1800d0,   0.0000d0,
        ccnue = - 0.050d0
 
 *   fit parameters:
-
-                                 mz = xval(1)
       if (flagmt.eqv..true.)     mt = xval(2)
                                  mb = xval(3)
       if (flagmc.eqv..true.)     mc = xval(4)

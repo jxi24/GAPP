@@ -213,12 +213,17 @@ C  Input of functions A_n from grid.out for tau lifetime and g-2:
          
          call ffinit
       endif
+      print*,xval
+      print*,"------------" 
+      print*,npar
       fval = chi2(xval,npar,smval,pull)
       prob = fval
 
-
+***********IF Minuit finishes minimizing then do the followin **********
       if (iflag.eq.3) then 
-      
+      print*,xval
+      print*,"------------" 
+      print*,npar
 C Kai026 ---------------------------------
 C  Store the best fit values of the NP parameters. 
 C ----------------------------------------
@@ -314,6 +319,8 @@ C ----------------------------------------
 
       return
       end
+      
+************************************************************************
 
       double precision function chi2(xval,npar,smval,pull)
    
@@ -581,7 +588,9 @@ C Kai010            0.4300d0,   0.1400d0,   0.1800d0,   0.0000d0,
        ccnue = - 0.050d0
 
 *   fit parameters:
-
+      print*,"==========================="
+      print*,xval,npar
+      print*,"==========================="
                                  mz = xval(1)
       if (flagmt.eqv..true.)     mt = xval(2)
                                  mb = xval(3)

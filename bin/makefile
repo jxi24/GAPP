@@ -3,8 +3,9 @@
 # CJY
 FLIBS = -L../lib/ -lminuit
 #CJY
-SOURCE=../src/F/core/:../src/F/driver_code/
-BUILD=../build/
+SOURCE=../src/F/core/:../src/F/driver_code/:../src/CPP/
+BUILD=../build/F/
+BUILDCPP=../build/CPP/
 
 VPATH=$(SOURCE)
 
@@ -13,6 +14,12 @@ FCC=gfortran -c
 #LINK.f=xlf -g
 #FFLAGS=  -fbacktrace -ffpe-trap=zero,overflow,underflow -O -Wall -fcheck=all
 FFLAGS= -w -C -g 
+
+CXX=g++
+CXXC=g++ -c
+CFLAGS= -g
+CCFLAGS=
+CLIBS= -lgfortran
 ######################################################################
 #### Compilation and creation of minuit fortran library ##############
 ######################################################################
@@ -26,11 +33,25 @@ FMINUIT:
 ####################################################################
 
 
+
 commonobj = $(BUILD)alfahat.o $(BUILD)sin2th.o $(BUILD)lowenergy.o $(BUILD)alfas.o $(BUILD)masses.o \
             $(BUILD)kappa.o $(BUILD)rho.o $(BUILD)bvertex.o $(BUILD)lep100.o $(BUILD)pnc.o $(BUILD)dis.o $(BUILD)nue.o $(BUILD)bsgamma.o \
             $(BUILD)polylogs.o $(BUILD)spence.o $(BUILD)ffcli2.o $(BUILD)ffxli2.o $(BUILD)ffinit.o $(BUILD)main.o $(BUILD)zprime.o \
             $(BUILD)wwidth.o $(BUILD)lep200.o $(BUILD)taulife.o $(BUILD)amu.o $(BUILD)sumrules.o $(BUILD)sin2th_plot.o
 
+###############################################################################
+##################  CPP BUILD   ###############################################
+###############################################################################
+
+testobj= $(BUILDCPP)test.o $(BUILD)chi2.o $(commonobj)
+
+test.exe: $(testobj) 
+	$(CXX) -o $@ $(testobj) $(CFLAGS) $(CLIBS)
+
+
+####################################################################
+#####Fortran build #################################################
+####################################################################
 fitobj  = $(BUILD)fit.o $(BUILD)chi2.o $(commonobj)
 
 fitobj2  = $(BUILD)fit_v2.o $(BUILD)chi2_v2.o $(commonobj)
@@ -133,16 +154,26 @@ plot3:  $(plotob3)
 $(BUILD)%.o: $(SRC)%.f
 	$(FCC) $< -o $@ $(FFLAGS) $(FLIBS)
 
+
+######################################################################
+
+#####################################################################
+
+$(BUILDCPP)%.o: $(SRC)%.cpp
+	$(CXXC) $< -o $@ $(CCFLAGS) $(CCLIBS)
+
 LIST= fit mh zplot zplot2 maplot plot plot2 plot3  221plot 221mh 221mt
 
 all: $(LIST)
 
 clean:
 	rm  -f $(BUILD)*.o 
+	rm  -f $(BUILDCPP)*.o 
 	rm -f *-d.fit *-t.fit
 cleanall:
 	rm -f $(LIST)
 	rm  -f $(BUILD)*.o 
+	rm  -f $(BUILDCPP)*.o 
 	rm -f *-d.fit *-t.fit
 	rm -f $(MINDIR)/*.o
 	rm -f ../lib/libminuit.a
