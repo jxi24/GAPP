@@ -622,6 +622,9 @@ C --------------------------------------------------------
         kkss   = 1.d0 - kkcc
 C ---------------------------------------------------------
 
+       print*,"xval=",mz,mt,mb,mc,alfas0,dahad3,mh,Tpar,Spar,Upar,Brho,
+     $  Bkappa, Zpar, mzp, sinth,lambdg
+
 C   The scale mu0 at which alphas is initialized (alfas0) 
 C   MUST be below mt and MUST NOT be below mb.
 

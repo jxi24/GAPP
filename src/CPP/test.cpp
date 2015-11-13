@@ -28,7 +28,49 @@ void cpp_fcn( int &ntpar, double *grad, double &fval, double *xval, int iflag)
 	cout<<"fval= "<< fval <<endl;
 	for (int i=0; i< ntpar;i++){cout<<"xval["<<i<<"]= "<<xval[i]<<endl;}
 }
+//************************ Common block variables***************************
+extern "C" {
+               extern struct{
+		       //*** Logical variables defined in common block of fortran
+			int  flagmr,ffermi,fa2mt4,fa2mt2,fa2mt0,fla2im,
+			     fasmt2,fasmt0,fas2mt,flagmf,fpolew,flgech,fobliq,
+			     f4lqcd,falas2,fbayes,flagmh,flagmt,flagmc,flagS,
+			     flagT,flgrho,fkappa,fzprim,fsinth,fwrite,flprob,
+			     fhiggs,flagal,fsplot;
+               } flags_;
+               extern struct{
+		       int flgfitx, flgtph, flgs2b, flfout;
+	       }fitflg_;
+             }
+//************************ Initialize logical flags ************************
+void Initlog(){
+	//*** 1 =True *** 0 =False
 
+        fitflg_.flgfitx = 1;
+        fitflg_.flgtph  = 1;
+        fitflg_.flgs2b  = 1;
+
+        fitflg_.flfout = 1;
+
+        flags_.fwrite = 0;
+// ----------------------------------------
+
+        flags_.fsplot = 1;
+        flags_.flprob = 1;
+// ----------------------------------------
+        flags_.flagmh = 1;
+// ----------------------------------------
+        flags_.flagmt = 1;
+        flags_.flagmc = 1;
+        flags_.flagal = 1;
+        flags_.flagS  = 1;
+        flags_.flagT  = 1;
+        flags_.flgrho = 1;
+        flags_.fkappa = 1;
+        flags_.fsinth = 1;
+        flags_.fzprim = 1;
+}             
+//************************ main function ***********************************
 int main()
 {
 
@@ -78,6 +120,8 @@ int main()
 	
 //	fcn_( &ntpar, grad, &fval, xval ,&iflag,chi2_);
 //	cout<<"Finished call: chi2 =  "<<fval<<endl;
+
+	Initlog();
 	
 	cpp_fcn( ntpar, grad, fval, xval, iflag);
 	cout<<"Finished call: chi2 =  "<<fval<<endl;
