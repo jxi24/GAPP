@@ -4,6 +4,7 @@
       integer npar,iflag,i,j
       double precision grad(npar),fval,xval(npar),chi2,det,dgamma
       double precision smval(80),pull(80),emat(6,6),dummy
+      integer ii2
 
       include 'common.f'
       external chi2
@@ -212,18 +213,16 @@ C  Input of functions A_n from grid.out for tau lifetime and g-2:
  10      format (f6.4,4(1x,f17.14))
          
          call ffinit
+         print*,"====================================="
       endif
-      print*,xval
-      print*,"------------" 
-      print*,npar
       fval = chi2(xval,npar,smval,pull)
       prob = fval
+      write(*,*) ("xval[",ii2,"]= ",xval(ii2), ii2=1,npar )
+      print*,"------------" 
+      print*,npar,fval
 
 ***********IF Minuit finishes minimizing then do the followin **********
       if (iflag.eq.3) then 
-      print*,xval
-      print*,"------------" 
-      print*,npar
 C Kai026 ---------------------------------
 C  Store the best fit values of the NP parameters. 
 C ----------------------------------------
@@ -302,9 +301,8 @@ C       close(51)
       endif
 C ----------------------------------------
 
- 
-
-
+C---- remove this part of code when using with C++ throught the preprocessor defintion 
+#ifndef CPP_FLAG
          if (flprob.eqv..true.) prob = dexp( - fval/2)
          if (fbayes.eqv..true.) then
             call mnemat(emat,6)
@@ -313,6 +311,7 @@ C ----------------------------------------
      .          + emat(1,3)*(emat(2,1)*emat(3,2) - emat(2,2)*emat(3,1))
             prob = prob*dsqrt(det)
          endif
+#endif         
       endif
       
  100  format(' observable ',i2,'): ',f12.7,f10.3)
@@ -339,6 +338,7 @@ C ----------------------------------------
       complex*16 kappa(0:9),rho(0:9)
       logical flcorr,flgzph
       common   /ma/ ima,ssteps
+      integer ii2
       include 'common.f'
 
 ***********************************************************************
@@ -588,9 +588,6 @@ C Kai010            0.4300d0,   0.1400d0,   0.1800d0,   0.0000d0,
        ccnue = - 0.050d0
 
 *   fit parameters:
-      print*,"==========================="
-      print*,xval,npar
-      print*,"==========================="
                                  mz = xval(1)
       if (flagmt.eqv..true.)     mt = xval(2)
                                  mb = xval(3)
@@ -839,7 +836,9 @@ C     smval(78) = afb200(2, 3)
       smval(80) = Tpar
 
       chi2 = 0.d0
-
+      print*,"___________________________"
+      print*,"chi2=",chi2,sigmah,R
+      write(*,*)("smval[",ii2,"]=",smval(ii2),ii2=1,68)
 C Kai009 ------------------------------
 C    Changed set of observables that are used
 C    for the global fit.

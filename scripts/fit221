@@ -14,7 +14,7 @@ MDLSdir=$GAPPdir"/src/F/core/mdls"
 tempdir=$GAPPdir"src/F/template/"
 maindir=$GAPPdir"src/F/driver_code/"
 coredir=$GAPPdir"src/F/core/"
-builddir=$GAPPdir"build/"
+builddir=$GAPPdir"build/F/"
 ##inputdir=$GAPPdir"bin/"
 inputdir=""
 

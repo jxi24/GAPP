@@ -13,13 +13,23 @@ FC=gfortran
 FCC=gfortran -c  
 #LINK.f=xlf -g
 #FFLAGS=  -fbacktrace -ffpe-trap=zero,overflow,underflow -O -Wall -fcheck=all
-FFLAGS= -w -C -g 
+FFLAGS= -w -C -g
+## Define preprocessor flag for CPP build in fortran file 
+FCFLAGS= $(FFLAGS) -DCPP_FLAG -cpp
 
 CXX=g++
 CXXC=g++ -c
-CFLAGS= -g
+CFLAGS= -g 
 CCFLAGS=
 CLIBS= -lgfortran
+
+#####################################################################
+######   ROOT FLAGS   ###############################################
+#####################################################################
+
+ROOTFLAGS = $(shell root-config --cflags)
+ROOTLIBS  = $(shell root-config --libs)
+
 ######################################################################
 #### Compilation and creation of minuit fortran library ##############
 ######################################################################
@@ -43,10 +53,10 @@ commonobj = $(BUILD)alfahat.o $(BUILD)sin2th.o $(BUILD)lowenergy.o $(BUILD)alfas
 ##################  CPP BUILD   ###############################################
 ###############################################################################
 
-testobj= $(BUILDCPP)test.o $(BUILD)chi2.o $(commonobj)
+testobj= $(BUILDCPP)test.o $(BUILDCPP)chi2.o $(commonobj)
 
 test.exe: $(testobj) 
-	$(CXX) -o $@ $(testobj) $(CFLAGS) $(CLIBS)
+	$(CXX) -o $@ $(testobj) $(CFLAGS) $(CLIBS) $(ROOTFLAGS) $(ROOTLIBS)
 
 
 ####################################################################
@@ -148,7 +158,7 @@ plot3:  $(plotob3)
 	$(FC) -o $@ $(FFLAGS) $(221mtob) $(FLIBS)
 
 ########################################################################
-
+### Build Fortran objects
 ########################################################################
 
 $(BUILD)%.o: $(SRC)%.f
@@ -156,12 +166,20 @@ $(BUILD)%.o: $(SRC)%.f
 
 
 ######################################################################
-
+### Buiild CPP objects
 #####################################################################
-
+### compile CPP objects
 $(BUILDCPP)%.o: $(SRC)%.cpp
-	$(CXXC) $< -o $@ $(CCFLAGS) $(CCLIBS)
+	$(CXXC) $< -o $@ $(CCFLAGS) $(CCLIBS) $(ROOTFLAGS)
+#### specially for chi2.o use preprocessor directive to remove parts of code 
+#### not needed in CPP calls $(FCFLAGS)
+$(BUILDCPP)chi2.o:$(SRC)chi2.f
+	$(FCC) $< -o $@ $(FCFLAGS) $(FLIBS)
 
+
+##########################################################
+### defintions of : all clean etc.
+#########################################################
 LIST= fit mh zplot zplot2 maplot plot plot2 plot3  221plot 221mh 221mt
 
 all: $(LIST)

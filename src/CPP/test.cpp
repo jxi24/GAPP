@@ -11,11 +11,22 @@
 #include<algorithm>
 #include<iterator>
 #include<ctype.h>
+// Root includes
+#include "TMinuit.h"
 using namespace std;
 //Defintion of subroutine fcn function in F/core/chi2.f
 extern "C"{
 	void fcn_(int* npar, double* grad, double* fval, double* xval, int* iflag, double (*chi2)(double *, int * , double * ,double* ) );
-	double chi2_(double *, int * , double * ,double*);
+	double chi2_(double* xval, int* npar, double* smval, double* pull);
+}
+//************************* fcn wrapper ************************************
+void cpp_fcn( int &ntpar, double *grad, double &fval, double *xval, int iflag)
+{
+	
+	fcn_( &ntpar, grad, &fval, xval ,&iflag,chi2_);
+	cout<<"ntpar= "<<ntpar<<" iflag= "<<iflag<<endl;
+	cout<<"fval= "<< fval <<endl;
+	for (int i=0; i< ntpar;i++){cout<<"xval["<<i<<"]= "<<xval[i]<<endl;}
 }
 
 int main()
@@ -57,17 +68,19 @@ int main()
 	cout<<"Total parameters = "<<npar<<endl;
 	
 	double grad[npar]={0.},xval[npar]={0.};
-	double fval=0.;
+	int ntpar=28; // number of paramaters to minimize over
+	double fval=0.; // return of chi2 function in fcn
 	int iflag=1;
-	//double chi2=0.;
-	int ntpar=5;
 	
 	// fill in values of array xval
 	for(int i = 0; i<parnum.size() ; i++){xval[parnum[i] -1] = vecpar[i];}
 	for(int i = 0; i<npar ; i++){cout<<setprecision(5)<<"xval["<<i<<"] = "<<xval[i]<<endl;}
 	
-	fcn_( &npar, grad, &fval, xval ,&iflag,chi2_);
-	cout<<"Finished call "<<endl;
+//	fcn_( &ntpar, grad, &fval, xval ,&iflag,chi2_);
+//	cout<<"Finished call: chi2 =  "<<fval<<endl;
+	
+	cpp_fcn( ntpar, grad, fval, xval, iflag);
+	cout<<"Finished call: chi2 =  "<<fval<<endl;
 	
 	return 0;
 }
