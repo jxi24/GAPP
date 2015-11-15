@@ -31,13 +31,22 @@ void cpp_fcn( int &ntpar, double *grad, double &fval, double *xval, int iflag)
 //************************ Common block variables***************************
 extern "C" {
                extern struct{
-		       //*** Logical variables defined in common block of fortran
-			int  flagmr,ffermi,fa2mt4,fa2mt2,fa2mt0,fla2im,
-			     fasmt2,fasmt0,fas2mt,flagmf,fpolew,flgech,fobliq,
-			     f4lqcd,falas2,fbayes,flagmh,flagmt,flagmc,flagS,
-			     flagT,flgrho,fkappa,fzprim,fsinth,fwrite,flprob,
-			     fhiggs,flagal,fsplot;
+		       //*** Logical variables defined in common block of fortran common.f
+		       /*
+		        *       common /flags/   flagmr,flgblm,ffermi,fa2mt4,fa2mt2,fa2mt0,fla2im,
+     .                 fasmt2,fasmt0,fas2mt,flagmf,fpolew,flgech,fobliq,
+     .                 f4lqcd,falas2,fbayes,flagzp,flagmh,flagmt,flagmc,
+     .                 flgrho,fkappa,flagS,flagT,fzprim,fsinth,fwrite,
+     .                 flprob,fhiggs,flagal,fsplot
+     *  flgblm and flagzp are of integer type in fortran rest are logical
+     * */
+                    int flagmr,flgblm,ffermi,fa2mt4,fa2mt2,fa2mt0,fla2im,
+                      fasmt2,fasmt0,fas2mt,flagmf,fpolew,flgech,fobliq,
+                      f4lqcd,falas2,fbayes,flagzp,flagmh,flagmt,flagmc,
+                      flgrho,fkappa,flagS,flagT,fzprim,fsinth,fwrite,
+                      flprob,fhiggs,flagal,fsplot;
                } flags_;
+               /*      common /fitflg/  flgfitx, flgtph, flgs2b, flfout*/
                extern struct{
 		       int flgfitx, flgtph, flgs2b, flfout;
 	       }fitflg_;
@@ -110,7 +119,7 @@ int main()
 	cout<<"Total parameters = "<<npar<<endl;
 	
 	double grad[npar]={0.},xval[npar]={0.};
-	int ntpar=28; // number of paramaters to minimize over
+	int ntpar=30; // number of paramaters to minimize over
 	double fval=0.; // return of chi2 function in fcn
 	int iflag=1;
 	
