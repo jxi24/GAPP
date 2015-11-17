@@ -217,9 +217,9 @@ C  Input of functions A_n from grid.out for tau lifetime and g-2:
       endif
       fval = chi2(xval,npar,smval,pull)
       prob = fval
-      write(*,*) ("xval[",ii2,"]= ",xval(ii2), ii2=1,npar )
-      print*,"------------" 
-      print*,npar,fval
+c      write(*,*) ("xval[",ii2,"]= ",xval(ii2), ii2=1,npar )
+c      print*,"------------" 
+c      print*,npar,fval
 
 ***********IF Minuit finishes minimizing then do the followin **********
       if (iflag.eq.3) then 
@@ -622,12 +622,12 @@ C --------------------------------------------------------
         kkss   = 1.d0 - kkcc
 C ---------------------------------------------------------
 
-       print*,"xval=",mz,mt,mb,mc,alfas0,dahad3,mh,Tpar,Spar,Upar,Brho,
-     $  Bkappa, Zpar, mzp, sinth,lambdg
-       print*,"---------------------------------------"
-        print*,"logical=",flagmt,flagmc,flagal,flgfitx,flgtph,
-     $  flgs2b,flagmh
-        print*,"---------------------------------------"
+c       print*,"xval=",mz,mt,mb,mc,alfas0,dahad3,mh,Tpar,Spar,Upar,Brho,
+c     $  Bkappa, Zpar, mzp, sinth,lambdg
+c       print*,"---------------------------------------"
+c        print*,"logical=",flagmt,flagmc,flagal,flgfitx,flgtph,
+c     $  flgs2b,flagmh
+c        print*,"---------------------------------------"
 C   The scale mu0 at which alphas is initialized (alfas0) 
 C   MUST be below mt and MUST NOT be below mb.
 
@@ -842,9 +842,9 @@ C     smval(78) = afb200(2, 3)
       smval(80) = Tpar
 
       chi2 = 0.d0
-      print*,"___________________________"
-      print*,"chi2=",chi2,sigmah,R
-      write(*,*)("smval[",ii2,"]=",smval(ii2),ii2=1,68)
+c      print*,"___________________________"
+c      print*,"chi2=",chi2,sigmah,R
+c      write(*,*)("smval[",ii2,"]=",smval(ii2),ii2=1,68)
 C Kai009 ------------------------------
 C    Changed set of observables that are used
 C    for the global fit.

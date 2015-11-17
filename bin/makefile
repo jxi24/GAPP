@@ -21,7 +21,7 @@ CXX=g++
 CXXC=g++ -c
 CFLAGS= -g 
 CCFLAGS=
-CLIBS= -lgfortran
+CLIBS= -lgfortran -lMinuit -lboost_system
 
 #####################################################################
 ######   ROOT FLAGS   ###############################################

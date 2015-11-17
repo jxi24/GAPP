@@ -3,6 +3,14 @@
 #1. Make code compileable without gfortran
 #2. Reorganize directory structure and makefile
 #    make file  is now inside bin/makefile
+
+##################################################
+############Dependencies #########################
+##################################################
+Currently using 
+1. gcc version 5.1.1 20150618 (Red Hat 5.1.1-4) (GCC)
+2. BOOST LIBRARIES
+3. ROOT 5.34/32
 ###################################################
 # Description of the structure of the code ########
 ###################################################
