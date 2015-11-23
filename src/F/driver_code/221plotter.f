@@ -45,9 +45,9 @@ C -------------------------------------------------------------
 
       open (5,file='smfit.dat',                       status='old')
       open (6,file='/dev/null',                       status='unknown')
-      open (9,file='221plots/grid_fp-d_sm.dat', status='unknown')
-      open (20,file='221plots/plot_fp-d_sm.out',status='unknown')
-C     open (21,file='221plots/plot_fp-d_2_sm.out', status='unknown')
+      open (9,file='../221plots/grid_fp-d.dat', status='unknown')
+      open (20,file='../221plots/plot_fp-d.out',status='unknown')
+C     open (21,file='221plots/plot_fp-d_2.out', status='unknown')
 
       call minuit(fcn,chi2)
 
@@ -57,7 +57,7 @@ C     open (21,file='221plots/plot_fp-d_2_sm.out', status='unknown')
      - 'fits2b: \tfittph: \tfitx: \t\tchi2 (old): \tchi2:'
 C     write(21,'(A)') 
 C    - 'fits2b: \tfittph: \tfitx: \t\tchi2 (old): \tchi2:'
-      write(9,'(A,F10.4)') 'Min. chi2: ', prob
+      write(9,'(A,F10.4)') 'Min. chi2: ', prob ! prob =fval : defined in line # 219 of chi2.f , subroutine fcn
 
 C Delta Chi2 for a fit of 3 parameters at 95 % CL.
       delchi = 7.81473d0
@@ -135,7 +135,7 @@ C FIND BOUNDARIES FOR fitx CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
             fitx = dexp(lnx)               
 
-            open (5,file='221plots/plot_fp-d_sm.dat')
+            open (5,file='../221plots/plot_fp-d.dat')
 
             call minuit(fcn,chi2)   
             close(5)
@@ -162,11 +162,11 @@ C           endif
 
  10      continue
       endif
-
+ 11   continue
 
 C FIND BOUNDARIES FOR fittph CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
- 11    if (scntph.eqv..true.) then
+      if (scntph.eqv..true.) then
 
 C        flgfitx = .true.
          fitx = dexp(lnxmax)
@@ -177,7 +177,7 @@ C        flgfitx = .true.
 
          do 15 i = 0, ysteps
 
-            open (5,file='221plots/plot_fp-d_sm.dat')
+            open (5,file='../221plots/plot_fp-d.dat')
             call minuit(fcn,chi2)   
             close(5)
 
@@ -213,7 +213,7 @@ C FIND BOUNDARIES FOR fits2b CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
          do 20 i = 0, zsteps
 
-            open (5,file='221plots/plot_fp-d_sm.dat')
+            open (5,file='../221plots/plot_fp-d.dat')
             call minuit(fcn,chi2)   
             close(5)
 
@@ -295,7 +295,7 @@ C        fits2b = bests2b --  plot only best fit value for fits2b. 05/30/09
 
                fitx = dexp(lnx)
 
-               open (5,file='221plots/plot_fp-d_sm.dat')
+               open (5,file='../221plots/plot_fp-d.dat')
                call minuit(fcn,chi2)
                close(5)
 

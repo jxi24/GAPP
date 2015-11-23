@@ -64,7 +64,7 @@ mkfit() {
       for mdl in ${mdls[*]}
       do
     
-        sed 's/MODELNAME/'$mdl'/' ${tempdir}template_chi2.f.template > ${coredir}chi2.f
+        sed 's/MODELNAME/'$mdl'/' ${tempdir}template_chi2.f > ${coredir}chi2.f
         sed 's/MODELNAME/'$mdl'/' ${tempdir}template_fit.f  > ${maindir}fit.f
         make fit
         mv fit $mdl.fit

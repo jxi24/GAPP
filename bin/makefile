@@ -13,9 +13,9 @@ FC=gfortran
 FCC=gfortran -c  
 #LINK.f=xlf -g
 #FFLAGS=  -fbacktrace -ffpe-trap=zero,overflow,underflow -O -Wall -fcheck=all
-FFLAGS= -w -C -g
+FFLAGS= -w -C -g -fbackslash
 ## Define preprocessor flag for CPP build in fortran file 
-FCFLAGS= $(FFLAGS) -DCPP_FLAG -cpp
+FCFLAGS= $(FFLAGS) -DCPP_FLAG -cpp -fbackslash
 
 CXX=g++
 CXXC=g++ -c
