@@ -2,20 +2,24 @@
  * This is a test file to call  fcn and chi2 fortran files 
  * Kirtimaan 11/10/2014
  * ********************************************************************/
-#include<iostream>
-#include<iomanip>
-#include<fstream>
-#include<sstream>
-#include<string>
-#include<vector>
-#include<algorithm>
-#include<iterator>
-#include<ctype.h>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+#include <ctype.h>
+#include <cmath>
 
 #include <boost/algorithm/string.hpp>
 // Root includes
-#include "TMinuit.h"
-#include "TGraph.h"
+#include <TMinuit.h>
+#include <TGraph.h>
+#include <TCanvas.h>
+#include <TFile.h>
+#include <TH2.h>
 using namespace std;
 //Defintion of subroutine fcn function in F/core/chi2.f
 extern "C"{
@@ -27,9 +31,11 @@ void cpp_fcn( int &ntpar, double *grad, double &fval, double *xval, int iflag)
 {
 	
 	fcn_( &ntpar, grad, &fval, xval ,&iflag,chi2_);
+	//cout<<"========================================="<<endl;
 	//cout<<"ntpar= "<<ntpar<<" iflag= "<<iflag<<endl;
 	//cout<<"fval= "<< fval <<endl;
-	//for (int i=0; i< ntpar;i++){cout<<"xval["<<i<<"]= "<<xval[i]<<endl;}
+	//for (int i=0; i< 30 ;i++){cout<<"xval["<<i<<"]= "<<xval[i]<<endl;}
+	//cout<<"_________________________________________"<<endl;
 }
 //************************ Common block variables***************************
 extern "C" {
@@ -179,9 +185,7 @@ int main()
 	cout<< "Start Minuit " << endl;
 	TMinuit *gMinuit = new TMinuit(30);
 	gMinuit -> SetFCN(cpp_fcn);
-	double arglist[10];
 	int ierflg = 0;
-	arglist[0] = 1;
 	//******************** SET PARAMETERS *************************//
 	for (int k =0 ;k < parname.size();k++)
 	{
@@ -193,27 +197,147 @@ int main()
 		gMinuit->FixParameter(fixpars[k] -1);
 	}
 	
+
+//**********************************************************************//	
+ //Returns the status of the execution: ierflg
+   //= 0: command executed normally
+     //1: command is blank, ignored
+     //2: command line unreadable, ignored
+     //3: unknown command, ignored
+     //4: abnormal termination (e.g., MIGRAD not converged)
+     //5: command is a request to read PARAMETER definitions
+     //6: 'SET INPUT' command
+     //7: 'SET TITLE' command
+     //8: 'SET COVAR' command
+     //9: reserved
+    //10: END command
+    //11: EXIT or STOP command
+    //12: RETURN command
+//**********************************************************************//
+	//ierflg=gMinuit-> Command("CALL FCN");	
+	//cout<<"ierflag(CALL FCN) = "<<ierflg<<endl;
+	//ierflg=gMinuit-> Command("MIGRAD");	
+	//cout<<"ierflag(MIGRAD) = "<<ierflg<<endl;
+	
+	
+
+//*********************************************************************//
+//**** WHAT IS PLIST AND LLIST ??
+//virtual void mnexcm(const char* comand, Double_t* plist, Int_t llist, Int_t& ierflg)
+//*********************************************************************//
+//plist is an array of length llist where the meaning of plist[0], [1], etc depends on the command you execute. You can use the Minuit help or see the doc of TMinuit, eg 
+//root > Tminuit m; 
+//root > m.mnhelp() 	
+//	root [4] m.mnhelp("MIGRAD") 
+//***>MIGrad [maxcalls] [tolerance] 
+//You see that MIGRAD has 2 arguments. 
+//Fill plist[0] with maxcalls 
+//and plist[1] with tolerance 
+//and set llist=2 
+//then do 
+//int ierr = 0 
+//m.mnexcm("MIGrad",plist,llist,ierr); 
+//https://root.cern.ch/phpBB3/viewtopic.php?t=1357
+// FOR VALUES OF ARGLIST AND LLIST SEE MINUIT FORTRAN MANUAL
+//*********************************************************************//
+	double arglist[10]={0.};
+	
+	arglist[0]=1; //iflag 
 	gMinuit->mnexcm("CALL FCN", arglist,1 ,ierflg);
 	
-	gMinuit->mnexcm("MINIMIZE", arglist,1 ,ierflg);
-	gMinuit->mnexcm("MINIMIZE", arglist,1 ,ierflg);
-	gMinuit->mnexcm("IMPROVE", arglist,1 ,ierflg);
-	gMinuit->mnexcm("IMPROVE", arglist,1 ,ierflg);
-	gMinuit->mnexcm("IMPROVE", arglist,1 ,ierflg);
-	gMinuit->mnexcm("SEEK", arglist,1 ,ierflg);
-	gMinuit->mnexcm("MINOS", arglist,1 ,ierflg);
-	gMinuit->mnexcm("HESSE", arglist,1 ,ierflg);
+
+	gMinuit->mnexcm("MINIMIZE", arglist,0,ierflg);
+	gMinuit->mnexcm("MINIMIZE", arglist,0,ierflg);
+	gMinuit->mnexcm("IMPROVE", arglist,0 ,ierflg);
+	gMinuit->mnexcm("IMPROVE", arglist,0 ,ierflg);
+	gMinuit->mnexcm("IMPROVE", arglist,0 ,ierflg);
+	gMinuit->mnexcm("SEEK", arglist,0 ,ierflg);
+	gMinuit->mnexcm("MINIMIZE", arglist,0,ierflg);
+	//gMinuit->mnexcm("MINOS", arglist,0 ,ierflg);
+	//gMinuit->mnexcm("HESSE", arglist,0 ,ierflg);
 	
-	TGraph * g1 = (TGraph*) gMinuit->Contour(100,2-1,7-1);
+
+	
+
+//*********************************************************************//
+//**************** Could not get this to work will try scan ***********//
+//*********************************************************************//	
+        //const char* fname_plot="plot.root";
+        //TFile f2(fname_plot,"RECREATE");
+        //TCanvas *c2 = new TCanvas("c2","contours",10,10,800,700);
+        //gMinuit->SetErrorDef(4.0);
+        ////gMinuit->FixParameter(2 -1);
+        ////gMinuit->FixParameter(7 -1);
+        //gMinuit->mnexcm("CALL FCN"	, arglist,1 ,ierflg);
+	//TGraph * g1 = (TGraph*) gMinuit->Contour(40,28-1,29-1);
+	//g1-> Draw("alp");
+	//c2->Update();
+	//f2.WriteTObject(c2);
+        //f2.Close();
+//*********************************************************************//
+//****** Set up a scan and save output to TH2**************************//
+//*********************************************************************//
+	int Npar=gMinuit->GetNumPars(); // Number of parameters
+	cout<<"npar = "<<Npar<<endl;
+	double parVal[npar]={0.}, parErr[npar]={0.},parGrad[npar]={0.};
+	double chi2minVal;
+	for(int i = 0; i<parnum.size() ; i++){
+		double currentVal;
+		double currentErr;
+		int tflag=gMinuit-> GetParameter(parnum[i] -1,currentVal, currentErr);
+		parVal[parnum[i]-1]=currentVal;
+		parErr[parnum[i]-1]=currentErr;
+		cout<<"xval["<<parnum[i] -1<<"]= "<<currentVal<<"\t"<<currentErr<<endl;
+	}//for(int i = 0; i<parnum.size() ; i++)
+	
+	int eval_flag=4;
+	cpp_fcn( npar, parGrad, chi2minVal, parVal, eval_flag);
+	cout<<setprecision(9)<<"Finished call: min_chi2 =  "<<chi2minVal<<endl;
+	
+	
+	double x_in =30.0, x_fin=500.0; int x_bin =100;
+	double cphi_in=0.0,  cphi_fin=1.0; int cphi_bin= 100;
+	double s2b_in=0.0, s2b_fin=1.0; int s2b_bin=60.0;
+	double s2b_delta=(s2b_fin -s2b_in)/double(s2b_bin);
+	TH2D *h1 = new TH2D("h1","x vs cos(#phi)",x_bin,x_in,x_fin,cphi_bin, cphi_in,cphi_fin);
+	int ibin=1,jbin =1;
+	while(ibin <= x_bin){
+		while(jbin <= cphi_bin){
+			double chi2Val;
+			double x = h1->GetXaxis()->GetBinCenter(ibin);
+			double y = h1->GetYaxis()->GetBinCenter(jbin);
+			parVal[28 - 1]=log(x);// ln(x)
+			parVal[29 - 1]=(1.0-y*y)/(y*y); // tan(\phi)^2
+			parVal[30 - 1]=s2b_in; // sin(\beta)^2
+			cpp_fcn( npar, parGrad, chi2Val, parVal, eval_flag);
+			//cout <<"x = "<<x<<" , y = "<<y<<"\t chi2= "<<chi2Val<<endl;
+			h1->SetBinContent(ibin,jbin,chi2Val-chi2minVal);
+			s2b_in=s2b_in + s2b_delta;
+			jbin++;
+			
+		}//
+		jbin=1;
+		ibin++;
+		s2b_in=0.0;
+	}//
+	const char* fname_plot="plot.root";
+	TFile f2(fname_plot,"RECREATE");
+	TCanvas *c2 = new TCanvas("c2","contours",10,10,800,700);
+	h1->Draw("ap");
+	c2->Update();
+	//f2.WriteTObject(c2);
+	h1->Write();
+        f2.Close();
+	
+
 	
 	
 	
-	//gMinuit->Minimize();
-	//gMinuit->Minimize();
 	
 	
 	
 	
+
 	
 	return 0;
 }
