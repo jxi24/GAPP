@@ -1,3 +1,7 @@
 *.o
 *.tmp
 *.a
+*.pull
+*.out
+*.221plot
+*.fit
